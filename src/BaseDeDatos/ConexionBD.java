@@ -164,6 +164,7 @@ public class ConexionBD {
                   "MONTOPAGADO FLOAT NOT NULL," +
                   "PERIODO VARCHAR (20) NOT NULL," +
                   "COD_TIPO SMALLINT NOT NULL," +
+                  "CUOTAS SMALLINT NOT NULL," +
                   "FOREIGN KEY (COD_TIPO) REFERENCES TIPO_PAGO(COD_TIPO))"    
         );
         

@@ -165,7 +165,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelInterseccion.setLayout(jPanelInterseccionLayout);
         jPanelInterseccionLayout.setHorizontalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 161, Short.MAX_VALUE)
         );
         jPanelInterseccionLayout.setVerticalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

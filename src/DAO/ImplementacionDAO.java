@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import BaseDeDatos.ConexionBD;
 import ClasesBase.Alumno;
 import ClasesBase.Pago;
 import ClasesBase.Persona;
@@ -17,7 +18,7 @@ public class ImplementacionDAO implements DAO {
 
     @Override
     public void altaAlumno(Alumno alumno) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ConexionBD.getConnection();
     }
 
     @Override

@@ -1,11 +1,11 @@
 package ClasesBase;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
 public class Alumno extends Persona {    
-    private Calendar fechaDeNacimiento;
+    private Date fechaDeNacimiento;
     private String lugarNacimiento;
     private String domicilio;
     private long telefono;
@@ -20,7 +20,7 @@ public class Alumno extends Persona {
     private Map<Integer,Sala> salas;
     private Set<RegistroAsistencia> ra;
 
-    public Alumno(Calendar fechaDeNacimiento, String lugarNacimiento, String domicilio, long telefono, boolean controlMedico, boolean vacunas, boolean controlNatacion, boolean traeMateriales, String otrosDatos, Set<Alumno> hermanos, Set<Tutor> tutores, Set<Pago> pagos, Map<Integer, Sala> salas, Set<RegistroAsistencia> ra, int dni, String apellidoYNombre) {
+    public Alumno(Date fechaDeNacimiento, String lugarNacimiento, String domicilio, long telefono, boolean controlMedico, boolean vacunas, boolean controlNatacion, boolean traeMateriales, String otrosDatos, Set<Alumno> hermanos, Set<Tutor> tutores, Set<Pago> pagos, Map<Integer, Sala> salas, Set<RegistroAsistencia> ra, int dni, String apellidoYNombre) {
         super(dni, apellidoYNombre);
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.lugarNacimiento = lugarNacimiento;
@@ -42,11 +42,11 @@ public class Alumno extends Persona {
     public Alumno() {
     }
 
-    public Calendar getFechaDeNacimiento() {
+    public Date getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
 
-    public void setFechaDeNacimiento(Calendar fechaDeNacimiento) {
+    public void setFechaDeNacimiento(Date fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
 

@@ -59,7 +59,6 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanelBarraSup" alignment="1" min="-2" max="-2" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="jPanelInterseccion" pref="160" max="32767" attributes="0"/>
@@ -74,6 +73,11 @@
                       <Component id="jPanelCard" max="32767" attributes="0"/>
                       <Component id="jPanelTitulo" max="32767" attributes="0"/>
                   </Group>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jPanelBarraSup" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -445,7 +449,7 @@
                                       <Component id="jLabel48" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel47" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="329" max="32767" attributes="0"/>
+                                  <EmptySpace pref="337" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -1366,7 +1370,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="1202" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1210" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -1384,7 +1388,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="1296" max="32767" attributes="0"/>
+                      <EmptySpace pref="1286" max="32767" attributes="0"/>
                       <Component id="jPanelMinimizar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanelCerrar" min="-2" max="-2" attributes="0"/>

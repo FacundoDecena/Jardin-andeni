@@ -7,15 +7,17 @@ public class Pago {
     private Calendar fecha;
     private String tipoPago;
     private String periodo;
+    private int cuotas;
     private float montoPagado;
     private float montoTotal;
     private int idPago;
     private Set<Alumno> alumnos;
 
-    public Pago(Calendar fecha, String tipoPago, String periodo, float montoPagado, float montoTotal, int idPago, Set<Alumno> alumnos) {
+    public Pago(Calendar fecha, String tipoPago, String periodo, int cuotas ,float montoPagado, float montoTotal, int idPago, Set<Alumno> alumnos) {
         this.fecha = fecha;
         this.tipoPago = tipoPago;
         this.periodo = periodo;
+        this.cuotas = cuotas;
         this.montoPagado = montoPagado;
         this.montoTotal = montoTotal;
         this.idPago = idPago;
@@ -49,6 +51,14 @@ public class Pago {
         this.periodo = periodo;
     }
 
+    public int getCuotas() {
+        return cuotas;
+    }
+
+    public void setCuotas(int cuotas) {
+        this.cuotas = cuotas;
+    }
+    
     public float getMontoPagado() {
         return montoPagado;
     }

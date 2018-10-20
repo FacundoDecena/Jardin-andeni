@@ -11,14 +11,37 @@ import ClasesBase.Pago;
 import ClasesBase.Persona;
 import ClasesBase.RegistroAsistencia;
 import ClasesBase.Tutor;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class ImplementacionDAO implements DAO {
 
     @Override
     public void altaAlumno(Alumno alumno) {
-        ConexionBD.getConnection();
+        Statement s = ConexionBD.getConnection();
+        try {
+            s.execute("INSERT INTO PERSONA VALUES (" + alumno.getDni() + ", "+
+                                                      alumno.getApellidoYNombre()+ ", " +
+                                                      "1" + //Tipo de persona
+                                                  ");");
+            s.execute("INSERT INTO ALUMNO VALUES (" + alumno.getDni() + ", "+
+                                                      alumno.getFechaDeNacimiento() + ", " +
+                                                      alumno.getLugarNacimiento() + ", " +
+                                                      alumno.isControlMedico() + ", " +
+                                                      alumno.isVacunas() + ", " +
+                                                      alumno.isControlNatacion() + ", " +
+                                                      alumno.getDomicilio() + ", " +
+                                                      alumno.isTraeMateriales() + ", " +
+                                                      alumno.getTelefono() + ", " +
+                                                      alumno.getOtrosDatos() +
+                                                  ");");
+        } catch (SQLException ex) {
+            System.err.println("Algo ha fallado mijo, en el alta Alumno, fijese");
+        }
     }
 
     @Override

@@ -59,9 +59,10 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="jPanelBarraSup" alignment="1" min="-2" max="-2" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jPanelInterseccion" pref="160" max="32767" attributes="0"/>
+                      <Component id="jPanelInterseccion" pref="161" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jPanelPestanas" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -73,11 +74,6 @@
                       <Component id="jPanelCard" max="32767" attributes="0"/>
                       <Component id="jPanelTitulo" max="32767" attributes="0"/>
                   </Group>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jPanelBarraSup" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -449,7 +445,6 @@
                                       <Component id="jLabel48" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel47" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="337" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -472,41 +467,39 @@
                                           <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                          <Component id="jTextField_TelPer_Padre1" min="-2" pref="200" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                                  <Component id="jTextField_Ocupacion_Tutor" min="-2" pref="200" max="-2" attributes="0"/>
-                                                  <Group type="102" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="jLabel28" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jLabel29" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jLabel30" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jLabel31" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jLabel32" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                              <Component id="jTextField_TipoDoc_Tutor" alignment="0" pref="200" max="32767" attributes="0"/>
-                                                              <Component id="jTextField_ApyNom_Tutor" alignment="0" max="32767" attributes="0"/>
-                                                          </Group>
-                                                          <Component id="jTextField_NumDoc_Tutor" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                                          <Component id="jTextField_Relacion" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                                                      </Group>
+                                          <Component id="jTextField_Ocupacion_Tutor" min="-2" pref="200" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabel28" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel29" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel30" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel31" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel32" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="jTextField_TipoDoc_Tutor" alignment="0" pref="200" max="32767" attributes="0"/>
+                                                      <Component id="jTextField_ApyNom_Tutor" alignment="0" max="32767" attributes="0"/>
                                                   </Group>
+                                                  <Component id="jTextField_NumDoc_Tutor" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                                  <Component id="jTextField_Relacion" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
                                               </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
-                                                  <Component id="jTextField_TelTra_Padre1" min="-2" pref="200" max="-2" attributes="0"/>
-                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="jTextField_TelTra_Padre1" pref="200" max="32767" attributes="0"/>
+                                              <Component id="jTextField_TelPer_Padre1" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1099,15 +1092,15 @@
                                               <Component id="jLabel49" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jTextField_NomyAp_PagoIns" pref="222" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="jTextField_NomyAp_PagoIns" pref="220" max="32767" attributes="0"/>
                                               <Component id="jTextField_Sala_PagoIns" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jTextField_Turno_PagoIns" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jYearChooser1" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jDateChooser2" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="82" max="32767" attributes="0"/>
+                                  <EmptySpace pref="84" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1129,10 +1122,10 @@
                                       <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jTextField_Turno_PagoIns" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="jLabel49" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jYearChooser1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jDateChooser2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -1228,7 +1221,10 @@
                             <Property name="text" type="java.lang.String" value="Ciclo Lectivo"/>
                           </Properties>
                         </Component>
-                        <Component class="com.toedter.calendar.JYearChooser" name="jYearChooser1">
+                        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
+                          <Properties>
+                            <Property name="dateFormatString" type="java.lang.String" value="yyyy"/>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -1364,7 +1360,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="1210" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1202" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -1382,7 +1378,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="1286" max="32767" attributes="0"/>
+                      <EmptySpace pref="1296" max="32767" attributes="0"/>
                       <Component id="jPanelMinimizar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanelCerrar" min="-2" max="-2" attributes="0"/>

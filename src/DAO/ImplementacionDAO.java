@@ -10,9 +10,11 @@ import ClasesBase.Alumno;
 import ClasesBase.Pago;
 import ClasesBase.Persona;
 import ClasesBase.RegistroAsistencia;
+import ClasesBase.Sala;
 import ClasesBase.Tutor;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -41,21 +43,21 @@ public class ImplementacionDAO implements DAO {
                                                       alumno.getTelefono() + ", " +
                                                       alumno.getOtrosDatos() +
                                                   ");");
-            Map sala = alumno.getSalas();
-            Set clave = sala.keySet();
-            s.execute("INSERT INTO ALUMNOS VALUES("
-                    + alumno.getDni()+ "" 
-                    + ""
-                    + ""
+            Map mapSala = alumno.getSalas();
+            List listSala  = (List) mapSala.keySet();
+            int cl;
+            cl = (int) listSala.get(0);
+            Sala sala = (Sala) mapSala.get(cl);
+            s.execute("INSERT INTO ES_ALUMNO VALUES("
+                    + alumno.getDni()+ ", " 
+                    + sala.getIdSala() + ", "
+                    + cl + ""
                     + ");");
-            s.execute("CREATE TABLE ES_ALUMNO(" +
-                  "DNIALUMNO INT NOT NULL," +
-                  "IDSALA INT NOT NULL," +
-                  "ANOLECTIVO INT NOT NULL," +
-                  "PRIMARY KEY (DNIALUMNO,IDSALA)," +
-                  "FOREIGN KEY (IDSALA) REFERENCES SALA(IDSALA)," +
-                  "FOREIGN KEY (DNIALUMNO) REFERENCES ALUMNO(DNI))" 
-        );
+            
+            List setRA = (List)alumno.getRa();
+            
+            
+            RegistroAsistencia ra;
         } catch (SQLException ex) {
             System.err.println("Algo ha fallado mijo, en el alta Alumno, fijese");
         }

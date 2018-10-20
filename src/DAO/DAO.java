@@ -36,7 +36,7 @@ public interface DAO{
     //public void bajaTutor(int dni);
     
     //Modificaciones
-    //public void modificarAlumno(Alumno alumno);
+    public void modificarAlumno(Alumno alumno);
     //public void modificarAsistencia(Asistencia asistencia);
     //public void modificarDocente(Docente docente);
     //public void modificarFalta(Falta falta);
@@ -50,12 +50,12 @@ public interface DAO{
     //public void modificarTutor(Tutor tutor);
     
     //ObtenerUno
-    public Alumno obtenerAlumno(int dni);
+    //public Alumno obtenerAlumno(int dni);
     //public Asistencia obtenerAsistencia(int idAsistencia);
     //public Docente obtenerDocente(int dni);
     //public Falta obtenerFalta(int idRA,Fecha fecha);
     //public Licencia obtenerLicencia(int idLicencia);
-    public Pago obtenerPago(int idPago);
+    //public Pago obtenerPago(int idPago);
     //public Persona obtenerPersona(int dni);
     //public RegistroAsistencia obtenerRegistroAsistencia(int idRA);
     //public Retiro obtenerRetiro(int idAsistencia);
@@ -75,7 +75,7 @@ public interface DAO{
     //public List obtenerTodosRetiro();
     //public List obtenerTodosSala();
     //public List obtenerTodosTardanza();
-    public List obtenerTodosTutor();
+    //public List obtenerTodosTutor();
     
     
     

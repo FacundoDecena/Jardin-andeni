@@ -44,12 +44,7 @@ public class ImplementacionDAO implements DAO {
     }
 
     @Override
-    public Alumno obtenerAlumno(int dni) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Pago obtenerPago(int idPago) {
+    public void modificarAlumno(Alumno alumno) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -62,12 +57,5 @@ public class ImplementacionDAO implements DAO {
     public List obtenerTodosAlumno() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public List obtenerTodosTutor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
-    
+  
 }

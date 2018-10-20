@@ -12,10 +12,7 @@ import ClasesBase.RegistroAsistencia;
 import ClasesBase.Tutor;
 import java.util.List;
 
-/**
- *
- * @author Maxi
- */
+
 public class ImplementacionDAO implements DAO {
 
     @Override
@@ -57,5 +54,7 @@ public class ImplementacionDAO implements DAO {
     public List obtenerTodosAlumno() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-  
+
+
+    
 }

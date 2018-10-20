@@ -55,9 +55,9 @@ public class ImplementacionDAO implements DAO {
                     + ");");
             
             List setRA = (List)alumno.getRa();
-            
-            
-            RegistroAsistencia ra;
+            RegistroAsistencia ra = (RegistroAsistencia) setRA.get(0);
+            altaRegistroAsistencia(ra);
+
         } catch (SQLException ex) {
             System.err.println("Algo ha fallado mijo, en el alta Alumno, fijese");
         }

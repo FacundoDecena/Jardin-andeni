@@ -33,11 +33,11 @@ public class ConexionBD {
         } catch(SQLException e){}
     }
     
-    public static ConexionBD getConnection(){
+    public static Statement getConnection(){
         if (BD == null){
            BD = new ConexionBD();
         }
-        return BD;
+        return s;
     }
     
     public void cerrarBD(){

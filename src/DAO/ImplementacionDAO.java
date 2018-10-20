@@ -14,6 +14,8 @@ import ClasesBase.Tutor;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,6 +41,21 @@ public class ImplementacionDAO implements DAO {
                                                       alumno.getTelefono() + ", " +
                                                       alumno.getOtrosDatos() +
                                                   ");");
+            Map sala = alumno.getSalas();
+            Set clave = sala.keySet();
+            s.execute("INSERT INTO ALUMNOS VALUES("
+                    + alumno.getDni()+ "" 
+                    + ""
+                    + ""
+                    + ");");
+            s.execute("CREATE TABLE ES_ALUMNO(" +
+                  "DNIALUMNO INT NOT NULL," +
+                  "IDSALA INT NOT NULL," +
+                  "ANOLECTIVO INT NOT NULL," +
+                  "PRIMARY KEY (DNIALUMNO,IDSALA)," +
+                  "FOREIGN KEY (IDSALA) REFERENCES SALA(IDSALA)," +
+                  "FOREIGN KEY (DNIALUMNO) REFERENCES ALUMNO(DNI))" 
+        );
         } catch (SQLException ex) {
             System.err.println("Algo ha fallado mijo, en el alta Alumno, fijese");
         }

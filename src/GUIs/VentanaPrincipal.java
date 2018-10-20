@@ -254,23 +254,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel50.setText("Datos Alumnos");
+        jLabel50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUIs/Imagenes/Datos para facu.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanelOpDatosAlumnosLayout = new javax.swing.GroupLayout(jPanelOpDatosAlumnos);
         jPanelOpDatosAlumnos.setLayout(jPanelOpDatosAlumnosLayout);
         jPanelOpDatosAlumnosLayout.setHorizontalGroup(
             jPanelOpDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelOpDatosAlumnosLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
                 .addComponent(jLabel50)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelOpDatosAlumnosLayout.setVerticalGroup(
             jPanelOpDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelOpDatosAlumnosLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jLabel50)
-                .addContainerGap(42, Short.MAX_VALUE))
+            .addComponent(jLabel50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanelPestanasLayout = new javax.swing.GroupLayout(jPanelPestanas);

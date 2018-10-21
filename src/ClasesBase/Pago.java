@@ -90,7 +90,7 @@ public class Pago {
     public void setAlumnos(Set<Alumno> alumnos) {
         this.alumnos = alumnos;
     }
+
     
-    
-    
+        
 }

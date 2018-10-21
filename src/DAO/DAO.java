@@ -14,7 +14,7 @@ public interface DAO{
     //public void altaFalta(Falta falta);
     //public void altaLicencia(Licencia licencia);
     public void altaPago(Pago pago);
-    public void altaPersona(Persona persona);
+    //public void altaPersona(Persona persona);
     public void altaRegistroAsistencia(RegistroAsistencia registroAsistencia);
     //public void altaRetiro(Retiro retiro);
     //public void altaSala(Sala sala);
@@ -76,6 +76,9 @@ public interface DAO{
     //public List obtenerTodosSala();
     //public List obtenerTodosTardanza();
     //public List obtenerTodosTutor();
+    
+    //Otros
+    public void agregarAñoLectivo(int dni, int idSala, int añoLectivo);
     
     
     

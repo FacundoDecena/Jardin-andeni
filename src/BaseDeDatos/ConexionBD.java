@@ -6,78 +6,40 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ConexionBD {
-    private String               driver = "org.apache.derby.jdbc.EmbeddedDriver";
-    private String               name = "JardinÑandeni";
-    private Connection           conn = null;
-    private static ConexionBD    BD = null;
-    private static Statement     s = null;
+    private static Connection conn = null;
    
     private ConexionBD(){
         try {
-            Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection("jdbc:derby:"+name+";create=true", null);
-            s = conn.createStatement();
-            //Si las tablas no existen, las creo. Si existen, al intentar crearlas salta
-            //una excepcion controlada de SQL que no permite que se creen. 
-            inicializarTablas();                  
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+            conn = DriverManager.getConnection("jdbc:derby:JardinÑandeni;create=true", null);
+            inicializarTablas();
         } catch (ClassNotFoundException cnfe) {
-            System.err.println("\nNo es posible cargar el driver de JDBC" + driver);
-            System.err.println("Por favor controle el CLASSPATH.");
-            cnfe.printStackTrace(System.err);
+            System.err.println("\nNo es posible cargar el driver de JDBC");
         } catch (InstantiationException ie) {
-            System.err.println("\nNo es posible Instanciar el driver de JDBC" + driver);
-            ie.printStackTrace(System.err);
+            System.err.println("\nNo es posible Instanciar el driver de JDBC");
         } catch (IllegalAccessException iae) {
-            System.err.println("\nNo se tiene acceso al driver de JDBC" + driver);
-            iae.printStackTrace(System.err);
+            System.err.println("\nNo se tiene acceso al driver de JDBC");
         } catch(SQLException e){}
     }
     
-    public static Statement getConnection(){
-        if (BD == null){
-           BD = new ConexionBD();
+    public static Connection getConnection(){
+        if (conn == null){
+            new ConexionBD();
         }
-        return s;
+        return conn;
     }
     
-    public void cerrarBD(){
+    public static void cerrarBD(){
         try{
             conn.close();
         } catch(SQLException sqle){
             System.err.println("Error al intentar cerrar la base de datos.");
         }
     }
-    
-    /*public void eliminarTablas(){
-        try{
-            s.execute("DROP TABLE TUTOR_RETIRO");
-            s.execute("DROP TABLE RETIRO");
-            s.execute("DROP TABLE TARDANZA");
-            s.execute("DROP TABLE ASISTENCIA");
-            s.execute("DROP TABLE FALTA");
-            s.execute("DROP TABLE REGISTROASISTENCIA");
-            s.execute("DROP TABLE ES_ALUMNO");
-            s.execute("DROP TABLE ES_DOCENTE");
-            s.execute("DROP TABLE SALA");
-            s.execute("DROP TABLE LICENCIA");
-            s.execute("DROP TABLE CORRESPONDE_PAGO");
-            s.execute("DROP TABLE PAGO");
-            s.execute("DROP TABLE TIPO_PAGO");
-            s.execute("DROP TABLE ES_TUTOR");
-            s.execute("DROP TABLE ES_HERMANO");
-            s.execute("DROP TABLE DOCENTE");
-            s.execute("DROP TABLE TUTOR");
-            s.execute("DROP TABLE ALUMNO");
-            s.execute("DROP TABLE PERSONA");
-            s.execute("DROP TABLE TIPO_PERSONA");
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-    }*/
-    
+
     public void inicializarTablas() throws SQLException{
+        Statement s = conn.createStatement();
         int largoCampos = 100;
-        
         s.execute("CREATE TABLE TIPO_PERSONA(" +
                   "COD_TIPO SMALLINT NOT NULL PRIMARY KEY," +
                   "TIPO VARCHAR(20) NOT NULL)"
@@ -96,8 +58,8 @@ public class ConexionBD {
         );
 
         s.execute("CREATE TABLE ALUMNO(" +
-                  "DNI INT NOT NULL PRIMARY KEY, " +
-                  "FECHADENACIMIENTO DATE NOT NULL, " +
+                  "DNI INT NOT NULL PRIMARY KEY," +
+                  "FECHADENACIMIENTO DATE NOT NULL," +
                   "LUGARDENACIMIENTO VARCHAR(20) NOT NULL," +
                   "CONTROLMEDICO BOOLEAN NOT NULL," + 
                   "VACUNAS BOOLEAN NOT NULL," + 
@@ -193,6 +155,13 @@ public class ConexionBD {
                   "COLOR VARCHAR(20) NOT NULL, " +
                   "TURNO VARCHAR(10) NOT NULL)"   
         );
+        
+        s.execute("INSERT INTO SALA VALUES(1,3,'Amarillo','Mañana')");
+        s.execute("INSERT INTO SALA VALUES(2,3,'Azul','Tarde')");
+        s.execute("INSERT INTO SALA VALUES(3,4,'Rojo','Mañana')");
+        s.execute("INSERT INTO SALA VALUES(4,4,'Blanco','Tarde')");
+        s.execute("INSERT INTO SALA VALUES(5,5,'Naranja','Mañana')");
+        s.execute("INSERT INTO SALA VALUES(6,5,'Violeta','Tarde')");
 
         s.execute("CREATE TABLE ES_ALUMNO(" +
                   "DNIALUMNO INT NOT NULL," +
@@ -253,5 +222,11 @@ public class ConexionBD {
                   "FOREIGN KEY (DNITUTOR) REFERENCES TUTOR(DNI)," +
                   "FOREIGN KEY (IDASISTENCIA) REFERENCES RETIRO(IDASISTENCIA))"
         );
+        s.close();
     }
+    
+    /*public static void main(String[] args) throws SQLException{
+        Connection c = ConexionBD.getConnection();
+        Statement s = c.createStatement();
+    }*/
 }

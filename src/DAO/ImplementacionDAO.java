@@ -26,6 +26,7 @@ public class ImplementacionDAO implements DAO {
     private Pago pago;
     private RegistroAsistencia registroAsistencia;
     private Tutor tutor;
+    private Sala sala;
     private static ImplementacionDAO creado = null;
     
     private ImplementacionDAO(){
@@ -185,6 +186,21 @@ public class ImplementacionDAO implements DAO {
             s.close();
             sAux.close();
             return tutor;
+        } catch (SQLException ex) {ex.printStackTrace();}
+        return null;
+    }
+    
+    @Override//NO GUARDA NADA EN LOS SETS
+    public Sala obtenerSala(int idSala) {
+        try {
+            Connection c = ConexionBD.getConnection();
+            Statement s = c.createStatement();
+            ResultSet rsSala = s.executeQuery("SELECT * FROM SALA WHERE IDSALA="+idSala);
+            rsSala.next();
+            sala = new Sala(rsSala.getInt("EDAD"),rsSala.getString("TURNO"),
+                                    rsSala.getString("COLOR"),rsSala.getInt("IDSALA"),null,null);
+            s.close();
+            return sala;
         } catch (SQLException ex) {ex.printStackTrace();}
         return null;
     }

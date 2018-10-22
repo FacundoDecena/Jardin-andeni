@@ -68,13 +68,13 @@ public class ManagerTutor {
         this.apellidoYNombre = null;
     }
     
-    public ManagerTutor GetManager(Tutor tutor, String ocupacion, String tipoDni, long telefonoPersonal, long telefonoTrabajo, String relacion, Set<Alumno> atutorados, Set<Retiro> retiros, int dni, String apellidoYNombre){
+    public static ManagerTutor GetManager(Tutor tutor, String ocupacion, String tipoDni, long telefonoPersonal, long telefonoTrabajo, String relacion, Set<Alumno> atutorados, Set<Retiro> retiros, int dni, String apellidoYNombre){
         if(manager == null)
             manager = new ManagerTutor(tutor, ocupacion, tipoDni, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
         return manager;
     }
     
-    public ManagerTutor GetManager(){
+    public static ManagerTutor GetManager(){
         if(manager == null)
             manager = new ManagerTutor();
         return manager;

@@ -22,9 +22,30 @@ import java.util.logging.Logger;
 
 public class ImplementacionDAO implements DAO {
 
+    private Alumno alumno;
+    private Pago pago;
+    private RegistroAsistencia registroAsistencia;
+    private Tutor tutor;
+    private static ImplementacionDAO creado = null;
+    
+    private ImplementacionDAO(){
+        alumno = null;
+        pago = null;
+        registroAsistencia = null;
+        tutor = null;
+    }
+    
+    public static ImplementacionDAO getDAO(){
+        if (creado == null){
+            creado = new ImplementacionDAO();
+        }
+        return creado;
+    }
+    
     @Override//FALTA LA PARTE DE HERMANOS
-    public void altaAlumno(Alumno alumno) {
+    public void altaAlumno(Alumno palumno) {
         try {
+            this.alumno = palumno;
             Connection c = ConexionBD.getConnection();
             Statement s = c.createStatement();
             s.execute("INSERT INTO PERSONA VALUES("+alumno.getDni()+",'"+alumno.getApellidoYNombre()+"','1')");
@@ -65,8 +86,9 @@ public class ImplementacionDAO implements DAO {
     }
 
     @Override
-    public void altaPago(Pago pago) {
+    public void altaPago(Pago ppago) {
         try {
+            this.pago = ppago;
             Connection c = ConexionBD.getConnection();
             Statement s = c.createStatement();
             int tipoPago;
@@ -91,8 +113,9 @@ public class ImplementacionDAO implements DAO {
     }
 
     @Override
-    public void altaRegistroAsistencia(RegistroAsistencia registroAsistencia) {
+    public void altaRegistroAsistencia(RegistroAsistencia pregistroAsistencia) {
         try {
+            registroAsistencia = pregistroAsistencia;
             Connection c = ConexionBD.getConnection();
             Statement s = c.createStatement();
             s.execute("INSERT INTO REGISTROASISTENCIA VALUES("+registroAsistencia.getIdRA()+","+registroAsistencia.getPersona().getDni()+
@@ -103,8 +126,9 @@ public class ImplementacionDAO implements DAO {
     }
 
     @Override
-    public void altaTutor(Tutor tutor) {
+    public void altaTutor(Tutor ptutor) {
         try {
+            tutor = ptutor;
             Connection c = ConexionBD.getConnection();
             Statement s = c.createStatement();
             s.execute("INSERT INTO PERSONA VALUES("+tutor.getDni()+",'"+tutor.getApellidoYNombre()+"','2')");
@@ -121,8 +145,9 @@ public class ImplementacionDAO implements DAO {
     }
 
     @Override//MODIFICA SOLO LOS CAMPOS PROPIOS, NO LAS RELACIONES
-    public void modificarAlumno(Alumno alumno) {
+    public void modificarAlumno(Alumno palumno) {
         try {
+            alumno = palumno;
             Connection c = ConexionBD.getConnection();
             Statement s = c.createStatement();
             s.execute("UPDATE PERSONA SET APELLIDOYNOMBRE="+alumno.getApellidoYNombre()+"WHERE DNI="+alumno.getDni());
@@ -146,7 +171,7 @@ public class ImplementacionDAO implements DAO {
             ResultSet rsNombre = sAux.executeQuery("SELECT APELLIDOYNOMBRE FROM PERSONA WHERE DNI="+dni);
             rsNombre.next();
             String apellidoYNombre = rsNombre.getString("APELLIDOYNOMBRE");
-            Tutor tutor = new Tutor(rsTutor.getString("OCUPACION"),rsTutor.getString("TIPODNI"),
+            tutor = new Tutor(rsTutor.getString("OCUPACION"),rsTutor.getString("TIPODNI"),
                                     rsTutor.getLong("TELEFONOPERSONAL"),rsTutor.getLong("TELEFONOTRABAJO"),
                                     rsTutor.getString("RELACION"),null,null,dni,apellidoYNombre);
             s.close();
@@ -170,7 +195,7 @@ public class ImplementacionDAO implements DAO {
                 ResultSet rsNombre = sAux.executeQuery("SELECT APELLIDOYNOMBRE FROM PERSONA WHERE DNI="+dni);
                 rsNombre.next();
                 String apellidoYNombre = rsNombre.getString("APELLIDOYNOMBRE");
-                Alumno alumno = new Alumno(rsAlumno.getDate("FECHADENACIMIENTO"),rsAlumno.getString("LUGARDENACIMIENTO"),
+                alumno = new Alumno(rsAlumno.getDate("FECHADENACIMIENTO"),rsAlumno.getString("LUGARDENACIMIENTO"),
                                            rsAlumno.getString("DOMICILIO"),rsAlumno.getLong("TELEFONO"),
                                            rsAlumno.getBoolean("CONTROLMEDICO"),rsAlumno.getBoolean("VACUNAS"),
                                            rsAlumno.getBoolean("CONTROLNATACION"),rsAlumno.getBoolean("TRAEMATERIALES"),

@@ -131,9 +131,17 @@ public class ImplementacionDAO implements DAO {
             tutor = ptutor;
             Connection c = ConexionBD.getConnection();
             Statement s = c.createStatement();
-            s.execute("INSERT INTO PERSONA VALUES("+tutor.getDni()+",'"+tutor.getApellidoYNombre()+"','2')");
-            s.execute("INSERT INTO TUTOR VALUES('"+tutor.getTipoDni()+"',"+tutor.getDni()+",'"+tutor.getOcupacion()+"','"
-                      +tutor.getRelacion()+"',"+tutor.getTelefonoPersonal()+","+tutor.getTelefonoTrabajo()+")");
+            s.execute("INSERT INTO PERSONA VALUES("
+                    +tutor.getDni()+",'"
+                    +tutor.getApellidoYNombre()+"','2')");
+            s.execute("INSERT INTO TUTOR VALUES('"
+                    +tutor.getTipoDni()+"',"
+                    +tutor.getDni()+",'"
+                    +tutor.getOcupacion()+"','"
+                    +tutor.getRelacion()+"',"
+                    +tutor.getTelefonoPersonal()+","
+                    +tutor.getTelefonoTrabajo()
+                    +")");
             Iterator i = tutor.getAtutorados().iterator();
             while(i.hasNext()){
                 Alumno a = (Alumno)i.next();

@@ -6,15 +6,14 @@
 package GUIs;
 
 import ClasesBase.Alumno;
+import ClasesBase.Managers.*;
 import ClasesBase.Pago;
 import ClasesBase.RegistroAsistencia;
+import ClasesBase.Retiro;
 import ClasesBase.Sala;
 import ClasesBase.Tutor;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
@@ -170,10 +169,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Jardin Ñandeni");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(1360, 768));
         setMinimumSize(new java.awt.Dimension(1360, 768));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1360, 768));
         setResizable(false);
         setSize(new java.awt.Dimension(1360, 768));
 
@@ -723,10 +720,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jCheckBoxVacunas)
                             .addComponent(jCheckBoxNatacion))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel46)
-                    .addComponent(jTextField_TelTra_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_TelTra_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel46))
                 .addContainerGap())
             .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
@@ -762,7 +759,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel48)
                     .addComponent(jTextField_TelTra_Tutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                 .addComponent(jButton_Inscribir)
                 .addGap(96, 96, 96))
         );
@@ -878,7 +875,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel40)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(223, Short.MAX_VALUE))
         );
 
         jPanelTipoPago.add(jPanelPagpInsc, "pagoInscripcion");
@@ -899,7 +896,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanelCuotaLayout.createSequentialGroup()
                 .addGap(104, 104, 104)
                 .addComponent(jLabel41)
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addContainerGap(408, Short.MAX_VALUE))
         );
 
         jPanelTipoPago.add(jPanelCuota, "pagoCuota");
@@ -1000,7 +997,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         jPanelDatosAlumnosLayout.setVerticalGroup(
             jPanelDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
+            .addGap(0, 585, Short.MAX_VALUE)
         );
 
         jPanelCard.add(jPanelDatosAlumnos, "datosAlumnos");
@@ -1133,9 +1130,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -1216,6 +1211,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanelOpDatosAlumnosMouseMoved
 
     private void jButton_InscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_InscribirActionPerformed
+        //Variables para controles de la primer columna
         String lugarNacimiento = "", domicilio = "", otrosDatos = "", apellidoYNombre;
         Date fechaDeNacimiento = null;
         long telefono = 0;
@@ -1227,6 +1223,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Map<Integer, Sala> salas = null;
         Set<RegistroAsistencia> ra = null;
         apellidoYNombre = jTextField_ApyNom.getText();
+        Sala sala = null;
+        int salaEdad, salaTurno, idSala;
+        ManagerAlumno mngAlumno;
+        ManagerTutor mngTutor = ManagerTutor.GetManager();
+        ManagerSala mngSala = ManagerSala.getManagerSala();
+        
+        //Controles de la primer columna
+        salaEdad = jComboBoxSala_Insc.getSelectedIndex();
+        salaTurno = jComboBoxTurno_Insc.getSelectedIndex();
+        idSala = salaEdad + salaTurno +1;
+        sala = mngSala.getSala(idSala);
+        salas.put(idSala, sala);
+        
         if(apellidoYNombre.isEmpty()){
             error = true;
             JOptionPane.showMessageDialog(null,"El nombre del alumno no puede ser vacio", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
@@ -1281,7 +1290,107 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         vacunas = jCheckBoxVacunas.isSelected();
         controlMedico = jCheckBoxMedico.isSelected();
         controlNatacion = jCheckBoxNatacion.isSelected();
+        //Variables para control del resto de columnas
+        //Primer paso: Padre
+        String ocupacion = "", tipoDni = "", relacion = "";
+        apellidoYNombre = "";
+        dni = 0;
+        long telefonoPersonal = 0, telefonoTrabajo = 0;
+        Set<Alumno> atutorados = null;
+        Set<Retiro> retiros = null;
         
+        if(!error){
+            apellidoYNombre = jTextField_ApyNom_Padre.getText();
+            if(apellidoYNombre.isEmpty()){
+                error = true;
+                JOptionPane.showMessageDialog(null,"Nombre del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        if(!error){
+            tipoDni = jTextField_TipoDoc_Padre.getText();
+            if(tipoDni.isEmpty()){
+                error = true;
+                JOptionPane.showMessageDialog(null,"Tipo DNI del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        if(!error){
+            try{
+                dni = new Integer (jTextField_NumDoc_Padre.getText());
+            }
+            catch(java.lang.NumberFormatException e){
+                 error = true;
+                JOptionPane.showMessageDialog(null,"DNI solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        if(!error){
+            ocupacion = jTextField_Ocupacion_Padre.getText();
+            if(ocupacion.isEmpty()){
+                error = true;
+                JOptionPane.showMessageDialog(null,"ocupacion del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        if(!error){
+            try{
+                telefonoPersonal = new Long(jTextField_TelPer_Padre.getText());
+                telefonoTrabajo = new Long(jTextField_TelTra_Padre.getText());
+            }
+            catch(java.lang.NumberFormatException e){
+                 error = true;
+                JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        try{
+            mngTutor.nuevoTutor(ocupacion, tipoDni, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
+        }
+        catch (Exception es){
+            JOptionPane.showMessageDialog(null,"Datos del padre tiene caracteres inválidos", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+        //Segundo paso: Madre
+        ocupacion = ""; tipoDni = ""; relacion = "";
+        apellidoYNombre = "";
+        dni = 0;
+        telefonoPersonal = 0; telefonoTrabajo = 0;
+        
+        if(!error){
+            apellidoYNombre = jTextField_ApyNom_Madre.getText();
+            if(apellidoYNombre.isEmpty()){
+                error = true;
+                JOptionPane.showMessageDialog(null,"Nombre de la madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        if(!error){
+            tipoDni = jTextField_TipoDoc_Madre.getText();
+            if(tipoDni.isEmpty()){
+                error = true;
+                JOptionPane.showMessageDialog(null,"Tipo DNI del madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        if(!error){
+            try{
+                dni = new Integer (jTextField_NumDoc_Madre.getText());
+            }
+            catch(java.lang.NumberFormatException e){
+                 error = true;
+                JOptionPane.showMessageDialog(null,"DNI solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        if(!error){
+            ocupacion = jTextField_Ocupacion_Madre.getText();
+            if(ocupacion.isEmpty()){
+                error = true;
+                JOptionPane.showMessageDialog(null,"ocupacion del madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        if(!error){
+            try{
+                telefonoPersonal = new Long(jTextField_TelPer_Madre.getText());
+                telefonoTrabajo = new Long(jTextField_TelTra_Madre.getText());
+            }
+            catch(java.lang.NumberFormatException e){
+                 error = true;
+                JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
+            }
+        }
         
     }//GEN-LAST:event_jButton_InscribirActionPerformed
 

@@ -59,7 +59,7 @@ public interface DAO{
     //public Persona obtenerPersona(int dni);
     //public RegistroAsistencia obtenerRegistroAsistencia(int idRA);
     //public Retiro obtenerRetiro(int idAsistencia);
-    //public Sala obtenerSala(int idSala);
+    public Sala obtenerSala(int idSala);
     //public Tardanza obtenerTardanza(int idAsistencia);
     public Tutor obtenerTutor(int dni);
     

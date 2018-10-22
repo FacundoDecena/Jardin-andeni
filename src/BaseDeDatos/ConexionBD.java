@@ -157,11 +157,11 @@ public class ConexionBD {
         );
         
         s.execute("INSERT INTO SALA VALUES(1,3,'Amarillo','Mañana')");
-        s.execute("INSERT INTO SALA VALUES(2,3,'Azul','Tarde')");
-        s.execute("INSERT INTO SALA VALUES(3,4,'Rojo','Mañana')");
-        s.execute("INSERT INTO SALA VALUES(4,4,'Blanco','Tarde')");
+        s.execute("INSERT INTO SALA VALUES(2,3,'Amarillo','Tarde')");
+        s.execute("INSERT INTO SALA VALUES(3,4,'Celeste','Mañana')");
+        s.execute("INSERT INTO SALA VALUES(4,4,'Celeste','Tarde')");
         s.execute("INSERT INTO SALA VALUES(5,5,'Naranja','Mañana')");
-        s.execute("INSERT INTO SALA VALUES(6,5,'Violeta','Tarde')");
+        s.execute("INSERT INTO SALA VALUES(6,5,'Naranja','Tarde')");
 
         s.execute("CREATE TABLE ES_ALUMNO(" +
                   "DNIALUMNO INT NOT NULL," +

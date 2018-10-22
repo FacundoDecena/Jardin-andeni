@@ -10,6 +10,15 @@ public class Sala {
     private Set<Docente> docentes;
     private Set<Alumno> alumnos;
 
+    /**
+     * 
+     * @param edad
+     * @param turno
+     * @param color
+     * @param idSala 1: 3TM, 2: 3TT, 3: 4TM, 4: 4TT, 5: 5TM, 6: 5TT (3 años = 0, 4 años = 2, 5 años = 4, TM = 1, TT = 2. id es la suma. )
+     * @param docentes
+     * @param alumnos 
+     */
     public Sala(int edad, String turno, String color, int idSala, Set<Docente> docentes, Set<Alumno> alumnos) {
         this.edad = edad;
         this.turno = turno;

@@ -5,19 +5,23 @@ import java.util.Set;
 public class RegistroAsistencia {
     private int añoLectivo;
     private int idRA;
+    private static int cantidad = 0;
     private Persona persona;
     private Set<Falta> faltas;
     private Set<Asistencia> asistencias;
 
-    public RegistroAsistencia(int añoLectivo, int idRA, Persona persona, Set<Falta> faltas, Set<Asistencia> asistencias) {
+    public RegistroAsistencia(int añoLectivo/*, int idRA*/, Persona persona, Set<Falta> faltas, Set<Asistencia> asistencias) {
         this.añoLectivo = añoLectivo;
-        this.idRA = idRA;
+        this.idRA = ++cantidad;
         this.persona = persona;
         this.faltas = faltas;
         this.asistencias = asistencias;
+        
     }
 
     public RegistroAsistencia() {
+        cantidad++;
+        this.idRA=cantidad;
     }
 
     public int getAñoLectivo() {

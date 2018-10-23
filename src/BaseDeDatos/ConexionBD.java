@@ -239,6 +239,51 @@ public class ConexionBD {
     
     public static void main(String[] args) throws SQLException{
         /*Connection c = ConexionBD.getConnection();
-        Statement s = c.createStatement();*/
+        Statement s = c.createStatement();
+        s.execute("INSERT INTO PERSONA VALUES(59675123,'Rodriguez Ian',1)");
+        s.execute("INSERT INTO PERSONA VALUES(63756456,'Velazquez Martina',1)");
+        s.execute("INSERT INTO PERSONA VALUES(60896213,'Silva Jonatan',1)");
+        s.execute("INSERT INTO PERSONA VALUES(61233664,'Marquez Valentina',1)");
+        s.execute("INSERT INTO ALUMNO VALUES(59675123,'2014-02-23','San Luis',true,true,true,'Tomas Jofre 78',true,2664361979,'')");
+        s.execute("INSERT INTO ALUMNO VALUES(63756456,'2015-05-27','San Luis',true,true,true,'Junin 66',true,2664369873,'')");
+        s.execute("INSERT INTO ALUMNO VALUES(60896213,'2014-08-12','San Luis',true,true,true,'Mitre 150',true,2664612043,'')");
+        s.execute("INSERT INTO ALUMNO VALUES(61233664,'2015-01-23','San Luis',true,true,true,'Irigoyen 750',true,2664727467,'')");
+
+
+        s.execute("INSERT INTO PERSONA VALUES(22768699,'Rodriguez Marcelo',2)");
+        s.execute("INSERT INTO PERSONA VALUES(14542703,'Velazquez Antonio',2)");
+        s.execute("INSERT INTO PERSONA VALUES(23724921,'Silva Marcos',2)");
+        s.execute("INSERT INTO PERSONA VALUES(29334669,'Marquez Jose',2)");
+
+        s.execute("INSERT INTO PERSONA VALUES(21698853,'Nuñez Veronica',2)");
+        s.execute("INSERT INTO PERSONA VALUES(23456987,'Puebla Maria',2)");
+        s.execute("INSERT INTO PERSONA VALUES(21456213,'Yerumini Estela',2)");
+        s.execute("INSERT INTO PERSONA VALUES(34123023,'Lopez Ester',2)");
+
+        s.execute("INSERT INTO TUTOR VALUES('DNI',22768699,'Remisero','Padre',26643578945,26643615945)");
+        s.execute("INSERT INTO TUTOR VALUES('DNI',14542703,'Obrero','Padre',26643575949,26643614545)");
+        s.execute("INSERT INTO TUTOR VALUES('DNI',23724921,'Contador','Padre',2664212468,26644956122)");
+        s.execute("INSERT INTO TUTOR VALUES('DNI',29334669,'Obrero','Padre',26643575949,26643614545)");
+
+        s.execute("INSERT INTO TUTOR VALUES('DNI',21698853,'Ama de Casa','Madre',2664367982,26648456)");
+        s.execute("INSERT INTO TUTOR VALUES('DNI',23456987,'Cheff','Madre',26643575949,2664451532)");
+        s.execute("INSERT INTO TUTOR VALUES('DNI',21456213,'Arquitecta','Madre',2664456453,2664786455)");
+        s.execute("INSERT INTO TUTOR VALUES('DNI',34123023,'Ingeniera','Madre',2664612341,266445612)");
+
+        s.execute("INSERT INTO ES_TUTOR VALUES(22768699,59675123)");
+        s.execute("INSERT INTO ES_TUTOR VALUES(21698853,59675123)");
+        s.execute("INSERT INTO ES_TUTOR VALUES(14542703,63756456)");
+        s.execute("INSERT INTO ES_TUTOR VALUES(23456987,63756456)");
+        s.execute("INSERT INTO ES_TUTOR VALUES(23724921,60896213)");
+        s.execute("INSERT INTO ES_TUTOR VALUES(21456213,60896213)");
+        s.execute("INSERT INTO ES_TUTOR VALUES(29334669,61233664)");
+        s.execute("INSERT INTO ES_TUTOR VALUES(34123023,61233664)");
+
+        s.execute("INSERT INTO ES_ALUMNO VALUES(59675123,3,2017)");
+        s.execute("INSERT INTO ES_ALUMNO VALUES(59675123,1,2016)");
+        s.execute("INSERT INTO ES_ALUMNO VALUES(63756456,1,2017)");
+        s.execute("INSERT INTO ES_ALUMNO VALUES(60896213,2,2017)");
+        s.execute("INSERT INTO ES_ALUMNO VALUES(61233664,6,2017)");
+        s.execute("INSERT INTO ES_ALUMNO VALUES(61233664,4,2016)");*/
     }
 }

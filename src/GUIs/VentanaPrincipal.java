@@ -1228,13 +1228,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         CardLayout card = (CardLayout)jPanelCard.getLayout();
         card.show(jPanelCard, "pago");
         model = (DefaultTableModel) jTablePago.getModel();
-        ManagerAlumno ma = ManagerAlumno.GetManager();
+        ManagerAlumno ma = ManagerAlumno.getManager();
         listaAlumnos = ma.obtenerTodosAlumno();
         Iterator i = listaAlumnos.listIterator();
         model.setRowCount(0);
         while(i.hasNext()){
             Alumno a = (Alumno) i.next();
-            model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),0,1});
+            int año = a.obtenerUltimoAñoLectivo();
+            model.addRow(new Object[]{a.getApellidoYNombre(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
         }
         
     }//GEN-LAST:event_jPanelOpPagoMouseClicked

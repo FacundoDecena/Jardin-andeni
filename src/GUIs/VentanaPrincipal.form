@@ -104,7 +104,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="161" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -1112,7 +1112,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           <Component id="jPanel1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -1377,10 +1377,14 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jTextFieldBusqueda_Pago" min="-2" pref="220" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jComboBoxBusqueda_Pago" min="-2" pref="170" max="-2" attributes="0"/>
+                                      <Component id="jComboBoxBusqueda_Pago" min="-2" pref="139" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jComboBoxSalaPago" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jComboBoxTurnoPago" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="15" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1392,6 +1396,8 @@
                                   <Component id="jLabel43" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTextFieldBusqueda_Pago" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jComboBoxBusqueda_Pago" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jComboBoxSalaPago" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jComboBoxTurnoPago" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane2" max="32767" attributes="0"/>
@@ -1407,15 +1413,16 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTextFieldBusqueda_Pago">
+                      <Events>
+                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldBusqueda_PagoKeyReleased"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="jComboBoxBusqueda_Pago">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
+                          <StringArray count="2">
                             <StringItem index="0" value="Apellido y Nombre"/>
                             <StringItem index="1" value="DNI"/>
-                            <StringItem index="2" value="Sala"/>
-                            <StringItem index="3" value="Turno"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1444,6 +1451,35 @@
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JComboBox" name="jComboBoxSalaPago">
+                      <Properties>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                          <StringArray count="4">
+                            <StringItem index="0" value="Sala"/>
+                            <StringItem index="1" value="5 a&#xf1;os"/>
+                            <StringItem index="2" value="4 a&#xf1;os"/>
+                            <StringItem index="3" value="3 a&#xf1;os"/>
+                          </StringArray>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JComboBox" name="jComboBoxTurnoPago">
+                      <Properties>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                          <StringArray count="3">
+                            <StringItem index="0" value="Turno"/>
+                            <StringItem index="1" value="Ma&#xf1;ana"/>
+                            <StringItem index="2" value="Tarde"/>
+                          </StringArray>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                      </AuxValues>
+                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>

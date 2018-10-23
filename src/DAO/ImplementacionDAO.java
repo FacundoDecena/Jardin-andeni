@@ -139,12 +139,13 @@ public class ImplementacionDAO implements DAO {
             fecha = fecha.concat(parcial+"-");
             parcial = String.valueOf(r.get(Calendar.DATE));
             fecha = fecha.concat(parcial);
-            s.execute("INSERT INTO PAGO VALUES("+(obtenerMaximoIdPago()+1)+",'"+fecha+"',"+pago.getMontoTotal()
+            int idPago = (obtenerMaximoIdPago()+1);
+            s.execute("INSERT INTO PAGO VALUES("+idPago+",'"+fecha+"',"+pago.getMontoTotal()
                       +","+pago.getMontoPagado()+",'"+pago.getPeriodo()+"',"+tipoPago+","+pago.getCuotas()+")");
             Iterator i = pago.getAlumnos().iterator();
             while(i.hasNext()){
                 Alumno a = (Alumno) i.next();
-                s.execute("INSERT INTO CORRESPONDE_PAGO VALUES("+pago.getIdPago()+","+a.getDni()+")");
+                s.execute("INSERT INTO CORRESPONDE_PAGO VALUES("+idPago+","+a.getDni()+")");
             }
         } catch (SQLException ex) {
             Logger.getLogger(ImplementacionDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -216,7 +217,7 @@ public class ImplementacionDAO implements DAO {
             Connection c = ConexionBD.getConnection();
             Statement s = c.createStatement();
             s.execute("UPDATE PAGO"+
-                      "SET MONTOTOTAL="+pago.getMontoTotal()+", MONTOPAGADO="+pago.getMontoPagado()+
+                      " SET MONTOPAGADO="+pago.getMontoPagado()+
                       " WHERE IDPAGO="+pago.getIdPago());  
         } catch (SQLException ex) {ex.printStackTrace();}
     }
@@ -397,7 +398,7 @@ public class ImplementacionDAO implements DAO {
             Statement s = c.createStatement();
             ResultSet rs = s.executeQuery("SELECT MAX(IDPAGO) FROM PAGO");
             rs.next();
-            valor = rs.getInt(0);
+            valor = rs.getInt(1);
         } catch (SQLException ex) {
             Logger.getLogger(ImplementacionDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

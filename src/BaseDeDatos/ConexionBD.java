@@ -239,6 +239,7 @@ public class ConexionBD {
     
     public static void main(String[] args) throws SQLException{
         /*Connection c = ConexionBD.getConnection();
-        Statement s = c.createStatement();*/
+        Statement s = c.createStatement();
+        s.execute("UPDATE PAGO SET MONTOPAGADO=1000");*/
     }
 }

@@ -17,71 +17,24 @@ import java.util.regex.*;
  * @author Facu SSD
  */
 public class ManagerTutor {
-    
-    private Tutor tutor;
-    private String ocupacion;
-    private String tipoDni;
-    private long telefonoPersonal;
-    private long telefonoTrabajo;
-    private String relacion;
-    private Set<Alumno> atutorados;
-    private Set<Retiro> retiros;
-    private int dni;
-    private String apellidoYNombre;
-    private static ManagerTutor manager = null;
-    
-    /**
-     * @param tutor puede ser null
-     * @param ocupacion
-     * @param tipoDni
-     * @param telefonoPersonal
-     * @param telefonoTrabajo
-     * @param relacion
-     * @param atutorados
-     * @param retiros
-     * @param dni
-     * @param apellidoYNombre 
-     */
-    private ManagerTutor(Tutor tutor, String ocupacion, String tipoDni, long telefonoPersonal, long telefonoTrabajo, String relacion, Set<Alumno> atutorados, Set<Retiro> retiros, int dni, String apellidoYNombre) {
-        this.tutor = tutor;
-        this.ocupacion = ocupacion;
-        this.tipoDni = tipoDni;
-        this.telefonoPersonal = telefonoPersonal;
-        this.telefonoTrabajo = telefonoTrabajo;
-        this.relacion = relacion;
-        this.atutorados = atutorados;
-        this.retiros = retiros;
-        this.dni = dni;
-        this.apellidoYNombre = apellidoYNombre;
-    }
+       
+    private static ManagerTutor manager;
     
     private ManagerTutor() {
-        this.tutor = null;
-        this.ocupacion = null;
-        this.tipoDni = null;
-        this.telefonoPersonal = 0;
-        this.telefonoTrabajo = 0;
-        this.relacion = null;
-        this.atutorados = null;
-        this.retiros = null;
-        this.dni = 0;
-        this.apellidoYNombre = null;
+        
     }
     
-    public static ManagerTutor GetManager(Tutor tutor, String ocupacion, String tipoDni, long telefonoPersonal, long telefonoTrabajo, String relacion, Set<Alumno> atutorados, Set<Retiro> retiros, int dni, String apellidoYNombre){
-        if(manager == null)
-            manager = new ManagerTutor(tutor, ocupacion, tipoDni, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
-        return manager;
-    }
     
-    public static ManagerTutor GetManager(){
+    public static ManagerTutor getManager(){
         if(manager == null)
             manager = new ManagerTutor();
         return manager;
     }
 
     public Tutor nuevoTutor (String ocupacion, String tipoDni, long telefonoPersonal, long telefonoTrabajo, String relacion, Set<Alumno> atutorados, Set<Retiro> retiros, int dni, String apellidoYNombre) throws IllegalArgumentException, Exception{
-        Pattern patron = Pattern.compile("[a-zA-Z&&[ x0Bf ]&&[^0-9]]");
+        Tutor tutor;
+        
+        Pattern patron = Pattern.compile("[a-zA-Z&&'\'s&&[^0-9]]");
         Matcher encaja;
         
         encaja = patron.matcher(ocupacion);
@@ -114,78 +67,4 @@ public class ManagerTutor {
         return e;
     }
     
-    
-    public String getOcupacion() {
-        return ocupacion;
-    }
-
-    public void setOcupacion(String ocupacion) {
-        this.ocupacion = ocupacion;
-    }
-
-    public String getTipoDni() {
-        return tipoDni;
-    }
-
-    public void setTipoDni(String tipoDni) {
-        this.tipoDni = tipoDni;
-    }
-
-    public long getTelefonoPersonal() {
-        return telefonoPersonal;
-    }
-
-    public void setTelefonoPersonal(long telefonoPersonal) {
-        this.telefonoPersonal = telefonoPersonal;
-    }
-
-    public long getTelefonoTrabajo() {
-        return telefonoTrabajo;
-    }
-
-    public void setTelefonoTrabajo(long telefonoTrabajo) {
-        this.telefonoTrabajo = telefonoTrabajo;
-    }
-
-    public String getRelacion() {
-        return relacion;
-    }
-
-    public void setRelacion(String relacion) {
-        this.relacion = relacion;
-    }
-
-    public Set<Alumno> getAtutorados() {
-        return atutorados;
-    }
-
-    public void setAtutorados(Set<Alumno> atutorados) {
-        this.atutorados = atutorados;
-    }
-
-    public Set<Retiro> getRetiros() {
-        return retiros;
-    }
-
-    public void setRetiros(Set<Retiro> retiros) {
-        this.retiros = retiros;
-    }
-
-    public int getDni() {
-        return dni;
-    }
-
-    public void setDni(int dni) {
-        this.dni = dni;
-    }
-
-    public String getApellidoYNombre() {
-        return apellidoYNombre;
-    }
-
-    public void setApellidoYNombre(String apellidoYNombre) {
-        this.apellidoYNombre = apellidoYNombre;
-    }
-    
 }
-

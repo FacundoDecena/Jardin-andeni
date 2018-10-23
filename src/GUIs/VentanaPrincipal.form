@@ -65,7 +65,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jPanelTitulo" max="32767" attributes="0"/>
-                      <Component id="jPanelCard" max="32767" attributes="0"/>
+                      <Component id="jPanelCard" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,7 @@ public class ImplementacionDAO implements DAO {
             this.alumno = palumno;
             Connection c = ConexionBD.getConnection();
             Statement s = c.createStatement();
-            s.execute("INSERT INTO PERSONA VALUES("+alumno.getDni()+",'"+alumno.getApellidoYNombre()+"','1')");
+            s.execute("INSERT INTO PERSONA VALUES("+alumno.getDni()+",'"+alumno.getApellidoYNombre()+"',1)");
             s.execute("INSERT INTO ALUMNO VALUES (" + alumno.getDni() + ",'"+
                                                       alumno.getFechaDeNacimiento() + "', '" +
                                                       alumno.getLugarNacimiento() + "', " +
@@ -134,7 +135,7 @@ public class ImplementacionDAO implements DAO {
             Statement s = c.createStatement();
             s.execute("INSERT INTO PERSONA VALUES("
                     +tutor.getDni()+",'"
-                    +tutor.getApellidoYNombre()+"','2')");
+                    +tutor.getApellidoYNombre()+"',2)");
             s.execute("INSERT INTO TUTOR VALUES('"
                     +tutor.getTipoDni()+"',"
                     +tutor.getDni()+",'"
@@ -208,17 +209,35 @@ public class ImplementacionDAO implements DAO {
     @Override//NO GUARDA NADA EN LOS SETS
     public List obtenerTodosAlumno() {
         try {
+            int dni, idSala, añoLectivo;
             Connection c = ConexionBD.getConnection();
             Statement s = c.createStatement();
+            List<Alumno> listaDeAlumnos = new ArrayList();
+            List<Sala> listaSalas = new ArrayList<>();
+            Map<Integer,Sala> mapaSalas;
             ResultSet rsAlumno = null;
             rsAlumno = s.executeQuery("SELECT * FROM ALUMNO");
-            List<Alumno> listaDeAlumnos = new ArrayList();
             Statement sAux = c.createStatement();
+            ResultSet rsSala = sAux.executeQuery("SELECT IDSALA FROM SALA");
+            while(rsSala.next()){
+                idSala = rsSala.getInt("IDSALA");
+                listaSalas.add(obtenerSala(idSala));
+            }
             while(rsAlumno.next()){
-                int dni = rsAlumno.getInt("DNI");
+                dni = rsAlumno.getInt("DNI");
                 ResultSet rsNombre = sAux.executeQuery("SELECT APELLIDOYNOMBRE FROM PERSONA WHERE DNI="+dni);
                 rsNombre.next();
                 String apellidoYNombre = rsNombre.getString("APELLIDOYNOMBRE");
+                rsSala = sAux.executeQuery("SELECT IDSALA,ANOLECTIVO FROM ES_ALUMNO WHERE DNIALUMNO="+dni);
+                while(rsSala.next()){
+                    añoLectivo = rsSala.getInt("ANOLECTIVO");
+                    idSala = rsSala.getInt("IDSALA");
+                    Iterator i = listaSalas.listIterator();
+                    mapaSalas = new HashMap();
+                    while(i.hasNext()){
+                        //(Sala) i.next();
+                    }
+                }
                 alumno = new Alumno(rsAlumno.getDate("FECHADENACIMIENTO"),rsAlumno.getString("LUGARDENACIMIENTO"),
                                            rsAlumno.getString("DOMICILIO"),rsAlumno.getLong("TELEFONO"),
                                            rsAlumno.getBoolean("CONTROLMEDICO"),rsAlumno.getBoolean("VACUNAS"),

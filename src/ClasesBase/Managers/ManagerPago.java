@@ -32,4 +32,8 @@ public class ManagerPago {
         ImplementacionDAO.getDAO().altaPago(pago);
     }
     
+    public void modificarPago(Pago pago){
+        ImplementacionDAO.getDAO().modificarPago(pago);
+    }
+    
 }

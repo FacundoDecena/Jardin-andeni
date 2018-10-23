@@ -142,6 +142,8 @@ public class ConexionBD {
                   "FOREIGN KEY (COD_TIPO) REFERENCES TIPO_PAGO(COD_TIPO))"    
         );
         
+        s.execute("INSERT INTO PAGO VALUES(1,'2012-1-1',0.0,0.0,'',1,3)");
+        
         s.execute("CREATE TABLE CORRESPONDE_PAGO(" +
                   "IDPAGO INT NOT NULL," +
                   "DNIALUMNO INT NOT NULL," +
@@ -174,6 +176,8 @@ public class ConexionBD {
         s.execute("INSERT INTO SALA VALUES(4,4,'Celeste','Tarde')");
         s.execute("INSERT INTO SALA VALUES(5,5,'Naranja','Mañana')");
         s.execute("INSERT INTO SALA VALUES(6,5,'Naranja','Tarde')");
+        
+       
 
         s.execute("CREATE TABLE ES_ALUMNO(" +
                   "DNIALUMNO INT NOT NULL," +

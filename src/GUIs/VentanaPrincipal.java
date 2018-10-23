@@ -38,6 +38,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private List<Alumno> listaAlumnos;
     private Alumno alumnoSeleccionado;
     private Pago pagoSeleccionado;
+    private boolean nuevo;
     
     public VentanaPrincipal() {
         initComponents();
@@ -392,7 +393,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelInterseccion.setLayout(jPanelInterseccionLayout);
         jPanelInterseccionLayout.setHorizontalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 161, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanelInterseccionLayout.setVerticalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1066,6 +1067,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel49.setText("Ciclo Lectivo");
 
         jYearChooser1.setVerifyInputWhenFocusTarget(false);
+        jYearChooser1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jYearChooser1MouseClicked(evt);
+            }
+        });
 
         jLabelTotalPagado.setText("jLabel53");
 
@@ -1737,7 +1743,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelCard, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFondoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2288,6 +2294,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         float valorInscripcion = ManagerPago.getManager().obtenerValorInscripcion();
         int valorPeriodo = jYearChooser1.getValue();
         if(pagos.isEmpty()){
+            nuevo=true;
             jLabelMontoAPagar.setText("$ "+String.valueOf(valorInscripcion)+"0");
             jLabelTotalPagado.setText("$ 0.00");
             int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
@@ -2314,19 +2321,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 if(Integer.parseInt(pago.getPeriodo()) == valorPeriodo && pago.getTipoPago().equals("INSCRIPCION")){
                     pagoSeleccionado = pago;
                     if(pagoSeleccionado.getMontoPagado() == pagoSeleccionado.getMontoTotal()){
-                        JOptionPane.showMessageDialog(null,"La inscripcion de"+valorPeriodo+"de este alumno ya esta pagada completamente.", "Info",JOptionPane.INFORMATION_MESSAGE);
                         jButtonRegistrarPago.setEnabled(false);
+                        JOptionPane.showMessageDialog(null,"La inscripcion de "+valorPeriodo+" de este alumno ya esta pagada completamente.", "Info",JOptionPane.INFORMATION_MESSAGE);
+                        jLabelMontoCuota.setText("-");
+                    }
+                    else{
+                    jLabelMontoCuota.setText("$ "+(pagoSeleccionado.getMontoTotal()/pagoSeleccionado.getCuotas())+"0");
                     }
                     jLabelMontoAPagar.setText("$ "+pagoSeleccionado.getMontoTotal()+"0");
                     jLabelTotalPagado.setText("$ "+pagoSeleccionado.getMontoPagado()+"0");
                     jSpinner_Cuotas_PagoIns.setValue(pagoSeleccionado.getCuotas());
                     jSpinner_Cuotas_PagoIns.setEnabled(false);
-                    jLabelMontoCuota.setText("$ "+(pagoSeleccionado.getMontoTotal()/pagoSeleccionado.getCuotas())+"0");
                     encontroInscripcion=true;
+                    nuevo=false;
                     break;
                 }
             }
             if(!encontroInscripcion){
+                nuevo=true;
                jLabelMontoAPagar.setText("$ "+String.valueOf(valorInscripcion)+"0");
                 int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
                 switch(valorSpinner){
@@ -2484,6 +2496,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 case 4:
                     jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/4)+"0");
                     break;
+                default:
+                    jLabelMontoCuota.setText("-");
 
             }
         }
@@ -2530,7 +2544,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         java.util.Date fecha = new Date();
         Set<Alumno> alumnos = new HashSet<>();
         alumnos.add(alumnoSeleccionado);
-        if(jSpinner_Cuotas_PagoIns.isEnabled()){
+        if(nuevo){
             Pago nuevoPago = new Pago(fecha,"INSCRIPCION",String.valueOf(jYearChooser1.getValue()),
                                       (Integer)jSpinner_Cuotas_PagoIns.getValue(),
                                       Float.parseFloat(jLabelMontoCuota.getText().substring(2,jLabelMontoCuota.getText().length()-2)),
@@ -2540,13 +2554,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             ManagerPago.getManager().altaPago(nuevoPago);
             jLabelTotalPagado.setText("$ "+String.valueOf(nuevoPago.getMontoPagado())+"0");
             jSpinner_Cuotas_PagoIns.setEnabled(false);
+            if(nuevoPago.getMontoPagado()==nuevoPago.getMontoTotal())
+            {
+                jButtonRegistrarPago.setEnabled(false);
+                JOptionPane.showMessageDialog(null,"Se ha realizado el pago total de la inscripcion.", "Exito",JOptionPane.INFORMATION_MESSAGE);
+                jLabelMontoCuota.setText("-");
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Pago realizado correctamente.", "Exito",JOptionPane.INFORMATION_MESSAGE);
+            }
         }
         else{
             float nuevoMontoPagado = pagoSeleccionado.getMontoPagado() + pagoSeleccionado.getMontoTotal()/pagoSeleccionado.getCuotas();
             pagoSeleccionado.setMontoPagado(nuevoMontoPagado);
+            jLabelTotalPagado.setText("$ "+String.valueOf(nuevoMontoPagado)+"0");
             ManagerPago.getManager().modificarPago(pagoSeleccionado);
+            jSpinner_Cuotas_PagoIns.setEnabled(false);
+            if(nuevoMontoPagado==pagoSeleccionado.getMontoTotal())
+            {
+                jButtonRegistrarPago.setEnabled(false);
+                JOptionPane.showMessageDialog(null,"Se ha realizado el pago total de la inscripcion.", "Exito",JOptionPane.INFORMATION_MESSAGE);
+                jLabelMontoCuota.setText("-");
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Pago realizado correctamente.", "Exito",JOptionPane.INFORMATION_MESSAGE);
+            }
+                
         }
-        JOptionPane.showMessageDialog(null,"Pago realizado correctamente.", "Exito",JOptionPane.INFORMATION_MESSAGE);
+        
     }//GEN-LAST:event_jButtonRegistrarPagoActionPerformed
 
     private void jTableDatosAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDatosAlumnosMouseClicked
@@ -2629,6 +2664,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jTableDatosAlumnosMouseClicked
+
+    private void jYearChooser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jYearChooser1MouseClicked
+        
+    }//GEN-LAST:event_jYearChooser1MouseClicked
 
 
     /**

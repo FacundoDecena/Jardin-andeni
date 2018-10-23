@@ -41,7 +41,7 @@ public interface DAO{
     //public void modificarDocente(Docente docente);
     //public void modificarFalta(Falta falta);
     //public void modificarLicencia(Licencia licencia);
-    //public void modificarPago(Pago pago);
+    public void modificarPago(Pago pago);
     //public void modificarPersona(Persona persona);
     //public void modificarRegistroAsistencia(RegistroAsistencia registroAsistencia);
     //public void modificarRetiro(Retiro retiro);

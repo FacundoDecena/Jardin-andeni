@@ -5,6 +5,7 @@
  */
 package ClasesBase.Managers;
 
+import ClasesBase.Pago;
 import DAO.ImplementacionDAO;
 
 /**
@@ -25,6 +26,10 @@ public class ManagerPago {
     
     public float obtenerValorInscripcion(){
         return ImplementacionDAO.getDAO().obtenerValorInscripcion();
+    }
+
+    public void altaPago(Pago pago) {
+        ImplementacionDAO.getDAO().altaPago(pago);
     }
     
 }

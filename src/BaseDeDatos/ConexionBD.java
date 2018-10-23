@@ -179,7 +179,7 @@ public class ConexionBD {
                   "DNIALUMNO INT NOT NULL," +
                   "IDSALA INT NOT NULL," +
                   "ANOLECTIVO INT NOT NULL," +
-                  "PRIMARY KEY (DNIALUMNO,IDSALA)," +
+                  "PRIMARY KEY (DNIALUMNO,IDSALA,ANOLECTIVO)," +
                   "FOREIGN KEY (IDSALA) REFERENCES SALA(IDSALA)," +
                   "FOREIGN KEY (DNIALUMNO) REFERENCES ALUMNO(DNI))" 
         );

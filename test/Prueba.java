@@ -82,7 +82,7 @@ public class Prueba extends javax.swing.JFrame {
         p.setVisible(true);
         Connection c = ConexionBD.getConnection();
         Statement s = c.createStatement();
-        ResultSet rs = s.executeQuery("SELECT * FROM PAGO");
+        ResultSet rs = s.executeQuery("SELECT * FROM ES_ALUMNO");
         DefaultTableModel dtm = new DefaultTableModel();
         p.jTableA.setModel(dtm);
         ResultSetMetaData rsMd = rs.getMetaData();

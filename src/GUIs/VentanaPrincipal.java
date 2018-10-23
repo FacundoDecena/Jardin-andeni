@@ -154,6 +154,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jRadioButtonAgregarPadre = new javax.swing.JRadioButton();
         jRadioButtonAgregarMadre = new javax.swing.JRadioButton();
         jButtonBuscarAlumBD = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanelPago = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
@@ -501,7 +502,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel13.setText("Telefono");
 
-        jComboBoxSala_Insc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5 Años", "4 Años", "3 Años" }));
+        jComboBoxSala_Insc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3 Años", "4 Años", "5 Años" }));
 
         jTextField_Edad.setEditable(false);
         jTextField_Edad.setBackground(new java.awt.Color(255, 255, 255));
@@ -634,11 +635,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jRadioButtonAgregarMadre.setSelected(true);
         jRadioButtonAgregarMadre.setText("Incluir");
+        jRadioButtonAgregarMadre.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButtonAgregarMadreStateChanged(evt);
+            }
+        });
 
         jButtonBuscarAlumBD.setText("Buscar Alumno en Base de Datos");
         jButtonBuscarAlumBD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBuscarAlumBDActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Reiniciar Formulario");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -694,6 +707,42 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel23))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInscripcionLayout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel22))
+                                .addGap(284, 284, 284)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                                .addComponent(jLabel26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel27)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                                .addComponent(jRadioButtonAgregarTutor))
+                            .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel28)
+                                    .addComponent(jLabel29)
+                                    .addComponent(jLabel30)
+                                    .addComponent(jLabel31)
+                                    .addComponent(jLabel32))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField_TelTra_Tutor)
+                                    .addComponent(jTextField_TipoDoc_Tutor)
+                                    .addComponent(jTextField_ApyNom_Tutor)
+                                    .addComponent(jTextField_NumDoc_Tutor)
+                                    .addComponent(jTextField_Ocupacion_Tutor)
+                                    .addComponent(jTextField_Relacion)
+                                    .addComponent(jTextField_TelPer_Tutor, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))))
+                        .addContainerGap(100, Short.MAX_VALUE))
+                    .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -742,10 +791,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)))
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInscripcionLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
-                                .addComponent(jButton_Inscribir)
-                                .addGap(181, 181, 181))
                             .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanelInscripcionLayout.createSequentialGroup()
@@ -756,43 +801,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                                         .addGap(128, 128, 128)
                                         .addComponent(jButtonBuscarAlumBD)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanelInscripcionLayout.createSequentialGroup()
-                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelInscripcionLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel23))
+                                .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInscripcionLayout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jLabel22))
-                                .addGap(284, 284, 284)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanelInscripcionLayout.createSequentialGroup()
-                                .addComponent(jLabel26)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel27)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                                .addComponent(jRadioButtonAgregarTutor))
-                            .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel28)
-                                    .addComponent(jLabel29)
-                                    .addComponent(jLabel30)
-                                    .addComponent(jLabel31)
-                                    .addComponent(jLabel32))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField_TelTra_Tutor)
-                                    .addComponent(jTextField_TipoDoc_Tutor)
-                                    .addComponent(jTextField_ApyNom_Tutor)
-                                    .addComponent(jTextField_NumDoc_Tutor)
-                                    .addComponent(jTextField_Ocupacion_Tutor)
-                                    .addComponent(jTextField_Relacion)
-                                    .addComponent(jTextField_TelPer_Tutor, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))))
-                        .addContainerGap(100, Short.MAX_VALUE))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInscripcionLayout.createSequentialGroup()
+                                        .addComponent(jButton_Inscribir)
+                                        .addGap(181, 181, 181))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInscripcionLayout.createSequentialGroup()
+                                        .addComponent(jButton1)
+                                        .addGap(155, 155, 155))))))))
         );
         jPanelInscripcionLayout.setVerticalGroup(
             jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -911,7 +929,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel46)
                             .addComponent(jTextField_TelTra_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
             .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -948,6 +966,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(jTextField_TelTra_Tutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
                 .addComponent(jButtonBuscarAlumBD)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton_Inscribir)
                 .addGap(96, 96, 96))
@@ -1511,7 +1531,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //Controles de la primer columna
         salaEdad = jComboBoxSala_Insc.getSelectedIndex();
         salaTurno = jComboBoxTurno_Insc.getSelectedIndex();
-        idSala = salaEdad + salaTurno +1;
+        idSala = (salaEdad * 2)+ salaTurno +1;
         sala = mngSala.getSala(idSala);
         salas.put(idSala, sala);
         
@@ -1745,15 +1765,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
               
         }
         if(!error){
-            try{
-                
-                alumno = mngAlumno.nuevoAlumno(fechaDeNacimiento, lugarNacimiento, domicilio, telefono, controlMedico, vacunas, controlNatacion, traeMateriales, otrosDatos, hermanos, tutores, pagos, salas, ra, dni, apellidoYNombre);
+            if(jTextField_ApyNom.isEnabled()){
+                try{
+                    alumno = mngAlumno.nuevoAlumno(fechaDeNacimiento, lugarNacimiento, domicilio, telefono, controlMedico, vacunas, controlNatacion, traeMateriales, otrosDatos, hermanos, tutores, pagos, salas, ra, dni, apellidoYNombre);
+                    JOptionPane.showMessageDialog(null,"El alumno ha sido Inscripto correctamente", "Inscripto",JOptionPane.INFORMATION_MESSAGE);
+                }
+                catch(Exception e){
+                    JOptionPane.showMessageDialog(null,e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else{
+                Calendar cal= Calendar.getInstance();
+                mngAlumno.actualizarAñoLectivo(dni, idSala, cal.get(Calendar.YEAR));
                 JOptionPane.showMessageDialog(null,"El alumno ha sido Inscripto correctamente", "Inscripto",JOptionPane.INFORMATION_MESSAGE);
             }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
-            }
-            }
+        }
     }//GEN-LAST:event_jButton_InscribirActionPerformed
 
     private void jDateChooserFechaNacimientoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserFechaNacimientoPropertyChange
@@ -1994,6 +2020,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox_TurnoDialogItemStateChanged
 
     private void jTableAlumnosDialogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAlumnosDialogMouseClicked
+        borrarTextFieldInscripcion();
+        jRadioButtonAgregarPadre.setSelected(false);
+        jRadioButtonAgregarMadre.setSelected(false);
+        jRadioButtonAgregarTutor.setSelected(false);
+        //Bloqueo los datos del alumno
+        jTextField_ApyNom.setEnabled(false);
+        jDateChooserFechaNacimiento.setEnabled(false);
+        jTextField_LugarNacimiento.setEnabled(false);
+        jTextField_DNI_Ins.setEnabled(false);
+        jTextField_Domicilio.setEnabled(false);
+        jTextField_Telefono.setEnabled(false);
+        jTextAreaOtrosDatos.setEnabled(false);
+        jCheckBoxMedico.setEnabled(false);
+        jCheckBoxNatacion.setEnabled(false);
+        jCheckBoxTraeMateriales.setEnabled(false);
+        jCheckBoxVacunas.setEnabled(false);
+        
         String dniFila = String.valueOf(model.getValueAt(jTableAlumnosDialog.getSelectedRow(),1));
         Set<Tutor> tutors;
         Iterator j;
@@ -2019,27 +2062,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 while(j.hasNext()){
                     Tutor t = (Tutor) j.next();
                     if(t.getRelacion().equals("Padre")){
-                        jRadioButtonAgregarPadre.setSelected(true);
                         jTextField_ApyNom_Padre.setText(t.getApellidoYNombre());
                         jTextField_TipoDoc_Padre.setText(t.getTipoDni());
                         jTextField_NumDoc_Padre.setText(String.valueOf(t.getDni()));
                         jTextField_Ocupacion_Padre.setText(t.getOcupacion());
                         jTextField_TelPer_Padre.setText(String.valueOf(t.getTelefonoPersonal()));
                         jTextField_TelTra_Padre.setText(String.valueOf(t.getTelefonoTrabajo()));
-                        break;
+                        continue;
                     }
                     if(t.getRelacion().equals("Madre")){
-                        jRadioButtonAgregarMadre.setSelected(true);
                         jTextField_ApyNom_Madre.setText(t.getApellidoYNombre());
                         jTextField_TipoDoc_Madre.setText(t.getTipoDni());
                         jTextField_NumDoc_Madre.setText(String.valueOf(t.getDni()));
                         jTextField_Ocupacion_Madre.setText(t.getOcupacion());
                         jTextField_TelPer_Madre.setText(String.valueOf(t.getTelefonoPersonal()));
                         jTextField_TelTra_Madre.setText(String.valueOf(t.getTelefonoTrabajo()));
-                        break;
+                        continue;
                     }
                     else{
-                        jRadioButtonAgregarTutor.setSelected(true);
                         jTextField_ApyNom_Tutor.setText(t.getApellidoYNombre());
                         jTextField_TipoDoc_Tutor.setText(t.getTipoDni());
                         jTextField_NumDoc_Tutor.setText(String.valueOf(t.getDni()));
@@ -2047,7 +2087,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         jTextField_Ocupacion_Tutor.setText(t.getOcupacion());
                         jTextField_TelPer_Tutor.setText(String.valueOf(t.getTelefonoPersonal()));
                         jTextField_TelTra_Tutor.setText(String.valueOf(t.getTelefonoTrabajo()));
-                        break;
+                        continue;
                     }
                 }
                 break;
@@ -2076,6 +2116,41 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jSpinner_Cuotas_PagoInsStateChanged
+
+    private void jRadioButtonAgregarMadreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonAgregarMadreStateChanged
+        if(jRadioButtonAgregarMadre.isSelected()){
+            jLabel17.setEnabled(true);
+            jLabel18.setEnabled(true);
+            jLabel19.setEnabled(true);
+            jLabel20.setEnabled(true);
+            jLabel42.setEnabled(true);
+            jLabel44.setEnabled(true);
+            jTextField_ApyNom_Madre.setEnabled(true);
+            jTextField_TipoDoc_Madre.setEnabled(true);
+            jTextField_NumDoc_Madre.setEnabled(true);
+            jTextField_Ocupacion_Madre.setEnabled(true);
+            jTextField_TelPer_Madre.setEnabled(true);
+            jTextField_TelTra_Madre.setEnabled(true);
+        }
+        else{
+            jLabel16.setEnabled(false);
+            jLabel23.setEnabled(false);
+            jLabel14.setEnabled(false);
+            jLabel25.setEnabled(false);
+            jLabel45.setEnabled(false);
+            jLabel46.setEnabled(false);
+            jTextField_ApyNom_Madre.setEnabled(false);
+            jTextField_TipoDoc_Madre.setEnabled(false);
+            jTextField_NumDoc_Madre.setEnabled(false);
+            jTextField_Ocupacion_Madre.setEnabled(false);
+            jTextField_TelPer_Madre.setEnabled(false);
+            jTextField_TelTra_Madre.setEnabled(false);
+        }
+    }//GEN-LAST:event_jRadioButtonAgregarMadreStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        borrarTextFieldInscripcion();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonRegistrarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarPagoActionPerformed
         java.util.Date fecha = new Date();
@@ -2128,6 +2203,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonBuscarAlumBD;
     private javax.swing.JButton jButtonRegistrarPago;
     private javax.swing.JButton jButton_Inscribir;
@@ -2270,6 +2346,56 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_Turno_PagoIns;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     // End of variables declaration//GEN-END:variables
+    
+    private void borrarTextFieldInscripcion(){
+        jTextField_ApyNom.setEnabled(true);
+        jDateChooserFechaNacimiento.setEnabled(true);
+        jTextField_LugarNacimiento.setEnabled(true);
+        jTextField_DNI_Ins.setEnabled(true);
+        jTextField_Domicilio.setEnabled(true);
+        jTextField_Telefono.setEnabled(true);
+        jTextAreaOtrosDatos.setEnabled(true);
+        jCheckBoxMedico.setEnabled(true);
+        jCheckBoxNatacion.setEnabled(true);
+        jCheckBoxTraeMateriales.setEnabled(true);
+        jCheckBoxVacunas.setEnabled(true);
+        
+        jTextField_ApyNom.setText("");
+        jTextField_LugarNacimiento.setText("");
+        jTextField_DNI_Ins.setText("");
+        jTextField_Domicilio.setText("");
+        jTextField_Telefono.setText("");
+        jTextAreaOtrosDatos.setText("");
+        jCheckBoxMedico.setSelected(false);
+        jCheckBoxNatacion.setSelected(false);
+        jCheckBoxTraeMateriales.setSelected(false);
+        jCheckBoxVacunas.setSelected(false);
+
+        jRadioButtonAgregarPadre.setSelected(true);
+        jTextField_ApyNom_Padre.setText("");
+        jTextField_TipoDoc_Padre.setText("");
+        jTextField_NumDoc_Padre.setText("");
+        jTextField_Ocupacion_Padre.setText("");
+        jTextField_TelPer_Padre.setText("");
+        jTextField_TelTra_Padre.setText("");
+
+        jRadioButtonAgregarMadre.setSelected(true);
+        jTextField_ApyNom_Madre.setText("");
+        jTextField_TipoDoc_Madre.setText("");
+        jTextField_NumDoc_Madre.setText("");
+        jTextField_Ocupacion_Madre.setText("");
+        jTextField_TelPer_Madre.setText("");
+        jTextField_TelTra_Madre.setText("");
+
+        jRadioButtonAgregarTutor.setSelected(false);
+        jTextField_ApyNom_Tutor.setText("");
+        jTextField_TipoDoc_Tutor.setText("");
+        jTextField_NumDoc_Tutor.setText("");
+        jTextField_Relacion.setText("");
+        jTextField_Ocupacion_Tutor.setText("");
+        jTextField_TelPer_Tutor.setText("");
+        jTextField_TelTra_Tutor.setText("");
+    }
     
     public void cargarTabla(String valorComboBox1, String buscado, int salaS, int turnoS){
         model.setRowCount(0);

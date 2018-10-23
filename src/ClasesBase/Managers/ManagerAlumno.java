@@ -67,6 +67,10 @@ public class ManagerAlumno{
         return ImplementacionDAO.getDAO().obtenerTodosAlumno();
     }
     
+    /*public Alumno getAlumno(int dni){
+        return ImplementacionDAO.getDAO().obtenerAlumno(dni);
+    }*/
+    
     public void actualizarAñoLectivo(int dni, int idSala, int añoLectivo){
         ImplementacionDAO.getDAO().agregarAñoLectivo(dni, idSala, añoLectivo);
     }

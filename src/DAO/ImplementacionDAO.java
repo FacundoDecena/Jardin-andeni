@@ -233,6 +233,87 @@ public class ImplementacionDAO implements DAO {
         } catch (SQLException ex) {ex.printStackTrace();}
     }
 
+    /*@Override
+    public Alumno obtenerAlumno(int dniA){
+        try {
+            int idSala, añoLectivo,idPago, dniT;
+            Connection c = ConexionBD.getConnection();
+            Statement s = c.createStatement();
+            List<Tutor> listTutores = new ArrayList();
+            List<Sala> listaSalas = new ArrayList<>();
+            List<Pago> listaPagos = new ArrayList<>();
+            Map<Integer,Sala> mapaSalas;
+            Set<Pago> pagos;
+            Set<Tutor> tutores;
+            ResultSet rsAlumno;
+            rsAlumno = s.executeQuery("SELECT * FROM ALUMNO");
+            Statement sAux = c.createStatement();
+            ResultSet rsSala = sAux.executeQuery("SELECT IDSALA FROM SALA");
+            while(rsSala.next()){
+                idSala = rsSala.getInt("IDSALA");
+                listaSalas.add(obtenerSala(idSala));
+            }
+            ResultSet rsPago = sAux.executeQuery("SELECT IDPAGO FROM PAGO");
+            while(rsPago.next()){
+                idPago = rsPago.getInt("IDPAGO");
+                listaPagos.add(obtenerPago(idPago));
+            }
+            ResultSet rsTutor = sAux.executeQuery("SELECT DNI FROM TUTOR");
+            while(rsTutor.next()){
+                dniT = rsTutor.getInt("DNI");
+                listTutores.add(obtenerTutor(dniT));
+            }
+            while(rsAlumno.next()){
+                ResultSet rsNombre = sAux.executeQuery("SELECT APELLIDOYNOMBRE FROM PERSONA WHERE DNI="+dniA);
+                rsNombre.next();
+                String apellidoYNombre = rsNombre.getString("APELLIDOYNOMBRE");
+                rsSala = sAux.executeQuery("SELECT IDSALA,ANOLECTIVO FROM ES_ALUMNO WHERE DNIALUMNO="+dniA);
+                mapaSalas = new HashMap();
+                while(rsSala.next()){
+                    añoLectivo = rsSala.getInt("ANOLECTIVO");
+                    idSala = rsSala.getInt("IDSALA");
+                    Iterator i = listaSalas.listIterator();
+                    while(i.hasNext()){
+                        Sala sala = (Sala) i.next();
+                        if(sala.getIdSala() == idSala){
+                            mapaSalas.put(añoLectivo,sala);
+                        }
+                    }
+                }
+                pagos = new HashSet();
+                rsPago = sAux.executeQuery("SELECT IDPAGO FROM CORRESPONDE_PAGO WHERE DNIALUMNO="+dniA);
+                while(rsPago.next()){
+                    idPago = rsPago.getInt("IDPAGO");
+                    Iterator i = listaPagos.listIterator();
+                    while(i.hasNext()){
+                        Pago p = (Pago) i.next();
+                        if(p.getIdPago() == idPago)
+                            pagos.add(p);
+                    }
+                }
+                tutores = new HashSet();
+                rsTutor = sAux.executeQuery("SELECT DNITUTOR FROM ES_TUTOR WHERE DNIALUMNO="+dniA);
+                while(rsTutor.next()){
+                    dniT = rsTutor.getInt("DNITUTOR");
+                    Iterator i = listTutores.listIterator();
+                    while(i.hasNext()){
+                        Tutor t = (Tutor) i.next();
+                        if(t.getDni()== dniT)
+                            tutores.add(t);
+                    }
+                }
+                alumno = new Alumno(rsAlumno.getDate("FECHADENACIMIENTO"),rsAlumno.getString("LUGARDENACIMIENTO"),
+                                           rsAlumno.getString("DOMICILIO"),rsAlumno.getLong("TELEFONO"),
+                                           rsAlumno.getBoolean("CONTROLMEDICO"),rsAlumno.getBoolean("VACUNAS"),
+                                           rsAlumno.getBoolean("CONTROLNATACION"),rsAlumno.getBoolean("TRAEMATERIALES"),
+                                           rsAlumno.getString("OTROSDATOS"),null,tutores,pagos,mapaSalas,null,dniA,apellidoYNombre);
+            }
+            s.close();
+            sAux.close();
+        } catch (SQLException ex) {ex.printStackTrace();}
+        return null;
+    }*/
+    
     @Override//NO GUARDA NADA EN LOS SETS
     public Tutor obtenerTutor(int dni) {
         try {

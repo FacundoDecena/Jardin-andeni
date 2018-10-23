@@ -185,7 +185,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelInterseccion.setLayout(jPanelInterseccionLayout);
         jPanelInterseccionLayout.setHorizontalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 161, Short.MAX_VALUE)
         );
         jPanelInterseccionLayout.setVerticalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -461,6 +461,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         jRadioButtonAgregarTutor.setText("Incluir");
+        jRadioButtonAgregarTutor.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButtonAgregarTutorStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelInscripcionLayout = new javax.swing.GroupLayout(jPanelInscripcion);
         jPanelInscripcion.setLayout(jPanelInscripcionLayout);
@@ -1352,11 +1357,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
             }
         }
-        try{
-            mngTutor.nuevoTutor(ocupacion, tipoDni, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
-        }
-        catch (Exception es){
-            JOptionPane.showMessageDialog(null,"Datos del padre tiene caracteres inválidos", "Error",JOptionPane.ERROR_MESSAGE);
+        if(!error){
+            try{
+                mngTutor.nuevoTutor(ocupacion, tipoDni, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
+            }
+            catch (Exception es){
+                JOptionPane.showMessageDialog(null,"Datos del padre tiene caracteres inválidos", "Error",JOptionPane.ERROR_MESSAGE);
+            }
         }
         //Segundo paso: Madre
         ocupacion = ""; tipoDni = ""; relacion = "";
@@ -1404,6 +1411,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
             }
         }
+        if(!error){
+            try{
+                mngTutor.nuevoTutor(ocupacion, tipoDni, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
+            }
+            catch (Exception es){
+                JOptionPane.showMessageDialog(null,"Datos del madre tiene caracteres inválidos", "Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        if(jRadioButtonAgregarTutor.isSelected()){
+            jLabel28.setEnabled(true);
+            jLabel29.setEnabled(true);
+            jLabel30.setEnabled(true);
+            jLabel31.setEnabled(true);
+            jLabel32.setEnabled(true);
+            jLabel47.setEnabled(true);
+            jLabel48.setEnabled(true);
+            jTextField_ApyNom_Tutor.setEnabled(true);
+            jTextField_TipoDoc_Tutor.setEnabled(true);
+            jTextField_NumDoc_Tutor.setEnabled(true);
+            jTextField_Ocupacion_Tutor.setEnabled(true);
+            jTextField_TelPer_Tutor.setEnabled(true);
+            jTextField_TelTra_Tutor.setEnabled(true);
+        }
         
     }//GEN-LAST:event_jButton_InscribirActionPerformed
 
@@ -1412,6 +1443,39 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String edad = Alumno.getEdad(fechaDeNacimiento);
         jTextField_Edad.setText(edad);
     }//GEN-LAST:event_jDateChooserFechaNacimientoPropertyChange
+
+    private void jRadioButtonAgregarTutorStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonAgregarTutorStateChanged
+        if(jRadioButtonAgregarTutor.isSelected()){
+            jLabel28.setEnabled(true);
+            jLabel29.setEnabled(true);
+            jLabel30.setEnabled(true);
+            jLabel31.setEnabled(true);
+            jLabel32.setEnabled(true);
+            jLabel47.setEnabled(true);
+            jLabel48.setEnabled(true);
+            jTextField_ApyNom_Tutor.setEnabled(true);
+            jTextField_TipoDoc_Tutor.setEnabled(true);
+            jTextField_NumDoc_Tutor.setEnabled(true);
+            jTextField_Ocupacion_Tutor.setEnabled(true);
+            jTextField_TelPer_Tutor.setEnabled(true);
+            jTextField_TelTra_Tutor.setEnabled(true);
+        }
+        else{
+            jLabel28.setEnabled(false);
+            jLabel29.setEnabled(false);
+            jLabel30.setEnabled(false);
+            jLabel31.setEnabled(false);
+            jLabel32.setEnabled(false);
+            jLabel47.setEnabled(false);
+            jLabel48.setEnabled(false);
+            jTextField_ApyNom_Tutor.setEnabled(false);
+            jTextField_TipoDoc_Tutor.setEnabled(false);
+            jTextField_NumDoc_Tutor.setEnabled(false);
+            jTextField_Ocupacion_Tutor.setEnabled(false);
+            jTextField_TelPer_Tutor.setEnabled(false);
+            jTextField_TelTra_Tutor.setEnabled(false);
+        }
+    }//GEN-LAST:event_jRadioButtonAgregarTutorStateChanged
 
 
     /**

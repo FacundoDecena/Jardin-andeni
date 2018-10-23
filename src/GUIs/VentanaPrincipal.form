@@ -1062,6 +1062,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Incluir"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jRadioButtonAgregarTutorStateChanged"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -207,11 +207,11 @@ public class ImplementacionDAO implements DAO {
 
     @Override//NO GUARDA NADA EN LOS SETS
     public List obtenerTodosAlumno() {
-        try {
+        /*try {
             Connection c = ConexionBD.getConnection();
             Statement s = c.createStatement();
             ResultSet rsAlumno = null;
-            rsAlumno = s.executeQuery("SELECT * FROM ALUMNO");
+            rsAlumno = s.executeQuery("SELECT * FROM ALUMNO ORDER BY APELLIDOYNOMBRE");
             List<Alumno> listaDeAlumnos = new ArrayList();
             Statement sAux = c.createStatement();
             while(rsAlumno.next()){
@@ -229,7 +229,7 @@ public class ImplementacionDAO implements DAO {
             s.close();
             sAux.close();
             return listaDeAlumnos;
-        } catch (SQLException ex) {ex.printStackTrace();}
+        } catch (SQLException ex) {ex.printStackTrace();}*/
         return null;
     }
 

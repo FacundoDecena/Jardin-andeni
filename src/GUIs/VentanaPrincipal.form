@@ -1316,12 +1316,16 @@
                                               <Component id="jLabelMontoAPagar" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabelTotalPagado" min="-2" max="-2" attributes="0"/>
                                               <Component id="jSpinner_Cuotas_PagoIns" min="-2" pref="64" max="-2" attributes="0"/>
-                                              <Component id="jButtonRegistrarPago" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace pref="64" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jButtonRegistrarPago" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1368,9 +1372,9 @@
                                       <Component id="jLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabelMontoCuota" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                   <Component id="jButtonRegistrarPago" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="182" max="32767" attributes="0"/>
+                                  <EmptySpace pref="187" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1403,12 +1407,15 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel39">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Monto a pagar"/>
+                            <Property name="text" type="java.lang.String" value="Valor total"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel40">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Monto de la cuota"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="13" style="1"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Monto a pagar"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="jTextField_Sala_PagoIns">
@@ -1423,6 +1430,9 @@
                               <SpinnerModel initial="1" maximum="4" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinner_Cuotas_PagoInsStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel49">
                           <Properties>
@@ -1451,7 +1461,7 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="jButtonRegistrarPago">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="jButton2"/>
+                            <Property name="text" type="java.lang.String" value="Registrar pago"/>
                           </Properties>
                         </Component>
                       </SubComponents>

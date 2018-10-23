@@ -11,6 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -51,9 +54,18 @@ public class ImplementacionDAO implements DAO {
             this.alumno = palumno;
             Connection c = ConexionBD.getConnection();
             Statement s = c.createStatement();
+            Calendar r = new GregorianCalendar();
+            String fecha = "", parcial;
+            r.setTime(alumno.getFechaDeNacimiento());
+            parcial = String.valueOf(r.get(Calendar.YEAR));
+            fecha = fecha.concat(parcial+"-");
+            parcial = String.valueOf(r.get(Calendar.MONTH));
+            fecha = fecha.concat(parcial+"-");
+            parcial = String.valueOf(r.get(Calendar.DATE));
+            fecha = fecha.concat(parcial);
             s.execute("INSERT INTO PERSONA VALUES("+alumno.getDni()+",'"+alumno.getApellidoYNombre()+"',1)");
             s.execute("INSERT INTO ALUMNO VALUES (" + alumno.getDni() + ",'"+
-                                                      alumno.getFechaDeNacimiento() + "', '" +
+                                                      fecha + "', '" +
                                                       alumno.getLugarNacimiento() + "', " +
                                                       alumno.isControlMedico() + ", " +
                                                       alumno.isVacunas() + ", " +
@@ -64,27 +76,43 @@ public class ImplementacionDAO implements DAO {
                                                       alumno.getOtrosDatos() +
                                                   "')");
             Map mapSala = alumno.getSalas();
-            List listSala  = (List) mapSala.keySet();
-            int cl;
-            cl = (int) listSala.get(0);
-            Sala sala = (Sala) mapSala.get(cl);
+            Set setCLs  = mapSala.keySet();
+            int cl = -1;
+            Sala sala = null;
+            Iterator i = setCLs.iterator();
+            while(i.hasNext()){
+                cl = (Integer)i.next();
+                sala = (Sala)mapSala.get(cl);
+            }
+                    
             s.execute("INSERT INTO ES_ALUMNO VALUES("
                     + alumno.getDni()+ ", " 
                     + sala.getIdSala() + ", "
                     + cl + ""
                     + ")");
-            List setRA = (List)alumno.getRa();
-            RegistroAsistencia ra = (RegistroAsistencia) setRA.get(0);
+            
+            RegistroAsistencia ra = new RegistroAsistencia(cl, alumno, new HashSet(), new HashSet());
+            /*Set setRA = alumno.getRa(); YA QUEDA LISTO PARA ALUMNOS YA INSCRIPTOS
+            RegistroAsistencia ra = null;
+            i = setRA.iterator();
+            Date year = new Date();
+            r.setTime(year);
+            int thisYear = r.get(Calendar.YEAR);
+            while(i.hasNext()){
+                ra = (RegistroAsistencia)i.next();
+                if(ra.getAñoLectivo()== thisYear)
+                    break;
+            }*/
             altaRegistroAsistencia(ra);
             Set<Tutor> tutores = alumno.getTutores();
-            Iterator i = tutores.iterator();
-            while(i.hasNext()){
-                altaTutor((Tutor)i.next());
+            Iterator j = tutores.iterator();
+            while(j.hasNext()){
+                altaTutor((Tutor)j.next());
             }
             
             s.close();
         } catch (SQLException ex) {
-            System.err.println("Algo ha fallado mijo, en el alta Alumno, fijese");
+            ex.printStackTrace();
         }
     }
 
@@ -117,12 +145,15 @@ public class ImplementacionDAO implements DAO {
 
     @Override
     public void altaRegistroAsistencia(RegistroAsistencia pregistroAsistencia) {
+        registroAsistencia = pregistroAsistencia;
+        int idra = registroAsistencia.getIdRA();
+        int dni = registroAsistencia.getPersona().getDni();
+        int cl = registroAsistencia.getAñoLectivo();
         try {
-            registroAsistencia = pregistroAsistencia;
             Connection c = ConexionBD.getConnection();
             Statement s = c.createStatement();
-            s.execute("INSERT INTO REGISTROASISTENCIA VALUES("+registroAsistencia.getIdRA()+","+registroAsistencia.getPersona().getDni()+
-                      ","+registroAsistencia.getAñoLectivo()+")");
+            s.execute("INSERT INTO REGISTROASISTENCIA VALUES("+idra+","+dni+
+                      ","+cl+")");
         } catch (SQLException ex) {
             Logger.getLogger(ImplementacionDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

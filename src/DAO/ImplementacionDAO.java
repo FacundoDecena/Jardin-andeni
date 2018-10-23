@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -199,7 +200,7 @@ public class ImplementacionDAO implements DAO {
             ResultSet rsSala = s.executeQuery("SELECT * FROM SALA WHERE IDSALA="+idSala);
             rsSala.next();
             sala = new Sala(rsSala.getInt("EDAD"),rsSala.getString("TURNO"),
-                                    rsSala.getString("COLOR"),rsSala.getInt("IDSALA"),null,null);
+                                    rsSala.getString("COLOR"),rsSala.getInt("IDSALA"),new HashSet(),new HashSet());
             s.close();
             return sala;
         } catch (SQLException ex) {ex.printStackTrace();}

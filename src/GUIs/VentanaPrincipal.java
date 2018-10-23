@@ -967,6 +967,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         jComboBoxBusqueda_Pago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Apellido y Nombre", "DNI" }));
+        jComboBoxBusqueda_Pago.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxBusqueda_PagoItemStateChanged(evt);
+            }
+        });
 
         jTablePago.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -987,8 +992,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTablePago);
 
         jComboBoxSalaPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sala", "5 años", "4 años", "3 años" }));
+        jComboBoxSalaPago.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxSalaPagoItemStateChanged(evt);
+            }
+        });
 
         jComboBoxTurnoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turno", "Mañana", "Tarde" }));
+        jComboBoxTurnoPago.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxTurnoPagoItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1177,7 +1192,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFondoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1230,13 +1245,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         model = (DefaultTableModel) jTablePago.getModel();
         ManagerAlumno ma = ManagerAlumno.getManager();
         listaAlumnos = ma.obtenerTodosAlumno();
-        Iterator i = listaAlumnos.listIterator();
-        model.setRowCount(0);
-        while(i.hasNext()){
-            Alumno a = (Alumno) i.next();
-            int año = a.obtenerUltimoAñoLectivo();
-            model.addRow(new Object[]{a.getApellidoYNombre(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
-        }
+        cargarTabla();
         
     }//GEN-LAST:event_jPanelOpPagoMouseClicked
 
@@ -1635,31 +1644,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonAgregarPadreStateChanged
 
     private void jTextFieldBusqueda_PagoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBusqueda_PagoKeyReleased
-        model.setRowCount(0);
-        String buscado;
-        buscado = jTextFieldBusqueda_Pago.getText().toUpperCase();
-        Iterator i = listaAlumnos.listIterator();
-        String valorComboBox1 = jComboBoxBusqueda_Pago.getSelectedItem().toString();
-        String valorComboBox2 = jComboBoxSalaPago.getSelectedItem().toString();
-        String valorComboBox3 = jComboBoxTurnoPago.getSelectedItem().toString();
-        while(i.hasNext()){
-            Alumno a = (Alumno) i.next();
-            if(valorComboBox1.equals("Apellido y Nombre")){
-                String nombre = a.getApellidoYNombre().toUpperCase();
-                if(nombre.contains(buscado)){
-                    model.addRow(new Object []{a.getApellidoYNombre(),a.getDni(),0,1});
-                }
-            }
-            else{
-                String dni = String.valueOf(a.getDni());
-                if(dni.contains(buscado)){
-                    model.addRow(new Object []{a.getApellidoYNombre(),a.getDni(),0,1});
-                }
-                
-                
-            }
-        }
+        cargarTabla();
     }//GEN-LAST:event_jTextFieldBusqueda_PagoKeyReleased
+
+    private void jComboBoxSalaPagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxSalaPagoItemStateChanged
+        cargarTabla();
+    }//GEN-LAST:event_jComboBoxSalaPagoItemStateChanged
+
+    private void jComboBoxTurnoPagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTurnoPagoItemStateChanged
+        cargarTabla();
+    }//GEN-LAST:event_jComboBoxTurnoPagoItemStateChanged
+
+    private void jComboBoxBusqueda_PagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxBusqueda_PagoItemStateChanged
+        cargarTabla();
+    }//GEN-LAST:event_jComboBoxBusqueda_PagoItemStateChanged
 
 
     /**
@@ -1828,4 +1826,445 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_Turno_PagoIns;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     // End of variables declaration//GEN-END:variables
+    
+    public void cargarTabla(){
+        String valorComboBox1 = jComboBoxBusqueda_Pago.getSelectedItem().toString();
+        String buscado = jTextFieldBusqueda_Pago.getText().toUpperCase();
+        model.setRowCount(0);
+        switch(jComboBoxSalaPago.getSelectedIndex()){
+            case 0:
+                    switch(jComboBoxTurnoPago.getSelectedIndex()){
+                        case 0:
+                            if(buscado.equals("")){
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
+                                }
+                            }
+                            else{
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    if(valorComboBox1.equals("Apellido y Nombre")){
+                                        String nombre = a.getApellidoYNombre().toUpperCase();
+                                        if(nombre.contains(buscado)){
+                                            int año = a.obtenerUltimoAñoLectivo();
+                                            model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
+                                        }
+                                    }
+                                    else{
+                                        String dni = String.valueOf(a.getDni());
+                                        if(dni.contains(buscado)){
+                                            int año = a.obtenerUltimoAñoLectivo();
+                                            model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
+                                        } 
+                                    }
+                                }
+                            }
+                            break;
+                        case 1:
+                            if(buscado.equals("")){
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    String turno = a.getSalas().get(año).getTurno();
+                                    if(turno.equalsIgnoreCase("Mañana"))
+                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                }
+                            }
+                            else{
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    String turno = a.getSalas().get(año).getTurno();
+                                    if(turno.equalsIgnoreCase("Mañana")){
+                                        if(valorComboBox1.equals("Apellido y Nombre")){
+                                            String nombre = a.getApellidoYNombre().toUpperCase();
+                                            if(nombre.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                            }
+                                        }
+                                        else{
+                                            String dni = String.valueOf(a.getDni());
+                                            if(dni.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                            } 
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case 2:
+                            if(buscado.equals("")){
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    String turno = a.getSalas().get(año).getTurno();
+                                    if(turno.equalsIgnoreCase("Tarde"))
+                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                }
+                            }
+                            else{
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    String turno = a.getSalas().get(año).getTurno();
+                                    if(turno.equalsIgnoreCase("Tarde")){
+                                        if(valorComboBox1.equals("Apellido y Nombre")){
+                                            String nombre = a.getApellidoYNombre().toUpperCase();
+                                            if(nombre.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                            }
+                                        }
+                                        else{
+                                            String dni = String.valueOf(a.getDni());
+                                            if(dni.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                            } 
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                    }
+                    break;
+            case 1:
+                    switch(jComboBoxTurnoPago.getSelectedIndex()){
+                        case 0:
+                            if(buscado.equals("")){
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    if(edad == 5)
+                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                }
+                            }
+                            else{
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    if(edad == 5){
+                                        if(valorComboBox1.equals("Apellido y Nombre")){
+                                            String nombre = a.getApellidoYNombre().toUpperCase();
+                                            if(nombre.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            }
+                                        }
+                                        else{
+                                            String dni = String.valueOf(a.getDni());
+                                            if(dni.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            } 
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case 1:
+                            if(buscado.equals("")){
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    int idSala = a.getSalas().get(año).getIdSala();
+                                    if(idSala == 5)
+                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                }
+                            }
+                            else{
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    int idSala = a.getSalas().get(año).getIdSala();
+                                    if(idSala == 5){
+                                        if(valorComboBox1.equals("Apellido y Nombre")){
+                                            String nombre = a.getApellidoYNombre().toUpperCase();
+                                            if(nombre.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            }
+                                        }
+                                        else{
+                                            String dni = String.valueOf(a.getDni());
+                                            if(dni.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            } 
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case 2:
+                            if(buscado.equals("")){
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    int idSala = a.getSalas().get(año).getIdSala();
+                                    if(idSala == 6)
+                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                }
+                            }
+                            else{
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    int idSala = a.getSalas().get(año).getIdSala();
+                                    if(idSala == 6){
+                                        if(valorComboBox1.equals("Apellido y Nombre")){
+                                            String nombre = a.getApellidoYNombre().toUpperCase();
+                                            if(nombre.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            }
+                                        }
+                                        else{
+                                            String dni = String.valueOf(a.getDni());
+                                            if(dni.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            } 
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                    }
+                    break;
+            case 2:
+                    switch(jComboBoxTurnoPago.getSelectedIndex()){
+                        case 0:
+                            if(buscado.equals("")){
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    if(edad == 4)
+                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                }
+                            }
+                            else{
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    if(edad == 4){
+                                        if(valorComboBox1.equals("Apellido y Nombre")){
+                                            String nombre = a.getApellidoYNombre().toUpperCase();
+                                            if(nombre.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            }
+                                        }
+                                        else{
+                                            String dni = String.valueOf(a.getDni());
+                                            if(dni.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            } 
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case 1:
+                            if(buscado.equals("")){
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    int idSala = a.getSalas().get(año).getIdSala();
+                                    if(idSala == 3)
+                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                }
+                            }
+                            else{
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    int idSala = a.getSalas().get(año).getIdSala();
+                                    if(idSala == 3){
+                                        if(valorComboBox1.equals("Apellido y Nombre")){
+                                            String nombre = a.getApellidoYNombre().toUpperCase();
+                                            if(nombre.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            }
+                                        }
+                                        else{
+                                            String dni = String.valueOf(a.getDni());
+                                            if(dni.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            } 
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case 2:
+                            if(buscado.equals("")){
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    int idSala = a.getSalas().get(año).getIdSala();
+                                    if(idSala == 4)
+                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                }
+                            }
+                            else{
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    int idSala = a.getSalas().get(año).getIdSala();
+                                    if(idSala == 4){
+                                        if(valorComboBox1.equals("Apellido y Nombre")){
+                                            String nombre = a.getApellidoYNombre().toUpperCase();
+                                            if(nombre.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            }
+                                        }
+                                        else{
+                                            String dni = String.valueOf(a.getDni());
+                                            if(dni.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            } 
+                                        }
+                                    }
+                                }
+                            }
+                            break;         
+                    }
+                    break;
+            case 3:
+                    switch(jComboBoxTurnoPago.getSelectedIndex()){
+                        case 0:    
+                            if(buscado.equals("")){
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    if(edad == 3)
+                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                }
+                            }
+                            else{
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    if(edad == 3){
+                                        if(valorComboBox1.equals("Apellido y Nombre")){
+                                            String nombre = a.getApellidoYNombre().toUpperCase();
+                                            if(nombre.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            }
+                                        }
+                                        else{
+                                            String dni = String.valueOf(a.getDni());
+                                            if(dni.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            } 
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case 1:
+                            if(buscado.equals("")){
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    int idSala = a.getSalas().get(año).getIdSala();
+                                    if(idSala == 1)
+                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                }
+                            }
+                            else{
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    int idSala = a.getSalas().get(año).getIdSala();
+                                    if(idSala == 1){
+                                        if(valorComboBox1.equals("Apellido y Nombre")){
+                                            String nombre = a.getApellidoYNombre().toUpperCase();
+                                            if(nombre.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            }
+                                        }
+                                        else{
+                                            String dni = String.valueOf(a.getDni());
+                                            if(dni.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            } 
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case 2:
+                            if(buscado.equals("")){
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    int idSala = a.getSalas().get(año).getIdSala();
+                                    if(idSala == 2)
+                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                }
+                            }
+                            else{
+                                Iterator i = listaAlumnos.listIterator();
+                                while(i.hasNext()){
+                                    Alumno a = (Alumno) i.next();
+                                    int año = a.obtenerUltimoAñoLectivo();
+                                    int edad = a.getSalas().get(año).getEdad();
+                                    int idSala = a.getSalas().get(año).getIdSala();
+                                    if(idSala == 2){
+                                        if(valorComboBox1.equals("Apellido y Nombre")){
+                                            String nombre = a.getApellidoYNombre().toUpperCase();
+                                            if(nombre.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),edad,a.getSalas().get(año).getTurno()});
+                                            }
+                                        }
+                                        else{
+                                            String dni = String.valueOf(a.getDni());
+                                            if(dni.contains(buscado)){
+                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                            } 
+                                        }
+                                    }
+                                }
+                            }
+                            break; 
+                    }
+                    break;
+        }
+    }
 }
+

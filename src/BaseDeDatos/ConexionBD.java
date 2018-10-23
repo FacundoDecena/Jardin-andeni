@@ -225,8 +225,8 @@ public class ConexionBD {
         s.close();
     }
     
-    /*public static void main(String[] args) throws SQLException{
-        Connection c = ConexionBD.getConnection();
-        Statement s = c.createStatement();
-    }*/
+    public static void main(String[] args) throws SQLException{
+        /*Connection c = ConexionBD.getConnection();
+        Statement s = c.createStatement();*/
+    }
 }

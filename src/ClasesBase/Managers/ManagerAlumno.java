@@ -28,24 +28,25 @@ public class ManagerAlumno{
     
     public Alumno nuevoAlumno(Date fechaDeNacimiento, String lugarNacimiento, String domicilio, long telefono, boolean controlMedico, boolean vacunas, boolean controlNatacion, boolean traeMateriales, String otrosDatos, Set<Alumno> hermanos, Set<Tutor> tutores, Set<Pago> pagos, Map<Integer, Sala> salas, Set<RegistroAsistencia> ra, int dni, String apellidoYNombre) throws IllegalArgumentException, Exception{
         Date d = new Date();
-        Pattern patron = Pattern.compile("[a-zA-Z&&[ x0Bf ]&&[^0-9]]");
+        Pattern patron = Pattern.compile("([a-zA-Z]*[ \\t\\n\\x0b\\r\\f]*)+");
         Matcher encaja;
         
-        int a = d.getYear() - 6 - fechaDeNacimiento.getYear();
-        if(a<0)
-            throw IllegalArgumentException("El alumno es mayor de 6 años");
+        int a = new Integer(Alumno.getEdad(fechaDeNacimiento));
+        if(a>5)
+            throw IllegalArgumentException("El alumno es mayor de 5 años");
         
         encaja = patron.matcher(lugarNacimiento);
         if(!encaja.matches())
             throw IllegalArgumentException("Lugar contiene simbolos invalidos");
-        
-        encaja = patron.matcher(domicilio);
-        if(!encaja.matches())
-            throw IllegalArgumentException("Domicilio contiene simbolos invalidos");
-        
+             
         encaja = patron.matcher(apellidoYNombre);
         if(!encaja.matches())
             throw IllegalArgumentException("Apellido y/o Nombre contiene simbolos invalidos");
+        
+        patron = Pattern.compile("([a-zA-Z]*[ \\t\\n\\x0b\\r\\f]*[0-9]*)+");
+        encaja = patron.matcher(domicilio);
+        if(!encaja.matches())
+            throw IllegalArgumentException("Domicilio contiene simbolos invalidos");
         
         Alumno alumno = new Alumno(fechaDeNacimiento, lugarNacimiento, domicilio, telefono, controlMedico, vacunas, controlNatacion, traeMateriales, otrosDatos, hermanos, tutores, pagos, salas, ra, dni, apellidoYNombre);
         

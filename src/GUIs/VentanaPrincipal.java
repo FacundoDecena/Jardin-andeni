@@ -30,6 +30,7 @@ import javax.swing.table.DefaultTableModel;
 public class VentanaPrincipal extends javax.swing.JFrame {
 
     private DefaultTableModel model;
+    private List<Alumno> listaAlumnos;
     
     public VentanaPrincipal() {
         initComponents();
@@ -163,6 +164,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jComboBoxBusqueda_Pago = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTablePago = new javax.swing.JTable();
+        jComboBoxSalaPago = new javax.swing.JComboBox<>();
+        jComboBoxTurnoPago = new javax.swing.JComboBox<>();
         jPanelDatosAlumnos = new javax.swing.JPanel();
         jPanelBarraSup = new javax.swing.JPanel();
         jPanelCerrar = new javax.swing.JPanel();
@@ -187,7 +190,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelInterseccion.setLayout(jPanelInterseccionLayout);
         jPanelInterseccionLayout.setHorizontalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 161, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanelInterseccionLayout.setVerticalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -955,7 +958,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel43.setText("Buscar Alumno");
 
-        jComboBoxBusqueda_Pago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Apellido y Nombre", "DNI", "Sala", "Turno" }));
+        jTextFieldBusqueda_Pago.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldBusqueda_PagoKeyReleased(evt);
+            }
+        });
+
+        jComboBoxBusqueda_Pago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Apellido y Nombre", "DNI" }));
 
         jTablePago.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -975,6 +984,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTablePago);
 
+        jComboBoxSalaPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sala", "5 años", "4 años", "3 años" }));
+
+        jComboBoxTurnoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turno", "Mañana", "Tarde" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -988,8 +1001,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldBusqueda_Pago, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBoxBusqueda_Pago, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jComboBoxBusqueda_Pago, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBoxSalaPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxTurnoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -998,7 +1015,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel43)
                     .addComponent(jTextFieldBusqueda_Pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxBusqueda_Pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxBusqueda_Pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxSalaPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxTurnoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2)
                 .addContainerGap())
@@ -1035,7 +1054,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanelTipoPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPagoLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(42, 42, 42)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1208,7 +1227,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         card.show(jPanelCard, "pago");
         model = (DefaultTableModel) jTablePago.getModel();
         ManagerAlumno ma = ManagerAlumno.GetManager();
-        List<Alumno> listaAlumnos = ma.obtenerTodosAlumno();
+        listaAlumnos = ma.obtenerTodosAlumno();
         Iterator i = listaAlumnos.listIterator();
         model.setRowCount(0);
         while(i.hasNext()){
@@ -1612,6 +1631,33 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jRadioButtonAgregarPadreStateChanged
 
+    private void jTextFieldBusqueda_PagoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBusqueda_PagoKeyReleased
+        model.setRowCount(0);
+        String buscado;
+        buscado = jTextFieldBusqueda_Pago.getText().toUpperCase();
+        Iterator i = listaAlumnos.listIterator();
+        String valorComboBox1 = jComboBoxBusqueda_Pago.getSelectedItem().toString();
+        String valorComboBox2 = jComboBoxSalaPago.getSelectedItem().toString();
+        String valorComboBox3 = jComboBoxTurnoPago.getSelectedItem().toString();
+        while(i.hasNext()){
+            Alumno a = (Alumno) i.next();
+            if(valorComboBox1.equals("Apellido y Nombre")){
+                String nombre = a.getApellidoYNombre().toUpperCase();
+                if(nombre.contains(buscado)){
+                    model.addRow(new Object []{a.getApellidoYNombre(),a.getDni(),0,1});
+                }
+            }
+            else{
+                String dni = String.valueOf(a.getDni());
+                if(dni.contains(buscado)){
+                    model.addRow(new Object []{a.getApellidoYNombre(),a.getDni(),0,1});
+                }
+                
+                
+            }
+        }
+    }//GEN-LAST:event_jTextFieldBusqueda_PagoKeyReleased
+
 
     /**
      * @param args the command line arguments
@@ -1656,8 +1702,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxTraeMateriales;
     private javax.swing.JCheckBox jCheckBoxVacunas;
     private javax.swing.JComboBox<String> jComboBoxBusqueda_Pago;
+    private javax.swing.JComboBox<String> jComboBoxSalaPago;
     private javax.swing.JComboBox<String> jComboBoxSala_Insc;
     private javax.swing.JComboBox<String> jComboBoxTipoDePago;
+    private javax.swing.JComboBox<String> jComboBoxTurnoPago;
     private javax.swing.JComboBox<String> jComboBoxTurno_Insc;
     private com.toedter.calendar.JDateChooser jDateChooserFechaNacimiento;
     private javax.swing.JLabel jLabel1;

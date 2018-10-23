@@ -105,11 +105,11 @@ public class ImplementacionDAO implements DAO {
             }*/
             altaRegistroAsistencia(ra);
             Set<Tutor> tutores = alumno.getTutores();
-            Iterator j = tutores.iterator();
+            /*Iterator j = tutores.iterator();
             while(j.hasNext()){
                 altaTutor((Tutor)j.next());
             }
-            
+            */
             s.close();
         } catch (SQLException ex) {
             ex.printStackTrace();

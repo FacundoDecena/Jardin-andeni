@@ -194,7 +194,6 @@ public class ImplementacionDAO implements DAO {
     public Sala obtenerSala(int idSala) {
         try {
             Connection c = ConexionBD.getConnection();
-            System.out.println(c);
             Statement s = c.createStatement();
             ResultSet rsSala = s.executeQuery("SELECT * FROM SALA WHERE IDSALA="+idSala);
             rsSala.next();

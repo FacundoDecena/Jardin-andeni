@@ -15,6 +15,7 @@ import ClasesBase.Tutor;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.JOptionPane;
@@ -1220,7 +1221,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Set<Alumno> hermanos = null;
         Set<Tutor> tutores = null;
         Set<Pago> pagos = null;
-        Map<Integer, Sala> salas = null;
+        Map<Integer, Sala> salas = new HashMap();
         Set<RegistroAsistencia> ra = null;
         apellidoYNombre = jTextField_ApyNom.getText();
         Sala sala = null;

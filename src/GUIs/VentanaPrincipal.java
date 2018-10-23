@@ -131,6 +131,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jCheckBoxNatacion = new javax.swing.JCheckBox();
         jButton_Inscribir = new javax.swing.JButton();
         jRadioButtonAgregarTutor = new javax.swing.JRadioButton();
+        jRadioButtonAgregarPadre = new javax.swing.JRadioButton();
+        jRadioButtonAgregarMadre = new javax.swing.JRadioButton();
         jPanelPago = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
@@ -467,6 +469,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jRadioButtonAgregarPadre.setSelected(true);
+        jRadioButtonAgregarPadre.setText("Incluir");
+        jRadioButtonAgregarPadre.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButtonAgregarPadreStateChanged(evt);
+            }
+        });
+
+        jRadioButtonAgregarMadre.setSelected(true);
+        jRadioButtonAgregarMadre.setText("Incluir");
+
         javax.swing.GroupLayout jPanelInscripcionLayout = new javax.swing.GroupLayout(jPanelInscripcion);
         jPanelInscripcion.setLayout(jPanelInscripcionLayout);
         jPanelInscripcionLayout.setHorizontalGroup(
@@ -489,8 +502,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addComponent(jLabel14)
                                 .addGap(30, 30, 30)
                                 .addComponent(jComboBoxTurno_Insc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jTextField_ApyNom)
-                            .addComponent(jDateChooserFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jDateChooserFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField_ApyNom)))
                     .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                         .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
@@ -519,6 +532,65 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                                                .addComponent(jLabel24)
+                                                .addGap(25, 25, 25)
+                                                .addComponent(jTextField_NumDoc_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jTextField_TipoDoc_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextField_ApyNom_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jRadioButtonAgregarMadre))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInscripcionLayout.createSequentialGroup()
+                                            .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel25)
+                                                .addComponent(jLabel46))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jTextField_Ocupacion_Madre, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                                                .addComponent(jTextField_TelPer_Madre)
+                                                .addComponent(jTextField_TelTra_Madre))))
+                                    .addComponent(jLabel45, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                                            .addComponent(jLabel21)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jRadioButtonAgregarPadre))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInscripcionLayout.createSequentialGroup()
+                                            .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel17)
+                                                .addComponent(jLabel18)
+                                                .addComponent(jLabel19)
+                                                .addComponent(jLabel20)
+                                                .addComponent(jLabel42)
+                                                .addComponent(jLabel44))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                                            .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jTextField_ApyNom_Padre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTextField_TipoDoc_Padre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTextField_NumDoc_Padre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTextField_Ocupacion_Padre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTextField_TelPer_Padre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTextField_TelTra_Padre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(18, 18, 18)))
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInscripcionLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                                .addComponent(jButton_Inscribir)
+                                .addGap(181, 181, 181))
+                            .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel48)
+                                    .addComponent(jLabel47))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                         .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                                 .addGap(8, 8, 8)
@@ -530,12 +602,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     .addComponent(jLabel22))
                                 .addGap(284, 284, 284)))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                                 .addComponent(jLabel26)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel27)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                                 .addComponent(jRadioButtonAgregarTutor))
                             .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -545,144 +617,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     .addComponent(jLabel31)
                                     .addComponent(jLabel32))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField_TipoDoc_Tutor, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField_ApyNom_Tutor, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField_NumDoc_Tutor, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField_Ocupacion_Tutor, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField_Relacion, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField_TelPer_Tutor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanelInscripcionLayout.createSequentialGroup()
-                                .addGap(127, 127, 127)
-                                .addComponent(jTextField_TelTra_Tutor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(88, Short.MAX_VALUE))
-                    .addGroup(jPanelInscripcionLayout.createSequentialGroup()
-                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelInscripcionLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanelInscripcionLayout.createSequentialGroup()
-                                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addGroup(jPanelInscripcionLayout.createSequentialGroup()
-                                                    .addComponent(jLabel24)
-                                                    .addGap(25, 25, 25)
-                                                    .addComponent(jTextField_NumDoc_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(jTextField_TipoDoc_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jTextField_ApyNom_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInscripcionLayout.createSequentialGroup()
-                                                .addComponent(jLabel25)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(jTextField_Ocupacion_Madre, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                                                    .addComponent(jTextField_TelPer_Madre)
-                                                    .addComponent(jTextField_TelTra_Madre))))
-                                        .addGap(18, 18, 18))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelInscripcionLayout.createSequentialGroup()
-                                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelInscripcionLayout.createSequentialGroup()
-                                        .addGap(7, 7, 7)
-                                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel19)
-                                            .addComponent(jLabel20)
-                                            .addComponent(jLabel18)
-                                            .addComponent(jLabel17)
-                                            .addComponent(jLabel21)
-                                            .addComponent(jLabel42)
-                                            .addComponent(jLabel44))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField_Ocupacion_Padre, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                                            .addComponent(jTextField_NumDoc_Padre, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                                            .addComponent(jTextField_TipoDoc_Padre, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                                            .addComponent(jTextField_ApyNom_Padre, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                                            .addComponent(jTextField_TelPer_Padre)
-                                            .addComponent(jTextField_TelTra_Padre)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelInscripcionLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel46)
-                                            .addComponent(jLabel45))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInscripcionLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_Inscribir)
-                                .addGap(181, 181, 181))
-                            .addGroup(jPanelInscripcionLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel48)
-                                    .addComponent(jLabel47))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField_TelTra_Tutor)
+                                    .addComponent(jTextField_TipoDoc_Tutor)
+                                    .addComponent(jTextField_ApyNom_Tutor)
+                                    .addComponent(jTextField_NumDoc_Tutor)
+                                    .addComponent(jTextField_Ocupacion_Tutor)
+                                    .addComponent(jTextField_Relacion)
+                                    .addComponent(jTextField_TelPer_Tutor, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))))
+                        .addContainerGap(100, Short.MAX_VALUE))))
         );
         jPanelInscripcionLayout.setVerticalGroup(
             jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator2)
             .addComponent(jSeparator4)
             .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelInscripcionLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6))
+                    .addComponent(jRadioButtonAgregarPadre)
                     .addGroup(jPanelInscripcionLayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel21)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
-                            .addComponent(jTextField_ApyNom_Padre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel18)
-                            .addComponent(jTextField_TipoDoc_Padre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel19)
-                            .addComponent(jTextField_NumDoc_Padre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel20)
-                            .addComponent(jTextField_Ocupacion_Padre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel42)
-                            .addComponent(jTextField_TelPer_Padre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel44)
-                            .addComponent(jTextField_TelTra_Padre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel22)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel16)
-                            .addComponent(jTextField_ApyNom_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel23)
-                            .addComponent(jTextField_TipoDoc_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel24)
-                            .addComponent(jTextField_NumDoc_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel25)
-                            .addComponent(jTextField_Ocupacion_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel45)
-                            .addComponent(jTextField_TelPer_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField_ApyNom_Padre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(jComboBoxSala_Insc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -727,12 +692,59 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jCheckBoxVacunas)
-                            .addComponent(jCheckBoxNatacion))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField_TelTra_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel46))
-                .addContainerGap())
+                            .addComponent(jCheckBoxNatacion)))
+                    .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18)
+                            .addComponent(jTextField_TipoDoc_Padre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel19)
+                            .addComponent(jTextField_NumDoc_Padre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel20)
+                            .addComponent(jTextField_Ocupacion_Padre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel42)
+                            .addComponent(jTextField_TelPer_Padre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel44)
+                            .addComponent(jTextField_TelTra_Padre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel22)
+                            .addComponent(jRadioButtonAgregarMadre))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(jTextField_ApyNom_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel23)
+                            .addComponent(jTextField_TipoDoc_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel24)
+                            .addComponent(jTextField_NumDoc_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel25)
+                            .addComponent(jTextField_Ocupacion_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel45)
+                            .addComponent(jTextField_TelPer_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel46)
+                            .addComponent(jTextField_TelTra_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -767,7 +779,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel48)
                     .addComponent(jTextField_TelTra_Tutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                 .addComponent(jButton_Inscribir)
                 .addGap(96, 96, 96))
         );
@@ -883,7 +895,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel40)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
 
         jPanelTipoPago.add(jPanelPagpInsc, "pagoInscripcion");
@@ -904,7 +916,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanelCuotaLayout.createSequentialGroup()
                 .addGap(104, 104, 104)
                 .addComponent(jLabel41)
-                .addContainerGap(408, Short.MAX_VALUE))
+                .addContainerGap(424, Short.MAX_VALUE))
         );
 
         jPanelTipoPago.add(jPanelCuota, "pagoCuota");
@@ -1001,11 +1013,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelDatosAlumnos.setLayout(jPanelDatosAlumnosLayout);
         jPanelDatosAlumnosLayout.setHorizontalGroup(
             jPanelDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1202, Short.MAX_VALUE)
+            .addGap(0, 1214, Short.MAX_VALUE)
         );
         jPanelDatosAlumnosLayout.setVerticalGroup(
             jPanelDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 585, Short.MAX_VALUE)
+            .addGap(0, 601, Short.MAX_VALUE)
         );
 
         jPanelCard.add(jPanelDatosAlumnos, "datosAlumnos");
@@ -1080,7 +1092,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelBarraSupLayout.setHorizontalGroup(
             jPanelBarraSupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBarraSupLayout.createSequentialGroup()
-                .addContainerGap(1296, Short.MAX_VALUE)
+                .addContainerGap(1291, Short.MAX_VALUE)
                 .addComponent(jPanelMinimizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1102,7 +1114,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelFondo.setLayout(jPanelFondoLayout);
         jPanelFondoLayout.setHorizontalGroup(
             jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelBarraSup, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanelFondoLayout.createSequentialGroup()
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanelInterseccion, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
@@ -1112,8 +1123,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFondoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelBarraSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         jPanelFondoLayout.setVerticalGroup(
             jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1134,7 +1150,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 1366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1244,15 +1262,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Sala sala;
         int salaEdad, salaTurno, idSala;
         ManagerAlumno mngAlumno;
-        ManagerTutor mngTutor = ManagerTutor.GetManager();
+        ManagerTutor mngTutor = ManagerTutor.getManager();
         ManagerSala mngSala = ManagerSala.getManagerSala();
         
         //Controles de la primer columna
         salaEdad = jComboBoxSala_Insc.getSelectedIndex();
         salaTurno = jComboBoxTurno_Insc.getSelectedIndex();
         idSala = salaEdad + salaTurno +1;
-        sala = mngSala.getSala(idSala);
-        salas.put(idSala, sala);
+        //sala = mngSala.getSala(idSala);
+        //salas.put(idSala, sala);
         
         if(apellidoYNombre.isEmpty()){
             error = true;
@@ -1357,7 +1375,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
             }
         }
-        if(!error){
+        if(!error && jRadioButtonAgregarMadre.isSelected()){
             try{
                 mngTutor.nuevoTutor(ocupacion, tipoDni, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
             }
@@ -1411,31 +1429,70 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
             }
         }
-        if(!error){
+        if(!error && jRadioButtonAgregarMadre.isSelected()){
             try{
                 mngTutor.nuevoTutor(ocupacion, tipoDni, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
             }
             catch (Exception es){
-                JOptionPane.showMessageDialog(null,"Datos del madre tiene caracteres inválidos", "Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Datos de la madre tiene caracteres inválidos", "Error",JOptionPane.ERROR_MESSAGE);
             }
         }
-        
-        if(jRadioButtonAgregarTutor.isSelected()){
-            jLabel28.setEnabled(true);
-            jLabel29.setEnabled(true);
-            jLabel30.setEnabled(true);
-            jLabel31.setEnabled(true);
-            jLabel32.setEnabled(true);
-            jLabel47.setEnabled(true);
-            jLabel48.setEnabled(true);
-            jTextField_ApyNom_Tutor.setEnabled(true);
-            jTextField_TipoDoc_Tutor.setEnabled(true);
-            jTextField_NumDoc_Tutor.setEnabled(true);
-            jTextField_Ocupacion_Tutor.setEnabled(true);
-            jTextField_TelPer_Tutor.setEnabled(true);
-            jTextField_TelTra_Tutor.setEnabled(true);
+        //Paso 3 solo si esta selecionado incluir tutor que no sean los padres
+        if(!error && jRadioButtonAgregarTutor.isSelected()){
+            ocupacion = ""; tipoDni = ""; relacion = "";
+            apellidoYNombre = "";
+            dni = 0;
+            telefonoPersonal = 0; telefonoTrabajo = 0;
+
+            if(!error){
+                apellidoYNombre = jTextField_ApyNom_Tutor.getText();
+                if(apellidoYNombre.isEmpty()){
+                    error = true;
+                    JOptionPane.showMessageDialog(null,"Nombre de la madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            if(!error){
+                tipoDni = jTextField_TipoDoc_Tutor.getText();
+                if(tipoDni.isEmpty()){
+                    error = true;
+                    JOptionPane.showMessageDialog(null,"Tipo DNI del madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            if(!error){
+                try{
+                    dni = new Integer (jTextField_NumDoc_Tutor.getText());
+                }
+                catch(java.lang.NumberFormatException e){
+                     error = true;
+                    JOptionPane.showMessageDialog(null,"DNI solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            if(!error){
+                ocupacion = jTextField_Ocupacion_Tutor.getText();
+                if(ocupacion.isEmpty()){
+                    error = true;
+                    JOptionPane.showMessageDialog(null,"ocupacion del madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            if(!error){
+                try{
+                    telefonoPersonal = new Long(jTextField_TelPer_Tutor.getText());
+                    telefonoTrabajo = new Long(jTextField_TelTra_Tutor.getText());
+                }
+                catch(java.lang.NumberFormatException e){
+                     error = true;
+                    JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            if(!error && jRadioButtonAgregarTutor.isSelected()){
+                try{
+                    mngTutor.nuevoTutor(ocupacion, tipoDni, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
+                }
+                catch (Exception es){
+                    JOptionPane.showMessageDialog(null,"Datos del madre tiene caracteres inválidos", "Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
-        
     }//GEN-LAST:event_jButton_InscribirActionPerformed
 
     private void jDateChooserFechaNacimientoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserFechaNacimientoPropertyChange
@@ -1457,6 +1514,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jTextField_TipoDoc_Tutor.setEnabled(true);
             jTextField_NumDoc_Tutor.setEnabled(true);
             jTextField_Ocupacion_Tutor.setEnabled(true);
+            jTextField_Relacion.setEnabled(true);
             jTextField_TelPer_Tutor.setEnabled(true);
             jTextField_TelTra_Tutor.setEnabled(true);
         }
@@ -1472,10 +1530,42 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jTextField_TipoDoc_Tutor.setEnabled(false);
             jTextField_NumDoc_Tutor.setEnabled(false);
             jTextField_Ocupacion_Tutor.setEnabled(false);
+            jTextField_Relacion.setEnabled(false);
             jTextField_TelPer_Tutor.setEnabled(false);
             jTextField_TelTra_Tutor.setEnabled(false);
         }
     }//GEN-LAST:event_jRadioButtonAgregarTutorStateChanged
+
+    private void jRadioButtonAgregarPadreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonAgregarPadreStateChanged
+        if(jRadioButtonAgregarPadre.isSelected()){
+            jLabel17.setEnabled(true);
+            jLabel18.setEnabled(true);
+            jLabel19.setEnabled(true);
+            jLabel20.setEnabled(true);
+            jLabel42.setEnabled(true);
+            jLabel44.setEnabled(true);
+            jTextField_ApyNom_Padre.setEnabled(true);
+            jTextField_TipoDoc_Padre.setEnabled(true);
+            jTextField_NumDoc_Padre.setEnabled(true);
+            jTextField_Ocupacion_Padre.setEnabled(true);
+            jTextField_TelPer_Padre.setEnabled(true);
+            jTextField_TelTra_Padre.setEnabled(true);
+        }
+        else{
+            jLabel17.setEnabled(false);
+            jLabel18.setEnabled(false);
+            jLabel19.setEnabled(false);
+            jLabel20.setEnabled(false);
+            jLabel42.setEnabled(false);
+            jLabel44.setEnabled(false);
+            jTextField_ApyNom_Padre.setEnabled(false);
+            jTextField_TipoDoc_Padre.setEnabled(false);
+            jTextField_NumDoc_Padre.setEnabled(false);
+            jTextField_Ocupacion_Padre.setEnabled(false);
+            jTextField_TelPer_Padre.setEnabled(false);
+            jTextField_TelTra_Padre.setEnabled(false);
+        }
+    }//GEN-LAST:event_jRadioButtonAgregarPadreStateChanged
 
 
     /**
@@ -1595,6 +1685,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelPestanas;
     private javax.swing.JPanel jPanelTipoPago;
     private javax.swing.JPanel jPanelTitulo;
+    private javax.swing.JRadioButton jRadioButtonAgregarMadre;
+    private javax.swing.JRadioButton jRadioButtonAgregarPadre;
     private javax.swing.JRadioButton jRadioButtonAgregarTutor;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

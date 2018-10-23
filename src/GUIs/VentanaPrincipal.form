@@ -756,8 +756,14 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_LugarNacimiento">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="San Luis"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_ApyNom">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Juan Perez"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="jComboBoxSala_Insc">
                   <Properties>
@@ -782,8 +788,14 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_Domicilio">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Balcarce 123"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_Telefono">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="2664584736"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel14">
                   <Properties>
@@ -857,12 +869,24 @@
                 <Component class="javax.swing.JSeparator" name="jSeparator3">
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_NumDoc_Padre">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="35214698"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_TipoDoc_Padre">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="DNI"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_ApyNom_Padre">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Pedro Perez"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_Ocupacion_Padre">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Anestesista"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel21">
                   <Properties>
@@ -900,12 +924,24 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_NumDoc_Madre">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="36478124"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_TipoDoc_Madre">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="DNI"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_ApyNom_Madre">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Lucia Lopez"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_Ocupacion_Madre">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Ginecologa"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel26">
                   <Properties>
@@ -984,8 +1020,14 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_TelPer_Padre">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="2664584736"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_TelTra_Padre">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="4425789"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel45">
                   <Properties>
@@ -998,6 +1040,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_TelPer_Madre">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="2664321785"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_TelTra_Madre">
                 </Component>
@@ -1034,6 +1079,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_DNI_Ins">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="55685214"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="jCheckBoxTraeMateriales">
                   <Properties>

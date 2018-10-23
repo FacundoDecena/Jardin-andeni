@@ -350,10 +350,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel13.setText("Telefono");
 
+        jTextField_LugarNacimiento.setText("San Luis");
+
+        jTextField_ApyNom.setText("Juan Perez");
+
         jComboBoxSala_Insc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5 Años", "4 Años", "3 Años" }));
 
         jTextField_Edad.setEditable(false);
         jTextField_Edad.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTextField_Domicilio.setText("Balcarce 123");
+
+        jTextField_Telefono.setText("2664584736");
 
         jLabel14.setText("Turno");
 
@@ -377,6 +385,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel20.setText("Ocupacion");
 
+        jTextField_NumDoc_Padre.setText("35214698");
+
+        jTextField_TipoDoc_Padre.setText("DNI");
+
+        jTextField_ApyNom_Padre.setText("Pedro Perez");
+
+        jTextField_Ocupacion_Padre.setText("Anestesista");
+
         jLabel21.setText("Datos del padre");
 
         jLabel22.setText("Datos de la madre");
@@ -390,6 +406,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel24.setText("Número de Documento");
 
         jLabel25.setText("Ocupacion");
+
+        jTextField_NumDoc_Madre.setText("36478124");
+
+        jTextField_TipoDoc_Madre.setText("DNI");
+
+        jTextField_ApyNom_Madre.setText("Lucia Lopez");
+
+        jTextField_Ocupacion_Madre.setText("Ginecologa");
 
         jLabel26.setText("Datos del tutor");
 
@@ -425,9 +449,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel44.setText("Telefono Trabajo");
 
+        jTextField_TelPer_Padre.setText("2664584736");
+
+        jTextField_TelTra_Padre.setText("4425789");
+
         jLabel45.setText("Telefono Personal");
 
         jLabel46.setText("Telefono Trabajo");
+
+        jTextField_TelPer_Madre.setText("2664321785");
 
         jLabel47.setText("Telefono Personal");
         jLabel47.setEnabled(false);
@@ -446,6 +476,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         jLabel52.setText("DNI (sin puntos)");
+
+        jTextField_DNI_Ins.setText("55685214");
 
         jCheckBoxTraeMateriales.setText("Trae Materiales");
 
@@ -1248,10 +1280,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jButton_InscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_InscribirActionPerformed
         //Variables para controles de la primer columna
-        String lugarNacimiento, domicilio, otrosDatos, apellidoYNombre;
-        Date fechaDeNacimiento;
-        long telefono = 0;
-        int dni; 
+        String lugarNacimiento="", domicilio="", otrosDatos="", apellidoYNombre="";
+        Date fechaDeNacimiento = null;
+        long telefono = -1;
+        int dni = -1; 
         boolean controlMedico, vacunas, controlNatacion, traeMateriales, error = false;
         Set<Alumno> hermanos = null;
         Set<Tutor> tutores = null;
@@ -1262,7 +1294,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Sala sala;
         int salaEdad, salaTurno, idSala;
         ManagerAlumno mngAlumno;
+        Alumno alumno;
         ManagerTutor mngTutor = ManagerTutor.getManager();
+        Tutor tutor;
         ManagerSala mngSala = ManagerSala.getManagerSala();
         
         //Controles de la primer columna
@@ -1328,30 +1362,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         controlNatacion = jCheckBoxNatacion.isSelected();
         //Variables para control del resto de columnas
         //Primer paso: Padre
-        String ocupacion = "", tipoDni = "", relacion = "";
-        apellidoYNombre = "";
-        dni = 0;
+        String ocupacion = "", tipoDniT = "", relacion = "", apellidoYNombreT = "";
+        int dniT = 0;
         long telefonoPersonal = 0, telefonoTrabajo = 0;
         Set<Alumno> atutorados = null;
         Set<Retiro> retiros = null;
         
         if(!error){
-            apellidoYNombre = jTextField_ApyNom_Padre.getText();
-            if(apellidoYNombre.isEmpty()){
+            apellidoYNombreT = jTextField_ApyNom_Padre.getText();
+            if(apellidoYNombreT.isEmpty()){
                 error = true;
                 JOptionPane.showMessageDialog(null,"Nombre del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
             }
         }
         if(!error){
-            tipoDni = jTextField_TipoDoc_Padre.getText();
-            if(tipoDni.isEmpty()){
+            tipoDniT = jTextField_TipoDoc_Padre.getText();
+            if(tipoDniT.isEmpty()){
                 error = true;
                 JOptionPane.showMessageDialog(null,"Tipo DNI del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
             }
         }
         if(!error){
             try{
-                dni = new Integer (jTextField_NumDoc_Padre.getText());
+                dniT = new Integer (jTextField_NumDoc_Padre.getText());
             }
             catch(java.lang.NumberFormatException e){
                  error = true;
@@ -1377,35 +1410,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         if(!error && jRadioButtonAgregarMadre.isSelected()){
             try{
-                mngTutor.nuevoTutor(ocupacion, tipoDni, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
+                tutor = mngTutor.nuevoTutor(ocupacion, tipoDniT, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
+                tutores.add(tutor);
             }
             catch (Exception es){
-                JOptionPane.showMessageDialog(null,"Datos del padre tiene caracteres inválidos", "Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,es.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+                error = true;
             }
         }
         //Segundo paso: Madre
-        ocupacion = ""; tipoDni = ""; relacion = "";
-        apellidoYNombre = "";
-        dni = 0;
+        ocupacion = ""; tipoDniT = ""; relacion = "";
+        apellidoYNombreT = "";
+        dniT = 0;
         telefonoPersonal = 0; telefonoTrabajo = 0;
         
         if(!error){
-            apellidoYNombre = jTextField_ApyNom_Madre.getText();
-            if(apellidoYNombre.isEmpty()){
+            apellidoYNombreT = jTextField_ApyNom_Madre.getText();
+            if(apellidoYNombreT.isEmpty()){
                 error = true;
                 JOptionPane.showMessageDialog(null,"Nombre de la madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
             }
         }
         if(!error){
-            tipoDni = jTextField_TipoDoc_Madre.getText();
-            if(tipoDni.isEmpty()){
+            tipoDniT = jTextField_TipoDoc_Madre.getText();
+            if(tipoDniT.isEmpty()){
                 error = true;
                 JOptionPane.showMessageDialog(null,"Tipo DNI del madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
             }
         }
         if(!error){
             try{
-                dni = new Integer (jTextField_NumDoc_Madre.getText());
+                dniT = new Integer (jTextField_NumDoc_Madre.getText());
             }
             catch(java.lang.NumberFormatException e){
                  error = true;
@@ -1416,7 +1451,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             ocupacion = jTextField_Ocupacion_Madre.getText();
             if(ocupacion.isEmpty()){
                 error = true;
-                JOptionPane.showMessageDialog(null,"ocupacion del madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null,"ocupacion de la madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
             }
         }
         if(!error){
@@ -1431,36 +1466,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         if(!error && jRadioButtonAgregarMadre.isSelected()){
             try{
-                mngTutor.nuevoTutor(ocupacion, tipoDni, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
+                tutor = mngTutor.nuevoTutor(ocupacion, tipoDniT, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
+                tutores.add(tutor);
             }
             catch (Exception es){
-                JOptionPane.showMessageDialog(null,"Datos de la madre tiene caracteres inválidos", "Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,es.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+                error = true;
             }
         }
         //Paso 3 solo si esta selecionado incluir tutor que no sean los padres
         if(!error && jRadioButtonAgregarTutor.isSelected()){
-            ocupacion = ""; tipoDni = ""; relacion = "";
-            apellidoYNombre = "";
-            dni = 0;
+            ocupacion = ""; tipoDniT = ""; relacion = "";
+            apellidoYNombreT = "";
+            dniT = 0;
             telefonoPersonal = 0; telefonoTrabajo = 0;
 
             if(!error){
-                apellidoYNombre = jTextField_ApyNom_Tutor.getText();
-                if(apellidoYNombre.isEmpty()){
+                apellidoYNombreT = jTextField_ApyNom_Tutor.getText();
+                if(apellidoYNombreT.isEmpty()){
                     error = true;
                     JOptionPane.showMessageDialog(null,"Nombre de la madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
                 }
             }
             if(!error){
-                tipoDni = jTextField_TipoDoc_Tutor.getText();
-                if(tipoDni.isEmpty()){
+                tipoDniT = jTextField_TipoDoc_Tutor.getText();
+                if(tipoDniT.isEmpty()){
                     error = true;
                     JOptionPane.showMessageDialog(null,"Tipo DNI del madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
                 }
             }
             if(!error){
                 try{
-                    dni = new Integer (jTextField_NumDoc_Tutor.getText());
+                    dniT = new Integer (jTextField_NumDoc_Tutor.getText());
                 }
                 catch(java.lang.NumberFormatException e){
                      error = true;
@@ -1471,7 +1508,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 ocupacion = jTextField_Ocupacion_Tutor.getText();
                 if(ocupacion.isEmpty()){
                     error = true;
-                    JOptionPane.showMessageDialog(null,"ocupacion del madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"ocupacion de la madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
                 }
             }
             if(!error){
@@ -1480,18 +1517,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     telefonoTrabajo = new Long(jTextField_TelTra_Tutor.getText());
                 }
                 catch(java.lang.NumberFormatException e){
-                     error = true;
+                    error = true;
                     JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
                 }
             }
             if(!error && jRadioButtonAgregarTutor.isSelected()){
                 try{
-                    mngTutor.nuevoTutor(ocupacion, tipoDni, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
+                    tutor = mngTutor.nuevoTutor(ocupacion, tipoDniT, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
+                    tutores.add(tutor);
                 }
                 catch (Exception es){
-                    JOptionPane.showMessageDialog(null,"Datos del madre tiene caracteres inválidos", "Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,es.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+                    error = true;
                 }
             }
+            if(!error){
+                alumno = new Alumno(fechaDeNacimiento, lugarNacimiento, domicilio, telefono, controlMedico, vacunas, controlNatacion, traeMateriales, otrosDatos, hermanos, tutores, pagos, salas, ra, dni, apellidoYNombre);
+                System.out.println("Inscripto");
+                
+            }
+                
         }
     }//GEN-LAST:event_jButton_InscribirActionPerformed
 

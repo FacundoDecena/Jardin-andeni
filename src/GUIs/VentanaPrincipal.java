@@ -136,6 +136,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jRadioButtonAgregarTutor = new javax.swing.JRadioButton();
         jRadioButtonAgregarPadre = new javax.swing.JRadioButton();
         jRadioButtonAgregarMadre = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
         jPanelPago = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
@@ -519,6 +520,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jRadioButtonAgregarMadre.setSelected(true);
         jRadioButtonAgregarMadre.setText("Incluir");
 
+        jButton1.setText("Buscar Alumno en Base de Datos");
+
         javax.swing.GroupLayout jPanelInscripcionLayout = new javax.swing.GroupLayout(jPanelInscripcion);
         jPanelInscripcion.setLayout(jPanelInscripcionLayout);
         jPanelInscripcionLayout.setHorizontalGroup(
@@ -624,10 +627,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addComponent(jButton_Inscribir)
                                 .addGap(181, 181, 181))
                             .addGroup(jPanelInscripcionLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
                                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel48)
-                                    .addComponent(jLabel47))
+                                    .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel48)
+                                            .addComponent(jLabel47)))
+                                    .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                                        .addGap(128, 128, 128)
+                                        .addComponent(jButton1)))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                         .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -783,7 +791,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel46)
                             .addComponent(jTextField_TelTra_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
             .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -818,7 +826,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel48)
                     .addComponent(jTextField_TelTra_Tutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                .addGap(51, 51, 51)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton_Inscribir)
                 .addGap(96, 96, 96))
         );
@@ -1704,6 +1714,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_Inscribir;
     private javax.swing.JCheckBox jCheckBoxMedico;
     private javax.swing.JCheckBox jCheckBoxNatacion;

@@ -7,6 +7,7 @@ import ClasesBase.Sala;
 import ClasesBase.Tutor;
 import DAO.ImplementacionDAO;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.*;
@@ -78,7 +79,7 @@ public class ManagerAlumno{
         return manager;
     }
     
-    public ManagerAlumno GetManager(){
+    public static ManagerAlumno GetManager(){
         if(manager == null)
             manager = new ManagerAlumno();
         return manager;
@@ -277,6 +278,10 @@ public class ManagerAlumno{
         return alumno;
     }
 
+    public static List<Alumno> obtenerTodosAlumno(){
+        return ImplementacionDAO.getDAO().obtenerTodosAlumno();
+    }
+    
     private Exception IllegalArgumentException(String mensaje) {
         IllegalArgumentException e = new IllegalArgumentException(mensaje, null);
         return e;

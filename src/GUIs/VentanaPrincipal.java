@@ -16,9 +16,12 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,9 +29,8 @@ import javax.swing.JOptionPane;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentanaPrincipal
-     */
+    private DefaultTableModel model;
+    
     public VentanaPrincipal() {
         initComponents();
     }
@@ -158,7 +160,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jTextFieldBusqueda_Pago = new javax.swing.JTextField();
         jComboBoxBusqueda_Pago = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTablePago = new javax.swing.JTable();
         jPanelDatosAlumnos = new javax.swing.JPanel();
         jPanelBarraSup = new javax.swing.JPanel();
         jPanelCerrar = new javax.swing.JPanel();
@@ -183,7 +185,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelInterseccion.setLayout(jPanelInterseccionLayout);
         jPanelInterseccionLayout.setHorizontalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 161, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanelInterseccionLayout.setVerticalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -906,7 +908,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jComboBoxBusqueda_Pago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Apellido y Nombre", "DNI", "Sala", "Turno" }));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTablePago.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -922,7 +924,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTablePago);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1149,6 +1151,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jPanelOpPagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpPagoMouseClicked
         CardLayout card = (CardLayout)jPanelCard.getLayout();
         card.show(jPanelCard, "pago");
+        model = (DefaultTableModel) jTablePago.getModel();
+        ManagerAlumno ma = ManagerAlumno.GetManager();
+        List<Alumno> listaAlumnos = ma.obtenerTodosAlumno();
+        Iterator i = listaAlumnos.listIterator();
+        model.setRowCount(0);
+        while(i.hasNext()){
+            Alumno a = (Alumno) i.next();
+            model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),0,1});
+        }
+        
     }//GEN-LAST:event_jPanelOpPagoMouseClicked
 
     private void jPanelCerrarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelCerrarMouseMoved
@@ -1527,7 +1539,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSpinner jSpinner_Cuotas_PagoIns;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTablePago;
     private javax.swing.JTextArea jTextAreaOtrosDatos;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;

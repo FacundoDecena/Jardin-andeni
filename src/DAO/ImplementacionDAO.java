@@ -214,7 +214,7 @@ public class ImplementacionDAO implements DAO {
             String apellidoYNombre = rsNombre.getString("APELLIDOYNOMBRE");
             tutor = new Tutor(rsTutor.getString("OCUPACION"),rsTutor.getString("TIPODNI"),
                                     rsTutor.getLong("TELEFONOPERSONAL"),rsTutor.getLong("TELEFONOTRABAJO"),
-                                    rsTutor.getString("RELACION"),null,null,dni,apellidoYNombre);
+                                    rsTutor.getString("RELACION"),new HashSet(),new HashSet(),dni,apellidoYNombre);
             s.close();
             sAux.close();
             return tutor;
@@ -260,14 +260,16 @@ public class ImplementacionDAO implements DAO {
     @Override//NO GUARDA NADA EN LOS SETS
     public List obtenerTodosAlumno() {
         try {
-            int dni, idSala, añoLectivo,idPago;
+            int dni, idSala, añoLectivo,idPago, dniT;
             Connection c = ConexionBD.getConnection();
             Statement s = c.createStatement();
             List<Alumno> listaDeAlumnos = new ArrayList();
+            List<Tutor> listTutores = new ArrayList();
             List<Sala> listaSalas = new ArrayList<>();
             List<Pago> listaPagos = new ArrayList<>();
             Map<Integer,Sala> mapaSalas;
             Set<Pago> pagos;
+            Set<Tutor> tutores;
             ResultSet rsAlumno = null;
             rsAlumno = s.executeQuery("SELECT * FROM ALUMNO");
             Statement sAux = c.createStatement();
@@ -280,6 +282,11 @@ public class ImplementacionDAO implements DAO {
             while(rsPago.next()){
                 idPago = rsPago.getInt("IDPAGO");
                 listaPagos.add(obtenerPago(idPago));
+            }
+            ResultSet rsTutor = sAux.executeQuery("SELECT DNI FROM TUTOR");
+            while(rsTutor.next()){
+                dniT = rsTutor.getInt("DNI");
+                listTutores.add(obtenerTutor(dniT));
             }
             while(rsAlumno.next()){
                 dni = rsAlumno.getInt("DNI");
@@ -310,11 +317,22 @@ public class ImplementacionDAO implements DAO {
                             pagos.add(p);
                     }
                 }
+                tutores = new HashSet();
+                rsTutor = sAux.executeQuery("SELECT DNITUTOR FROM ES_TUTOR WHERE DNIALUMNO="+dni);
+                while(rsTutor.next()){
+                    dniT = rsTutor.getInt("DNITUTOR");
+                    Iterator i = listTutores.listIterator();
+                    while(i.hasNext()){
+                        Tutor t = (Tutor) i.next();
+                        if(t.getDni()== dniT)
+                            tutores.add(t);
+                    }
+                }
                 alumno = new Alumno(rsAlumno.getDate("FECHADENACIMIENTO"),rsAlumno.getString("LUGARDENACIMIENTO"),
                                            rsAlumno.getString("DOMICILIO"),rsAlumno.getLong("TELEFONO"),
                                            rsAlumno.getBoolean("CONTROLMEDICO"),rsAlumno.getBoolean("VACUNAS"),
                                            rsAlumno.getBoolean("CONTROLNATACION"),rsAlumno.getBoolean("TRAEMATERIALES"),
-                                           rsAlumno.getString("OTROSDATOS"),null,null,pagos,mapaSalas,null,dni,apellidoYNombre);
+                                           rsAlumno.getString("OTROSDATOS"),null,tutores,pagos,mapaSalas,null,dni,apellidoYNombre);
                 listaDeAlumnos.add(alumno);
             }
             s.close();

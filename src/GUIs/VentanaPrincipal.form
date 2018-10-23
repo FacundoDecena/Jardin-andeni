@@ -2,35 +2,198 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Container class="javax.swing.JDialog" name="jDialog1">
+    <Container class="javax.swing.JDialog" name="jDialogBuscar">
+      <Properties>
+        <Property name="alwaysOnTop" type="boolean" value="true"/>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[700, 480]"/>
+        </Property>
+        <Property name="modal" type="boolean" value="true"/>
+        <Property name="name" type="java.lang.String" value="Buscar" noResource="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[700, 480]"/>
+        </Property>
+        <Property name="resizable" type="boolean" value="false"/>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
+              <Component id="jPanelFondoDialog" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Component id="jPanelFondoDialog" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel2">
+        <Container class="javax.swing.JPanel" name="jPanelFondoDialog">
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="640" max="32767" attributes="0"/>
+                  <Component id="jPanelTabla" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jPanelDetalles" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="480" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jPanelDetalles" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanelTabla" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanelDetalles">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel53" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jTextField_BusquedaDialog" min="-2" pref="220" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jComboBox_TipoDialog" min="-2" pref="139" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jComboBox_SalaDialog" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jComboBox_TurnoDialog" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel53" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextField_BusquedaDialog" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboBox_TipoDialog" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboBox_SalaDialog" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboBox_TurnoDialog" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="69" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel53">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Buscar alumno"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTextField_BusquedaDialog">
+                  <Events>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField_BusquedaDialogKeyReleased"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="jComboBox_TipoDialog">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="2">
+                        <StringItem index="0" value="Apellido y Nombre"/>
+                        <StringItem index="1" value="DNI"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBox_TipoDialogItemStateChanged"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="jComboBox_SalaDialog">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="4">
+                        <StringItem index="0" value="Sala"/>
+                        <StringItem index="1" value="5 a&#xf1;os"/>
+                        <StringItem index="2" value="4 a&#xf1;os"/>
+                        <StringItem index="3" value="4 a&#xf1;os"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBox_SalaDialogItemStateChanged"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="jComboBox_TurnoDialog">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="3">
+                        <StringItem index="0" value="Turno"/>
+                        <StringItem index="1" value="Ma&#xf1;ana"/>
+                        <StringItem index="2" value="Tarde"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBox_TurnoDialogItemStateChanged"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelTabla">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane3" alignment="0" pref="380" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                  <AuxValues>
+                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JTable" name="jTableAlumnosDialog">
+                      <Properties>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                          <Table columnCount="4" rowCount="0">
+                            <Column editable="false" title="Apellido y nombre" type="java.lang.Object"/>
+                            <Column editable="false" title="DNI" type="java.lang.Object"/>
+                            <Column editable="false" title="Sala" type="java.lang.Object"/>
+                            <Column editable="false" title="Turno" type="java.lang.Object"/>
+                          </Table>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableAlumnosDialogMouseClicked"/>
+                      </Events>
+                    </Component>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+          </SubComponents>
         </Container>
       </SubComponents>
     </Container>
@@ -146,7 +309,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="161" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -496,7 +659,7 @@
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
-                                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jButtonBuscarAlumBD" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <EmptySpace max="32767" attributes="0"/>
@@ -745,7 +908,7 @@
                               <Component id="jTextField_TelTra_Tutor" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonBuscarAlumBD" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jButton_Inscribir" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
@@ -800,14 +963,8 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_LugarNacimiento">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="San Luis"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_ApyNom">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Juan Perez"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="jComboBoxSala_Insc">
                   <Properties>
@@ -832,14 +989,8 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_Domicilio">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Balcarce 123"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_Telefono">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="2664584736"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel14">
                   <Properties>
@@ -913,9 +1064,6 @@
                 <Component class="javax.swing.JSeparator" name="jSeparator3">
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_NumDoc_Padre">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="35214698"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_TipoDoc_Padre">
                   <Properties>
@@ -923,14 +1071,8 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_ApyNom_Padre">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Pedro Perez"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_Ocupacion_Padre">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Anestesista"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel21">
                   <Properties>
@@ -968,9 +1110,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_NumDoc_Madre">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="36478124"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_TipoDoc_Madre">
                   <Properties>
@@ -978,14 +1117,8 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_ApyNom_Madre">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Lucia Lopez"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_Ocupacion_Madre">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Ginecologa"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel26">
                   <Properties>
@@ -1064,14 +1197,8 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_TelPer_Padre">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="2664584736"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_TelTra_Padre">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="4425789"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel45">
                   <Properties>
@@ -1084,14 +1211,8 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_TelPer_Madre">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="2664321785"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_TelTra_Madre">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="4458963"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel47">
                   <Properties>
@@ -1126,9 +1247,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField_DNI_Ins">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="55685214"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="jCheckBoxTraeMateriales">
                   <Properties>
@@ -1181,10 +1299,13 @@
                     <Property name="text" type="java.lang.String" value="Incluir"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton1">
+                <Component class="javax.swing.JButton" name="jButtonBuscarAlumBD">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Buscar Alumno en Base de Datos"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBuscarAlumBDActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

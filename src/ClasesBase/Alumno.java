@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -181,6 +182,17 @@ public class Alumno extends Persona {
 
     public void setRa(Set<RegistroAsistencia> ra) {
         this.ra = ra;
+    }
+    
+    public int obtenerUltimoAñoLectivo(){
+        Iterator i  = salas.keySet().iterator();
+        int ultimoAño = 0;
+        while(i.hasNext()){
+            int año = (Integer) i.next();
+            if(año>ultimoAño)
+                ultimoAño = año;
+        }
+        return ultimoAño;
     }
 
 

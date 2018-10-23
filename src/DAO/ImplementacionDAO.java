@@ -229,20 +229,23 @@ public class ImplementacionDAO implements DAO {
                 rsNombre.next();
                 String apellidoYNombre = rsNombre.getString("APELLIDOYNOMBRE");
                 rsSala = sAux.executeQuery("SELECT IDSALA,ANOLECTIVO FROM ES_ALUMNO WHERE DNIALUMNO="+dni);
+                mapaSalas = new HashMap();
                 while(rsSala.next()){
                     añoLectivo = rsSala.getInt("ANOLECTIVO");
                     idSala = rsSala.getInt("IDSALA");
                     Iterator i = listaSalas.listIterator();
-                    mapaSalas = new HashMap();
                     while(i.hasNext()){
-                        //(Sala) i.next();
+                        Sala sala = (Sala) i.next();
+                        if(sala.getIdSala() == idSala){
+                            mapaSalas.put(añoLectivo,sala);
+                        }
                     }
                 }
                 alumno = new Alumno(rsAlumno.getDate("FECHADENACIMIENTO"),rsAlumno.getString("LUGARDENACIMIENTO"),
                                            rsAlumno.getString("DOMICILIO"),rsAlumno.getLong("TELEFONO"),
                                            rsAlumno.getBoolean("CONTROLMEDICO"),rsAlumno.getBoolean("VACUNAS"),
                                            rsAlumno.getBoolean("CONTROLNATACION"),rsAlumno.getBoolean("TRAEMATERIALES"),
-                                           rsAlumno.getString("OTROSDATOS"),null,null,null,null,null,dni,apellidoYNombre);
+                                           rsAlumno.getString("OTROSDATOS"),null,null,null,mapaSalas,null,dni,apellidoYNombre);
                 listaDeAlumnos.add(alumno);
             }
             s.close();

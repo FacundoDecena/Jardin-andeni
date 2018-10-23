@@ -1236,26 +1236,6 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace pref="52" max="32767" attributes="0"/>
-                                          <Component id="jTextField7" min="-2" pref="220" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="jTextField6" min="-2" pref="220" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="jTextField5" min="-2" pref="220" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="jSpinner_Cuotas_PagoIns" min="-2" pref="220" max="-2" attributes="0"/>
-                                      </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jLabel34" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1268,11 +1248,30 @@
                                               <Component id="jTextField_NomyAp_PagoIns" pref="220" max="32767" attributes="0"/>
                                               <Component id="jTextField_Sala_PagoIns" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jTextField_Turno_PagoIns" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jYearChooser1" alignment="0" max="32767" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="jYearChooser1" max="32767" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
                                       </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel37" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel38" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel39" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel40" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelMontoCuota" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabelMontoAPagar" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabelTotalPagado" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jSpinner_Cuotas_PagoIns" min="-2" pref="64" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace pref="82" max="32767" attributes="0"/>
+                                  <EmptySpace pref="64" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1305,21 +1304,21 @@
                                       <Component id="jSpinner_Cuotas_PagoIns" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextField5" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelTotalPagado" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextField6" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelMontoAPagar" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextField7" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelMontoCuota" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="239" max="32767" attributes="0"/>
+                                  <EmptySpace pref="245" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1366,21 +1365,6 @@
                         </Component>
                         <Component class="javax.swing.JTextField" name="jTextField_Turno_PagoIns">
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField5">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Esto o reemplazar por label"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField6">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Esto o reemplazar por label"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField7">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Esto o reemplazar por label"/>
-                          </Properties>
-                        </Component>
                         <Component class="javax.swing.JSpinner" name="jSpinner_Cuotas_PagoIns">
                           <Properties>
                             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
@@ -1394,6 +1378,24 @@
                           </Properties>
                         </Component>
                         <Component class="com.toedter.calendar.JYearChooser" name="jYearChooser1">
+                          <Properties>
+                            <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabelTotalPagado">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="jLabel53"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabelMontoAPagar">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="jLabel53"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabelMontoCuota">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="jLabel53"/>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -1522,6 +1524,9 @@
                               </Table>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTablePagoMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>

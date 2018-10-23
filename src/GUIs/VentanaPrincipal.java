@@ -192,7 +192,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelInterseccion.setLayout(jPanelInterseccionLayout);
         jPanelInterseccionLayout.setHorizontalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 161, Short.MAX_VALUE)
         );
         jPanelInterseccionLayout.setVerticalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -463,6 +463,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel46.setText("Telefono Trabajo");
 
         jTextField_TelPer_Madre.setText("2664321785");
+
+        jTextField_TelTra_Madre.setText("4458963");
 
         jLabel47.setText("Telefono Personal");
         jLabel47.setEnabled(false);
@@ -1177,7 +1179,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFondoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1307,15 +1309,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         long telefono = -1;
         int dni = -1; 
         boolean controlMedico, vacunas, controlNatacion, traeMateriales, error = false;
-        Set<Alumno> hermanos = new TreeSet();
+        Set<Alumno> hermanos = new HashSet();
         Set<Tutor> tutores = new HashSet();
         Set<Pago> pagos = new TreeSet();
         Map<Integer, Sala> salas = new HashMap();
-        Set<RegistroAsistencia> ra = new TreeSet();
+        Set<RegistroAsistencia> ra = new HashSet();
         apellidoYNombre = jTextField_ApyNom.getText();
         Sala sala;
         int salaEdad, salaTurno, idSala;
-        ManagerAlumno mngAlumno;
+        ManagerAlumno mngAlumno = ManagerAlumno.getManager();
         Alumno alumno;
         ManagerTutor mngTutor = ManagerTutor.getManager();
         Tutor tutor;
@@ -1325,8 +1327,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         salaEdad = jComboBoxSala_Insc.getSelectedIndex();
         salaTurno = jComboBoxTurno_Insc.getSelectedIndex();
         idSala = salaEdad + salaTurno +1;
-        //sala = mngSala.getSala(idSala);
-        //salas.put(idSala, sala);
+        sala = mngSala.getSala(idSala);
+        salas.put(idSala, sala);
         
         if(apellidoYNombre.isEmpty()){
             error = true;
@@ -1556,9 +1558,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
               
         }
         if(!error){
-                alumno = new Alumno(fechaDeNacimiento, lugarNacimiento, domicilio, telefono, controlMedico, vacunas, controlNatacion, traeMateriales, otrosDatos, hermanos, tutores, pagos, salas, ra, dni, apellidoYNombre);
+            try{
                 
-                System.out.println("Inscripto");
+                alumno = mngAlumno.nuevoAlumno(fechaDeNacimiento, lugarNacimiento, domicilio, telefono, controlMedico, vacunas, controlNatacion, traeMateriales, otrosDatos, hermanos, tutores, pagos, salas, ra, dni, apellidoYNombre);
+                JOptionPane.showMessageDialog(null,"El alumno ha sido Inscripto correctamente", "Inscripto",JOptionPane.INFORMATION_MESSAGE);
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+            }
             }
     }//GEN-LAST:event_jButton_InscribirActionPerformed
 

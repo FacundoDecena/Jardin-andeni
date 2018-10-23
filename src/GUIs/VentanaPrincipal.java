@@ -2119,12 +2119,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jRadioButtonAgregarMadreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonAgregarMadreStateChanged
         if(jRadioButtonAgregarMadre.isSelected()){
-            jLabel17.setEnabled(true);
-            jLabel18.setEnabled(true);
-            jLabel19.setEnabled(true);
-            jLabel20.setEnabled(true);
-            jLabel42.setEnabled(true);
-            jLabel44.setEnabled(true);
+            jLabel16.setEnabled(true);
+            jLabel23.setEnabled(true);
+            jLabel24.setEnabled(true);
+            jLabel25.setEnabled(true);
+            jLabel45.setEnabled(true);
+            jLabel46.setEnabled(true);
             jTextField_ApyNom_Madre.setEnabled(true);
             jTextField_TipoDoc_Madre.setEnabled(true);
             jTextField_NumDoc_Madre.setEnabled(true);
@@ -2134,8 +2134,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         else{
             jLabel16.setEnabled(false);
-            jLabel23.setEnabled(false);
-            jLabel14.setEnabled(false);
+            jLabel23.setEnabled(false);;
+            jLabel24.setEnabled(false);
             jLabel25.setEnabled(false);
             jLabel45.setEnabled(false);
             jLabel46.setEnabled(false);
@@ -2362,6 +2362,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         jTextField_ApyNom.setText("");
         jTextField_LugarNacimiento.setText("");
+        jTextField_Edad.setText("");
         jTextField_DNI_Ins.setText("");
         jTextField_Domicilio.setText("");
         jTextField_Telefono.setText("");

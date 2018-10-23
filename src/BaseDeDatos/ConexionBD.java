@@ -118,6 +118,18 @@ public class ConexionBD {
         s.execute("INSERT INTO TIPO_PAGO VALUES(3,'CUOTA')"); 
         s.execute("INSERT INTO TIPO_PAGO VALUES(4,'SAC')");
         s.execute("INSERT INTO TIPO_PAGO VALUES(5,'NATACION')");
+        
+        s.execute("CREATE TABLE VALORES(" +
+                  "COD_TIPO SMALLINT NOT NULL PRIMARY KEY," +
+                  "VALOR FLOAT NOT NULL," +
+                  "FOREIGN KEY (COD_TIPO) REFERENCES TIPO_PAGO(COD_TIPO))"
+        );
+        
+        s.execute("INSERT INTO VALORES VALUES(1,3000.00)");
+        s.execute("INSERT INTO VALORES VALUES(2,550.00)"); 
+        s.execute("INSERT INTO VALORES VALUES(3,2000.00)"); 
+        s.execute("INSERT INTO VALORES VALUES(4,1000.00)");
+        s.execute("INSERT INTO VALORES VALUES(5,500.00)");
 
         s.execute("CREATE TABLE PAGO(" +
                   "IDPAGO INT NOT NULL PRIMARY KEY," +

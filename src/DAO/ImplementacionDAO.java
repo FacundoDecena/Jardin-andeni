@@ -195,6 +195,17 @@ public class ImplementacionDAO implements DAO {
         }
     }
 
+    public void nuevoEs_tutor(int dniT, int dniA){
+        try{
+            Connection c = ConexionBD.getConnection();
+            Statement s = c.createStatement();
+            s.execute("INSERT INTO ES_TUTOR VALUES("+dniT+","+dniA+")");
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(ImplementacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     @Override//MODIFICA SOLO LOS CAMPOS PROPIOS, NO LAS RELACIONES
     public void modificarAlumno(Alumno palumno) {
         try {

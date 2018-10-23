@@ -53,7 +53,13 @@ public class ManagerAlumno{
         ImplementacionDAO dao = ImplementacionDAO.getDAO();
         
         dao.altaAlumno(alumno);
-        
+        //Si llegó aca, los tutores ya estan en la base de datos.
+        Iterator i = tutores.iterator();
+        while(i.hasNext()){
+            Tutor t = (Tutor)i.next();
+            int dniT = t.getDni();
+            dao.nuevoEs_tutor(dniT,alumno.getDni());
+        }
         return alumno;
     }
 

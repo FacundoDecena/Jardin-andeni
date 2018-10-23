@@ -61,6 +61,10 @@ public class ManagerAlumno{
         return ImplementacionDAO.getDAO().obtenerTodosAlumno();
     }
     
+    public void actualizarAñoLectivo(int dni, int idSala, int añoLectivo){
+        ImplementacionDAO.getDAO().agregarAñoLectivo(dni, idSala, añoLectivo);
+    }
+    
     
     private Exception IllegalArgumentException(String mensaje) {
         IllegalArgumentException e = new IllegalArgumentException(mensaje, null);

@@ -89,7 +89,7 @@ public class Prueba extends javax.swing.JFrame {
         s.execute("DELETE FROM PERSONA WHERE DNI = 55685214");
         s.execute("DELETE FROM TUTOR WHERE DNI = 36478124");
         s.execute("DELETE FROM PERSONA WHERE DNI = 36478124");
-        ResultSet rs = s.executeQuery("SELECT * FROM TUTOR");
+        ResultSet rs = s.executeQuery("SELECT * FROM PERSONA");
         DefaultTableModel dtm = new DefaultTableModel();
         p.jTableA.setModel(dtm);
         ResultSetMetaData rsMd = rs.getMetaData();

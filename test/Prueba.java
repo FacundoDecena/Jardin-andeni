@@ -81,7 +81,9 @@ public class Prueba extends javax.swing.JFrame {
         p.setVisible(true);
         Connection c = ConexionBD.getConnection();
         Statement s = c.createStatement();
-        ResultSet rs = s.executeQuery("SELECT * FROM TUTOR");
+        //s.execute("DELETE FROM TUTOR WHERE DNI = 36478124");
+        //s.execute("DELETE FROM PERSONA WHERE DNI = 36478124");
+        ResultSet rs = s.executeQuery("SELECT * FROM PERSONA");
         DefaultTableModel dtm = new DefaultTableModel();
         p.jTableA.setModel(dtm);
         ResultSetMetaData rsMd = rs.getMetaData();

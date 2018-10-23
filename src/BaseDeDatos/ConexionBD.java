@@ -19,7 +19,7 @@ public class ConexionBD {
             System.err.println("\nNo es posible Instanciar el driver de JDBC");
         } catch (IllegalAccessException iae) {
             System.err.println("\nNo se tiene acceso al driver de JDBC");
-        } catch(SQLException e){/*e.printStackTrace();*/}
+        } catch(SQLException e){}
     }
     
     public static Connection getConnection(){

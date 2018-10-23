@@ -39,6 +39,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     public VentanaPrincipal() {
         initComponents();
+        jDialogBuscar.setLocationRelativeTo(null);
     }
 
     /**
@@ -50,8 +51,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
-        jPanel2 = new javax.swing.JPanel();
+        jDialogBuscar = new javax.swing.JDialog();
+        jPanelFondoDialog = new javax.swing.JPanel();
+        jPanelDetalles = new javax.swing.JPanel();
+        jLabel53 = new javax.swing.JLabel();
+        jTextField_BusquedaDialog = new javax.swing.JTextField();
+        jComboBox_TipoDialog = new javax.swing.JComboBox<>();
+        jComboBox_SalaDialog = new javax.swing.JComboBox<>();
+        jComboBox_TurnoDialog = new javax.swing.JComboBox<>();
+        jPanelTabla = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableAlumnosDialog = new javax.swing.JTable();
         jPanelFondo = new javax.swing.JPanel();
         jPanelInterseccion = new javax.swing.JPanel();
         jPanelPestanas = new javax.swing.JPanel();
@@ -141,7 +151,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jRadioButtonAgregarTutor = new javax.swing.JRadioButton();
         jRadioButtonAgregarPadre = new javax.swing.JRadioButton();
         jRadioButtonAgregarMadre = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonBuscarAlumBD = new javax.swing.JButton();
         jPanelPago = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
@@ -183,26 +193,132 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel33 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+        jDialogBuscar.setAlwaysOnTop(true);
+        jDialogBuscar.setMinimumSize(new java.awt.Dimension(700, 480));
+        jDialogBuscar.setModal(true);
+        jDialogBuscar.setName("Buscar"); // NOI18N
+        jDialogBuscar.setPreferredSize(new java.awt.Dimension(700, 480));
+        jDialogBuscar.setResizable(false);
+
+        jLabel53.setText("Buscar alumno");
+
+        jTextField_BusquedaDialog.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_BusquedaDialogKeyReleased(evt);
+            }
+        });
+
+        jComboBox_TipoDialog.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Apellido y Nombre", "DNI" }));
+        jComboBox_TipoDialog.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox_TipoDialogItemStateChanged(evt);
+            }
+        });
+
+        jComboBox_SalaDialog.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sala", "5 años", "4 años", "4 años" }));
+        jComboBox_SalaDialog.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox_SalaDialogItemStateChanged(evt);
+            }
+        });
+
+        jComboBox_TurnoDialog.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turno", "Mañana", "Tarde" }));
+        jComboBox_TurnoDialog.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox_TurnoDialogItemStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelDetallesLayout = new javax.swing.GroupLayout(jPanelDetalles);
+        jPanelDetalles.setLayout(jPanelDetallesLayout);
+        jPanelDetallesLayout.setHorizontalGroup(
+            jPanelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDetallesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel53)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField_BusquedaDialog, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox_TipoDialog, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox_SalaDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox_TurnoDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+        jPanelDetallesLayout.setVerticalGroup(
+            jPanelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDetallesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel53)
+                    .addComponent(jTextField_BusquedaDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_TipoDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_SalaDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_TurnoDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jTableAlumnosDialog.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Apellido y nombre", "DNI", "Sala", "Turno"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableAlumnosDialog.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableAlumnosDialogMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTableAlumnosDialog);
+
+        javax.swing.GroupLayout jPanelTablaLayout = new javax.swing.GroupLayout(jPanelTabla);
+        jPanelTabla.setLayout(jPanelTablaLayout);
+        jPanelTablaLayout.setHorizontalGroup(
+            jPanelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3)
         );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jPanelTablaLayout.setVerticalGroup(
+            jPanelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanelFondoDialogLayout = new javax.swing.GroupLayout(jPanelFondoDialog);
+        jPanelFondoDialog.setLayout(jPanelFondoDialogLayout);
+        jPanelFondoDialogLayout.setHorizontalGroup(
+            jPanelFondoDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelDetalles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanelFondoDialogLayout.setVerticalGroup(
+            jPanelFondoDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelFondoDialogLayout.createSequentialGroup()
+                .addComponent(jPanelDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout jDialogBuscarLayout = new javax.swing.GroupLayout(jDialogBuscar.getContentPane());
+        jDialogBuscar.getContentPane().setLayout(jDialogBuscarLayout);
+        jDialogBuscarLayout.setHorizontalGroup(
+            jDialogBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelFondoDialog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jDialogBuscarLayout.setVerticalGroup(
+            jDialogBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogBuscarLayout.createSequentialGroup()
+                .addComponent(jPanelFondoDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -221,7 +337,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelInterseccion.setLayout(jPanelInterseccionLayout);
         jPanelInterseccionLayout.setHorizontalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 161, Short.MAX_VALUE)
         );
         jPanelInterseccionLayout.setVerticalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,18 +500,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel13.setText("Telefono");
 
-        jTextField_LugarNacimiento.setText("San Luis");
-
-        jTextField_ApyNom.setText("Juan Perez");
-
         jComboBoxSala_Insc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5 Años", "4 Años", "3 Años" }));
 
         jTextField_Edad.setEditable(false);
         jTextField_Edad.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTextField_Domicilio.setText("Balcarce 123");
-
-        jTextField_Telefono.setText("2664584736");
 
         jLabel14.setText("Turno");
 
@@ -419,13 +527,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel20.setText("Ocupacion");
 
-        jTextField_NumDoc_Padre.setText("35214698");
-
         jTextField_TipoDoc_Padre.setText("DNI");
-
-        jTextField_ApyNom_Padre.setText("Pedro Perez");
-
-        jTextField_Ocupacion_Padre.setText("Anestesista");
 
         jLabel21.setText("Datos del padre");
 
@@ -441,13 +543,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel25.setText("Ocupacion");
 
-        jTextField_NumDoc_Madre.setText("36478124");
-
         jTextField_TipoDoc_Madre.setText("DNI");
-
-        jTextField_ApyNom_Madre.setText("Lucia Lopez");
-
-        jTextField_Ocupacion_Madre.setText("Ginecologa");
 
         jLabel26.setText("Datos del tutor");
 
@@ -483,17 +579,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel44.setText("Telefono Trabajo");
 
-        jTextField_TelPer_Padre.setText("2664584736");
-
-        jTextField_TelTra_Padre.setText("4425789");
-
         jLabel45.setText("Telefono Personal");
 
         jLabel46.setText("Telefono Trabajo");
-
-        jTextField_TelPer_Madre.setText("2664321785");
-
-        jTextField_TelTra_Madre.setText("4458963");
 
         jLabel47.setText("Telefono Personal");
         jLabel47.setEnabled(false);
@@ -512,8 +600,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         jLabel52.setText("DNI (sin puntos)");
-
-        jTextField_DNI_Ins.setText("55685214");
 
         jCheckBoxTraeMateriales.setText("Trae Materiales");
 
@@ -548,7 +634,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jRadioButtonAgregarMadre.setSelected(true);
         jRadioButtonAgregarMadre.setText("Incluir");
 
-        jButton1.setText("Buscar Alumno en Base de Datos");
+        jButtonBuscarAlumBD.setText("Buscar Alumno en Base de Datos");
+        jButtonBuscarAlumBD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarAlumBDActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelInscripcionLayout = new javax.swing.GroupLayout(jPanelInscripcion);
         jPanelInscripcion.setLayout(jPanelInscripcionLayout);
@@ -663,7 +754,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                             .addComponent(jLabel47)))
                                     .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                                         .addGap(128, 128, 128)
-                                        .addComponent(jButton1)))
+                                        .addComponent(jButtonBuscarAlumBD)))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                         .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -855,7 +946,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel48)
                     .addComponent(jTextField_TelTra_Tutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
-                .addComponent(jButton1)
+                .addComponent(jButtonBuscarAlumBD)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton_Inscribir)
                 .addGap(96, 96, 96))
@@ -1470,55 +1561,56 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         long telefonoPersonal = 0, telefonoTrabajo = 0;
         Set<Alumno> atutorados = new TreeSet();
         Set<Retiro> retiros = new TreeSet();
-        
-        if(!error){
-            apellidoYNombreT = jTextField_ApyNom_Padre.getText();
-            if(apellidoYNombreT.isEmpty()){
-                error = true;
-                JOptionPane.showMessageDialog(null,"Nombre del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+        if(jRadioButtonAgregarPadre.isSelected()){
+            if(!error){
+                apellidoYNombreT = jTextField_ApyNom_Padre.getText();
+                if(apellidoYNombreT.isEmpty()){
+                    error = true;
+                    JOptionPane.showMessageDialog(null,"Nombre del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+                }
             }
-        }
-        if(!error){
-            tipoDniT = jTextField_TipoDoc_Padre.getText();
-            if(tipoDniT.isEmpty()){
-                error = true;
-                JOptionPane.showMessageDialog(null,"Tipo DNI del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+            if(!error){
+                tipoDniT = jTextField_TipoDoc_Padre.getText();
+                if(tipoDniT.isEmpty()){
+                    error = true;
+                    JOptionPane.showMessageDialog(null,"Tipo DNI del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+                }
             }
-        }
-        if(!error){
-            try{
-                dniT = new Integer (jTextField_NumDoc_Padre.getText());
+            if(!error){
+                try{
+                    dniT = new Integer (jTextField_NumDoc_Padre.getText());
+                }
+                catch(java.lang.NumberFormatException e){
+                     error = true;
+                    JOptionPane.showMessageDialog(null,"DNI solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
+                }
             }
-            catch(java.lang.NumberFormatException e){
-                 error = true;
-                JOptionPane.showMessageDialog(null,"DNI solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
+            if(!error){
+                ocupacion = jTextField_Ocupacion_Padre.getText();
+                if(ocupacion.isEmpty()){
+                    error = true;
+                    JOptionPane.showMessageDialog(null,"ocupacion del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+                }
             }
-        }
-        if(!error){
-            ocupacion = jTextField_Ocupacion_Padre.getText();
-            if(ocupacion.isEmpty()){
-                error = true;
-                JOptionPane.showMessageDialog(null,"ocupacion del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+            if(!error){
+                try{
+                    telefonoPersonal = new Long(jTextField_TelPer_Padre.getText());
+                    telefonoTrabajo = new Long(jTextField_TelTra_Padre.getText());
+                }
+                catch(java.lang.NumberFormatException e){
+                     error = true;
+                    JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
+                }
             }
-        }
-        if(!error){
-            try{
-                telefonoPersonal = new Long(jTextField_TelPer_Padre.getText());
-                telefonoTrabajo = new Long(jTextField_TelTra_Padre.getText());
-            }
-            catch(java.lang.NumberFormatException e){
-                 error = true;
-                JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
-            }
-        }
-        if(!error && jRadioButtonAgregarMadre.isSelected()){
-            try{
-                tutor = mngTutor.nuevoTutor(ocupacion, tipoDniT, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
-                tutores.add(tutor);
-            }
-            catch (Exception es){
-                JOptionPane.showMessageDialog(null,es.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
-                error = true;
+            if(!error){
+                try{
+                    tutor = mngTutor.nuevoTutor(ocupacion, tipoDniT, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
+                    tutores.add(tutor);
+                }
+                catch (Exception es){
+                    JOptionPane.showMessageDialog(null,es.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+                    error = true;
+                }
             }
         }
         //Segundo paso: Madre
@@ -1526,55 +1618,56 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         apellidoYNombreT = "";
         dniT = 0;
         telefonoPersonal = 0; telefonoTrabajo = 0;
-        
-        if(!error){
-            apellidoYNombreT = jTextField_ApyNom_Madre.getText();
-            if(apellidoYNombreT.isEmpty()){
-                error = true;
-                JOptionPane.showMessageDialog(null,"Nombre de la madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+        if(jRadioButtonAgregarMadre.isSelected()){
+            if(!error){
+                apellidoYNombreT = jTextField_ApyNom_Madre.getText();
+                if(apellidoYNombreT.isEmpty()){
+                    error = true;
+                    JOptionPane.showMessageDialog(null,"Nombre de la madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+                }
             }
-        }
-        if(!error){
-            tipoDniT = jTextField_TipoDoc_Madre.getText();
-            if(tipoDniT.isEmpty()){
-                error = true;
-                JOptionPane.showMessageDialog(null,"Tipo DNI del madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+            if(!error){
+                tipoDniT = jTextField_TipoDoc_Madre.getText();
+                if(tipoDniT.isEmpty()){
+                    error = true;
+                    JOptionPane.showMessageDialog(null,"Tipo DNI del madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+                }
             }
-        }
-        if(!error){
-            try{
-                dniT = new Integer (jTextField_NumDoc_Madre.getText());
+            if(!error){
+                try{
+                    dniT = new Integer (jTextField_NumDoc_Madre.getText());
+                }
+                catch(java.lang.NumberFormatException e){
+                     error = true;
+                    JOptionPane.showMessageDialog(null,"DNI solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
+                }
             }
-            catch(java.lang.NumberFormatException e){
-                 error = true;
-                JOptionPane.showMessageDialog(null,"DNI solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
+            if(!error){
+                ocupacion = jTextField_Ocupacion_Madre.getText();
+                if(ocupacion.isEmpty()){
+                    error = true;
+                    JOptionPane.showMessageDialog(null,"ocupacion de la madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+                }
             }
-        }
-        if(!error){
-            ocupacion = jTextField_Ocupacion_Madre.getText();
-            if(ocupacion.isEmpty()){
-                error = true;
-                JOptionPane.showMessageDialog(null,"ocupacion de la madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
+            if(!error){
+                try{
+                    telefonoPersonal = new Long(jTextField_TelPer_Madre.getText());
+                    telefonoTrabajo = new Long(jTextField_TelTra_Madre.getText());
+                }
+                catch(java.lang.NumberFormatException e){
+                     error = true;
+                    JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
+                }
             }
-        }
-        if(!error){
-            try{
-                telefonoPersonal = new Long(jTextField_TelPer_Madre.getText());
-                telefonoTrabajo = new Long(jTextField_TelTra_Madre.getText());
-            }
-            catch(java.lang.NumberFormatException e){
-                 error = true;
-                JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
-            }
-        }
-        if(!error && jRadioButtonAgregarMadre.isSelected()){
-            try{
-                tutor = mngTutor.nuevoTutor(ocupacion, tipoDniT, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
-                tutores.add(tutor);
-            }
-            catch (Exception es){
-                JOptionPane.showMessageDialog(null,es.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
-                error = true;
+            if(!error && jRadioButtonAgregarMadre.isSelected()){
+                try{
+                    tutor = mngTutor.nuevoTutor(ocupacion, tipoDniT, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
+                    tutores.add(tutor);
+                }
+                catch (Exception es){
+                    JOptionPane.showMessageDialog(null,es.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+                    error = true;
+                }
             }
         }
         //Paso 3 solo si esta selecionado incluir tutor que no sean los padres
@@ -1772,6 +1865,113 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTablePagoMouseClicked
 
+    private void jButtonBuscarAlumBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarAlumBDActionPerformed
+        model = (DefaultTableModel) jTableAlumnosDialog.getModel();
+        ManagerAlumno ma = ManagerAlumno.getManager();
+        listaAlumnos = ma.obtenerTodosAlumno();
+        String a = jComboBox_TipoDialog.getSelectedItem().toString();
+        String b = jTextField_BusquedaDialog.getText().toUpperCase();
+        int c = jComboBox_SalaDialog.getSelectedIndex();
+        int d = jComboBox_TurnoDialog.getSelectedIndex();
+        cargarTabla(a,b,c,d);
+        jDialogBuscar.setVisible(true);
+        jDialogBuscar.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButtonBuscarAlumBDActionPerformed
+
+    private void jTextField_BusquedaDialogKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_BusquedaDialogKeyReleased
+        String a = jComboBox_TipoDialog.getSelectedItem().toString();
+        String b = jTextField_BusquedaDialog.getText().toUpperCase();
+        int c = jComboBox_SalaDialog.getSelectedIndex();
+        int d = jComboBox_TurnoDialog.getSelectedIndex();
+        cargarTabla(a,b,c,d);
+    }//GEN-LAST:event_jTextField_BusquedaDialogKeyReleased
+
+    private void jComboBox_TipoDialogItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox_TipoDialogItemStateChanged
+        String a = jComboBox_TipoDialog.getSelectedItem().toString();
+        String b = jTextField_BusquedaDialog.getText().toUpperCase();
+        int c = jComboBox_SalaDialog.getSelectedIndex();
+        int d = jComboBox_TurnoDialog.getSelectedIndex();
+        cargarTabla(a,b,c,d);
+    }//GEN-LAST:event_jComboBox_TipoDialogItemStateChanged
+
+    private void jComboBox_SalaDialogItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox_SalaDialogItemStateChanged
+        String a = jComboBox_TipoDialog.getSelectedItem().toString();
+        String b = jTextField_BusquedaDialog.getText().toUpperCase();
+        int c = jComboBox_SalaDialog.getSelectedIndex();
+        int d = jComboBox_TurnoDialog.getSelectedIndex();
+        cargarTabla(a,b,c,d);;
+    }//GEN-LAST:event_jComboBox_SalaDialogItemStateChanged
+
+    private void jComboBox_TurnoDialogItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox_TurnoDialogItemStateChanged
+        String a = jComboBox_TipoDialog.getSelectedItem().toString();
+        String b = jTextField_BusquedaDialog.getText().toUpperCase();
+        int c = jComboBox_SalaDialog.getSelectedIndex();
+        int d = jComboBox_TurnoDialog.getSelectedIndex();
+        cargarTabla(a,b,c,d);
+    }//GEN-LAST:event_jComboBox_TurnoDialogItemStateChanged
+
+    private void jTableAlumnosDialogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAlumnosDialogMouseClicked
+        String dniFila = String.valueOf(model.getValueAt(jTableAlumnosDialog.getSelectedRow(),1));
+        Set<Tutor> tutors;
+        Iterator j;
+        Iterator i = listaAlumnos.iterator();
+        while(i.hasNext()){
+            Alumno a = (Alumno) i.next();
+            if(dniFila.equals(String.valueOf(a.getDni()))){
+                jTextField_ApyNom.setText(a.getApellidoYNombre());
+                jDateChooserFechaNacimiento.setDate(a.getFechaDeNacimiento());
+                jTextField_LugarNacimiento.setText(a.getLugarNacimiento());
+                jTextField_DNI_Ins.setText(String.valueOf(a.getDni()));
+                jTextField_Domicilio.setText(a.getDomicilio());
+                jTextField_Telefono.setText(String.valueOf(a.getTelefono()));
+                jTextAreaOtrosDatos.setText(a.getOtrosDatos());
+                jCheckBoxMedico.setSelected(a.isControlMedico());
+                jCheckBoxNatacion.setSelected(a.isControlNatacion());
+                jCheckBoxTraeMateriales.setSelected(a.isTraeMateriales());
+                jCheckBoxVacunas.setSelected(a.isVacunas());
+                tutors = a.getTutores();
+                if(tutors == null)
+                    tutors = new HashSet();
+                j = tutors.iterator();
+                while(j.hasNext()){
+                    Tutor t = (Tutor) j.next();
+                    if(t.getRelacion().equals("Padre")){
+                        jRadioButtonAgregarPadre.setSelected(true);
+                        jTextField_ApyNom_Padre.setText(t.getApellidoYNombre());
+                        jTextField_TipoDoc_Padre.setText(t.getTipoDni());
+                        jTextField_NumDoc_Padre.setText(String.valueOf(t.getDni()));
+                        jTextField_Ocupacion_Padre.setText(t.getOcupacion());
+                        jTextField_TelPer_Padre.setText(String.valueOf(t.getTelefonoPersonal()));
+                        jTextField_TelTra_Padre.setText(String.valueOf(t.getTelefonoTrabajo()));
+                        break;
+                    }
+                    if(t.getRelacion().equals("Madre")){
+                        jRadioButtonAgregarMadre.setSelected(true);
+                        jTextField_ApyNom_Madre.setText(t.getApellidoYNombre());
+                        jTextField_TipoDoc_Madre.setText(t.getTipoDni());
+                        jTextField_NumDoc_Madre.setText(String.valueOf(t.getDni()));
+                        jTextField_Ocupacion_Madre.setText(t.getOcupacion());
+                        jTextField_TelPer_Madre.setText(String.valueOf(t.getTelefonoPersonal()));
+                        jTextField_TelTra_Madre.setText(String.valueOf(t.getTelefonoTrabajo()));
+                        break;
+                    }
+                    else{
+                        jRadioButtonAgregarTutor.setSelected(true);
+                        jTextField_ApyNom_Tutor.setText(t.getApellidoYNombre());
+                        jTextField_TipoDoc_Tutor.setText(t.getTipoDni());
+                        jTextField_NumDoc_Tutor.setText(String.valueOf(t.getDni()));
+                        jTextField_Relacion.setText(t.getRelacion());
+                        jTextField_Ocupacion_Tutor.setText(t.getOcupacion());
+                        jTextField_TelPer_Tutor.setText(String.valueOf(t.getTelefonoPersonal()));
+                        jTextField_TelTra_Tutor.setText(String.valueOf(t.getTelefonoTrabajo()));
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }//GEN-LAST:event_jTableAlumnosDialogMouseClicked
+
 
     /**
      * @param args the command line arguments
@@ -1810,7 +2010,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonBuscarAlumBD;
     private javax.swing.JButton jButtonRegistrarPago;
     private javax.swing.JButton jButton_Inscribir;
     private javax.swing.JCheckBox jCheckBoxMedico;
@@ -1823,8 +2023,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxTipoDePago;
     private javax.swing.JComboBox<String> jComboBoxTurnoPago;
     private javax.swing.JComboBox<String> jComboBoxTurno_Insc;
+    private javax.swing.JComboBox<String> jComboBox_SalaDialog;
+    private javax.swing.JComboBox<String> jComboBox_TipoDialog;
+    private javax.swing.JComboBox<String> jComboBox_TurnoDialog;
     private com.toedter.calendar.JDateChooser jDateChooserFechaNacimiento;
-    private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialogBuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1873,6 +2076,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1881,13 +2085,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelMontoCuota;
     private javax.swing.JLabel jLabelTotalPagado;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelBarraSup;
     private javax.swing.JPanel jPanelCard;
     private javax.swing.JPanel jPanelCerrar;
     private javax.swing.JPanel jPanelCuota;
     private javax.swing.JPanel jPanelDatosAlumnos;
+    private javax.swing.JPanel jPanelDetalles;
     private javax.swing.JPanel jPanelFondo;
+    private javax.swing.JPanel jPanelFondoDialog;
     private javax.swing.JPanel jPanelInscripcion;
     private javax.swing.JPanel jPanelInterseccion;
     private javax.swing.JPanel jPanelMinimizar;
@@ -1897,6 +2102,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelPago;
     private javax.swing.JPanel jPanelPagpInsc;
     private javax.swing.JPanel jPanelPestanas;
+    private javax.swing.JPanel jPanelTabla;
     private javax.swing.JPanel jPanelTipoPago;
     private javax.swing.JPanel jPanelTitulo;
     private javax.swing.JRadioButton jRadioButtonAgregarMadre;
@@ -1904,12 +2110,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonAgregarTutor;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSpinner jSpinner_Cuotas_PagoIns;
+    private javax.swing.JTable jTableAlumnosDialog;
     private javax.swing.JTable jTablePago;
     private javax.swing.JTextArea jTextAreaOtrosDatos;
     private javax.swing.JTextField jTextFieldBusqueda_Pago;
@@ -1917,6 +2125,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_ApyNom_Madre;
     private javax.swing.JTextField jTextField_ApyNom_Padre;
     private javax.swing.JTextField jTextField_ApyNom_Tutor;
+    private javax.swing.JTextField jTextField_BusquedaDialog;
     private javax.swing.JTextField jTextField_DNI_Ins;
     private javax.swing.JTextField jTextField_Domicilio;
     private javax.swing.JTextField jTextField_Edad;
@@ -1945,8 +2154,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     public void cargarTabla(String valorComboBox1, String buscado, int salaS, int turnoS){
-        valorComboBox1 = jComboBoxBusqueda_Pago.getSelectedItem().toString();
-        buscado = jTextFieldBusqueda_Pago.getText().toUpperCase();
         model.setRowCount(0);
         switch(salaS){
             case 0:

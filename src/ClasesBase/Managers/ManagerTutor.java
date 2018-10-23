@@ -34,7 +34,7 @@ public class ManagerTutor {
     public Tutor nuevoTutor (String ocupacion, String tipoDni, long telefonoPersonal, long telefonoTrabajo, String relacion, Set<Alumno> atutorados, Set<Retiro> retiros, int dni, String apellidoYNombre) throws IllegalArgumentException, Exception{
         Tutor tutor;
         
-        Pattern patron = Pattern.compile("[a-zA-Z&&'\'s&&[^0-9]]");
+        Pattern patron = Pattern.compile("([a-zA-Z]*[ \\t\\n\\x0b\\r\\f]*)+");
         Matcher encaja;
         
         encaja = patron.matcher(ocupacion);

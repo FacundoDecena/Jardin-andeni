@@ -2154,7 +2154,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
             }
             else{
-                cal= Calendar.getInstance();
+                /*alumno = mngAlumno.getAlumno(dni);
+                cal = Calendar.getInstance();
+                salas = alumno.getSalas();
+                sala = salas.get(cal.get(Calendar.YEAR));
+                if(sala != null){
+                    JOptionPane.showMessageDialog(null,"El alumno ya esta inscripto", "Notificacion",JOptionPane.WARNING_MESSAGE);
+                }*/
                 mngAlumno.actualizarAñoLectivo(dni, idSala, cal.get(Calendar.YEAR));
                 JOptionPane.showMessageDialog(null,"El alumno ha sido Inscripto correctamente", "Inscripto",JOptionPane.INFORMATION_MESSAGE);
             }
@@ -2597,15 +2603,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 else{
                     salaId = sala.getIdSala();
                     switch(salaId){
-                        case 1: jLabel_Sala.setText("3 Turno Mañana");
-                        case 2: jLabel_Sala.setText("3 Turno Tarde");
-                        case 3: jLabel_Sala.setText("4 Turno Mañana");
-                        case 4: jLabel_Sala.setText("4 Turno Tarde");
-                        case 5: jLabel_Sala.setText("5 Turno Mañana");
-                        case 6: jLabel_Sala.setText("5 Turno Tarde");
+                        case 1: jLabel_Sala.setText("3 Turno Mañana");break;
+                        case 2: jLabel_Sala.setText("3 Turno Tarde");break;
+                        case 3: jLabel_Sala.setText("4 Turno Mañana");break;
+                        case 4: jLabel_Sala.setText("4 Turno Tarde");break;
+                        case 5: jLabel_Sala.setText("5 Turno Mañana");break;
+                        case 6: jLabel_Sala.setText("5 Turno Tarde");break;
                     }
                 }
-                
                 tutors = a.getTutores();
                 if(tutors == null)
                     tutors = new HashSet();

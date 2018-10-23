@@ -50,6 +50,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
         jPanelFondo = new javax.swing.JPanel();
         jPanelInterseccion = new javax.swing.JPanel();
         jPanelPestanas = new javax.swing.JPanel();
@@ -139,6 +141,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jRadioButtonAgregarTutor = new javax.swing.JRadioButton();
         jRadioButtonAgregarPadre = new javax.swing.JRadioButton();
         jRadioButtonAgregarMadre = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
         jPanelPago = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
@@ -180,6 +183,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel33 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 480, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Jardin Ñandeni");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -196,7 +221,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelInterseccion.setLayout(jPanelInterseccionLayout);
         jPanelInterseccionLayout.setHorizontalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 161, Short.MAX_VALUE)
         );
         jPanelInterseccionLayout.setVerticalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,6 +548,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jRadioButtonAgregarMadre.setSelected(true);
         jRadioButtonAgregarMadre.setText("Incluir");
 
+        jButton1.setText("Buscar Alumno en Base de Datos");
+
         javax.swing.GroupLayout jPanelInscripcionLayout = new javax.swing.GroupLayout(jPanelInscripcion);
         jPanelInscripcion.setLayout(jPanelInscripcionLayout);
         jPanelInscripcionLayout.setHorizontalGroup(
@@ -628,10 +655,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addComponent(jButton_Inscribir)
                                 .addGap(181, 181, 181))
                             .addGroup(jPanelInscripcionLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
                                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel48)
-                                    .addComponent(jLabel47))
+                                    .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel48)
+                                            .addComponent(jLabel47)))
+                                    .addGroup(jPanelInscripcionLayout.createSequentialGroup()
+                                        .addGap(128, 128, 128)
+                                        .addComponent(jButton1)))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                         .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -787,7 +819,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel46)
                             .addComponent(jTextField_TelTra_Madre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
             .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -822,7 +854,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel48)
                     .addComponent(jTextField_TelTra_Tutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                .addGap(51, 51, 51)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton_Inscribir)
                 .addGap(96, 96, 96))
         );
@@ -1213,7 +1247,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanelCard, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFondoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1266,7 +1300,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         model = (DefaultTableModel) jTablePago.getModel();
         ManagerAlumno ma = ManagerAlumno.getManager();
         listaAlumnos = ma.obtenerTodosAlumno();
-        cargarTabla();
+        String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
+        int c = jComboBoxSalaPago.getSelectedIndex();
+        int d = jComboBoxTurnoPago.getSelectedIndex();
+        cargarTabla(a,b,c,d);
         jTextField_NomyAp_PagoIns.setEditable(false);
         jTextField_Sala_PagoIns.setEditable(false);
         jTextField_Turno_PagoIns.setEditable(false);
@@ -1687,19 +1725,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonAgregarPadreStateChanged
 
     private void jTextFieldBusqueda_PagoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBusqueda_PagoKeyReleased
-        cargarTabla();
+        String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
+        int c = jComboBoxSalaPago.getSelectedIndex();
+        int d = jComboBoxTurnoPago.getSelectedIndex();
+        cargarTabla(a,b,c,d);
     }//GEN-LAST:event_jTextFieldBusqueda_PagoKeyReleased
 
     private void jComboBoxSalaPagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxSalaPagoItemStateChanged
-        cargarTabla();
+        String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
+        int c = jComboBoxSalaPago.getSelectedIndex();
+        int d = jComboBoxTurnoPago.getSelectedIndex();
+        cargarTabla(a,b,c,d);
     }//GEN-LAST:event_jComboBoxSalaPagoItemStateChanged
 
     private void jComboBoxTurnoPagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTurnoPagoItemStateChanged
-        cargarTabla();
+        String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
+        int c = jComboBoxSalaPago.getSelectedIndex();
+        int d = jComboBoxTurnoPago.getSelectedIndex();
+        cargarTabla(a,b,c,d);
     }//GEN-LAST:event_jComboBoxTurnoPagoItemStateChanged
 
     private void jComboBoxBusqueda_PagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxBusqueda_PagoItemStateChanged
-        cargarTabla();
+        String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
+        int c = jComboBoxSalaPago.getSelectedIndex();
+        int d = jComboBoxTurnoPago.getSelectedIndex();
+        cargarTabla(a,b,c,d);
     }//GEN-LAST:event_jComboBoxBusqueda_PagoItemStateChanged
 
     private void jTablePagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePagoMouseClicked
@@ -1773,6 +1827,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxTurnoPago;
     private javax.swing.JComboBox<String> jComboBoxTurno_Insc;
     private com.toedter.calendar.JDateChooser jDateChooserFechaNacimiento;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1829,6 +1884,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelMontoCuota;
     private javax.swing.JLabel jLabelTotalPagado;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelBarraSup;
     private javax.swing.JPanel jPanelCard;
     private javax.swing.JPanel jPanelCerrar;
@@ -1891,13 +1947,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private com.toedter.calendar.JYearChooser jYearChooser1;
     // End of variables declaration//GEN-END:variables
     
-    public void cargarTabla(){
-        String valorComboBox1 = jComboBoxBusqueda_Pago.getSelectedItem().toString();
-        String buscado = jTextFieldBusqueda_Pago.getText().toUpperCase();
+    public void cargarTabla(String valorComboBox1, String buscado, int salaS, int turnoS){
+        valorComboBox1 = jComboBoxBusqueda_Pago.getSelectedItem().toString();
+        buscado = jTextFieldBusqueda_Pago.getText().toUpperCase();
         model.setRowCount(0);
-        switch(jComboBoxSalaPago.getSelectedIndex()){
+        switch(salaS){
             case 0:
-                    switch(jComboBoxTurnoPago.getSelectedIndex()){
+                    switch(turnoS){
                         case 0:
                             if(buscado.equals("")){
                                 Iterator i = listaAlumnos.listIterator();
@@ -1999,7 +2055,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     }
                     break;
             case 1:
-                    switch(jComboBoxTurnoPago.getSelectedIndex()){
+                    switch(turnoS){
                         case 0:
                             if(buscado.equals("")){
                                 Iterator i = listaAlumnos.listIterator();
@@ -2109,7 +2165,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     }
                     break;
             case 2:
-                    switch(jComboBoxTurnoPago.getSelectedIndex()){
+                    switch(turnoS){
                         case 0:
                             if(buscado.equals("")){
                                 Iterator i = listaAlumnos.listIterator();
@@ -2219,7 +2275,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     }
                     break;
             case 3:
-                    switch(jComboBoxTurnoPago.getSelectedIndex()){
+                    switch(turnoS){
                         case 0:    
                             if(buscado.equals("")){
                                 Iterator i = listaAlumnos.listIterator();

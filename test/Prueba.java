@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -81,7 +82,7 @@ public class Prueba extends javax.swing.JFrame {
         p.setVisible(true);
         Connection c = ConexionBD.getConnection();
         Statement s = c.createStatement();
-        ResultSet rs = s.executeQuery("SELECT * FROM VALORES");
+        ResultSet rs = s.executeQuery("SELECT * FROM PAGO");
         DefaultTableModel dtm = new DefaultTableModel();
         p.jTableA.setModel(dtm);
         ResultSetMetaData rsMd = rs.getMetaData();

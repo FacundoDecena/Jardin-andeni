@@ -1,10 +1,11 @@
 package ClasesBase;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 
 public class Pago {
-    private Calendar fecha;
+    private Date fecha;
     private String tipoPago;
     private String periodo;
     private int cuotas;
@@ -13,7 +14,7 @@ public class Pago {
     private int idPago;
     private Set<Alumno> alumnos;
 
-    public Pago(Calendar fecha, String tipoPago, String periodo, int cuotas ,float montoPagado, float montoTotal, int idPago, Set<Alumno> alumnos) {
+    public Pago(Date fecha, String tipoPago, String periodo, int cuotas ,float montoPagado, float montoTotal, int idPago, Set<Alumno> alumnos) {
         this.fecha = fecha;
         this.tipoPago = tipoPago;
         this.periodo = periodo;
@@ -27,11 +28,11 @@ public class Pago {
     public Pago() {
     }
 
-    public Calendar getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(Calendar fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 

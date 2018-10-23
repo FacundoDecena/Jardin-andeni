@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Tue Oct 23 11:17:46 ART 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0166-a149-e5b3-000006329008 
-on database directory C:\Users\Facu SSD\Desktop\Jardin-andeni-master\JardinÑandeni with class loader sun.misc.Launcher$AppClassLoader@7852e922 
-Loaded from file:/C:/Users/Facu%20SSD/Desktop/Jardin-andeni-master/derby.jar
+Tue Oct 23 11:11:20 ART 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0166-a143-ffc5-0000098b3c48 
+on database directory C:\Users\Maxi\Desktop\Jardin-andeni\JardinÑandeni with class loader sun.misc.Launcher$AppClassLoader@7852e922 
+Loaded from file:/C:/Users/Maxi/Desktop/Jardin-andeni/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_144-b01
 user.dir=C:\Users\Facu SSD\Desktop\Jardin-andeni-master

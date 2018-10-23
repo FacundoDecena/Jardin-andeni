@@ -55,7 +55,7 @@ public interface DAO{
     //public Docente obtenerDocente(int dni);
     //public Falta obtenerFalta(int idRA,Fecha fecha);
     //public Licencia obtenerLicencia(int idLicencia);
-    //public Pago obtenerPago(int idPago);
+    public Pago obtenerPago(int idPago);
     //public Persona obtenerPersona(int dni);
     //public RegistroAsistencia obtenerRegistroAsistencia(int idRA);
     //public Retiro obtenerRetiro(int idAsistencia);
@@ -79,6 +79,8 @@ public interface DAO{
     
     //Otros
     public void agregarAñoLectivo(int dni, int idSala, int añoLectivo);
+    public float obtenerValorInscripcion();
+    public int obtenerMaximoIdPago();
     
     
     

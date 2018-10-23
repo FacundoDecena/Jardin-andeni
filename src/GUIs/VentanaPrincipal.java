@@ -977,11 +977,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel38.setText("Total Pagado");
 
-        jLabel39.setText("Monto a pagar");
+        jLabel39.setText("Valor total");
 
-        jLabel40.setText("Monto de la cuota");
+        jLabel40.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel40.setText("Monto a pagar");
 
         jSpinner_Cuotas_PagoIns.setModel(new javax.swing.SpinnerNumberModel(1, 1, 4, 1));
+        jSpinner_Cuotas_PagoIns.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinner_Cuotas_PagoInsStateChanged(evt);
+            }
+        });
 
         jLabel49.setText("Ciclo Lectivo");
 
@@ -993,7 +999,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabelMontoCuota.setText("jLabel53");
 
-        jButtonRegistrarPago.setText("jButton2");
+        jButtonRegistrarPago.setText("Registrar pago");
 
         javax.swing.GroupLayout jPanelPagpInscLayout = new javax.swing.GroupLayout(jPanelPagpInsc);
         jPanelPagpInsc.setLayout(jPanelPagpInscLayout);
@@ -1027,10 +1033,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabelMontoCuota)
                             .addComponent(jLabelMontoAPagar)
                             .addComponent(jLabelTotalPagado)
-                            .addComponent(jSpinner_Cuotas_PagoIns, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonRegistrarPago))
-                        .addGap(141, 141, 141)))
+                            .addComponent(jSpinner_Cuotas_PagoIns, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(156, 156, 156)))
                 .addContainerGap(64, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPagpInscLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonRegistrarPago)
+                .addGap(157, 157, 157))
         );
         jPanelPagpInscLayout.setVerticalGroup(
             jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1067,9 +1076,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel40)
                     .addComponent(jLabelMontoCuota))
-                .addGap(46, 46, 46)
+                .addGap(41, 41, 41)
                 .addComponent(jButtonRegistrarPago)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
 
         jPanelTipoPago.add(jPanelPagpInsc, "pagoInscripcion");
@@ -1851,18 +1860,36 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String salaFila = String.valueOf(model.getValueAt(jTablePago.getSelectedRow(),2));
         String turnoFila = String.valueOf(model.getValueAt(jTablePago.getSelectedRow(),3));
         Iterator i = listaAlumnos.iterator();
+        Set<Pago> pagos;  
         while(i.hasNext()){
             Alumno a = (Alumno) i.next();
             if(dniFila.equals(String.valueOf(a.getDni()))){
                 jTextField_NomyAp_PagoIns.setText(apellidoFila);
                 jTextField_Sala_PagoIns.setText(salaFila);
                 jTextField_Turno_PagoIns.setText(turnoFila);
-                jLabelMontoAPagar.setText("$ 58,50");
-                jLabelMontoCuota.setText("$73,80");
-                jLabelTotalPagado.setText("$90,66");
+                pagos = a.getPagos();
                 break;
             }
         }
+        ManagerPago.getManager().obtenerValorInscripcion();
+        jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion())+"0");
+        int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
+            switch(valorSpinner){
+                case 1:
+                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion())+"0");
+                    break;
+                case 2:
+                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/2)+"0");
+                    break;
+                case 3:
+                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/3)+"0");
+                    break;
+                case 4:
+                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/4)+"0");
+                    break;
+
+            }
+        jLabelTotalPagado.setText("$ 0.00");
     }//GEN-LAST:event_jTablePagoMouseClicked
 
     private void jButtonBuscarAlumBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarAlumBDActionPerformed
@@ -1971,6 +1998,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jTableAlumnosDialogMouseClicked
+    private void jSpinner_Cuotas_PagoInsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner_Cuotas_PagoInsStateChanged
+        if(!jTextField_NomyAp_PagoIns.getText().isEmpty()){
+            int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
+            switch(valorSpinner){
+                case 1:
+                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion())+"0");
+                    break;
+                case 2:
+                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/2)+"0");
+                    break;
+                case 3:
+                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/3)+"0");
+                    break;
+                case 4:
+                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/4)+"0");
+                    break;
+
+            }
+        }
+        
+        
+    }//GEN-LAST:event_jSpinner_Cuotas_PagoInsStateChanged
 
 
     /**

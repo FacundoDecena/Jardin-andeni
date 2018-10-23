@@ -1225,10 +1225,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jButton_InscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_InscribirActionPerformed
         //Variables para controles de la primer columna
-        String lugarNacimiento = "", domicilio = "", otrosDatos = "", apellidoYNombre;
-        Date fechaDeNacimiento = null;
+        String lugarNacimiento, domicilio, otrosDatos, apellidoYNombre;
+        Date fechaDeNacimiento;
         long telefono = 0;
-        int dni = 0; 
+        int dni; 
         boolean controlMedico, vacunas, controlNatacion, traeMateriales, error = false;
         Set<Alumno> hermanos = null;
         Set<Tutor> tutores = null;
@@ -1236,7 +1236,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Map<Integer, Sala> salas = new HashMap();
         Set<RegistroAsistencia> ra = null;
         apellidoYNombre = jTextField_ApyNom.getText();
-        Sala sala = null;
+        Sala sala;
         int salaEdad, salaTurno, idSala;
         ManagerAlumno mngAlumno;
         ManagerTutor mngTutor = ManagerTutor.GetManager();
@@ -1443,6 +1443,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new VentanaPrincipal().setVisible(true);
             }

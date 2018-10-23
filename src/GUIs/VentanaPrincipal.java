@@ -16,10 +16,12 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -1300,15 +1302,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jButton_InscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_InscribirActionPerformed
         //Variables para controles de la primer columna
         String lugarNacimiento="", domicilio="", otrosDatos="", apellidoYNombre="";
-        Date fechaDeNacimiento = null;
+        Date fechaDeNacimiento = new Date();
         long telefono = -1;
         int dni = -1; 
         boolean controlMedico, vacunas, controlNatacion, traeMateriales, error = false;
-        Set<Alumno> hermanos = null;
-        Set<Tutor> tutores = null;
-        Set<Pago> pagos = null;
+        Set<Alumno> hermanos = new TreeSet();
+        Set<Tutor> tutores = new HashSet();
+        Set<Pago> pagos = new TreeSet();
         Map<Integer, Sala> salas = new HashMap();
-        Set<RegistroAsistencia> ra = null;
+        Set<RegistroAsistencia> ra = new TreeSet();
         apellidoYNombre = jTextField_ApyNom.getText();
         Sala sala;
         int salaEdad, salaTurno, idSala;
@@ -1381,11 +1383,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         controlNatacion = jCheckBoxNatacion.isSelected();
         //Variables para control del resto de columnas
         //Primer paso: Padre
-        String ocupacion = "", tipoDniT = "", relacion = "", apellidoYNombreT = "";
+        String ocupacion = "", tipoDniT = "", relacion = "Padre", apellidoYNombreT = "";
         int dniT = 0;
         long telefonoPersonal = 0, telefonoTrabajo = 0;
-        Set<Alumno> atutorados = null;
-        Set<Retiro> retiros = null;
+        Set<Alumno> atutorados = new TreeSet();
+        Set<Retiro> retiros = new TreeSet();
         
         if(!error){
             apellidoYNombreT = jTextField_ApyNom_Padre.getText();
@@ -1438,7 +1440,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
         //Segundo paso: Madre
-        ocupacion = ""; tipoDniT = ""; relacion = "";
+        ocupacion = ""; tipoDniT = ""; relacion = "Madre";
         apellidoYNombreT = "";
         dniT = 0;
         telefonoPersonal = 0; telefonoTrabajo = 0;
@@ -1495,7 +1497,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         //Paso 3 solo si esta selecionado incluir tutor que no sean los padres
         if(!error && jRadioButtonAgregarTutor.isSelected()){
-            ocupacion = ""; tipoDniT = ""; relacion = "";
+            ocupacion = ""; tipoDniT = ""; relacion = "Tutor";
             apellidoYNombreT = "";
             dniT = 0;
             telefonoPersonal = 0; telefonoTrabajo = 0;
@@ -1550,13 +1552,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     error = true;
                 }
             }
-            if(!error){
-                alumno = new Alumno(fechaDeNacimiento, lugarNacimiento, domicilio, telefono, controlMedico, vacunas, controlNatacion, traeMateriales, otrosDatos, hermanos, tutores, pagos, salas, ra, dni, apellidoYNombre);
-                System.out.println("Inscripto");
-                
-            }
-                
+              
         }
+        if(!error){
+                alumno = new Alumno(fechaDeNacimiento, lugarNacimiento, domicilio, telefono, controlMedico, vacunas, controlNatacion, traeMateriales, otrosDatos, hermanos, tutores, pagos, salas, ra, dni, apellidoYNombre);
+                
+                System.out.println("Inscripto");
+            }
     }//GEN-LAST:event_jButton_InscribirActionPerformed
 
     private void jDateChooserFechaNacimientoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserFechaNacimientoPropertyChange

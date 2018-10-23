@@ -189,6 +189,59 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jComboBoxSalaPago = new javax.swing.JComboBox<>();
         jComboBoxTurnoPago = new javax.swing.JComboBox<>();
         jPanelDatosAlumnos = new javax.swing.JPanel();
+        jPanelFondoDatosAlumnos = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel54 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableDatosAlumnos = new javax.swing.JTable();
+        jLabel55 = new javax.swing.JLabel();
+        jLabel56 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        jLabel58 = new javax.swing.JLabel();
+        jLabel59 = new javax.swing.JLabel();
+        jLabel60 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
+        jLabel63 = new javax.swing.JLabel();
+        jLabel64 = new javax.swing.JLabel();
+        jLabel65 = new javax.swing.JLabel();
+        jLabel66 = new javax.swing.JLabel();
+        jLabel67 = new javax.swing.JLabel();
+        jLabel68 = new javax.swing.JLabel();
+        jLabel69 = new javax.swing.JLabel();
+        jLabel70 = new javax.swing.JLabel();
+        jLabel71 = new javax.swing.JLabel();
+        jLabel72 = new javax.swing.JLabel();
+        jLabel73 = new javax.swing.JLabel();
+        jLabel74 = new javax.swing.JLabel();
+        jLabel75 = new javax.swing.JLabel();
+        jLabel76 = new javax.swing.JLabel();
+        jLabel_TelefonoEmergencia = new javax.swing.JLabel();
+        jLabel_Domicilio = new javax.swing.JLabel();
+        jLabel_Edad = new javax.swing.JLabel();
+        jLabel_Dni = new javax.swing.JLabel();
+        jLabel_LugarNacimiento = new javax.swing.JLabel();
+        jLabel_FechaNacimiento = new javax.swing.JLabel();
+        jLabel_NombreYApellido = new javax.swing.JLabel();
+        jLabel_Sala = new javax.swing.JLabel();
+        jLabel_OtrosDatos = new javax.swing.JLabel();
+        jLabel_TraeMateriales = new javax.swing.JLabel();
+        jLabel_ControlMedico = new javax.swing.JLabel();
+        jLabel_Vacunas = new javax.swing.JLabel();
+        jLabel_ControlNatacion = new javax.swing.JLabel();
+        jLabel_Padre = new javax.swing.JLabel();
+        jLabel_TelefonoPersonalPadre = new javax.swing.JLabel();
+        jLabel_TelefonoTrabajoPadre = new javax.swing.JLabel();
+        jLabel_Madre = new javax.swing.JLabel();
+        jLabel_TelefonoPersonalMadre = new javax.swing.JLabel();
+        jLabel_TelefonoTrabajoMadre = new javax.swing.JLabel();
+        jLabel_Tutor = new javax.swing.JLabel();
+        jLabel_TelefonoPersonalTutor = new javax.swing.JLabel();
+        jLabel_TelefonoTrabajoTutor = new javax.swing.JLabel();
         jPanelBarraSup = new javax.swing.JPanel();
         jPanelCerrar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -339,7 +392,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelInterseccion.setLayout(jPanelInterseccionLayout);
         jPanelInterseccionLayout.setHorizontalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 161, Short.MAX_VALUE)
         );
         jPanelInterseccionLayout.setVerticalGroup(
             jPanelInterseccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1254,15 +1307,330 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanelCard.add(jPanelPago, "pago");
 
+        jLabel54.setText("Buscar Alumno");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sala", "3 años", "4 años", "5 años" }));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turno", "Mañana", "Tarde" }));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel54)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(143, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel54)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+
+        jTableDatosAlumnos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Apellido y Nombre", "DNI", "Sala", "Turno"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableDatosAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableDatosAlumnosMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jTableDatosAlumnos);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane4)
+                .addGap(0, 0, 0))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4)
+        );
+
+        jLabel55.setText("Sala");
+
+        jLabel56.setText("Apellido y nombre");
+
+        jLabel57.setText("Fecha de Nacimiento");
+
+        jLabel58.setText("Lugar de Nacimiento");
+
+        jLabel59.setText("DNI");
+
+        jLabel60.setText("Edad");
+
+        jLabel61.setText("Domicilio");
+
+        jLabel62.setText("Telefono de emergencia");
+
+        jLabel63.setText("Otros datos");
+
+        jLabel64.setText("Trae Materiales");
+
+        jLabel65.setText("Controles Médicos");
+
+        jLabel66.setText("Vacunas");
+
+        jLabel67.setText("Control Natacion");
+
+        jLabel68.setText("Padre");
+
+        jLabel69.setText("Telefono Personal");
+
+        jLabel70.setText("Telefono Trabajo");
+
+        jLabel71.setText("Madre");
+
+        jLabel72.setText("Telefono Personal");
+
+        jLabel73.setText("Telefono Trabajo");
+
+        jLabel74.setText("Otro tutor");
+
+        jLabel75.setText("Telefono Personal");
+
+        jLabel76.setText("Telefono Trabajo");
+
+        jLabel_TelefonoEmergencia.setText("jLabel77");
+
+        jLabel_Domicilio.setText("jLabel77");
+
+        jLabel_Edad.setText("jLabel77");
+
+        jLabel_Dni.setText("jLabel77");
+
+        jLabel_LugarNacimiento.setText("jLabel77");
+
+        jLabel_FechaNacimiento.setText("jLabel77");
+
+        jLabel_NombreYApellido.setText("jLabel77");
+
+        jLabel_Sala.setText("jLabel77");
+
+        jLabel_OtrosDatos.setText("jLabel77");
+
+        jLabel_TraeMateriales.setText("jLabel77");
+
+        jLabel_ControlMedico.setText("jLabel77");
+
+        jLabel_Vacunas.setText("jLabel77");
+
+        jLabel_ControlNatacion.setText("jLabel77");
+
+        jLabel_Padre.setText("jLabel77");
+
+        jLabel_TelefonoPersonalPadre.setText("jLabel77");
+
+        jLabel_TelefonoTrabajoPadre.setText("jLabel77");
+
+        jLabel_Madre.setText("jLabel77");
+
+        jLabel_TelefonoPersonalMadre.setText("jLabel77");
+
+        jLabel_TelefonoTrabajoMadre.setText("jLabel77");
+
+        jLabel_Tutor.setText("jLabel77");
+
+        jLabel_TelefonoPersonalTutor.setText("jLabel77");
+
+        jLabel_TelefonoTrabajoTutor.setText("jLabel77");
+
+        javax.swing.GroupLayout jPanelFondoDatosAlumnosLayout = new javax.swing.GroupLayout(jPanelFondoDatosAlumnos);
+        jPanelFondoDatosAlumnos.setLayout(jPanelFondoDatosAlumnosLayout);
+        jPanelFondoDatosAlumnosLayout.setHorizontalGroup(
+            jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelFondoDatosAlumnosLayout.createSequentialGroup()
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel62)
+                    .addComponent(jLabel61)
+                    .addComponent(jLabel60)
+                    .addComponent(jLabel59)
+                    .addComponent(jLabel58)
+                    .addComponent(jLabel57)
+                    .addComponent(jLabel56)
+                    .addComponent(jLabel55)
+                    .addComponent(jLabel63)
+                    .addComponent(jLabel64)
+                    .addComponent(jLabel65)
+                    .addComponent(jLabel66)
+                    .addComponent(jLabel67)
+                    .addComponent(jLabel68)
+                    .addComponent(jLabel69)
+                    .addComponent(jLabel70)
+                    .addComponent(jLabel71)
+                    .addComponent(jLabel72)
+                    .addComponent(jLabel73)
+                    .addComponent(jLabel74)
+                    .addComponent(jLabel75)
+                    .addComponent(jLabel76))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_TelefonoTrabajoTutor)
+                    .addComponent(jLabel_TelefonoPersonalTutor)
+                    .addComponent(jLabel_Tutor)
+                    .addComponent(jLabel_TelefonoTrabajoMadre)
+                    .addComponent(jLabel_TelefonoPersonalMadre)
+                    .addComponent(jLabel_Madre)
+                    .addComponent(jLabel_TelefonoTrabajoPadre)
+                    .addComponent(jLabel_TelefonoPersonalPadre)
+                    .addComponent(jLabel_Padre)
+                    .addComponent(jLabel_ControlNatacion)
+                    .addComponent(jLabel_Vacunas)
+                    .addComponent(jLabel_ControlMedico)
+                    .addComponent(jLabel_TraeMateriales)
+                    .addComponent(jLabel_OtrosDatos)
+                    .addComponent(jLabel_Sala)
+                    .addComponent(jLabel_NombreYApellido)
+                    .addComponent(jLabel_FechaNacimiento)
+                    .addComponent(jLabel_LugarNacimiento)
+                    .addComponent(jLabel_Dni)
+                    .addComponent(jLabel_Edad)
+                    .addComponent(jLabel_Domicilio)
+                    .addComponent(jLabel_TelefonoEmergencia))
+                .addGap(0, 374, Short.MAX_VALUE))
+        );
+        jPanelFondoDatosAlumnosLayout.setVerticalGroup(
+            jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelFondoDatosAlumnosLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanelFondoDatosAlumnosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel55)
+                    .addComponent(jLabel_Sala))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel56)
+                    .addComponent(jLabel_NombreYApellido))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel57)
+                    .addComponent(jLabel_FechaNacimiento))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel58)
+                    .addComponent(jLabel_LugarNacimiento))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel59)
+                    .addComponent(jLabel_Dni))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel60)
+                    .addComponent(jLabel_Edad))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel61)
+                    .addComponent(jLabel_Domicilio))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel62)
+                    .addComponent(jLabel_TelefonoEmergencia))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel63)
+                    .addComponent(jLabel_OtrosDatos))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel64)
+                    .addComponent(jLabel_TraeMateriales))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel65)
+                    .addComponent(jLabel_ControlMedico))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel66)
+                    .addComponent(jLabel_Vacunas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel67)
+                    .addComponent(jLabel_ControlNatacion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel68)
+                    .addComponent(jLabel_Padre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel69)
+                    .addComponent(jLabel_TelefonoPersonalPadre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel70)
+                    .addComponent(jLabel_TelefonoTrabajoPadre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel71)
+                    .addComponent(jLabel_Madre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel72)
+                    .addComponent(jLabel_TelefonoPersonalMadre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel73)
+                    .addComponent(jLabel_TelefonoTrabajoMadre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel74)
+                    .addComponent(jLabel_Tutor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel75)
+                    .addComponent(jLabel_TelefonoPersonalTutor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel76)
+                    .addComponent(jLabel_TelefonoTrabajoTutor))
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanelDatosAlumnosLayout = new javax.swing.GroupLayout(jPanelDatosAlumnos);
         jPanelDatosAlumnos.setLayout(jPanelDatosAlumnosLayout);
         jPanelDatosAlumnosLayout.setHorizontalGroup(
             jPanelDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1214, Short.MAX_VALUE)
+            .addGroup(jPanelDatosAlumnosLayout.createSequentialGroup()
+                .addComponent(jPanelFondoDatosAlumnos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelDatosAlumnosLayout.setVerticalGroup(
             jPanelDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 601, Short.MAX_VALUE)
+            .addComponent(jPanelFondoDatosAlumnos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanelCard.add(jPanelDatosAlumnos, "datosAlumnos");
@@ -1369,7 +1737,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanelCard, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFondoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1497,6 +1865,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jPanelOpDatosAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpDatosAlumnosMouseClicked
         CardLayout card = (CardLayout)jPanelCard.getLayout();
         card.show(jPanelCard, "datosAlumnos");
+        borrarLabelsDatosAlumno();
+        model = (DefaultTableModel) jTableDatosAlumnos.getModel();
+        ManagerAlumno ma = ManagerAlumno.getManager();
+        listaAlumnos = ma.obtenerTodosAlumno();
+        String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
+        int c = jComboBoxSalaPago.getSelectedIndex();
+        int d = jComboBoxTurnoPago.getSelectedIndex();
+        cargarTabla(a,b,c,d);
+        
     }//GEN-LAST:event_jPanelOpDatosAlumnosMouseClicked
 
     private void jPanelOpDatosAlumnosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpDatosAlumnosMouseExited
@@ -2165,6 +2543,87 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null,"Pago realizado correctamente.", "Exito",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonRegistrarPagoActionPerformed
 
+    private void jTableDatosAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDatosAlumnosMouseClicked
+        String dniFila = String.valueOf(model.getValueAt(jTableDatosAlumnos.getSelectedRow(),1));
+        Set<Tutor> tutors;
+        Map<Integer, Sala> salas;
+        Sala sala;
+        int salaId;
+        Calendar cal= Calendar.getInstance();
+        ManagerAlumno ma = ManagerAlumno.getManager();
+        listaAlumnos = ma.obtenerTodosAlumno();
+        Iterator j;
+        Iterator i = listaAlumnos.iterator();
+        while(i.hasNext()){
+            Alumno a = (Alumno) i.next();
+            if(dniFila.equals(String.valueOf(a.getDni()))){
+                jLabel_NombreYApellido.setText(a.getApellidoYNombre());
+                jLabel_FechaNacimiento.setText(String.valueOf(a.getFechaDeNacimiento()));
+                jLabel_LugarNacimiento.setText(a.getLugarNacimiento());
+                jLabel_Dni.setText(String.valueOf(a.getDni()));
+                jLabel_Edad.setText(a.getEdad(a.getFechaDeNacimiento()));
+                jLabel_Domicilio.setText(a.getDomicilio());
+                jLabel_TelefonoEmergencia.setText(String.valueOf(a.getTelefono()));
+                jLabel_OtrosDatos.setText(a.getOtrosDatos());
+                if(a.isControlMedico())
+                    jLabel_ControlMedico.setText("Sí");
+                else
+                    jLabel_ControlMedico.setText("No");
+                if(a.isControlMedico())
+                    jLabel_ControlNatacion.setText("Sí");
+                else
+                    jLabel_ControlNatacion.setText("No");
+                if(a.isControlMedico())
+                    jLabel_Vacunas.setText("Sí");
+                else
+                    jLabel_Vacunas.setText("No");
+                if(a.isControlMedico())
+                    jLabel_TraeMateriales.setText("Sí");
+                else
+                    jLabel_TraeMateriales.setText("No");
+                
+                salas = a.getSalas();
+                sala = salas.get(cal.get(Calendar.YEAR));
+                salaId = sala.getIdSala();
+                switch(salaId){
+                    case 1: jLabel_Sala.setText("3 Turno Mañana");
+                    case 2: jLabel_Sala.setText("3 Turno Tarde");
+                    case 3: jLabel_Sala.setText("4 Turno Mañana");
+                    case 4: jLabel_Sala.setText("4 Turno Tarde");
+                    case 5: jLabel_Sala.setText("5 Turno Mañana");
+                    case 6: jLabel_Sala.setText("5 Turno Tarde");
+                }
+                tutors = a.getTutores();
+                if(tutors == null)
+                    tutors = new HashSet();
+                j = tutors.iterator();
+                while(j.hasNext()){
+                    Tutor t = (Tutor) j.next();
+                    if(t.getRelacion().equals("Padre")){
+                        jLabel_Padre.setText(t.getApellidoYNombre());
+                        jLabel_TelefonoPersonalPadre.setText(String.valueOf(t.getTelefonoPersonal()));
+                        jLabel_TelefonoTrabajoPadre.setText(String.valueOf(t.getTelefonoTrabajo()));
+                        continue;
+                    }
+                    if(t.getRelacion().equals("Madre")){
+                        jLabel_Madre.setText(t.getApellidoYNombre());
+                        jLabel_TelefonoPersonalMadre.setText(String.valueOf(t.getTelefonoPersonal()));
+                        jLabel_TelefonoTrabajoMadre.setText(String.valueOf(t.getTelefonoTrabajo()));
+                        continue;
+                    }
+                    else{
+                        jLabel_Tutor.setText(t.getApellidoYNombre());
+                        jLabel_TelefonoPersonalTutor.setText(String.valueOf(t.getTelefonoPersonal()));
+                        jLabel_TelefonoTrabajoTutor.setText(String.valueOf(t.getTelefonoTrabajo()));
+                        continue;
+                    }
+                }
+                
+                break;
+            }
+        }
+    }//GEN-LAST:event_jTableDatosAlumnosMouseClicked
+
 
     /**
      * @param args the command line arguments
@@ -2211,6 +2670,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxNatacion;
     private javax.swing.JCheckBox jCheckBoxTraeMateriales;
     private javax.swing.JCheckBox jCheckBoxVacunas;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBoxBusqueda_Pago;
     private javax.swing.JComboBox<String> jComboBoxSalaPago;
     private javax.swing.JComboBox<String> jComboBoxSala_Insc;
@@ -2271,14 +2732,61 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel70;
+    private javax.swing.JLabel jLabel71;
+    private javax.swing.JLabel jLabel72;
+    private javax.swing.JLabel jLabel73;
+    private javax.swing.JLabel jLabel74;
+    private javax.swing.JLabel jLabel75;
+    private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelMontoAPagar;
     private javax.swing.JLabel jLabelMontoCuota;
     private javax.swing.JLabel jLabelTotalPagado;
+    private javax.swing.JLabel jLabel_ControlMedico;
+    private javax.swing.JLabel jLabel_ControlNatacion;
+    private javax.swing.JLabel jLabel_Dni;
+    private javax.swing.JLabel jLabel_Domicilio;
+    private javax.swing.JLabel jLabel_Edad;
+    private javax.swing.JLabel jLabel_FechaNacimiento;
+    private javax.swing.JLabel jLabel_LugarNacimiento;
+    private javax.swing.JLabel jLabel_Madre;
+    private javax.swing.JLabel jLabel_NombreYApellido;
+    private javax.swing.JLabel jLabel_OtrosDatos;
+    private javax.swing.JLabel jLabel_Padre;
+    private javax.swing.JLabel jLabel_Sala;
+    private javax.swing.JLabel jLabel_TelefonoEmergencia;
+    private javax.swing.JLabel jLabel_TelefonoPersonalMadre;
+    private javax.swing.JLabel jLabel_TelefonoPersonalPadre;
+    private javax.swing.JLabel jLabel_TelefonoPersonalTutor;
+    private javax.swing.JLabel jLabel_TelefonoTrabajoMadre;
+    private javax.swing.JLabel jLabel_TelefonoTrabajoPadre;
+    private javax.swing.JLabel jLabel_TelefonoTrabajoTutor;
+    private javax.swing.JLabel jLabel_TraeMateriales;
+    private javax.swing.JLabel jLabel_Tutor;
+    private javax.swing.JLabel jLabel_Vacunas;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelBarraSup;
     private javax.swing.JPanel jPanelCard;
     private javax.swing.JPanel jPanelCerrar;
@@ -2286,6 +2794,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelDatosAlumnos;
     private javax.swing.JPanel jPanelDetalles;
     private javax.swing.JPanel jPanelFondo;
+    private javax.swing.JPanel jPanelFondoDatosAlumnos;
     private javax.swing.JPanel jPanelFondoDialog;
     private javax.swing.JPanel jPanelInscripcion;
     private javax.swing.JPanel jPanelInterseccion;
@@ -2305,6 +2814,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -2312,8 +2822,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSpinner jSpinner_Cuotas_PagoIns;
     private javax.swing.JTable jTableAlumnosDialog;
+    private javax.swing.JTable jTableDatosAlumnos;
     private javax.swing.JTable jTablePago;
     private javax.swing.JTextArea jTextAreaOtrosDatos;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldBusqueda_Pago;
     private javax.swing.JTextField jTextField_ApyNom;
     private javax.swing.JTextField jTextField_ApyNom_Madre;
@@ -2346,6 +2858,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_Turno_PagoIns;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     // End of variables declaration//GEN-END:variables
+    
+    private void borrarLabelsDatosAlumno(){
+        jLabel_ControlMedico.setText("");
+        jLabel_ControlNatacion.setText("");
+        jLabel_Dni.setText("");
+        jLabel_Domicilio.setText("");
+        jLabel_Edad.setText("");
+        jLabel_FechaNacimiento.setText("");
+        jLabel_LugarNacimiento.setText("");
+        jLabel_Madre.setText("");
+        jLabel_NombreYApellido.setText("");
+        jLabel_OtrosDatos.setText("");
+        jLabel_Padre.setText("");
+        jLabel_Sala.setText("");
+        jLabel_TelefonoEmergencia.setText("");
+        jLabel_TelefonoPersonalMadre.setText("");
+        jLabel_TelefonoPersonalPadre.setText("");
+        jLabel_TelefonoPersonalTutor.setText("");
+        jLabel_TelefonoTrabajoMadre.setText("");
+        jLabel_TelefonoTrabajoPadre.setText("");
+        jLabel_TelefonoTrabajoTutor .setText("");
+        jLabel_TraeMateriales .setText("");
+        jLabel_Tutor.setText("");
+        jLabel_Vacunas .setText("");
+    }
     
     private void borrarTextFieldInscripcion(){
         jTextField_ApyNom.setEnabled(true);

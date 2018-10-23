@@ -225,8 +225,14 @@ public class ConexionBD {
         s.close();
     }
     
-    /*public static void main(String[] args) throws SQLException{
+    public static void main(String[] args) throws SQLException{
         Connection c = ConexionBD.getConnection();
         Statement s = c.createStatement();
-    }*/
+        /*s.execute("INSERT INTO ES_ALUMNO VALUES(59675123,3,2017)");
+        s.execute("INSERT INTO ES_ALUMNO VALUES(59675123,1,2016)");
+        s.execute("INSERT INTO ES_ALUMNO VALUES(63756456,1,2017)");
+        s.execute("INSERT INTO ES_ALUMNO VALUES(60896213,2,2017)");
+        s.execute("INSERT INTO ES_ALUMNO VALUES(61233664,6,2017)");
+        s.execute("INSERT INTO ES_ALUMNO VALUES(61233664,4,2016)");*/
+    }
 }

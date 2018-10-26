@@ -1,5 +1,6 @@
 package ClasesBase;
 
+import java.util.Map;
 import java.util.Set;
 
 public class Sala {
@@ -7,8 +8,8 @@ public class Sala {
     private String turno;
     private String color;
     private int idSala;
-    private Set<Docente> docentes;
-    private Set<Alumno> alumnos;
+    private Map<Integer,Docente> docentes;
+    private Map<Integer,Alumno> alumnos;
 
     /**
      * 
@@ -19,7 +20,7 @@ public class Sala {
      * @param docentes
      * @param alumnos 
      */
-    public Sala(int edad, String turno, String color, int idSala, Set<Docente> docentes, Set<Alumno> alumnos) {
+    public Sala(int edad, String turno, String color, int idSala, Map<Integer, Docente> docentes, Map<Integer, Alumno> alumnos) {
         this.edad = edad;
         this.turno = turno;
         this.color = color;
@@ -63,19 +64,19 @@ public class Sala {
         this.idSala = idSala;
     }
 
-    public Set<Docente> getDocentes() {
+    public Map<Integer, Docente> getDocentes() {
         return docentes;
     }
 
-    public void setDocentes(Set<Docente> docentes) {
+    public void setDocentes(Map<Integer, Docente> docentes) {
         this.docentes = docentes;
     }
 
-    public Set<Alumno> getAlumnos() {
+    public Map<Integer, Alumno> getAlumnos() {
         return alumnos;
     }
 
-    public void setAlumnos(Set<Alumno> alumnos) {
+    public void setAlumnos(Map<Integer, Alumno> alumnos) {
         this.alumnos = alumnos;
     }
     

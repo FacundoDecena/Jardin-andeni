@@ -343,7 +343,7 @@ public class ImplementacionDAO implements DAO {
             ResultSet rsSala = s.executeQuery("SELECT * FROM SALA WHERE IDSALA="+idSala);
             rsSala.next();
             sala = new Sala(rsSala.getInt("EDAD"),rsSala.getString("TURNO"),
-                                    rsSala.getString("COLOR"),rsSala.getInt("IDSALA"),new HashSet(),new HashSet());
+                                    rsSala.getString("COLOR"),rsSala.getInt("IDSALA"),new HashMap(),new HashMap());
             s.close();
             return sala;
         } catch (SQLException ex) {ex.printStackTrace();}

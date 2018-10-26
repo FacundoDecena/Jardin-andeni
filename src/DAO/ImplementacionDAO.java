@@ -178,7 +178,6 @@ public class ImplementacionDAO implements DAO {
                     +tutor.getDni()+",'"
                     +tutor.getApellidoYNombre()+"',2)");
             s.execute("INSERT INTO TUTOR VALUES('"
-                    +tutor.getTipoDni()+"',"
                     +tutor.getDni()+",'"
                     +tutor.getOcupacion()+"','"
                     +tutor.getRelacion()+"',"
@@ -325,7 +324,7 @@ public class ImplementacionDAO implements DAO {
             ResultSet rsNombre = sAux.executeQuery("SELECT APELLIDOYNOMBRE FROM PERSONA WHERE DNI="+dni);
             rsNombre.next();
             String apellidoYNombre = rsNombre.getString("APELLIDOYNOMBRE");
-            tutor = new Tutor(rsTutor.getString("OCUPACION"),rsTutor.getString("TIPODNI"),
+            tutor = new Tutor(rsTutor.getString("OCUPACION"),
                                     rsTutor.getLong("TELEFONOPERSONAL"),rsTutor.getLong("TELEFONOTRABAJO"),
                                     rsTutor.getString("RELACION"),new HashSet(),new HashSet(),dni,apellidoYNombre);
             s.close();

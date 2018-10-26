@@ -2019,7 +2019,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             if(!error){
                 try{
-                    tutor = mngTutor.nuevoTutor(ocupacion, tipoDniT, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
+                    tutor = mngTutor.nuevoTutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
                     tutores.add(tutor);
                 }
                 catch (Exception es){
@@ -2076,7 +2076,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             if(!error && jRadioButtonAgregarMadre.isSelected()){
                 try{
-                    tutor = mngTutor.nuevoTutor(ocupacion, tipoDniT, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
+                    tutor = mngTutor.nuevoTutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
                     tutores.add(tutor);
                 }
                 catch (Exception es){
@@ -2134,7 +2134,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             if(!error && jRadioButtonAgregarTutor.isSelected()){
                 try{
-                    tutor = mngTutor.nuevoTutor(ocupacion, tipoDniT, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
+                    tutor = mngTutor.nuevoTutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
                     tutores.add(tutor);
                 }
                 catch (Exception es){
@@ -2451,7 +2451,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     Tutor t = (Tutor) j.next();
                     if(t.getRelacion().equals("Padre")){
                         jTextField_ApyNom_Padre.setText(t.getApellidoYNombre());
-                        jTextField_TipoDoc_Padre.setText(t.getTipoDni());
                         jTextField_NumDoc_Padre.setText(String.valueOf(t.getDni()));
                         jTextField_Ocupacion_Padre.setText(t.getOcupacion());
                         jTextField_TelPer_Padre.setText(String.valueOf(t.getTelefonoPersonal()));
@@ -2460,7 +2459,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     }
                     if(t.getRelacion().equals("Madre")){
                         jTextField_ApyNom_Madre.setText(t.getApellidoYNombre());
-                        jTextField_TipoDoc_Madre.setText(t.getTipoDni());
                         jTextField_NumDoc_Madre.setText(String.valueOf(t.getDni()));
                         jTextField_Ocupacion_Madre.setText(t.getOcupacion());
                         jTextField_TelPer_Madre.setText(String.valueOf(t.getTelefonoPersonal()));
@@ -2469,7 +2467,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     }
                     else{
                         jTextField_ApyNom_Tutor.setText(t.getApellidoYNombre());
-                        jTextField_TipoDoc_Tutor.setText(t.getTipoDni());
                         jTextField_NumDoc_Tutor.setText(String.valueOf(t.getDni()));
                         jTextField_Relacion.setText(t.getRelacion());
                         jTextField_Ocupacion_Tutor.setText(t.getOcupacion());

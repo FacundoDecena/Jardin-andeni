@@ -31,7 +31,7 @@ public class ManagerTutor {
         return manager;
     }
 
-    public Tutor nuevoTutor (String ocupacion, String tipoDni, long telefonoPersonal, long telefonoTrabajo, String relacion, Set<Alumno> atutorados, Set<Retiro> retiros, int dni, String apellidoYNombre) throws IllegalArgumentException, Exception{
+    public Tutor nuevoTutor (String ocupacion, long telefonoPersonal, long telefonoTrabajo, String relacion, Set<Alumno> atutorados, Set<Retiro> retiros, int dni, String apellidoYNombre) throws IllegalArgumentException, Exception{
         Tutor tutor;
         
         Pattern patron = Pattern.compile("([a-zA-Z]*[ \\t\\n\\x0b\\r\\f]*)+");
@@ -41,9 +41,6 @@ public class ManagerTutor {
         if(!encaja.matches())
             throw IllegalArgumentException("Ocupacion contiene simbolos invalidos");
         
-        encaja = patron.matcher(tipoDni);
-        if(!encaja.matches())
-            throw IllegalArgumentException("tipo DNI contiene simbolos invalidos");
         
         encaja = patron.matcher(relacion);
         if(!encaja.matches())
@@ -53,7 +50,7 @@ public class ManagerTutor {
         if(!encaja.matches())
             throw IllegalArgumentException("Apellido y nombre contiene simbolos invalidos");
         
-        tutor = new Tutor(ocupacion, tipoDni, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
+        tutor = new Tutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
         
         ImplementacionDAO dao = ImplementacionDAO.getDAO();
         

@@ -49,11 +49,11 @@ public class ManagerTutor {
         encaja = patron.matcher(ocupacion);
         if(!encaja.matches())
             throw IllegalArgumentException("Apellido y nombre contiene simbolos invalidos");
-        
-        tutor = new Tutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
-        
+                
         ImplementacionDAO dao = ImplementacionDAO.getDAO();
         
+        tutor = dao.nuevoTutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
+
         dao.altaTutor(tutor);
         
         return tutor;

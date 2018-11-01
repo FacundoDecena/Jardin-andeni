@@ -35,7 +35,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
-    private DefaultTableModel model;
+    private DefaultTableModel modelAlumnos;
+    private DefaultTableModel modelCuotas;
     private List<Alumno> listaAlumnos;
     private Alumno alumnoSeleccionado;
     private Pago pagoSeleccionado;
@@ -181,7 +182,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabelMontoAPagar = new javax.swing.JLabel();
         jButtonRegistrarPago = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableCuotas = new javax.swing.JTable();
         jPanelCuota = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -1084,7 +1085,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableCuotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -1100,7 +1101,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane5.setViewportView(jTable1);
+        jScrollPane5.setViewportView(jTableCuotas);
 
         javax.swing.GroupLayout jPanelPagpInscLayout = new javax.swing.GroupLayout(jPanelPagpInsc);
         jPanelPagpInsc.setLayout(jPanelPagpInscLayout);
@@ -1810,7 +1811,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jPanelOpPagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpPagoMouseClicked
         CardLayout card = (CardLayout)jPanelCard.getLayout();
         card.show(jPanelCard, "pago");
-        model = (DefaultTableModel) jTablePago.getModel();
+        modelAlumnos = (DefaultTableModel) jTablePago.getModel();
         ManagerAlumno ma = ManagerAlumno.getManager();
         listaAlumnos = ma.obtenerTodosAlumno();
         String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
@@ -1889,7 +1890,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         CardLayout card = (CardLayout)jPanelCard.getLayout();
         card.show(jPanelCard, "datosAlumnos");
         borrarLabelsDatosAlumno();
-        model = (DefaultTableModel) jTableDatosAlumnos.getModel();
+        modelAlumnos = (DefaultTableModel) jTableDatosAlumnos.getModel();
         ManagerAlumno ma = ManagerAlumno.getManager();
         listaAlumnos = ma.obtenerTodosAlumno();
         String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
@@ -2295,10 +2296,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxBusqueda_PagoItemStateChanged
 
     private void jTablePagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePagoMouseClicked
-        String apellidoFila = String.valueOf(model.getValueAt(jTablePago.getSelectedRow(),0));
-        String dniFila = String.valueOf(model.getValueAt(jTablePago.getSelectedRow(),1));
-        String salaFila = String.valueOf(model.getValueAt(jTablePago.getSelectedRow(),2));
-        String turnoFila = String.valueOf(model.getValueAt(jTablePago.getSelectedRow(),3));
+        String apellidoFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),0));
+        String dniFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),1));
+        String salaFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),2));
+        String turnoFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),3));
+        jTextField_NomyAp_PagoIns.setText(apellidoFila);
+        jTextField_Sala_PagoIns.setText(salaFila);
+        jTextField_Turno_PagoIns.setText(turnoFila);
         jSpinner_Cuotas_PagoIns.setEnabled(true);
         jButtonRegistrarPago.setEnabled(true);
         Iterator i = listaAlumnos.iterator();
@@ -2306,86 +2310,60 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         while(i.hasNext()){
             Alumno a = (Alumno) i.next();
             if(dniFila.equals(String.valueOf(a.getDni()))){
-                jTextField_NomyAp_PagoIns.setText(apellidoFila);
-                jTextField_Sala_PagoIns.setText(salaFila);
-                jTextField_Turno_PagoIns.setText(turnoFila);
                 pagos = a.getPagos();
                 alumnoSeleccionado = a;
                 break;
             }
         }
-        
         float valorInscripcion = ManagerPago.getManager().obtenerValorInscripcion();
         int valorPeriodo = jYearChooser1.getValue();
-        if(pagos.isEmpty()){
-            nuevo=true;
-            jLabelMontoRestante.setText("$ "+String.valueOf(valorInscripcion)+"0");
-            jLabelTotalPagado.setText("$ 0.00");
-            int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
-            switch(valorSpinner){
-                case 0:
-                    jLabelMontoAPagar.setText("$ "+valorInscripcion+"0");
-                    break;
-                case 1:
-                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/2)+"0");
-                    break;
-                case 2:
-                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/3)+"0");
-                    break;
-                case 3:
-                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/4)+"0");
-                    break;
+        boolean encontroInscripcion = false;
+        i = pagos.iterator();//Nunca va a ser null
+        while(i.hasNext()){
+            Pago pago = (Pago) i.next();
+            if(Integer.parseInt(pago.getPeriodo()) == valorPeriodo && pago.getTipoPago().equals("INSCRIPCION")){
+                pagoSeleccionado = pago;
+                encontroInscripcion = true;
+                nuevo = false;
+                break;
             }
         }
-        else{
-            boolean encontroInscripcion = false;
-            i = pagos.iterator();
-            while(i.hasNext()){
-                Pago pago = (Pago) i.next();
-                if(Integer.parseInt(pago.getPeriodo()) == valorPeriodo && pago.getTipoPago().equals("INSCRIPCION")){
-                    pagoSeleccionado = pago;
-                    if(pagoSeleccionado.getMontoPagado() == pagoSeleccionado.getMontoTotal()){
-                        jButtonRegistrarPago.setEnabled(false);
-                        JOptionPane.showMessageDialog(null,"La inscripcion de "+valorPeriodo+" de este alumno ya esta pagada completamente.", "Info",JOptionPane.INFORMATION_MESSAGE);
-                        jLabelMontoAPagar.setText("-");
-                    }
-                    else{
-                    jLabelMontoAPagar.setText("$ "+(pagoSeleccionado.getMontoTotal()/pagoSeleccionado.getCuotas())+"0");
-                    }
-                    jLabelMontoRestante.setText("$ "+pagoSeleccionado.getMontoTotal()+"0");
-                    jLabelTotalPagado.setText("$ "+pagoSeleccionado.getMontoPagado()+"0");
-                    jSpinner_Cuotas_PagoIns.setValue(pagoSeleccionado.getCuotas());
-                    jSpinner_Cuotas_PagoIns.setEnabled(false);
-                    encontroInscripcion=true;
-                    nuevo=false;
-                    break;
-                }
+        if(encontroInscripcion){
+            jLabelMontoRestante.setText("$ "+pagoSeleccionado.getMontoTotal()+"0");
+            jLabelTotalPagado.setText("$ "+pagoSeleccionado.getMontoPagado()+"0");
+            jSpinner_Cuotas_PagoIns.setValue(pagoSeleccionado.getCuotas());
+            jSpinner_Cuotas_PagoIns.setEnabled(false);
+            if(pagoSeleccionado.getMontoPagado() == pagoSeleccionado.getMontoTotal()){
+                jButtonRegistrarPago.setEnabled(false);
+                JOptionPane.showMessageDialog(null,"La inscripcion de "+valorPeriodo+" de este alumno ya esta pagada completamente.", "Info",JOptionPane.INFORMATION_MESSAGE);
+                jLabelMontoAPagar.setText("-");
             }
-            if(!encontroInscripcion){
-                nuevo=true;
-               jLabelMontoRestante.setText("$ "+String.valueOf(valorInscripcion)+"0");
-                int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
-                switch(valorSpinner){
-                    case 1:
-                        jLabelMontoAPagar.setText("$ "+valorInscripcion+"0");
-                        break;
-                    case 2:
-                        jLabelMontoAPagar.setText("$ "+(valorInscripcion/2)+"0");
-                        break;
-                    case 3:
-                        jLabelMontoAPagar.setText("$ "+(valorInscripcion/3)+"0");
-                        break;
-                    case 4:
-                        jLabelMontoAPagar.setText("$ "+(valorInscripcion/4)+"0");
-                        break;
-                }
-                jLabelTotalPagado.setText("$ 0.00");
+            else
+                jLabelMontoAPagar.setText("$ "+(pagoSeleccionado.getMontoTotal()/pagoSeleccionado.getCuotas())+"0");
+        }
+        else{
+            nuevo = true;
+            jLabelMontoRestante.setText("$ "+String.valueOf(valorInscripcion)+"0");
+            int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
+            switch(valorSpinner){
+                case 1:
+                    jLabelMontoAPagar.setText("$ "+valorInscripcion+"0");
+                    break;
+                case 2:
+                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/2)+"0");
+                    break;
+                case 3:
+                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/3)+"0");
+                    break;
+                case 4:
+                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/4)+"0");
+                    break;
             }
         }   
     }//GEN-LAST:event_jTablePagoMouseClicked
 
     private void jButtonBuscarAlumBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarAlumBDActionPerformed
-        model = (DefaultTableModel) jTableAlumnosDialog.getModel();
+        modelAlumnos = (DefaultTableModel) jTableAlumnosDialog.getModel();
         ManagerAlumno ma = ManagerAlumno.getManager();
         listaAlumnos = ma.obtenerTodosAlumno();
         String a = jComboBox_TipoDialog.getSelectedItem().toString();
@@ -2447,7 +2425,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jCheckBoxTraeMateriales.setEnabled(false);
         jCheckBoxVacunas.setEnabled(false);
         
-        String dniFila = String.valueOf(model.getValueAt(jTableAlumnosDialog.getSelectedRow(),1));
+        String dniFila = String.valueOf(modelAlumnos.getValueAt(jTableAlumnosDialog.getSelectedRow(),1));
         Set<Tutor> tutors;
         Iterator j;
         Iterator i = listaAlumnos.iterator();
@@ -2501,30 +2479,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jTableAlumnosDialogMouseClicked
-    private void jSpinner_Cuotas_PagoInsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner_Cuotas_PagoInsStateChanged
-        if(!jTextField_NomyAp_PagoIns.getText().isEmpty()){
-            int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
-            switch(valorSpinner){
-                case 1:
-                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion())+"0");
-                    break;
-                case 2:
-                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/2)+"0");
-                    break;
-                case 3:
-                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/3)+"0");
-                    break;
-                case 4:
-                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/4)+"0");
-                    break;
-                default:
-                    jLabelMontoAPagar.setText("-");
-
-            }
-        }
-        
-        
-    }//GEN-LAST:event_jSpinner_Cuotas_PagoInsStateChanged
 
     private void jRadioButtonAgregarMadreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonAgregarMadreStateChanged
         if(jRadioButtonAgregarMadre.isSelected()){
@@ -2609,7 +2563,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRegistrarPagoActionPerformed
 
     private void jTableDatosAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDatosAlumnosMouseClicked
-        String dniFila = String.valueOf(model.getValueAt(jTableDatosAlumnos.getSelectedRow(),1));
+        String dniFila = String.valueOf(modelAlumnos.getValueAt(jTableDatosAlumnos.getSelectedRow(),1));
         Set<Tutor> tutors;
         Map<Integer, Sala> salas;
         Sala sala;
@@ -2697,6 +2651,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jYearChooser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jYearChooser1MouseClicked
         
     }//GEN-LAST:event_jYearChooser1MouseClicked
+
+    private void jSpinner_Cuotas_PagoInsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner_Cuotas_PagoInsStateChanged
+        if(!jTextField_NomyAp_PagoIns.getText().isEmpty()){
+            int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
+            switch(valorSpinner){
+                case 1:
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion())+"0");
+                    break;
+                case 2:
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/2)+"0");
+                    break;
+                case 3:
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/3)+"0");
+                    break;
+                case 4:
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/4)+"0");
+                    break;
+                default:
+                    jLabelMontoAPagar.setText("-");
+
+            }
+        }
+    }//GEN-LAST:event_jSpinner_Cuotas_PagoInsStateChanged
 
 
     /**
@@ -2896,8 +2873,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSpinner jSpinner_Cuotas_PagoIns;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableAlumnosDialog;
+    private javax.swing.JTable jTableCuotas;
     private javax.swing.JTable jTableDatosAlumnos;
     private javax.swing.JTable jTablePago;
     private javax.swing.JTextArea jTextAreaOtrosDatos;
@@ -3012,7 +2989,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
     
     public void cargarTabla(String valorComboBox1, String buscado, int salaS, int turnoS){
-        model.setRowCount(0);
+        modelAlumnos.setRowCount(0);
         switch(salaS){
             case 0:
                     switch(turnoS){
@@ -3022,7 +2999,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 while(i.hasNext()){
                                     Alumno a = (Alumno) i.next();
                                     int año = a.obtenerUltimoAñoLectivo();
-                                    model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
+                                    modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3033,14 +3010,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         String nombre = a.getApellidoYNombre().toUpperCase();
                                         if(nombre.contains(buscado)){
                                             int año = a.obtenerUltimoAñoLectivo();
-                                            model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
+                                            modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
                                         }
                                     }
                                     else{
                                         String dni = String.valueOf(a.getDni());
                                         if(dni.contains(buscado)){
                                             int año = a.obtenerUltimoAñoLectivo();
-                                            model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
+                                            modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
                                         } 
                                     }
                                 }
@@ -3054,7 +3031,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int año = a.obtenerUltimoAñoLectivo();
                                     String turno = a.getSalas().get(año).getTurno();
                                     if(turno.equalsIgnoreCase("Mañana"))
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
                                 }
                             }
                             else{
@@ -3067,13 +3044,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
                                             } 
                                         }
                                     }
@@ -3088,7 +3065,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int año = a.obtenerUltimoAñoLectivo();
                                     String turno = a.getSalas().get(año).getTurno();
                                     if(turno.equalsIgnoreCase("Tarde"))
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
                                 }
                             }
                             else{
@@ -3101,13 +3078,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
                                             } 
                                         }
                                     }
@@ -3126,7 +3103,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int año = a.obtenerUltimoAñoLectivo();
                                     int edad = a.getSalas().get(año).getEdad();
                                     if(edad == 5)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3139,13 +3116,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3161,7 +3138,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 5)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3175,13 +3152,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3197,7 +3174,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 6)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3211,13 +3188,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3236,7 +3213,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int año = a.obtenerUltimoAñoLectivo();
                                     int edad = a.getSalas().get(año).getEdad();
                                     if(edad == 4)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3249,13 +3226,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3271,7 +3248,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 3)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3285,13 +3262,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3307,7 +3284,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 4)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3321,13 +3298,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3346,7 +3323,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int año = a.obtenerUltimoAñoLectivo();
                                     int edad = a.getSalas().get(año).getEdad();
                                     if(edad == 3)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3359,13 +3336,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3381,7 +3358,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 1)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3395,13 +3372,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3417,7 +3394,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 2)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3431,13 +3408,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }

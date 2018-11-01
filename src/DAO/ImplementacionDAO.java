@@ -4,6 +4,7 @@ import BaseDeDatos.ConexionBD;
 import ClasesBase.Alumno;
 import ClasesBase.Pago;
 import ClasesBase.RegistroAsistencia;
+import ClasesBase.Retiro;
 import ClasesBase.Sala;
 import ClasesBase.Tutor;
 import java.sql.Connection;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -115,6 +117,14 @@ public class ImplementacionDAO implements DAO {
         }
     }
 
+    public Alumno nuevoAlumno(){
+        return new Alumno();
+    }
+    
+    public Alumno nuevoAlumno(Date fechaDeNacimiento, String lugarNacimiento, String domicilio, long telefono, boolean controlMedico, boolean vacunas, boolean controlNatacion, boolean traeMateriales, String otrosDatos, Set<Alumno> hermanos, Set<Tutor> tutores, Set<Pago> pagos, Map<Integer, Sala> salas, Set<RegistroAsistencia> ra, int dni, String apellidoYNombre){
+        return new Alumno(fechaDeNacimiento, lugarNacimiento, domicilio, telefono, controlMedico, vacunas, controlNatacion, traeMateriales, otrosDatos, hermanos, tutores, pagos, salas, ra, dni, apellidoYNombre);
+    }
+    
     @Override
     public void altaPago(Pago ppago) {
         try {
@@ -168,6 +178,14 @@ public class ImplementacionDAO implements DAO {
         }
     }
 
+    public Tutor nuevoTutor(){
+        return new Tutor();
+    }
+    
+    public Tutor nuevoTutor(String ocupacion, long telefonoPersonal, long telefonoTrabajo, String relacion, Set<Alumno> atutorados, Set<Retiro> retiros, int dni, String apellidoYNombre){
+        return new Tutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
+    }
+    
     @Override
     public void altaTutor(Tutor ptutor) {
         try {

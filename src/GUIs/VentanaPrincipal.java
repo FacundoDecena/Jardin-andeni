@@ -179,9 +179,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel49 = new javax.swing.JLabel();
         jYearChooser1 = new com.toedter.calendar.JYearChooser();
         jLabelTotalPagado = new javax.swing.JLabel();
+        jLabelMontoRestante = new javax.swing.JLabel();
         jLabelMontoAPagar = new javax.swing.JLabel();
-        jLabelMontoCuota = new javax.swing.JLabel();
         jButtonRegistrarPago = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel43 = new javax.swing.JLabel();
         jTextFieldBusqueda_Pago = new javax.swing.JTextField();
@@ -1020,7 +1022,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton_Inscribir)))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
 
         jPanelCard.add(jPanelInscripcion, "inscripcion");
@@ -1054,7 +1056,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanelCuotaLayout.createSequentialGroup()
                 .addGap(104, 104, 104)
                 .addComponent(jLabel41)
-                .addContainerGap(513, Short.MAX_VALUE))
+                .addContainerGap(572, Short.MAX_VALUE))
         );
 
         jPanelTipoPago.add(jPanelCuota, "pagoCuota");
@@ -1067,9 +1069,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel37.setText("Cuotas");
 
-        jLabel38.setText("Total Pagado");
+        jLabel38.setText("Total pagado");
 
-        jLabel39.setText("Valor total");
+        jLabel39.setText("Monto restante");
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel40.setText("Monto a pagar");
@@ -1092,9 +1094,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabelTotalPagado.setText("jLabel53");
 
-        jLabelMontoAPagar.setText("jLabel53");
+        jLabelMontoRestante.setText("jLabel53");
 
-        jLabelMontoCuota.setText("jLabel53");
+        jLabelMontoAPagar.setText("jLabel53");
 
         jButtonRegistrarPago.setText("Registrar pago");
         jButtonRegistrarPago.addActionListener(new java.awt.event.ActionListener() {
@@ -1103,49 +1105,61 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nro. de cuota", "Fecha de pago", "Pagado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(jTable1);
+
         javax.swing.GroupLayout jPanelPagpInscLayout = new javax.swing.GroupLayout(jPanelPagpInsc);
         jPanelPagpInsc.setLayout(jPanelPagpInscLayout);
         jPanelPagpInscLayout.setHorizontalGroup(
             jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPagpInscLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonRegistrarPago)
-                .addGap(157, 157, 157))
             .addGroup(jPanelPagpInscLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanelPagpInscLayout.createSequentialGroup()
-                            .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel34)
-                                .addComponent(jLabel35)
-                                .addComponent(jLabel36)
-                                .addComponent(jLabel49))
-                            .addGap(50, 50, 50)
+                    .addGroup(jPanelPagpInscLayout.createSequentialGroup()
+                        .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
+                        .addGap(51, 51, 51)
+                        .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelMontoAPagar)
+                            .addComponent(jLabelMontoRestante)
+                            .addComponent(jLabelTotalPagado)
+                            .addComponent(jButtonRegistrarPago)))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelPagpInscLayout.createSequentialGroup()
+                        .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel35, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel36, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel49, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel37, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField_NomyAp_PagoIns, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                                 .addComponent(jTextField_Sala_PagoIns)
                                 .addComponent(jTextField_Turno_PagoIns)
                                 .addGroup(jPanelPagpInscLayout.createSequentialGroup()
-                                    .addComponent(jYearChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGap(156, 156, 156))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPagpInscLayout.createSequentialGroup()
-                            .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel37)
-                                .addGroup(jPanelPagpInscLayout.createSequentialGroup()
-                                    .addGap(12, 12, 12)
-                                    .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel39)
-                                        .addComponent(jLabel38))))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                            .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabelMontoCuota)
-                                .addComponent(jLabelMontoAPagar)
-                                .addComponent(jLabelTotalPagado)
-                                .addComponent(jSpinner_Cuotas_PagoIns, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(156, 156, 156)))
-                    .addComponent(jLabel40))
-                .addContainerGap(64, Short.MAX_VALUE))
+                                    .addComponent(jYearChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                                    .addGap(197, 197, 197)))
+                            .addComponent(jTextField_NomyAp_PagoIns, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinner_Cuotas_PagoIns, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanelPagpInscLayout.setVerticalGroup(
             jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1162,7 +1176,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
                     .addComponent(jTextField_Turno_PagoIns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel49)
                     .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1170,21 +1184,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37)
                     .addComponent(jSpinner_Cuotas_PagoIns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel40)
-                    .addComponent(jLabelMontoCuota))
-                .addGap(121, 121, 121)
-                .addComponent(jButtonRegistrarPago)
-                .addGap(78, 78, 78)
-                .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelTotalPagado)
-                    .addComponent(jLabel38))
+                    .addComponent(jLabel38)
+                    .addComponent(jLabelTotalPagado))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel39)
+                    .addComponent(jLabelMontoRestante))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel40)
                     .addComponent(jLabelMontoAPagar))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addComponent(jButtonRegistrarPago)
+                .addContainerGap(203, Short.MAX_VALUE))
         );
 
         jPanelTipoPago.add(jPanelPagpInsc, "pagoInscripcion");
@@ -1283,9 +1299,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanelPagoLayout.createSequentialGroup()
                 .addGroup(jPanelPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelPagoLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addGap(12, 12, 12)
                         .addComponent(jLabel2)
-                        .addGap(41, 41, 41)
+                        .addGap(32, 32, 32)
                         .addComponent(jComboBoxTipoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelPagoLayout.createSequentialGroup()
                         .addContainerGap()
@@ -1526,7 +1542,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel_Edad)
                     .addComponent(jLabel_Domicilio)
                     .addComponent(jLabel_TelefonoEmergencia))
-                .addGap(0, 374, Short.MAX_VALUE))
+                .addGap(0, 302, Short.MAX_VALUE))
         );
         jPanelFondoDatosAlumnosLayout.setVerticalGroup(
             jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1623,7 +1639,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel76)
                     .addComponent(jLabel_TelefonoTrabajoTutor))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelDatosAlumnosLayout = new javax.swing.GroupLayout(jPanelDatosAlumnos);
@@ -1734,21 +1750,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelFondoLayout.setHorizontalGroup(
             jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFondoLayout.createSequentialGroup()
-                .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanelInterseccion, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                    .addGroup(jPanelFondoLayout.createSequentialGroup()
-                        .addComponent(jPanelPestanas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(jPanelFondoLayout.createSequentialGroup()
+                        .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanelInterseccion, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                            .addGroup(jPanelFondoLayout.createSequentialGroup()
+                                .addComponent(jPanelPestanas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(jPanelFondoLayout.createSequentialGroup()
+                        .addComponent(jPanelBarraSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFondoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelBarraSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
         );
         jPanelFondoLayout.setVerticalGroup(
             jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1815,8 +1832,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jYearChooser1.setStartYear(cal.get(Calendar.YEAR));
         JSpinner spinner = (JSpinner)jYearChooser1.getSpinner();
         ((javax.swing.JTextField)spinner.getEditor()).setEditable(false);
+        jLabelMontoRestante.setText("-");
         jLabelMontoAPagar.setText("-");
-        jLabelMontoCuota.setText("-");
         jLabelTotalPagado.setText("-");
         jButtonRegistrarPago.setEnabled(false);
     }//GEN-LAST:event_jPanelOpPagoMouseClicked
@@ -2302,21 +2319,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         int valorPeriodo = jYearChooser1.getValue();
         if(pagos.isEmpty()){
             nuevo=true;
-            jLabelMontoAPagar.setText("$ "+String.valueOf(valorInscripcion)+"0");
+            jLabelMontoRestante.setText("$ "+String.valueOf(valorInscripcion)+"0");
             jLabelTotalPagado.setText("$ 0.00");
             int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
             switch(valorSpinner){
                 case 0:
-                    jLabelMontoCuota.setText("$ "+valorInscripcion+"0");
+                    jLabelMontoAPagar.setText("$ "+valorInscripcion+"0");
                     break;
                 case 1:
-                    jLabelMontoCuota.setText("$ "+(valorInscripcion/2)+"0");
+                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/2)+"0");
                     break;
                 case 2:
-                    jLabelMontoCuota.setText("$ "+(valorInscripcion/3)+"0");
+                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/3)+"0");
                     break;
                 case 3:
-                    jLabelMontoCuota.setText("$ "+(valorInscripcion/4)+"0");
+                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/4)+"0");
                     break;
             }
         }
@@ -2330,12 +2347,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     if(pagoSeleccionado.getMontoPagado() == pagoSeleccionado.getMontoTotal()){
                         jButtonRegistrarPago.setEnabled(false);
                         JOptionPane.showMessageDialog(null,"La inscripcion de "+valorPeriodo+" de este alumno ya esta pagada completamente.", "Info",JOptionPane.INFORMATION_MESSAGE);
-                        jLabelMontoCuota.setText("-");
+                        jLabelMontoAPagar.setText("-");
                     }
                     else{
-                    jLabelMontoCuota.setText("$ "+(pagoSeleccionado.getMontoTotal()/pagoSeleccionado.getCuotas())+"0");
+                    jLabelMontoAPagar.setText("$ "+(pagoSeleccionado.getMontoTotal()/pagoSeleccionado.getCuotas())+"0");
                     }
-                    jLabelMontoAPagar.setText("$ "+pagoSeleccionado.getMontoTotal()+"0");
+                    jLabelMontoRestante.setText("$ "+pagoSeleccionado.getMontoTotal()+"0");
                     jLabelTotalPagado.setText("$ "+pagoSeleccionado.getMontoPagado()+"0");
                     jSpinner_Cuotas_PagoIns.setValue(pagoSeleccionado.getCuotas());
                     jSpinner_Cuotas_PagoIns.setEnabled(false);
@@ -2346,20 +2363,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             if(!encontroInscripcion){
                 nuevo=true;
-               jLabelMontoAPagar.setText("$ "+String.valueOf(valorInscripcion)+"0");
+               jLabelMontoRestante.setText("$ "+String.valueOf(valorInscripcion)+"0");
                 int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
                 switch(valorSpinner){
                     case 1:
-                        jLabelMontoCuota.setText("$ "+valorInscripcion+"0");
+                        jLabelMontoAPagar.setText("$ "+valorInscripcion+"0");
                         break;
                     case 2:
-                        jLabelMontoCuota.setText("$ "+(valorInscripcion/2)+"0");
+                        jLabelMontoAPagar.setText("$ "+(valorInscripcion/2)+"0");
                         break;
                     case 3:
-                        jLabelMontoCuota.setText("$ "+(valorInscripcion/3)+"0");
+                        jLabelMontoAPagar.setText("$ "+(valorInscripcion/3)+"0");
                         break;
                     case 4:
-                        jLabelMontoCuota.setText("$ "+(valorInscripcion/4)+"0");
+                        jLabelMontoAPagar.setText("$ "+(valorInscripcion/4)+"0");
                         break;
                 }
                 jLabelTotalPagado.setText("$ 0.00");
@@ -2489,19 +2506,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
             switch(valorSpinner){
                 case 1:
-                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion())+"0");
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion())+"0");
                     break;
                 case 2:
-                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/2)+"0");
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/2)+"0");
                     break;
                 case 3:
-                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/3)+"0");
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/3)+"0");
                     break;
                 case 4:
-                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/4)+"0");
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/4)+"0");
                     break;
                 default:
-                    jLabelMontoCuota.setText("-");
+                    jLabelMontoAPagar.setText("-");
 
             }
         }
@@ -2554,8 +2571,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if(nuevo){
             Pago nuevoPago = new Pago(fechas,"INSCRIPCION",String.valueOf(jYearChooser1.getValue()),
                                       (Integer)jSpinner_Cuotas_PagoIns.getValue(),
-                                      Float.parseFloat(jLabelMontoCuota.getText().substring(2,jLabelMontoCuota.getText().length()-2)),
-                                      Float.parseFloat(jLabelMontoAPagar.getText().substring(2,jLabelMontoAPagar.getText().length()-2)),1,
+                                      Float.parseFloat(jLabelMontoAPagar.getText().substring(2,jLabelMontoAPagar.getText().length()-2)),
+                                      Float.parseFloat(jLabelMontoRestante.getText().substring(2,jLabelMontoRestante.getText().length()-2)),1,
                                       alumnos);
             alumnoSeleccionado.getPagos().add(nuevoPago);
             ManagerPago.getManager().altaPago(nuevoPago);
@@ -2565,7 +2582,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             {
                 jButtonRegistrarPago.setEnabled(false);
                 JOptionPane.showMessageDialog(null,"Se ha realizado el pago total de la inscripcion.", "Exito",JOptionPane.INFORMATION_MESSAGE);
-                jLabelMontoCuota.setText("-");
+                jLabelMontoAPagar.setText("-");
             }
             else{
                 JOptionPane.showMessageDialog(null,"Pago realizado correctamente.", "Exito",JOptionPane.INFORMATION_MESSAGE);
@@ -2581,7 +2598,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             {
                 jButtonRegistrarPago.setEnabled(false);
                 JOptionPane.showMessageDialog(null,"Se ha realizado el pago total de la inscripcion.", "Exito",JOptionPane.INFORMATION_MESSAGE);
-                jLabelMontoCuota.setText("-");
+                jLabelMontoAPagar.setText("-");
             }
             else{
                 JOptionPane.showMessageDialog(null,"Pago realizado correctamente.", "Exito",JOptionPane.INFORMATION_MESSAGE);
@@ -2817,7 +2834,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelMontoAPagar;
-    private javax.swing.JLabel jLabelMontoCuota;
+    private javax.swing.JLabel jLabelMontoRestante;
     private javax.swing.JLabel jLabelTotalPagado;
     private javax.swing.JLabel jLabel_ControlMedico;
     private javax.swing.JLabel jLabel_ControlNatacion;
@@ -2872,12 +2889,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSpinner jSpinner_Cuotas_PagoIns;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableAlumnosDialog;
     private javax.swing.JTable jTableDatosAlumnos;
     private javax.swing.JTable jTablePago;

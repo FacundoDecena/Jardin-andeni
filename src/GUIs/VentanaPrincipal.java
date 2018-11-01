@@ -162,8 +162,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jComboBoxTipoDePago = new javax.swing.JComboBox<>();
         jPanelTipoPago = new javax.swing.JPanel();
-        jPanelCuota = new javax.swing.JPanel();
-        jLabel41 = new javax.swing.JLabel();
         jPanelPagpInsc = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
@@ -184,6 +182,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButtonRegistrarPago = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanelCuota = new javax.swing.JPanel();
+        jLabel41 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel43 = new javax.swing.JLabel();
         jTextFieldBusqueda_Pago = new javax.swing.JTextField();
@@ -1040,27 +1040,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanelTipoPago.setLayout(new java.awt.CardLayout());
 
-        jLabel41.setText("Pago cuota");
-
-        javax.swing.GroupLayout jPanelCuotaLayout = new javax.swing.GroupLayout(jPanelCuota);
-        jPanelCuota.setLayout(jPanelCuotaLayout);
-        jPanelCuotaLayout.setHorizontalGroup(
-            jPanelCuotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCuotaLayout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(jLabel41)
-                .addContainerGap(218, Short.MAX_VALUE))
-        );
-        jPanelCuotaLayout.setVerticalGroup(
-            jPanelCuotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCuotaLayout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(jLabel41)
-                .addContainerGap(572, Short.MAX_VALUE))
-        );
-
-        jPanelTipoPago.add(jPanelCuota, "pagoCuota");
-
         jLabel34.setText("Apellido y Nombre");
 
         jLabel35.setText("Sala");
@@ -1204,6 +1183,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
 
         jPanelTipoPago.add(jPanelPagpInsc, "pagoInscripcion");
+
+        jLabel41.setText("Pago cuota");
+
+        javax.swing.GroupLayout jPanelCuotaLayout = new javax.swing.GroupLayout(jPanelCuota);
+        jPanelCuota.setLayout(jPanelCuotaLayout);
+        jPanelCuotaLayout.setHorizontalGroup(
+            jPanelCuotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCuotaLayout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(jLabel41)
+                .addContainerGap(218, Short.MAX_VALUE))
+        );
+        jPanelCuotaLayout.setVerticalGroup(
+            jPanelCuotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCuotaLayout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(jLabel41)
+                .addContainerGap(572, Short.MAX_VALUE))
+        );
+
+        jPanelTipoPago.add(jPanelCuota, "pagoCuota");
 
         jLabel43.setText("Buscar Alumno");
 

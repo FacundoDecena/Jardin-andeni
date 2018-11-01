@@ -142,7 +142,7 @@ public class ImplementacionDAO implements DAO {
             }
             Calendar r = new GregorianCalendar();
             String fecha = "", parcial;
-            r.setTime(pago.getFecha());
+            r.setTime(pago.getFecha().get(0));
             parcial = String.valueOf(r.get(Calendar.YEAR));
             fecha = fecha.concat(parcial+"-");
             parcial = String.valueOf(r.get(Calendar.MONTH)+1);
@@ -150,8 +150,9 @@ public class ImplementacionDAO implements DAO {
             parcial = String.valueOf(r.get(Calendar.DATE));
             fecha = fecha.concat(parcial);
             int idPago = (obtenerMaximoIdPago()+1);
-            s.execute("INSERT INTO PAGO VALUES("+idPago+",'"+fecha+"',"+pago.getMontoTotal()
+            s.execute("INSERT INTO PAGO VALUES("+idPago+","+pago.getMontoTotal()
                       +","+pago.getMontoPagado()+",'"+pago.getPeriodo()+"',"+tipoPago+","+pago.getCuotas()+")");
+            s.execute("INSERT INTO FECHA_PAGO VALUES("+idPago+",'"+fecha+"')");
             Iterator i = pago.getAlumnos().iterator();
             while(i.hasNext()){
                 Alumno a = (Alumno) i.next();
@@ -378,7 +379,11 @@ public class ImplementacionDAO implements DAO {
             ResultSet rsTipoPago = sAux.executeQuery("SELECT TIPO FROM TIPO_PAGO WHERE COD_TIPO="+rsPago.getInt("COD_TIPO"));
             rsTipoPago.next();
             String tipoPago = rsTipoPago.getString("TIPO");
-            Pago pago = new Pago(rsPago.getDate("FECHA"),tipoPago,rsPago.getString("PERIODO"),
+            ResultSet rsFechaPago = sAux.executeQuery("SELECT FECHAPAGO FROM FECHA_PAGO WHERE IDPAGO="+idPago);
+            List<Date> fecha = new ArrayList();
+            while(rsFechaPago.next())
+                fecha.add(rsFechaPago.getDate("FECHAPAGO"));
+            Pago pago = new Pago(fecha,tipoPago,rsPago.getString("PERIODO"),
                                    rsPago.getInt("CUOTAS"),rsPago.getFloat("MONTOPAGADO"),rsPago.getFloat("MONTOTOTAL"),
                                    rsPago.getInt("IDPAGO"),null);
             s.close();

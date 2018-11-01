@@ -47,10 +47,10 @@ public class ManagerAlumno{
         encaja = patron.matcher(domicilio);
         if(!encaja.matches())
             throw IllegalArgumentException("Domicilio contiene simbolos invalidos");
-        
-        Alumno alumno = new Alumno(fechaDeNacimiento, lugarNacimiento, domicilio, telefono, controlMedico, vacunas, controlNatacion, traeMateriales, otrosDatos, hermanos, tutores, pagos, salas, ra, dni, apellidoYNombre);
-        
+                
         ImplementacionDAO dao = ImplementacionDAO.getDAO();
+        
+        Alumno alumno = dao.nuevoAlumno(fechaDeNacimiento, lugarNacimiento, domicilio, telefono, controlMedico, vacunas, controlNatacion, traeMateriales, otrosDatos, hermanos, tutores, pagos, salas, ra, dni, apellidoYNombre);
         
         dao.altaAlumno(alumno);
         //Si llegó aca, los tutores ya estan en la base de datos.

@@ -19,7 +19,7 @@ public class ConexionBD {
             System.err.println("\nNo es posible Instanciar el driver de JDBC");
         } catch (IllegalAccessException iae) {
             System.err.println("\nNo se tiene acceso al driver de JDBC");
-        } catch(SQLException e){}
+        } catch(SQLException e){e.printStackTrace();}
     }
     
     public static Connection getConnection(){
@@ -133,7 +133,6 @@ public class ConexionBD {
 
         s.execute("CREATE TABLE PAGO(" +
                   "IDPAGO INT NOT NULL PRIMARY KEY," +
-                  "FECHA DATE NOT NULL, " +
                   "MONTOTOTAL FLOAT NOT NULL, " +
                   "MONTOPAGADO FLOAT NOT NULL," +
                   "PERIODO VARCHAR (20) NOT NULL," +
@@ -142,7 +141,13 @@ public class ConexionBD {
                   "FOREIGN KEY (COD_TIPO) REFERENCES TIPO_PAGO(COD_TIPO))"    
         );
         
-        s.execute("INSERT INTO PAGO VALUES(1,'2012-1-1',0.0,0.0,'',1,3)");
+        s.execute("INSERT INTO PAGO VALUES(1,0.0,0.0,'',1,3)");
+        
+        s.execute("CREATE TABLE FECHA_PAGO(" + 
+                  "IDPAGO INT NOT NULL," +
+                  "FECHAPAGO DATE NOT NULL," +
+                  "FOREIGN KEY (IDPAGO) REFERENCES PAGO(IDPAGO),"+
+                  "PRIMARY KEY (IDPAGO,FECHAPAGO))");
         
         s.execute("CREATE TABLE CORRESPONDE_PAGO(" +
                   "IDPAGO INT NOT NULL," +

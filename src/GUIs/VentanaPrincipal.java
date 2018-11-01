@@ -14,6 +14,7 @@ import ClasesBase.Sala;
 import ClasesBase.Tutor;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -161,6 +162,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jComboBoxTipoDePago = new javax.swing.JComboBox<>();
         jPanelTipoPago = new javax.swing.JPanel();
+        jPanelCuota = new javax.swing.JPanel();
+        jLabel41 = new javax.swing.JLabel();
         jPanelPagpInsc = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
@@ -179,8 +182,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabelMontoAPagar = new javax.swing.JLabel();
         jLabelMontoCuota = new javax.swing.JLabel();
         jButtonRegistrarPago = new javax.swing.JButton();
-        jPanelCuota = new javax.swing.JPanel();
-        jLabel41 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel43 = new javax.swing.JLabel();
         jTextFieldBusqueda_Pago = new javax.swing.JTextField();
@@ -858,7 +859,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addGroup(jPanelInscripcionLayout.createSequentialGroup()
                                 .addGap(155, 155, 155)
                                 .addComponent(jButton_Inscribir)))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelInscripcionLayout.setVerticalGroup(
             jPanelInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1037,6 +1038,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanelTipoPago.setLayout(new java.awt.CardLayout());
 
+        jLabel41.setText("Pago cuota");
+
+        javax.swing.GroupLayout jPanelCuotaLayout = new javax.swing.GroupLayout(jPanelCuota);
+        jPanelCuota.setLayout(jPanelCuotaLayout);
+        jPanelCuotaLayout.setHorizontalGroup(
+            jPanelCuotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCuotaLayout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(jLabel41)
+                .addContainerGap(218, Short.MAX_VALUE))
+        );
+        jPanelCuotaLayout.setVerticalGroup(
+            jPanelCuotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCuotaLayout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(jLabel41)
+                .addContainerGap(513, Short.MAX_VALUE))
+        );
+
+        jPanelTipoPago.add(jPanelCuota, "pagoCuota");
+
         jLabel34.setText("Apellido y Nombre");
 
         jLabel35.setText("Sala");
@@ -1085,41 +1107,45 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelPagpInsc.setLayout(jPanelPagpInscLayout);
         jPanelPagpInscLayout.setHorizontalGroup(
             jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelPagpInscLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelPagpInscLayout.createSequentialGroup()
-                        .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel34)
-                            .addComponent(jLabel35)
-                            .addComponent(jLabel36)
-                            .addComponent(jLabel49))
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField_NomyAp_PagoIns, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                            .addComponent(jTextField_Sala_PagoIns)
-                            .addComponent(jTextField_Turno_PagoIns)
-                            .addGroup(jPanelPagpInscLayout.createSequentialGroup()
-                                .addComponent(jYearChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(156, 156, 156))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPagpInscLayout.createSequentialGroup()
-                        .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel37)
-                            .addComponent(jLabel38)
-                            .addComponent(jLabel39)
-                            .addComponent(jLabel40))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelMontoCuota)
-                            .addComponent(jLabelMontoAPagar)
-                            .addComponent(jLabelTotalPagado)
-                            .addComponent(jSpinner_Cuotas_PagoIns, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(156, 156, 156)))
-                .addContainerGap(64, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPagpInscLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonRegistrarPago)
                 .addGap(157, 157, 157))
+            .addGroup(jPanelPagpInscLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanelPagpInscLayout.createSequentialGroup()
+                            .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel34)
+                                .addComponent(jLabel35)
+                                .addComponent(jLabel36)
+                                .addComponent(jLabel49))
+                            .addGap(50, 50, 50)
+                            .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextField_NomyAp_PagoIns, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                                .addComponent(jTextField_Sala_PagoIns)
+                                .addComponent(jTextField_Turno_PagoIns)
+                                .addGroup(jPanelPagpInscLayout.createSequentialGroup()
+                                    .addComponent(jYearChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(156, 156, 156))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPagpInscLayout.createSequentialGroup()
+                            .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel37)
+                                .addGroup(jPanelPagpInscLayout.createSequentialGroup()
+                                    .addGap(12, 12, 12)
+                                    .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel39)
+                                        .addComponent(jLabel38))))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                            .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabelMontoCuota)
+                                .addComponent(jLabelMontoAPagar)
+                                .addComponent(jLabelTotalPagado)
+                                .addComponent(jSpinner_Cuotas_PagoIns, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(156, 156, 156)))
+                    .addComponent(jLabel40))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanelPagpInscLayout.setVerticalGroup(
             jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1146,43 +1172,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(jSpinner_Cuotas_PagoIns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel38)
-                    .addComponent(jLabelTotalPagado))
-                .addGap(24, 24, 24)
+                    .addComponent(jLabel40)
+                    .addComponent(jLabelMontoCuota))
+                .addGap(121, 121, 121)
+                .addComponent(jButtonRegistrarPago)
+                .addGap(78, 78, 78)
+                .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTotalPagado)
+                    .addComponent(jLabel38))
+                .addGap(18, 18, 18)
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel39)
                     .addComponent(jLabelMontoAPagar))
-                .addGap(24, 24, 24)
-                .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel40)
-                    .addComponent(jLabelMontoCuota))
-                .addGap(41, 41, 41)
-                .addComponent(jButtonRegistrarPago)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
 
         jPanelTipoPago.add(jPanelPagpInsc, "pagoInscripcion");
-
-        jLabel41.setText("Pago cuota");
-
-        javax.swing.GroupLayout jPanelCuotaLayout = new javax.swing.GroupLayout(jPanelCuota);
-        jPanelCuota.setLayout(jPanelCuotaLayout);
-        jPanelCuotaLayout.setHorizontalGroup(
-            jPanelCuotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCuotaLayout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(jLabel41)
-                .addContainerGap(218, Short.MAX_VALUE))
-        );
-        jPanelCuotaLayout.setVerticalGroup(
-            jPanelCuotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCuotaLayout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(jLabel41)
-                .addContainerGap(424, Short.MAX_VALUE))
-        );
-
-        jPanelTipoPago.add(jPanelCuota, "pagoCuota");
 
         jLabel43.setText("Buscar Alumno");
 
@@ -1738,7 +1743,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelCard, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFondoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2543,8 +2548,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         java.util.Date fecha = new Date();
         Set<Alumno> alumnos = new HashSet<>();
         alumnos.add(alumnoSeleccionado);
+        List<Date> fechas = new ArrayList<>();
+        fechas.add(fecha);
+        
         if(nuevo){
-            Pago nuevoPago = new Pago(fecha,"INSCRIPCION",String.valueOf(jYearChooser1.getValue()),
+            Pago nuevoPago = new Pago(fechas,"INSCRIPCION",String.valueOf(jYearChooser1.getValue()),
                                       (Integer)jSpinner_Cuotas_PagoIns.getValue(),
                                       Float.parseFloat(jLabelMontoCuota.getText().substring(2,jLabelMontoCuota.getText().length()-2)),
                                       Float.parseFloat(jLabelMontoAPagar.getText().substring(2,jLabelMontoAPagar.getText().length()-2)),1,

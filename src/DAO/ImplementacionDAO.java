@@ -247,7 +247,21 @@ public class ImplementacionDAO implements DAO {
             Statement s = c.createStatement();
             s.execute("UPDATE PAGO"+
                       " SET MONTOPAGADO="+pago.getMontoPagado()+
-                      " WHERE IDPAGO="+pago.getIdPago());  
+                      " WHERE IDPAGO="+pago.getIdPago());
+            Calendar r = new GregorianCalendar();
+            List<Date> fechas = pago.getFecha();
+            int tamaño = fechas.size();
+            Date d = fechas.get(tamaño-1);
+            String fecha = "", parcial;
+            r.setTime(d);
+            parcial = String.valueOf(r.get(Calendar.YEAR));
+            fecha = fecha.concat(parcial+"-");
+            parcial = String.valueOf(r.get(Calendar.MONTH)+1);
+            fecha = fecha.concat(parcial+"-");
+            parcial = String.valueOf(r.get(Calendar.DATE));
+            fecha = fecha.concat(parcial);
+            s.execute("INSERT INTO FECHA_PAGO VALUES("+pago.getIdPago()+",'"+fecha+"')");
+
         } catch (SQLException ex) {ex.printStackTrace();}
     }
 

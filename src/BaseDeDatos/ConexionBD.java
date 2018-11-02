@@ -146,8 +146,7 @@ public class ConexionBD {
         s.execute("CREATE TABLE FECHA_PAGO(" + 
                   "IDPAGO INT NOT NULL," +
                   "FECHAPAGO DATE NOT NULL," +
-                  "FOREIGN KEY (IDPAGO) REFERENCES PAGO(IDPAGO),"+
-                  "PRIMARY KEY (IDPAGO,FECHAPAGO))");
+                  "FOREIGN KEY (IDPAGO) REFERENCES PAGO(IDPAGO))");
         
         s.execute("CREATE TABLE CORRESPONDE_PAGO(" +
                   "IDPAGO INT NOT NULL," +

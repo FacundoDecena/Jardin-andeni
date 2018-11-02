@@ -16,7 +16,9 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -1238,8 +1240,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jTablePago.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTablePagoMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTablePagoMousePressed(evt);
             }
         });
         jScrollPane2.setViewportView(jTablePago);
@@ -1380,8 +1382,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jTableDatosAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableDatosAlumnosMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTableDatosAlumnosMousePressed(evt);
             }
         });
         jScrollPane4.setViewportView(jTableDatosAlumnos);
@@ -1812,6 +1814,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         CardLayout card = (CardLayout)jPanelCard.getLayout();
         card.show(jPanelCard, "pago");
         modelAlumnos = (DefaultTableModel) jTablePago.getModel();
+        modelCuotas = (DefaultTableModel) jTableCuotas.getModel();
         ManagerAlumno ma = ManagerAlumno.getManager();
         listaAlumnos = ma.obtenerTodosAlumno();
         String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
@@ -2295,73 +2298,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cargarTabla(a,b,c,d);
     }//GEN-LAST:event_jComboBoxBusqueda_PagoItemStateChanged
 
-    private void jTablePagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePagoMouseClicked
-        String apellidoFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),0));
-        String dniFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),1));
-        String salaFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),2));
-        String turnoFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),3));
-        jTextField_NomyAp_PagoIns.setText(apellidoFila);
-        jTextField_Sala_PagoIns.setText(salaFila);
-        jTextField_Turno_PagoIns.setText(turnoFila);
-        jSpinner_Cuotas_PagoIns.setEnabled(true);
-        jButtonRegistrarPago.setEnabled(true);
-        Iterator i = listaAlumnos.iterator();
-        Set<Pago> pagos = null;  
-        while(i.hasNext()){
-            Alumno a = (Alumno) i.next();
-            if(dniFila.equals(String.valueOf(a.getDni()))){
-                pagos = a.getPagos();
-                alumnoSeleccionado = a;
-                break;
-            }
-        }
-        float valorInscripcion = ManagerPago.getManager().obtenerValorInscripcion();
-        int valorPeriodo = jYearChooser1.getValue();
-        boolean encontroInscripcion = false;
-        i = pagos.iterator();//Nunca va a ser null
-        while(i.hasNext()){
-            Pago pago = (Pago) i.next();
-            if(Integer.parseInt(pago.getPeriodo()) == valorPeriodo && pago.getTipoPago().equals("INSCRIPCION")){
-                pagoSeleccionado = pago;
-                encontroInscripcion = true;
-                nuevo = false;
-                break;
-            }
-        }
-        if(encontroInscripcion){
-            jLabelMontoRestante.setText("$ "+pagoSeleccionado.getMontoTotal()+"0");
-            jLabelTotalPagado.setText("$ "+pagoSeleccionado.getMontoPagado()+"0");
-            jSpinner_Cuotas_PagoIns.setValue(pagoSeleccionado.getCuotas());
-            jSpinner_Cuotas_PagoIns.setEnabled(false);
-            if(pagoSeleccionado.getMontoPagado() == pagoSeleccionado.getMontoTotal()){
-                jButtonRegistrarPago.setEnabled(false);
-                JOptionPane.showMessageDialog(null,"La inscripcion de "+valorPeriodo+" de este alumno ya esta pagada completamente.", "Info",JOptionPane.INFORMATION_MESSAGE);
-                jLabelMontoAPagar.setText("-");
-            }
-            else
-                jLabelMontoAPagar.setText("$ "+(pagoSeleccionado.getMontoTotal()/pagoSeleccionado.getCuotas())+"0");
-        }
-        else{
-            nuevo = true;
-            jLabelMontoRestante.setText("$ "+String.valueOf(valorInscripcion)+"0");
-            int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
-            switch(valorSpinner){
-                case 1:
-                    jLabelMontoAPagar.setText("$ "+valorInscripcion+"0");
-                    break;
-                case 2:
-                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/2)+"0");
-                    break;
-                case 3:
-                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/3)+"0");
-                    break;
-                case 4:
-                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/4)+"0");
-                    break;
-            }
-        }   
-    }//GEN-LAST:event_jTablePagoMouseClicked
-
     private void jButtonBuscarAlumBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarAlumBDActionPerformed
         modelAlumnos = (DefaultTableModel) jTableAlumnosDialog.getModel();
         ManagerAlumno ma = ManagerAlumno.getManager();
@@ -2516,53 +2452,200 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonRegistrarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarPagoActionPerformed
-        java.util.Date fecha = new Date();
+        //Creo la fecha para agregarla al pago
+        java.util.Date fechaActualFormatoDate = new Date();
+        Calendar r = new GregorianCalendar();
+        String fecha = "", parcial;
+        r.setTime(fechaActualFormatoDate);
+        parcial = String.valueOf(r.get(Calendar.YEAR));
+        fecha = fecha.concat(parcial+"-");
+        parcial = String.valueOf(r.get(Calendar.MONTH)+1);
+        fecha = fecha.concat(parcial+"-");
+        parcial = String.valueOf(r.get(Calendar.DATE));
+        fecha = fecha.concat(parcial);
+        List<Date> fechas = new ArrayList<>();
+        fechas.add(fechaActualFormatoDate);
+        //Guardo el alumno a quien corresponde el pago.
         Set<Alumno> alumnos = new HashSet<>();
         alumnos.add(alumnoSeleccionado);
-        List<Date> fechas = new ArrayList<>();
-        fechas.add(fecha);
-        
+        float montoTotal,montoPagado,nuevoMontoPagado;
+        int cuotas,nroCuota;
+        //Si no existia un pago de inscripcion del ano lectivo seleccionado
         if(nuevo){
-            Pago nuevoPago = new Pago(fechas,"INSCRIPCION",String.valueOf(jYearChooser1.getValue()),
-                                      (Integer)jSpinner_Cuotas_PagoIns.getValue(),
-                                      Float.parseFloat(jLabelMontoAPagar.getText().substring(2,jLabelMontoAPagar.getText().length()-2)),
-                                      Float.parseFloat(jLabelMontoRestante.getText().substring(2,jLabelMontoRestante.getText().length()-2)),1,
-                                      alumnos);
-            alumnoSeleccionado.getPagos().add(nuevoPago);
-            ManagerPago.getManager().altaPago(nuevoPago);
-            jLabelTotalPagado.setText("$ "+String.valueOf(nuevoPago.getMontoPagado())+"0");
-            jSpinner_Cuotas_PagoIns.setEnabled(false);
-            if(nuevoPago.getMontoPagado()==nuevoPago.getMontoTotal())
-            {
-                jButtonRegistrarPago.setEnabled(false);
-                JOptionPane.showMessageDialog(null,"Se ha realizado el pago total de la inscripcion.", "Exito",JOptionPane.INFORMATION_MESSAGE);
-                jLabelMontoAPagar.setText("-");
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Pago realizado correctamente.", "Exito",JOptionPane.INFORMATION_MESSAGE);
-            }
+            //Creo el nuevo pago
+            montoTotal = Float.parseFloat(jLabelMontoRestante.getText().substring(2,jLabelMontoRestante.getText().length()-1));
+            montoPagado = Float.parseFloat(jLabelMontoAPagar.getText().substring(2,jLabelMontoAPagar.getText().length()-2));
+            nuevoMontoPagado = montoPagado;
+            cuotas = (int) jSpinner_Cuotas_PagoIns.getValue();
+            if(cuotas == 0)
+                cuotas++;
+            nroCuota = 1;
+            pagoSeleccionado = new Pago(fechas,"INSCRIPCION",String.valueOf(jYearChooser1.getValue()),cuotas,montoPagado,montoTotal,1,alumnos);
+            //Se lo asigno al alumno seleccionado
+            alumnoSeleccionado.getPagos().add(pagoSeleccionado);
+            //Lo doy de alta en la BD
+            ManagerPago.getManager().altaPago(pagoSeleccionado);
+            //Actualizo los campos de la pantalla para que reflejen el pago de la inscripcion
+            nuevo = false;
         }
+        //Si ya existia un pago de inscripcion del ano lectivo seleccionado
         else{
-            float nuevoMontoPagado = pagoSeleccionado.getMontoPagado() + pagoSeleccionado.getMontoTotal()/pagoSeleccionado.getCuotas();
+            //Actualizo el pago
+            montoTotal = pagoSeleccionado.getMontoTotal();
+            montoPagado = pagoSeleccionado.getMontoPagado();
+            cuotas = pagoSeleccionado.getCuotas();
+            nroCuota = (int) (montoPagado/(montoTotal/cuotas))+1;
+            nuevoMontoPagado =  montoTotal/cuotas + montoPagado;
             pagoSeleccionado.setMontoPagado(nuevoMontoPagado);
-            jLabelTotalPagado.setText("$ "+String.valueOf(nuevoMontoPagado)+"0");
-            ManagerPago.getManager().modificarPago(pagoSeleccionado);
-            jSpinner_Cuotas_PagoIns.setEnabled(false);
-            if(nuevoMontoPagado==pagoSeleccionado.getMontoTotal())
-            {
-                jButtonRegistrarPago.setEnabled(false);
-                JOptionPane.showMessageDialog(null,"Se ha realizado el pago total de la inscripcion.", "Exito",JOptionPane.INFORMATION_MESSAGE);
-                jLabelMontoAPagar.setText("-");
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Pago realizado correctamente.", "Exito",JOptionPane.INFORMATION_MESSAGE);
-            }
-                
+            pagoSeleccionado.getFecha().add(fechaActualFormatoDate);
+            ManagerPago.getManager().modificarPago(pagoSeleccionado); 
         }
+        //Actualizo los campos de la pantalla para que reflejen el pago de la inscripcion
+        jSpinner_Cuotas_PagoIns.setEnabled(false);
+        modelCuotas.addRow(new Object[]{nroCuota,fecha.toString(),jLabelMontoAPagar.getText()});
+        jLabelTotalPagado.setText("$ "+String.valueOf(nuevoMontoPagado)+"0");
+        jLabelMontoRestante.setText("$ "+String.valueOf(montoTotal-nuevoMontoPagado)+"0");
+        //Si la inscripcion se pago totalmente, lo informo por pantalla
+        if(pagoSeleccionado.getMontoPagado() == pagoSeleccionado.getMontoTotal())
+        {
+            jButtonRegistrarPago.setEnabled(false);
+            jLabelMontoRestante.setText("$ 0.00");
+            jLabelMontoAPagar.setText("-");
+            JOptionPane.showMessageDialog(null,"Se ha completado el pago de la inscripcion.", "Exito",JOptionPane.INFORMATION_MESSAGE);
+        }
+        //Muestro el exito del pago
+        else
+            JOptionPane.showMessageDialog(null,"Cuota de inscripcion pagada correctamente.", "Exito",JOptionPane.INFORMATION_MESSAGE);
         
     }//GEN-LAST:event_jButtonRegistrarPagoActionPerformed
 
-    private void jTableDatosAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDatosAlumnosMouseClicked
+    private void jYearChooser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jYearChooser1MouseClicked
+        
+    }//GEN-LAST:event_jYearChooser1MouseClicked
+
+    private void jSpinner_Cuotas_PagoInsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner_Cuotas_PagoInsStateChanged
+        if(!jTextField_NomyAp_PagoIns.getText().isEmpty()){
+            int valorSpinner = (Integer) jSpinner_Cuotas_PagoIns.getValue();
+            switch(valorSpinner){
+                case 1:
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion())+"0");
+                    break;
+                case 2:
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/2)+"0");
+                    break;
+                case 3:
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/3)+"0");
+                    break;
+                case 4:
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/4)+"0");
+                    break;
+                default:
+                    jLabelMontoAPagar.setText("-");
+
+            }
+        }
+    }//GEN-LAST:event_jSpinner_Cuotas_PagoInsStateChanged
+
+    private void jTablePagoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePagoMousePressed
+        modelCuotas.setRowCount(0);
+        jSpinner_Cuotas_PagoIns.setEnabled(true);
+        jButtonRegistrarPago.setEnabled(true);
+        int valorPeriodo = jYearChooser1.getValue();
+        float valorInscripcion = ManagerPago.getManager().obtenerValorInscripcion();
+        boolean encontroInscripcion = false;
+        //Seteo los campos con los datos del alumno seleccionado
+        String apellidoFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),0));
+        String dniFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),1));
+        String salaFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),2));
+        String turnoFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),3));
+        jTextField_NomyAp_PagoIns.setText(apellidoFila);
+        jTextField_Sala_PagoIns.setText(salaFila+" años");
+        jTextField_Turno_PagoIns.setText(turnoFila);
+        //Busco el alumno  seleccionado en la lista de alumnos
+        Iterator i = listaAlumnos.iterator();
+        Set<Pago> pagos = null;  
+        while(i.hasNext()){
+            Alumno a = (Alumno) i.next();
+            if(dniFila.equals(String.valueOf(a.getDni()))){
+                pagos = a.getPagos();
+                alumnoSeleccionado = a;
+                break;
+            }
+        }
+        //Busco los  pagos existentes del alumno seleccionado
+        i = pagos.iterator();//Nunca va a ser null
+        while(i.hasNext()){
+            Pago pago = (Pago) i.next();
+            if(Integer.parseInt(pago.getPeriodo()) == valorPeriodo && pago.getTipoPago().equals("INSCRIPCION")){
+                pagoSeleccionado = pago;
+                encontroInscripcion = true;
+                nuevo = false;
+                break;
+            }
+        }
+        //Si hay un pago correspondiente al alumno seleccionado en el año indicado en el YearChooser
+        if(encontroInscripcion){
+            //Seteo los valores del pago
+            jLabelMontoRestante.setText("$ "+pagoSeleccionado.getMontoTotal()+"0");
+            jLabelTotalPagado.setText("$ "+pagoSeleccionado.getMontoPagado()+"0");
+            jSpinner_Cuotas_PagoIns.setValue(pagoSeleccionado.getCuotas());
+            jSpinner_Cuotas_PagoIns.setEnabled(false);
+            //Muestro la tabla con los pagos existentes
+            List<Date> fechas = pagoSeleccionado.getFecha();
+            Collections.sort(fechas);
+            int cuota = 1;
+            Calendar r = new GregorianCalendar();
+            i = fechas.listIterator();
+            while(i.hasNext()){
+                Date d = (Date) i.next();
+                String fecha = "", parcial;
+                r.setTime(d);
+                parcial = String.valueOf(r.get(Calendar.YEAR));
+                fecha = fecha.concat(parcial+"-");
+                parcial = String.valueOf(r.get(Calendar.MONTH)+1);
+                fecha = fecha.concat(parcial+"-");
+                parcial = String.valueOf(r.get(Calendar.DATE));
+                fecha = fecha.concat(parcial);
+                modelCuotas.addRow(new Object[]{cuota,fecha,"$ "+pagoSeleccionado.getMontoTotal()/pagoSeleccionado.getCuotas()+"0"});
+                cuota++;
+            }
+            //En caso que ya se haya pagado toda la inscripcion se informa por pantalla
+            if(pagoSeleccionado.getMontoPagado() == pagoSeleccionado.getMontoTotal()){
+                jButtonRegistrarPago.setEnabled(false);
+                jLabelMontoRestante.setText("$ 0.00");
+                jLabelMontoAPagar.setText("-");
+                JOptionPane.showMessageDialog(null,"La inscripcion de "+valorPeriodo+" de este alumno ya esta pagada completamente.", "Info",JOptionPane.INFORMATION_MESSAGE);
+            }
+            //En caso de que aun resten pagar cuotas muestro lo  que se debe pagar
+            else
+                jLabelMontoAPagar.setText("$ "+(pagoSeleccionado.getMontoTotal()/pagoSeleccionado.getCuotas())+"0");
+        }
+        //Si no hay pago de inscripcion del alumno seleccionado en el año que indica el YearChooser
+        else{
+            nuevo = true;
+            jLabelMontoRestante.setText("$ "+String.valueOf(valorInscripcion)+"0");
+            int valorSpinner = (Integer) jSpinner_Cuotas_PagoIns.getValue();
+            //La primera vez que ingresa, el valor del Spinner es 0
+            if(valorSpinner == 0)
+                valorSpinner++;
+            switch(valorSpinner){
+                case 1:
+                    jLabelMontoAPagar.setText("$ "+valorInscripcion+"0");
+                    break;
+                case 2:
+                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/2)+"0");
+                    break;
+                case 3:
+                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/3)+"0");
+                    break;
+                case 4:
+                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/4)+"0");
+                    break;
+            }
+        }
+    }//GEN-LAST:event_jTablePagoMousePressed
+
+    private void jTableDatosAlumnosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDatosAlumnosMousePressed
         String dniFila = String.valueOf(modelAlumnos.getValueAt(jTableDatosAlumnos.getSelectedRow(),1));
         Set<Tutor> tutors;
         Map<Integer, Sala> salas;
@@ -2646,34 +2729,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 break;
             }
         }
-    }//GEN-LAST:event_jTableDatosAlumnosMouseClicked
-
-    private void jYearChooser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jYearChooser1MouseClicked
-        
-    }//GEN-LAST:event_jYearChooser1MouseClicked
-
-    private void jSpinner_Cuotas_PagoInsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner_Cuotas_PagoInsStateChanged
-        if(!jTextField_NomyAp_PagoIns.getText().isEmpty()){
-            int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
-            switch(valorSpinner){
-                case 1:
-                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion())+"0");
-                    break;
-                case 2:
-                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/2)+"0");
-                    break;
-                case 3:
-                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/3)+"0");
-                    break;
-                case 4:
-                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/4)+"0");
-                    break;
-                default:
-                    jLabelMontoAPagar.setText("-");
-
-            }
-        }
-    }//GEN-LAST:event_jSpinner_Cuotas_PagoInsStateChanged
+    }//GEN-LAST:event_jTableDatosAlumnosMousePressed
 
 
     /**

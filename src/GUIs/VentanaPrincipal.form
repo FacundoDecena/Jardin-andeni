@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.6" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Container class="javax.swing.JDialog" name="jDialogBuscar">
       <Properties>
@@ -1449,7 +1449,7 @@
                                                   <Component id="jTextField_Sala_PagoIns" max="32767" attributes="0"/>
                                                   <Component id="jTextField_Turno_PagoIns" alignment="0" max="32767" attributes="0"/>
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="jYearChooser1" pref="64" max="32767" attributes="0"/>
+                                                      <Component id="jYearChooserCicloLectivo" pref="64" max="32767" attributes="0"/>
                                                       <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
@@ -1483,7 +1483,7 @@
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel49" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jYearChooser1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jYearChooserCicloLectivo" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -1574,12 +1574,12 @@
                             <Property name="text" type="java.lang.String" value="Ciclo Lectivo"/>
                           </Properties>
                         </Component>
-                        <Component class="com.toedter.calendar.JYearChooser" name="jYearChooser1">
+                        <Component class="com.toedter.calendar.JYearChooser" name="jYearChooserCicloLectivo">
                           <Properties>
                             <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jYearChooser1MouseClicked"/>
+                            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jYearChooserCicloLectivoPropertyChange"/>
                           </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabelTotalPagado">
@@ -1620,6 +1620,13 @@
                                     <Column editable="false" title="Fecha de pago" type="java.lang.Object"/>
                                     <Column editable="false" title="Pagado" type="java.lang.Object"/>
                                   </Table>
+                                </Property>
+                                <Property name="rowSelectionAllowed" type="boolean" value="false"/>
+                                <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                                  <JTableSelectionModel selectionMode="0"/>
+                                </Property>
+                                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                                  <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                                 </Property>
                               </Properties>
                             </Component>
@@ -1750,6 +1757,37 @@
                                 <Column editable="false" title="Sala" type="java.lang.Object"/>
                                 <Column editable="false" title="Turno" type="java.lang.Object"/>
                               </Table>
+                            </Property>
+                            <Property name="autoResizeMode" type="int" value="0"/>
+                            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                              <TableColumnModel selectionModel="0">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="300" resizable="false">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="150" resizable="false">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="150" resizable="false">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                              </TableColumnModel>
+                            </Property>
+                            <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                              <JTableSelectionModel selectionMode="0"/>
+                            </Property>
+                            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                              <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                             </Property>
                           </Properties>
                           <Events>

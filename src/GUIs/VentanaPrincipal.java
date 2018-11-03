@@ -47,6 +47,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         initComponents();
         jDialogBuscar.setLocationRelativeTo(null);
+        ManagerAlumno ma = ManagerAlumno.getManager();
+        listaAlumnos = ma.obtenerTodosAlumno();
+        modelAlumnos = (DefaultTableModel) jTablePago.getModel();
+        modelCuotas = (DefaultTableModel) jTableCuotas.getModel();
+        jSpinner_Cuotas_PagoIns.setEditor(new JSpinner.DefaultEditor(jSpinner_Cuotas_PagoIns));
+        SpinnerNumberModel modeloSpinner = new SpinnerNumberModel();
+        modeloSpinner.setMaximum(4);
+        modeloSpinner.setMinimum(1);
+        jSpinner_Cuotas_PagoIns.setModel(modeloSpinner);
+        Calendar cal= Calendar.getInstance();
+        jYearChooserCicloLectivo.setStartYear(cal.get(Calendar.YEAR));
+        JSpinner spinner = (JSpinner)jYearChooserCicloLectivo.getSpinner();
+        ((javax.swing.JTextField)spinner.getEditor()).setEditable(false);
     }
 
     /**
@@ -178,7 +191,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jTextField_Turno_PagoIns = new javax.swing.JTextField();
         jSpinner_Cuotas_PagoIns = new javax.swing.JSpinner();
         jLabel49 = new javax.swing.JLabel();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        jYearChooserCicloLectivo = new com.toedter.calendar.JYearChooser();
         jLabelTotalPagado = new javax.swing.JLabel();
         jLabelMontoRestante = new javax.swing.JLabel();
         jLabelMontoAPagar = new javax.swing.JLabel();
@@ -1067,10 +1080,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel49.setText("Ciclo Lectivo");
 
-        jYearChooser1.setVerifyInputWhenFocusTarget(false);
-        jYearChooser1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jYearChooser1MouseClicked(evt);
+        jYearChooserCicloLectivo.setVerifyInputWhenFocusTarget(false);
+        jYearChooserCicloLectivo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jYearChooserCicloLectivoPropertyChange(evt);
             }
         });
 
@@ -1103,6 +1116,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableCuotas.setRowSelectionAllowed(false);
+        jTableCuotas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableCuotas.getTableHeader().setResizingAllowed(false);
+        jTableCuotas.getTableHeader().setReorderingAllowed(false);
         jScrollPane5.setViewportView(jTableCuotas);
 
         javax.swing.GroupLayout jPanelPagpInscLayout = new javax.swing.GroupLayout(jPanelPagpInsc);
@@ -1137,7 +1154,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addComponent(jTextField_Sala_PagoIns)
                                 .addComponent(jTextField_Turno_PagoIns)
                                 .addGroup(jPanelPagpInscLayout.createSequentialGroup()
-                                    .addComponent(jYearChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                                    .addComponent(jYearChooserCicloLectivo, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                                     .addGap(197, 197, 197)))
                             .addComponent(jTextField_NomyAp_PagoIns, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSpinner_Cuotas_PagoIns, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -1161,7 +1178,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel49)
-                    .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jYearChooserCicloLectivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37)
@@ -1239,12 +1256,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTablePago.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTablePago.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTablePago.getTableHeader().setResizingAllowed(false);
+        jTablePago.getTableHeader().setReorderingAllowed(false);
         jTablePago.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTablePagoMousePressed(evt);
             }
         });
         jScrollPane2.setViewportView(jTablePago);
+        if (jTablePago.getColumnModel().getColumnCount() > 0) {
+            jTablePago.getColumnModel().getColumn(0).setResizable(false);
+            jTablePago.getColumnModel().getColumn(0).setPreferredWidth(300);
+            jTablePago.getColumnModel().getColumn(1).setResizable(false);
+            jTablePago.getColumnModel().getColumn(1).setPreferredWidth(150);
+            jTablePago.getColumnModel().getColumn(2).setResizable(false);
+            jTablePago.getColumnModel().getColumn(3).setResizable(false);
+            jTablePago.getColumnModel().getColumn(3).setPreferredWidth(150);
+        }
 
         jComboBoxSalaPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sala", "5 años", "4 años", "3 años" }));
         jComboBoxSalaPago.addItemListener(new java.awt.event.ItemListener() {
@@ -1811,35 +1841,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanelOpInscripcionMouseClicked
 
     private void jPanelOpPagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpPagoMouseClicked
-        CardLayout card = (CardLayout)jPanelCard.getLayout();
-        card.show(jPanelCard, "pago");
-        modelAlumnos = (DefaultTableModel) jTablePago.getModel();
-        modelCuotas = (DefaultTableModel) jTableCuotas.getModel();
-        ManagerAlumno ma = ManagerAlumno.getManager();
-        listaAlumnos = ma.obtenerTodosAlumno();
+        //Limpio la busqueda
+        jTextFieldBusqueda_Pago.setText("");
+        jComboBoxBusqueda_Pago.setSelectedIndex(0);
+        jComboBoxSalaPago.setSelectedIndex(0);
+        jComboBoxTurnoPago.setSelectedIndex(0);
+        //Limpio los campos cargados
+        jTextField_NomyAp_PagoIns.setEditable(false);
+        jTextField_Sala_PagoIns.setEditable(false);
+        jTextField_Turno_PagoIns.setEditable(false);
+        jComboBoxTipoDePago.setSelectedIndex(0);
+        jTextField_NomyAp_PagoIns.setText("");
+        jTextField_Sala_PagoIns.setText("");
+        jTextField_Turno_PagoIns.setText("");
+        jSpinner_Cuotas_PagoIns.setValue(1);
+        Calendar cal= Calendar.getInstance();
+        jYearChooserCicloLectivo.setValue(cal.get(Calendar.YEAR));
+        jLabelMontoRestante.setText("-");
+        jLabelMontoAPagar.setText("-");
+        jLabelTotalPagado.setText("-");
+        jButtonRegistrarPago.setEnabled(false);
+        modelCuotas.setRowCount(0);
+        //Cargo la tabla
         String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
         String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
         int c = jComboBoxSalaPago.getSelectedIndex();
         int d = jComboBoxTurnoPago.getSelectedIndex();
         cargarTabla(a,b,c,d);
-        jTextField_NomyAp_PagoIns.setEditable(false);
-        jTextField_Sala_PagoIns.setEditable(false);
-        jTextField_Turno_PagoIns.setEditable(false);
-        jSpinner_Cuotas_PagoIns.setValue(1);
-        jSpinner_Cuotas_PagoIns.setEditor(new JSpinner.DefaultEditor(jSpinner_Cuotas_PagoIns));
-        SpinnerNumberModel modeloSpinner = new SpinnerNumberModel();
-        modeloSpinner.setMaximum(4);
-        modeloSpinner.setMinimum(1);
-        jSpinner_Cuotas_PagoIns.setModel(modeloSpinner);
-        Calendar cal= Calendar.getInstance();
-        jYearChooser1.setValue(cal.get(Calendar.YEAR));
-        jYearChooser1.setStartYear(cal.get(Calendar.YEAR));
-        JSpinner spinner = (JSpinner)jYearChooser1.getSpinner();
-        ((javax.swing.JTextField)spinner.getEditor()).setEditable(false);
-        jLabelMontoRestante.setText("-");
-        jLabelMontoAPagar.setText("-");
-        jLabelTotalPagado.setText("-");
-        jButtonRegistrarPago.setEnabled(false);
+        //Muestro la pantalla
+        CardLayout card = (CardLayout)jPanelCard.getLayout();
+        card.show(jPanelCard, "pago");
+       
     }//GEN-LAST:event_jPanelOpPagoMouseClicked
 
     private void jPanelCerrarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelCerrarMouseMoved
@@ -1881,8 +1913,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jComboBoxTipoDePagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTipoDePagoItemStateChanged
         CardLayout card;
         switch(jComboBoxTipoDePago.getSelectedIndex()){
-            case 0: card = (CardLayout)jPanelTipoPago.getLayout();
-                    card.show(jPanelTipoPago, "pagoInscripcion");break;
+            case 0: 
+                    //Limpio la busqueda
+                    jTextFieldBusqueda_Pago.setText("");
+                    jComboBoxBusqueda_Pago.setSelectedIndex(0);
+                    jComboBoxSalaPago.setSelectedIndex(0);
+                    jComboBoxTurnoPago.setSelectedIndex(0);
+                    //Limpio los campos ya cargados
+                    jTextField_NomyAp_PagoIns.setEditable(false);
+                    jTextField_Sala_PagoIns.setEditable(false);
+                    jTextField_Turno_PagoIns.setEditable(false);
+                    jTextField_NomyAp_PagoIns.setText("");
+                    jTextField_Sala_PagoIns.setText("");
+                    jTextField_Turno_PagoIns.setText("");
+                    jSpinner_Cuotas_PagoIns.setValue(1);
+                    Calendar cal= Calendar.getInstance();
+                    jYearChooserCicloLectivo.setValue(cal.get(Calendar.YEAR));
+                    jLabelMontoRestante.setText("-");
+                    jLabelMontoAPagar.setText("-");
+                    jLabelTotalPagado.setText("-");
+                    jButtonRegistrarPago.setEnabled(false);
+                    modelCuotas.setRowCount(0);
+                    //Cargo la tabla
+                    String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
+                    String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
+                    int c = jComboBoxSalaPago.getSelectedIndex();
+                    int d = jComboBoxTurnoPago.getSelectedIndex();
+                    cargarTabla(a,b,c,d);
+                    //Muestro la pantalla
+                    card = (CardLayout)jPanelTipoPago.getLayout();
+                    card.show(jPanelTipoPago, "pagoInscripcion");
+                    break;
             case 1: card = (CardLayout)jPanelTipoPago.getLayout();
                     card.show(jPanelTipoPago, "pagoCuota");break;
             
@@ -1895,7 +1956,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         borrarLabelsDatosAlumno();
         modelAlumnos = (DefaultTableModel) jTableDatosAlumnos.getModel();
         ManagerAlumno ma = ManagerAlumno.getManager();
-        listaAlumnos = ma.obtenerTodosAlumno();
         String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
         String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
         int c = jComboBoxSalaPago.getSelectedIndex();
@@ -2301,7 +2361,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jButtonBuscarAlumBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarAlumBDActionPerformed
         modelAlumnos = (DefaultTableModel) jTableAlumnosDialog.getModel();
         ManagerAlumno ma = ManagerAlumno.getManager();
-        listaAlumnos = ma.obtenerTodosAlumno();
         String a = jComboBox_TipoDialog.getSelectedItem().toString();
         String b = jTextField_BusquedaDialog.getText().toUpperCase();
         int c = jComboBox_SalaDialog.getSelectedIndex();
@@ -2480,7 +2539,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             if(cuotas == 0)
                 cuotas++;
             nroCuota = 1;
-            pagoSeleccionado = new Pago(fechas,"INSCRIPCION",String.valueOf(jYearChooser1.getValue()),cuotas,montoPagado,montoTotal,1,alumnos);
+            pagoSeleccionado = new Pago(fechas,"INSCRIPCION",String.valueOf(jYearChooserCicloLectivo.getValue()),cuotas,montoPagado,montoTotal,1,alumnos);
             //Se lo asigno al alumno seleccionado
             alumnoSeleccionado.getPagos().add(pagoSeleccionado);
             //Lo doy de alta en la BD
@@ -2519,10 +2578,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonRegistrarPagoActionPerformed
 
-    private void jYearChooser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jYearChooser1MouseClicked
-        
-    }//GEN-LAST:event_jYearChooser1MouseClicked
-
     private void jSpinner_Cuotas_PagoInsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner_Cuotas_PagoInsStateChanged
         if(!jTextField_NomyAp_PagoIns.getText().isEmpty()){
             int valorSpinner = (Integer) jSpinner_Cuotas_PagoIns.getValue();
@@ -2550,7 +2605,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         modelCuotas.setRowCount(0);
         jSpinner_Cuotas_PagoIns.setEnabled(true);
         jButtonRegistrarPago.setEnabled(true);
-        int valorPeriodo = jYearChooser1.getValue();
+        int valorPeriodo = jYearChooserCicloLectivo.getValue();
         float valorInscripcion = ManagerPago.getManager().obtenerValorInscripcion();
         boolean encontroInscripcion = false;
         //Seteo los campos con los datos del alumno seleccionado
@@ -2622,27 +2677,40 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         //Si no hay pago de inscripcion del alumno seleccionado en el año que indica el YearChooser
         else{
-            nuevo = true;
-            jLabelMontoRestante.setText("$ "+String.valueOf(valorInscripcion)+"0");
-            int valorSpinner = (Integer) jSpinner_Cuotas_PagoIns.getValue();
-            //La primera vez que ingresa, el valor del Spinner es 0
-            if(valorSpinner == 0)
-                valorSpinner++;
-            switch(valorSpinner){
-                case 1:
-                    jLabelMontoAPagar.setText("$ "+valorInscripcion+"0");
-                    break;
-                case 2:
-                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/2)+"0");
-                    break;
-                case 3:
-                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/3)+"0");
-                    break;
-                case 4:
-                    jLabelMontoAPagar.setText("$ "+(valorInscripcion/4)+"0");
-                    break;
+            if(alumnoSeleccionado.estaInscripto(valorPeriodo)){
+                nuevo = true;
+                if(alumnoSeleccionado.tieneHermanos(valorPeriodo))
+                    valorInscripcion = (float)((int)valorInscripcion*0.7);
+                jLabelMontoRestante.setText("$ "+String.valueOf(valorInscripcion)+"0");
+                int valorSpinner = (Integer) jSpinner_Cuotas_PagoIns.getValue();
+                //La primera vez que ingresa, el valor del Spinner es 0
+                if(valorSpinner == 0)
+                    valorSpinner++;
+                switch(valorSpinner){
+                    case 1:
+                        jLabelMontoAPagar.setText("$ "+valorInscripcion+"0");
+                        break;
+                    case 2:
+                        jLabelMontoAPagar.setText("$ "+(valorInscripcion/2)+"0");
+                        break;
+                    case 3:
+                        jLabelMontoAPagar.setText("$ "+(valorInscripcion/3)+"0");
+                        break;
+                    case 4:
+                        jLabelMontoAPagar.setText("$ "+(valorInscripcion/4)+"0");
+                        break;
+                }
             }
-        }
+            else{
+                jButtonRegistrarPago.setEnabled(false);
+                jLabelMontoRestante.setText("-");
+                jLabelMontoAPagar.setText("-");
+                jTextField_NomyAp_PagoIns.setText("");
+                jTextField_Sala_PagoIns.setText("");
+                jTextField_Turno_PagoIns.setText("");
+                JOptionPane.showMessageDialog(null,"El alumno seleccionado no está inscripto en el ciclo lectivo "+valorPeriodo+".", "Info",JOptionPane.WARNING_MESSAGE);
+            }
+        }   
     }//GEN-LAST:event_jTablePagoMousePressed
 
     private void jTableDatosAlumnosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDatosAlumnosMousePressed
@@ -2730,6 +2798,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jTableDatosAlumnosMousePressed
+
+    private void jYearChooserCicloLectivoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jYearChooserCicloLectivoPropertyChange
+        //Si esta vacio significa que es la primera vez que entra
+        if(!jTextField_NomyAp_PagoIns.getText().isEmpty()){
+            //Limpio los campos ya cargados
+            jTextField_NomyAp_PagoIns.setEditable(false);
+            jTextField_Sala_PagoIns.setEditable(false);
+            jTextField_Turno_PagoIns.setEditable(false);
+            jTextField_NomyAp_PagoIns.setText("");
+            jTextField_Sala_PagoIns.setText("");
+            jTextField_Turno_PagoIns.setText("");
+            jSpinner_Cuotas_PagoIns.setValue(1);
+            Calendar cal= Calendar.getInstance();
+            jLabelMontoRestante.setText("-");
+            jLabelMontoAPagar.setText("-");
+            jLabelTotalPagado.setText("-");
+            jButtonRegistrarPago.setEnabled(false);
+            modelCuotas.setRowCount(0);
+            jTablePago.clearSelection();
+            
+        }
+    }//GEN-LAST:event_jYearChooserCicloLectivoPropertyChange
 
 
     /**
@@ -2965,7 +3055,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_TipoDoc_Padre;
     private javax.swing.JTextField jTextField_TipoDoc_Tutor;
     private javax.swing.JTextField jTextField_Turno_PagoIns;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
+    private com.toedter.calendar.JYearChooser jYearChooserCicloLectivo;
     // End of variables declaration//GEN-END:variables
     
     private void borrarLabelsDatosAlumno(){

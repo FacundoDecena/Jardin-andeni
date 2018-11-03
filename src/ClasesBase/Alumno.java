@@ -194,6 +194,30 @@ public class Alumno extends Persona {
         }
         return ultimoAño;
     }
-
-
+    
+    public boolean tieneHermanos(int añoLectivo){
+        Iterator i = hermanos.iterator();
+        while(i.hasNext()){
+            Alumno a = (Alumno) i.next();
+            Set<Integer> s = a.getSalas().keySet();
+            Iterator j = s.iterator();
+            while(j.hasNext()){
+                int año = (int) j.next();
+                if(año == añoLectivo)
+                    return true;                    
+            }
+        }
+        return false;
+    }
+    
+    public boolean estaInscripto(int añoLectivo){
+        Iterator i = salas.keySet().iterator();
+        while(i.hasNext()){
+            int año = (int) i.next();
+            if(año == añoLectivo){
+                return true;
+            }
+        }
+        return false;
+    }
 }

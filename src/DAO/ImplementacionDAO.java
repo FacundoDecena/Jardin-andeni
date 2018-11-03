@@ -420,7 +420,9 @@ public class ImplementacionDAO implements DAO {
             Set<Pago> pagos;
             Set<Tutor> tutores;
             ResultSet rsAlumno = null;
-            rsAlumno = s.executeQuery("SELECT * FROM ALUMNO");
+            rsAlumno = s.executeQuery("SELECT ALUMNO.DNI,FECHADENACIMIENTO,LUGARDENACIMIENTO,CONTROLMEDICO,"+
+                                      "VACUNAS,CONTROLNATACION,DOMICILIO,TRAEMATERIALES,TELEFONO,OTROSDATOS "+
+                                       "FROM ALUMNO,PERSONA WHERE PERSONA.DNI=ALUMNO.DNI ORDER BY PERSONA.APELLIDOYNOMBRE");
             Statement sAux = c.createStatement();
             ResultSet rsSala = sAux.executeQuery("SELECT IDSALA FROM SALA");
             while(rsSala.next()){
@@ -484,6 +486,24 @@ public class ImplementacionDAO implements DAO {
                                            rsAlumno.getString("OTROSDATOS"),null,tutores,pagos,mapaSalas,null,dni,apellidoYNombre);
                 listaDeAlumnos.add(alumno);
             }
+            ResultSet rsHermanos;
+            Iterator i = listaDeAlumnos.iterator();
+            while(i.hasNext()){
+                Alumno a = (Alumno)i.next();
+                a.setHermanos(new HashSet());
+                rsHermanos = sAux.executeQuery("SELECT DNI1 FROM ES_HERMANO WHERE DNI2="+a.getDni());
+                while(rsHermanos.next()){
+                    int dni1 = rsHermanos.getInt("DNI1");
+                    Iterator j = listaDeAlumnos.iterator();
+                    while(j.hasNext()){
+                        Alumno b = (Alumno) j.next();
+                        if(b.getDni() == dni1){
+                            a.getHermanos().add(b);
+                        }
+                    }
+                }
+            }
+            
             s.close();
             sAux.close();
             return listaDeAlumnos;

@@ -6,6 +6,7 @@ import ClasesBase.RegistroAsistencia;
 import ClasesBase.Sala;
 import ClasesBase.Tutor;
 import DAO.ImplementacionDAO;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -71,8 +72,15 @@ public class ManagerAlumno{
         return ImplementacionDAO.getDAO().obtenerAlumno(dni);
     }*/
     
-    public void actualizarAñoLectivo(int dni, int idSala, int añoLectivo){
-        ImplementacionDAO.getDAO().agregarAñoLectivo(dni, idSala, añoLectivo);
+    public boolean actualizarAñoLectivo(int dni, int idSala, int añoLectivo){
+        try{
+            if(ImplementacionDAO.getDAO().agregarAñoLectivo(dni, idSala, añoLectivo))
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+        return false;
     }
     
     

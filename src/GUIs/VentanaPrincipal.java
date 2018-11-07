@@ -16,7 +16,9 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -35,7 +37,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
-    private DefaultTableModel model;
+    private DefaultTableModel modelAlumnos;
+    private DefaultTableModel modelCuotas;
     private List<Alumno> listaAlumnos;
     private Alumno alumnoSeleccionado;
     private Pago pagoSeleccionado;
@@ -44,6 +47,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         initComponents();
         jDialogBuscar.setLocationRelativeTo(null);
+        ManagerAlumno ma = ManagerAlumno.getManager();
+        listaAlumnos = ma.obtenerTodosAlumno();
+        modelAlumnos = (DefaultTableModel) jTablePago.getModel();
+        modelCuotas = (DefaultTableModel) jTableCuotas.getModel();
+        jSpinner_Cuotas_PagoIns.setEditor(new JSpinner.DefaultEditor(jSpinner_Cuotas_PagoIns));
+        SpinnerNumberModel modeloSpinner = new SpinnerNumberModel();
+        modeloSpinner.setMaximum(4);
+        modeloSpinner.setMinimum(1);
+        jSpinner_Cuotas_PagoIns.setModel(modeloSpinner);
+        Calendar cal= Calendar.getInstance();
+        jYearChooserCicloLectivo.setStartYear(cal.get(Calendar.YEAR));
+        JSpinner spinner = (JSpinner)jYearChooserCicloLectivo.getSpinner();
+        ((javax.swing.JTextField)spinner.getEditor()).setEditable(false);
     }
 
     /**
@@ -162,8 +178,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jComboBoxTipoDePago = new javax.swing.JComboBox<>();
         jPanelTipoPago = new javax.swing.JPanel();
-        jPanelCuota = new javax.swing.JPanel();
-        jLabel41 = new javax.swing.JLabel();
         jPanelPagpInsc = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
@@ -177,11 +191,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jTextField_Turno_PagoIns = new javax.swing.JTextField();
         jSpinner_Cuotas_PagoIns = new javax.swing.JSpinner();
         jLabel49 = new javax.swing.JLabel();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        jYearChooserCicloLectivo = new com.toedter.calendar.JYearChooser();
         jLabelTotalPagado = new javax.swing.JLabel();
+        jLabelMontoRestante = new javax.swing.JLabel();
         jLabelMontoAPagar = new javax.swing.JLabel();
-        jLabelMontoCuota = new javax.swing.JLabel();
         jButtonRegistrarPago = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTableCuotas = new javax.swing.JTable();
+        jPanelCuota = new javax.swing.JPanel();
+        jLabel41 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel43 = new javax.swing.JLabel();
         jTextFieldBusqueda_Pago = new javax.swing.JTextField();
@@ -1020,7 +1038,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton_Inscribir)))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
 
         jPanelCard.add(jPanelInscripcion, "inscripcion");
@@ -1038,27 +1056,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanelTipoPago.setLayout(new java.awt.CardLayout());
 
-        jLabel41.setText("Pago cuota");
-
-        javax.swing.GroupLayout jPanelCuotaLayout = new javax.swing.GroupLayout(jPanelCuota);
-        jPanelCuota.setLayout(jPanelCuotaLayout);
-        jPanelCuotaLayout.setHorizontalGroup(
-            jPanelCuotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCuotaLayout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(jLabel41)
-                .addContainerGap(218, Short.MAX_VALUE))
-        );
-        jPanelCuotaLayout.setVerticalGroup(
-            jPanelCuotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCuotaLayout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(jLabel41)
-                .addContainerGap(513, Short.MAX_VALUE))
-        );
-
-        jPanelTipoPago.add(jPanelCuota, "pagoCuota");
-
         jLabel34.setText("Apellido y Nombre");
 
         jLabel35.setText("Sala");
@@ -1067,9 +1064,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel37.setText("Cuotas");
 
-        jLabel38.setText("Total Pagado");
+        jLabel38.setText("Total pagado");
 
-        jLabel39.setText("Valor total");
+        jLabel39.setText("Monto restante");
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel40.setText("Monto a pagar");
@@ -1083,18 +1080,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel49.setText("Ciclo Lectivo");
 
-        jYearChooser1.setVerifyInputWhenFocusTarget(false);
-        jYearChooser1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jYearChooser1MouseClicked(evt);
+        jYearChooserCicloLectivo.setVerifyInputWhenFocusTarget(false);
+        jYearChooserCicloLectivo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jYearChooserCicloLectivoPropertyChange(evt);
             }
         });
 
         jLabelTotalPagado.setText("jLabel53");
 
-        jLabelMontoAPagar.setText("jLabel53");
+        jLabelMontoRestante.setText("jLabel53");
 
-        jLabelMontoCuota.setText("jLabel53");
+        jLabelMontoAPagar.setText("jLabel53");
 
         jButtonRegistrarPago.setText("Registrar pago");
         jButtonRegistrarPago.addActionListener(new java.awt.event.ActionListener() {
@@ -1103,49 +1100,65 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jTableCuotas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nro. de cuota", "Fecha de pago", "Pagado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableCuotas.setRowSelectionAllowed(false);
+        jTableCuotas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableCuotas.getTableHeader().setResizingAllowed(false);
+        jTableCuotas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane5.setViewportView(jTableCuotas);
+
         javax.swing.GroupLayout jPanelPagpInscLayout = new javax.swing.GroupLayout(jPanelPagpInsc);
         jPanelPagpInsc.setLayout(jPanelPagpInscLayout);
         jPanelPagpInscLayout.setHorizontalGroup(
             jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPagpInscLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonRegistrarPago)
-                .addGap(157, 157, 157))
             .addGroup(jPanelPagpInscLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanelPagpInscLayout.createSequentialGroup()
-                            .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel34)
-                                .addComponent(jLabel35)
-                                .addComponent(jLabel36)
-                                .addComponent(jLabel49))
-                            .addGap(50, 50, 50)
+                    .addGroup(jPanelPagpInscLayout.createSequentialGroup()
+                        .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
+                        .addGap(51, 51, 51)
+                        .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelMontoAPagar)
+                            .addComponent(jLabelMontoRestante)
+                            .addComponent(jLabelTotalPagado)
+                            .addComponent(jButtonRegistrarPago)))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelPagpInscLayout.createSequentialGroup()
+                        .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel35, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel36, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel49, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel37, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField_NomyAp_PagoIns, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                                 .addComponent(jTextField_Sala_PagoIns)
                                 .addComponent(jTextField_Turno_PagoIns)
                                 .addGroup(jPanelPagpInscLayout.createSequentialGroup()
-                                    .addComponent(jYearChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGap(156, 156, 156))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPagpInscLayout.createSequentialGroup()
-                            .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel37)
-                                .addGroup(jPanelPagpInscLayout.createSequentialGroup()
-                                    .addGap(12, 12, 12)
-                                    .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel39)
-                                        .addComponent(jLabel38))))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                            .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabelMontoCuota)
-                                .addComponent(jLabelMontoAPagar)
-                                .addComponent(jLabelTotalPagado)
-                                .addComponent(jSpinner_Cuotas_PagoIns, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(156, 156, 156)))
-                    .addComponent(jLabel40))
-                .addContainerGap(64, Short.MAX_VALUE))
+                                    .addComponent(jYearChooserCicloLectivo, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                                    .addGap(197, 197, 197)))
+                            .addComponent(jTextField_NomyAp_PagoIns, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinner_Cuotas_PagoIns, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanelPagpInscLayout.setVerticalGroup(
             jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1162,32 +1175,55 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
                     .addComponent(jTextField_Turno_PagoIns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel49)
-                    .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jYearChooserCicloLectivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37)
                     .addComponent(jSpinner_Cuotas_PagoIns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel40)
-                    .addComponent(jLabelMontoCuota))
-                .addGap(121, 121, 121)
-                .addComponent(jButtonRegistrarPago)
-                .addGap(78, 78, 78)
-                .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelTotalPagado)
-                    .addComponent(jLabel38))
+                    .addComponent(jLabel38)
+                    .addComponent(jLabelTotalPagado))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel39)
+                    .addComponent(jLabelMontoRestante))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelPagpInscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel40)
                     .addComponent(jLabelMontoAPagar))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addComponent(jButtonRegistrarPago)
+                .addContainerGap(203, Short.MAX_VALUE))
         );
 
         jPanelTipoPago.add(jPanelPagpInsc, "pagoInscripcion");
+
+        jLabel41.setText("Pago cuota");
+
+        javax.swing.GroupLayout jPanelCuotaLayout = new javax.swing.GroupLayout(jPanelCuota);
+        jPanelCuota.setLayout(jPanelCuotaLayout);
+        jPanelCuotaLayout.setHorizontalGroup(
+            jPanelCuotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCuotaLayout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(jLabel41)
+                .addContainerGap(218, Short.MAX_VALUE))
+        );
+        jPanelCuotaLayout.setVerticalGroup(
+            jPanelCuotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCuotaLayout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(jLabel41)
+                .addContainerGap(572, Short.MAX_VALUE))
+        );
+
+        jPanelTipoPago.add(jPanelCuota, "pagoCuota");
 
         jLabel43.setText("Buscar Alumno");
 
@@ -1220,12 +1256,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTablePago.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTablePago.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTablePago.getTableHeader().setResizingAllowed(false);
+        jTablePago.getTableHeader().setReorderingAllowed(false);
         jTablePago.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTablePagoMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTablePagoMousePressed(evt);
             }
         });
         jScrollPane2.setViewportView(jTablePago);
+        if (jTablePago.getColumnModel().getColumnCount() > 0) {
+            jTablePago.getColumnModel().getColumn(0).setResizable(false);
+            jTablePago.getColumnModel().getColumn(0).setPreferredWidth(300);
+            jTablePago.getColumnModel().getColumn(1).setResizable(false);
+            jTablePago.getColumnModel().getColumn(1).setPreferredWidth(150);
+            jTablePago.getColumnModel().getColumn(2).setResizable(false);
+            jTablePago.getColumnModel().getColumn(3).setResizable(false);
+            jTablePago.getColumnModel().getColumn(3).setPreferredWidth(150);
+        }
 
         jComboBoxSalaPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sala", "5 años", "4 años", "3 años" }));
         jComboBoxSalaPago.addItemListener(new java.awt.event.ItemListener() {
@@ -1283,9 +1332,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanelPagoLayout.createSequentialGroup()
                 .addGroup(jPanelPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelPagoLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addGap(12, 12, 12)
                         .addComponent(jLabel2)
-                        .addGap(41, 41, 41)
+                        .addGap(32, 32, 32)
                         .addComponent(jComboBoxTipoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelPagoLayout.createSequentialGroup()
                         .addContainerGap()
@@ -1363,8 +1412,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jTableDatosAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableDatosAlumnosMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTableDatosAlumnosMousePressed(evt);
             }
         });
         jScrollPane4.setViewportView(jTableDatosAlumnos);
@@ -1526,7 +1575,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel_Edad)
                     .addComponent(jLabel_Domicilio)
                     .addComponent(jLabel_TelefonoEmergencia))
-                .addGap(0, 374, Short.MAX_VALUE))
+                .addGap(0, 302, Short.MAX_VALUE))
         );
         jPanelFondoDatosAlumnosLayout.setVerticalGroup(
             jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1623,7 +1672,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel76)
                     .addComponent(jLabel_TelefonoTrabajoTutor))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelDatosAlumnosLayout = new javax.swing.GroupLayout(jPanelDatosAlumnos);
@@ -1734,21 +1783,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelFondoLayout.setHorizontalGroup(
             jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFondoLayout.createSequentialGroup()
-                .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanelInterseccion, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                    .addGroup(jPanelFondoLayout.createSequentialGroup()
-                        .addComponent(jPanelPestanas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(jPanelFondoLayout.createSequentialGroup()
+                        .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanelInterseccion, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                            .addGroup(jPanelFondoLayout.createSequentialGroup()
+                                .addComponent(jPanelPestanas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanelCard, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(jPanelFondoLayout.createSequentialGroup()
+                        .addComponent(jPanelBarraSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFondoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelBarraSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
         );
         jPanelFondoLayout.setVerticalGroup(
             jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1788,37 +1838,41 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jPanelOpInscripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpInscripcionMouseClicked
         CardLayout card = (CardLayout)jPanelCard.getLayout();
         card.show(jPanelCard, "inscripcion");
+        borrarTextFieldInscripcion();
     }//GEN-LAST:event_jPanelOpInscripcionMouseClicked
 
     private void jPanelOpPagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpPagoMouseClicked
-        CardLayout card = (CardLayout)jPanelCard.getLayout();
-        card.show(jPanelCard, "pago");
-        model = (DefaultTableModel) jTablePago.getModel();
-        ManagerAlumno ma = ManagerAlumno.getManager();
-        listaAlumnos = ma.obtenerTodosAlumno();
+        //Limpio la busqueda
+        jTextFieldBusqueda_Pago.setText("");
+        jComboBoxBusqueda_Pago.setSelectedIndex(0);
+        jComboBoxSalaPago.setSelectedIndex(0);
+        jComboBoxTurnoPago.setSelectedIndex(0);
+        //Limpio los campos cargados
+        jTextField_NomyAp_PagoIns.setEditable(false);
+        jTextField_Sala_PagoIns.setEditable(false);
+        jTextField_Turno_PagoIns.setEditable(false);
+        jComboBoxTipoDePago.setSelectedIndex(0);
+        jTextField_NomyAp_PagoIns.setText("");
+        jTextField_Sala_PagoIns.setText("");
+        jTextField_Turno_PagoIns.setText("");
+        jSpinner_Cuotas_PagoIns.setValue(1);
+        Calendar cal= Calendar.getInstance();
+        jYearChooserCicloLectivo.setValue(cal.get(Calendar.YEAR));
+        jLabelMontoRestante.setText("-");
+        jLabelMontoAPagar.setText("-");
+        jLabelTotalPagado.setText("-");
+        jButtonRegistrarPago.setEnabled(false);
+        modelCuotas.setRowCount(0);
+        //Cargo la tabla
         String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
         String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
         int c = jComboBoxSalaPago.getSelectedIndex();
         int d = jComboBoxTurnoPago.getSelectedIndex();
         cargarTabla(a,b,c,d);
-        jTextField_NomyAp_PagoIns.setEditable(false);
-        jTextField_Sala_PagoIns.setEditable(false);
-        jTextField_Turno_PagoIns.setEditable(false);
-        jSpinner_Cuotas_PagoIns.setValue(1);
-        jSpinner_Cuotas_PagoIns.setEditor(new JSpinner.DefaultEditor(jSpinner_Cuotas_PagoIns));
-        SpinnerNumberModel modeloSpinner = new SpinnerNumberModel();
-        modeloSpinner.setMaximum(4);
-        modeloSpinner.setMinimum(1);
-        jSpinner_Cuotas_PagoIns.setModel(modeloSpinner);
-        Calendar cal= Calendar.getInstance();
-        jYearChooser1.setValue(cal.get(Calendar.YEAR));
-        jYearChooser1.setStartYear(cal.get(Calendar.YEAR));
-        JSpinner spinner = (JSpinner)jYearChooser1.getSpinner();
-        ((javax.swing.JTextField)spinner.getEditor()).setEditable(false);
-        jLabelMontoAPagar.setText("-");
-        jLabelMontoCuota.setText("-");
-        jLabelTotalPagado.setText("-");
-        jButtonRegistrarPago.setEnabled(false);
+        //Muestro la pantalla
+        CardLayout card = (CardLayout)jPanelCard.getLayout();
+        card.show(jPanelCard, "pago");
+       
     }//GEN-LAST:event_jPanelOpPagoMouseClicked
 
     private void jPanelCerrarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelCerrarMouseMoved
@@ -1860,8 +1914,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jComboBoxTipoDePagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTipoDePagoItemStateChanged
         CardLayout card;
         switch(jComboBoxTipoDePago.getSelectedIndex()){
-            case 0: card = (CardLayout)jPanelTipoPago.getLayout();
-                    card.show(jPanelTipoPago, "pagoInscripcion");break;
+            case 0: 
+                    //Limpio la busqueda
+                    jTextFieldBusqueda_Pago.setText("");
+                    jComboBoxBusqueda_Pago.setSelectedIndex(0);
+                    jComboBoxSalaPago.setSelectedIndex(0);
+                    jComboBoxTurnoPago.setSelectedIndex(0);
+                    //Limpio los campos ya cargados
+                    jTextField_NomyAp_PagoIns.setEditable(false);
+                    jTextField_Sala_PagoIns.setEditable(false);
+                    jTextField_Turno_PagoIns.setEditable(false);
+                    jTextField_NomyAp_PagoIns.setText("");
+                    jTextField_Sala_PagoIns.setText("");
+                    jTextField_Turno_PagoIns.setText("");
+                    jSpinner_Cuotas_PagoIns.setValue(1);
+                    Calendar cal= Calendar.getInstance();
+                    jYearChooserCicloLectivo.setValue(cal.get(Calendar.YEAR));
+                    jLabelMontoRestante.setText("-");
+                    jLabelMontoAPagar.setText("-");
+                    jLabelTotalPagado.setText("-");
+                    jButtonRegistrarPago.setEnabled(false);
+                    modelCuotas.setRowCount(0);
+                    //Cargo la tabla
+                    String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
+                    String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
+                    int c = jComboBoxSalaPago.getSelectedIndex();
+                    int d = jComboBoxTurnoPago.getSelectedIndex();
+                    cargarTabla(a,b,c,d);
+                    //Muestro la pantalla
+                    card = (CardLayout)jPanelTipoPago.getLayout();
+                    card.show(jPanelTipoPago, "pagoInscripcion");
+                    break;
             case 1: card = (CardLayout)jPanelTipoPago.getLayout();
                     card.show(jPanelTipoPago, "pagoCuota");break;
             
@@ -1872,9 +1955,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         CardLayout card = (CardLayout)jPanelCard.getLayout();
         card.show(jPanelCard, "datosAlumnos");
         borrarLabelsDatosAlumno();
-        model = (DefaultTableModel) jTableDatosAlumnos.getModel();
+        modelAlumnos = (DefaultTableModel) jTableDatosAlumnos.getModel();
         ManagerAlumno ma = ManagerAlumno.getManager();
-        listaAlumnos = ma.obtenerTodosAlumno();
         String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
         String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
         int c = jComboBoxSalaPago.getSelectedIndex();
@@ -2025,7 +2107,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             if(!error){
                 try{
                     tutor = mngTutor.nuevoTutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
-                    tutores.add(tutor);
+                    if(!(tutor == null)){
+                        tutores.add(tutor);
+                    }
                 }
                 catch (Exception es){
                     JOptionPane.showMessageDialog(null,es.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
@@ -2082,7 +2166,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             if(!error && jRadioButtonAgregarMadre.isSelected()){
                 try{
                     tutor = mngTutor.nuevoTutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
-                    tutores.add(tutor);
+                    if(!(tutor == null)){
+                        tutores.add(tutor);
+                    }
                 }
                 catch (Exception es){
                     JOptionPane.showMessageDialog(null,es.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
@@ -2140,7 +2226,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             if(!error && jRadioButtonAgregarTutor.isSelected()){
                 try{
                     tutor = mngTutor.nuevoTutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
-                    tutores.add(tutor);
+                    if(!(tutor == null)){
+                        tutores.add(tutor);
+                    }
                 }
                 catch (Exception es){
                     JOptionPane.showMessageDialog(null,es.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
@@ -2160,13 +2248,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
             }
             else{
-                /*alumno = mngAlumno.getAlumno(dni);
-                cal = Calendar.getInstance();
-                salas = alumno.getSalas();
-                sala = salas.get(cal.get(Calendar.YEAR));
-                if(sala != null){
-                    JOptionPane.showMessageDialog(null,"El alumno ya esta inscripto", "Notificacion",JOptionPane.WARNING_MESSAGE);
-                }*/
                 mngAlumno.actualizarAñoLectivo(dni, idSala, cal.get(Calendar.YEAR));
                 JOptionPane.showMessageDialog(null,"El alumno ha sido Inscripto correctamente", "Inscripto",JOptionPane.INFORMATION_MESSAGE);
             }
@@ -2277,100 +2358,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cargarTabla(a,b,c,d);
     }//GEN-LAST:event_jComboBoxBusqueda_PagoItemStateChanged
 
-    private void jTablePagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePagoMouseClicked
-        String apellidoFila = String.valueOf(model.getValueAt(jTablePago.getSelectedRow(),0));
-        String dniFila = String.valueOf(model.getValueAt(jTablePago.getSelectedRow(),1));
-        String salaFila = String.valueOf(model.getValueAt(jTablePago.getSelectedRow(),2));
-        String turnoFila = String.valueOf(model.getValueAt(jTablePago.getSelectedRow(),3));
-        jSpinner_Cuotas_PagoIns.setEnabled(true);
-        jButtonRegistrarPago.setEnabled(true);
-        Iterator i = listaAlumnos.iterator();
-        Set<Pago> pagos = null;  
-        while(i.hasNext()){
-            Alumno a = (Alumno) i.next();
-            if(dniFila.equals(String.valueOf(a.getDni()))){
-                jTextField_NomyAp_PagoIns.setText(apellidoFila);
-                jTextField_Sala_PagoIns.setText(salaFila);
-                jTextField_Turno_PagoIns.setText(turnoFila);
-                pagos = a.getPagos();
-                alumnoSeleccionado = a;
-                break;
-            }
-        }
-        
-        float valorInscripcion = ManagerPago.getManager().obtenerValorInscripcion();
-        int valorPeriodo = jYearChooser1.getValue();
-        if(pagos.isEmpty()){
-            nuevo=true;
-            jLabelMontoAPagar.setText("$ "+String.valueOf(valorInscripcion)+"0");
-            jLabelTotalPagado.setText("$ 0.00");
-            int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
-            switch(valorSpinner){
-                case 0:
-                    jLabelMontoCuota.setText("$ "+valorInscripcion+"0");
-                    break;
-                case 1:
-                    jLabelMontoCuota.setText("$ "+(valorInscripcion/2)+"0");
-                    break;
-                case 2:
-                    jLabelMontoCuota.setText("$ "+(valorInscripcion/3)+"0");
-                    break;
-                case 3:
-                    jLabelMontoCuota.setText("$ "+(valorInscripcion/4)+"0");
-                    break;
-            }
-        }
-        else{
-            boolean encontroInscripcion = false;
-            i = pagos.iterator();
-            while(i.hasNext()){
-                Pago pago = (Pago) i.next();
-                if(Integer.parseInt(pago.getPeriodo()) == valorPeriodo && pago.getTipoPago().equals("INSCRIPCION")){
-                    pagoSeleccionado = pago;
-                    if(pagoSeleccionado.getMontoPagado() == pagoSeleccionado.getMontoTotal()){
-                        jButtonRegistrarPago.setEnabled(false);
-                        JOptionPane.showMessageDialog(null,"La inscripcion de "+valorPeriodo+" de este alumno ya esta pagada completamente.", "Info",JOptionPane.INFORMATION_MESSAGE);
-                        jLabelMontoCuota.setText("-");
-                    }
-                    else{
-                    jLabelMontoCuota.setText("$ "+(pagoSeleccionado.getMontoTotal()/pagoSeleccionado.getCuotas())+"0");
-                    }
-                    jLabelMontoAPagar.setText("$ "+pagoSeleccionado.getMontoTotal()+"0");
-                    jLabelTotalPagado.setText("$ "+pagoSeleccionado.getMontoPagado()+"0");
-                    jSpinner_Cuotas_PagoIns.setValue(pagoSeleccionado.getCuotas());
-                    jSpinner_Cuotas_PagoIns.setEnabled(false);
-                    encontroInscripcion=true;
-                    nuevo=false;
-                    break;
-                }
-            }
-            if(!encontroInscripcion){
-                nuevo=true;
-               jLabelMontoAPagar.setText("$ "+String.valueOf(valorInscripcion)+"0");
-                int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
-                switch(valorSpinner){
-                    case 1:
-                        jLabelMontoCuota.setText("$ "+valorInscripcion+"0");
-                        break;
-                    case 2:
-                        jLabelMontoCuota.setText("$ "+(valorInscripcion/2)+"0");
-                        break;
-                    case 3:
-                        jLabelMontoCuota.setText("$ "+(valorInscripcion/3)+"0");
-                        break;
-                    case 4:
-                        jLabelMontoCuota.setText("$ "+(valorInscripcion/4)+"0");
-                        break;
-                }
-                jLabelTotalPagado.setText("$ 0.00");
-            }
-        }   
-    }//GEN-LAST:event_jTablePagoMouseClicked
-
     private void jButtonBuscarAlumBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarAlumBDActionPerformed
-        model = (DefaultTableModel) jTableAlumnosDialog.getModel();
+        modelAlumnos = (DefaultTableModel) jTableAlumnosDialog.getModel();
         ManagerAlumno ma = ManagerAlumno.getManager();
-        listaAlumnos = ma.obtenerTodosAlumno();
         String a = jComboBox_TipoDialog.getSelectedItem().toString();
         String b = jTextField_BusquedaDialog.getText().toUpperCase();
         int c = jComboBox_SalaDialog.getSelectedIndex();
@@ -2430,7 +2420,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jCheckBoxTraeMateriales.setEnabled(false);
         jCheckBoxVacunas.setEnabled(false);
         
-        String dniFila = String.valueOf(model.getValueAt(jTableAlumnosDialog.getSelectedRow(),1));
+        String dniFila = String.valueOf(modelAlumnos.getValueAt(jTableAlumnosDialog.getSelectedRow(),1));
         Set<Tutor> tutors;
         Iterator j;
         Iterator i = listaAlumnos.iterator();
@@ -2483,31 +2473,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 break;
             }
         }
+        jDialogBuscar.setVisible(false);
+        jRadioButtonAgregarMadre.setEnabled(false);
+        jRadioButtonAgregarPadre.setEnabled(false);
     }//GEN-LAST:event_jTableAlumnosDialogMouseClicked
-    private void jSpinner_Cuotas_PagoInsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner_Cuotas_PagoInsStateChanged
-        if(!jTextField_NomyAp_PagoIns.getText().isEmpty()){
-            int valorSpinner = (Integer)jSpinner_Cuotas_PagoIns.getValue();
-            switch(valorSpinner){
-                case 1:
-                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion())+"0");
-                    break;
-                case 2:
-                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/2)+"0");
-                    break;
-                case 3:
-                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/3)+"0");
-                    break;
-                case 4:
-                    jLabelMontoCuota.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/4)+"0");
-                    break;
-                default:
-                    jLabelMontoCuota.setText("-");
-
-            }
-        }
-        
-        
-    }//GEN-LAST:event_jSpinner_Cuotas_PagoInsStateChanged
 
     private void jRadioButtonAgregarMadreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonAgregarMadreStateChanged
         if(jRadioButtonAgregarMadre.isSelected()){
@@ -2545,54 +2514,210 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonRegistrarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarPagoActionPerformed
-        java.util.Date fecha = new Date();
+        //Creo la fecha para agregarla al pago
+        java.util.Date fechaActualFormatoDate = new Date();
+        Calendar r = new GregorianCalendar();
+        String fecha = "", parcial;
+        r.setTime(fechaActualFormatoDate);
+        parcial = String.valueOf(r.get(Calendar.YEAR));
+        fecha = fecha.concat(parcial+"-");
+        parcial = String.valueOf(r.get(Calendar.MONTH)+1);
+        fecha = fecha.concat(parcial+"-");
+        parcial = String.valueOf(r.get(Calendar.DATE));
+        fecha = fecha.concat(parcial);
+        List<Date> fechas = new ArrayList<>();
+        fechas.add(fechaActualFormatoDate);
+        //Guardo el alumno a quien corresponde el pago.
         Set<Alumno> alumnos = new HashSet<>();
         alumnos.add(alumnoSeleccionado);
-        List<Date> fechas = new ArrayList<>();
-        fechas.add(fecha);
-        
+        float montoTotal,montoPagado,nuevoMontoPagado;
+        int cuotas,nroCuota;
+        //Si no existia un pago de inscripcion del ano lectivo seleccionado
         if(nuevo){
-            Pago nuevoPago = new Pago(fechas,"INSCRIPCION",String.valueOf(jYearChooser1.getValue()),
-                                      (Integer)jSpinner_Cuotas_PagoIns.getValue(),
-                                      Float.parseFloat(jLabelMontoCuota.getText().substring(2,jLabelMontoCuota.getText().length()-2)),
-                                      Float.parseFloat(jLabelMontoAPagar.getText().substring(2,jLabelMontoAPagar.getText().length()-2)),1,
-                                      alumnos);
-            alumnoSeleccionado.getPagos().add(nuevoPago);
-            ManagerPago.getManager().altaPago(nuevoPago);
-            jLabelTotalPagado.setText("$ "+String.valueOf(nuevoPago.getMontoPagado())+"0");
-            jSpinner_Cuotas_PagoIns.setEnabled(false);
-            if(nuevoPago.getMontoPagado()==nuevoPago.getMontoTotal())
-            {
-                jButtonRegistrarPago.setEnabled(false);
-                JOptionPane.showMessageDialog(null,"Se ha realizado el pago total de la inscripcion.", "Exito",JOptionPane.INFORMATION_MESSAGE);
-                jLabelMontoCuota.setText("-");
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Pago realizado correctamente.", "Exito",JOptionPane.INFORMATION_MESSAGE);
-            }
+            //Creo el nuevo pago
+            montoTotal = Float.parseFloat(jLabelMontoRestante.getText().substring(2,jLabelMontoRestante.getText().length()-1));
+            montoPagado = Float.parseFloat(jLabelMontoAPagar.getText().substring(2,jLabelMontoAPagar.getText().length()-2));
+            nuevoMontoPagado = montoPagado;
+            cuotas = (int) jSpinner_Cuotas_PagoIns.getValue();
+            if(cuotas == 0)
+                cuotas++;
+            nroCuota = 1;
+            pagoSeleccionado = new Pago(fechas,"INSCRIPCION",String.valueOf(jYearChooserCicloLectivo.getValue()),cuotas,montoPagado,montoTotal,1,alumnos);
+            //Se lo asigno al alumno seleccionado
+            alumnoSeleccionado.getPagos().add(pagoSeleccionado);
+            //Lo doy de alta en la BD
+            ManagerPago.getManager().altaPago(pagoSeleccionado);
+            //Actualizo los campos de la pantalla para que reflejen el pago de la inscripcion
+            nuevo = false;
         }
+        //Si ya existia un pago de inscripcion del ano lectivo seleccionado
         else{
-            float nuevoMontoPagado = pagoSeleccionado.getMontoPagado() + pagoSeleccionado.getMontoTotal()/pagoSeleccionado.getCuotas();
+            //Actualizo el pago
+            montoTotal = pagoSeleccionado.getMontoTotal();
+            montoPagado = pagoSeleccionado.getMontoPagado();
+            cuotas = pagoSeleccionado.getCuotas();
+            nroCuota = (int) (montoPagado/(montoTotal/cuotas))+1;
+            nuevoMontoPagado =  montoTotal/cuotas + montoPagado;
             pagoSeleccionado.setMontoPagado(nuevoMontoPagado);
-            jLabelTotalPagado.setText("$ "+String.valueOf(nuevoMontoPagado)+"0");
-            ManagerPago.getManager().modificarPago(pagoSeleccionado);
-            jSpinner_Cuotas_PagoIns.setEnabled(false);
-            if(nuevoMontoPagado==pagoSeleccionado.getMontoTotal())
-            {
-                jButtonRegistrarPago.setEnabled(false);
-                JOptionPane.showMessageDialog(null,"Se ha realizado el pago total de la inscripcion.", "Exito",JOptionPane.INFORMATION_MESSAGE);
-                jLabelMontoCuota.setText("-");
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Pago realizado correctamente.", "Exito",JOptionPane.INFORMATION_MESSAGE);
-            }
-                
+            pagoSeleccionado.getFecha().add(fechaActualFormatoDate);
+            ManagerPago.getManager().modificarPago(pagoSeleccionado); 
         }
+        //Actualizo los campos de la pantalla para que reflejen el pago de la inscripcion
+        jSpinner_Cuotas_PagoIns.setEnabled(false);
+        modelCuotas.addRow(new Object[]{nroCuota,fecha.toString(),jLabelMontoAPagar.getText()});
+        jLabelTotalPagado.setText("$ "+String.valueOf(nuevoMontoPagado)+"0");
+        jLabelMontoRestante.setText("$ "+String.valueOf(montoTotal-nuevoMontoPagado)+"0");
+        //Si la inscripcion se pago totalmente, lo informo por pantalla
+        if(pagoSeleccionado.getMontoPagado() == pagoSeleccionado.getMontoTotal())
+        {
+            jButtonRegistrarPago.setEnabled(false);
+            jLabelMontoRestante.setText("$ 0.00");
+            jLabelMontoAPagar.setText("-");
+            JOptionPane.showMessageDialog(null,"Se ha completado el pago de la inscripcion.", "Exito",JOptionPane.INFORMATION_MESSAGE);
+        }
+        //Muestro el exito del pago
+        else
+            JOptionPane.showMessageDialog(null,"Cuota de inscripcion pagada correctamente.", "Exito",JOptionPane.INFORMATION_MESSAGE);
         
     }//GEN-LAST:event_jButtonRegistrarPagoActionPerformed
 
-    private void jTableDatosAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDatosAlumnosMouseClicked
-        String dniFila = String.valueOf(model.getValueAt(jTableDatosAlumnos.getSelectedRow(),1));
+    private void jSpinner_Cuotas_PagoInsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner_Cuotas_PagoInsStateChanged
+        if(!jTextField_NomyAp_PagoIns.getText().isEmpty()){
+            int valorSpinner = (Integer) jSpinner_Cuotas_PagoIns.getValue();
+            switch(valorSpinner){
+                case 1:
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion())+"0");
+                    break;
+                case 2:
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/2)+"0");
+                    break;
+                case 3:
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/3)+"0");
+                    break;
+                case 4:
+                    jLabelMontoAPagar.setText("$ "+String.valueOf(ManagerPago.getManager().obtenerValorInscripcion()/4)+"0");
+                    break;
+                default:
+                    jLabelMontoAPagar.setText("-");
+
+            }
+        }
+    }//GEN-LAST:event_jSpinner_Cuotas_PagoInsStateChanged
+
+    private void jTablePagoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePagoMousePressed
+        modelCuotas.setRowCount(0);
+        jSpinner_Cuotas_PagoIns.setEnabled(true);
+        jButtonRegistrarPago.setEnabled(true);
+        int valorPeriodo = jYearChooserCicloLectivo.getValue();
+        float valorInscripcion = ManagerPago.getManager().obtenerValorInscripcion();
+        boolean encontroInscripcion = false;
+        //Seteo los campos con los datos del alumno seleccionado
+        String apellidoFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),0));
+        String dniFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),1));
+        String salaFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),2));
+        String turnoFila = String.valueOf(modelAlumnos.getValueAt(jTablePago.getSelectedRow(),3));
+        jTextField_NomyAp_PagoIns.setText(apellidoFila);
+        jTextField_Sala_PagoIns.setText(salaFila+" años");
+        jTextField_Turno_PagoIns.setText(turnoFila);
+        //Busco el alumno  seleccionado en la lista de alumnos
+        Iterator i = listaAlumnos.iterator();
+        Set<Pago> pagos = null;  
+        while(i.hasNext()){
+            Alumno a = (Alumno) i.next();
+            if(dniFila.equals(String.valueOf(a.getDni()))){
+                pagos = a.getPagos();
+                alumnoSeleccionado = a;
+                break;
+            }
+        }
+        //Busco los  pagos existentes del alumno seleccionado
+        i = pagos.iterator();//Nunca va a ser null
+        while(i.hasNext()){
+            Pago pago = (Pago) i.next();
+            if(Integer.parseInt(pago.getPeriodo()) == valorPeriodo && pago.getTipoPago().equals("INSCRIPCION")){
+                pagoSeleccionado = pago;
+                encontroInscripcion = true;
+                nuevo = false;
+                break;
+            }
+        }
+        //Si hay un pago correspondiente al alumno seleccionado en el año indicado en el YearChooser
+        if(encontroInscripcion){
+            //Seteo los valores del pago
+            jLabelMontoRestante.setText("$ "+pagoSeleccionado.getMontoTotal()+"0");
+            jLabelTotalPagado.setText("$ "+pagoSeleccionado.getMontoPagado()+"0");
+            jSpinner_Cuotas_PagoIns.setValue(pagoSeleccionado.getCuotas());
+            jSpinner_Cuotas_PagoIns.setEnabled(false);
+            //Muestro la tabla con los pagos existentes
+            List<Date> fechas = pagoSeleccionado.getFecha();
+            Collections.sort(fechas);
+            int cuota = 1;
+            Calendar r = new GregorianCalendar();
+            i = fechas.listIterator();
+            while(i.hasNext()){
+                Date d = (Date) i.next();
+                String fecha = "", parcial;
+                r.setTime(d);
+                parcial = String.valueOf(r.get(Calendar.YEAR));
+                fecha = fecha.concat(parcial+"-");
+                parcial = String.valueOf(r.get(Calendar.MONTH)+1);
+                fecha = fecha.concat(parcial+"-");
+                parcial = String.valueOf(r.get(Calendar.DATE));
+                fecha = fecha.concat(parcial);
+                modelCuotas.addRow(new Object[]{cuota,fecha,"$ "+pagoSeleccionado.getMontoTotal()/pagoSeleccionado.getCuotas()+"0"});
+                cuota++;
+            }
+            //En caso que ya se haya pagado toda la inscripcion se informa por pantalla
+            if(pagoSeleccionado.getMontoPagado() == pagoSeleccionado.getMontoTotal()){
+                jButtonRegistrarPago.setEnabled(false);
+                jLabelMontoRestante.setText("$ 0.00");
+                jLabelMontoAPagar.setText("-");
+                JOptionPane.showMessageDialog(null,"La inscripcion de "+valorPeriodo+" de este alumno ya esta pagada completamente.", "Info",JOptionPane.INFORMATION_MESSAGE);
+            }
+            //En caso de que aun resten pagar cuotas muestro lo  que se debe pagar
+            else
+                jLabelMontoAPagar.setText("$ "+(pagoSeleccionado.getMontoTotal()/pagoSeleccionado.getCuotas())+"0");
+        }
+        //Si no hay pago de inscripcion del alumno seleccionado en el año que indica el YearChooser
+        else{
+            if(alumnoSeleccionado.estaInscripto(valorPeriodo)){
+                nuevo = true;
+                if(alumnoSeleccionado.tieneHermanos(valorPeriodo))
+                    valorInscripcion = (float)((int)valorInscripcion*0.7);
+                jLabelMontoRestante.setText("$ "+String.valueOf(valorInscripcion)+"0");
+                int valorSpinner = (Integer) jSpinner_Cuotas_PagoIns.getValue();
+                //La primera vez que ingresa, el valor del Spinner es 0
+                if(valorSpinner == 0)
+                    valorSpinner++;
+                switch(valorSpinner){
+                    case 1:
+                        jLabelMontoAPagar.setText("$ "+valorInscripcion+"0");
+                        break;
+                    case 2:
+                        jLabelMontoAPagar.setText("$ "+(valorInscripcion/2)+"0");
+                        break;
+                    case 3:
+                        jLabelMontoAPagar.setText("$ "+(valorInscripcion/3)+"0");
+                        break;
+                    case 4:
+                        jLabelMontoAPagar.setText("$ "+(valorInscripcion/4)+"0");
+                        break;
+                }
+            }
+            else{
+                jButtonRegistrarPago.setEnabled(false);
+                jLabelMontoRestante.setText("-");
+                jLabelMontoAPagar.setText("-");
+                jTextField_NomyAp_PagoIns.setText("");
+                jTextField_Sala_PagoIns.setText("");
+                jTextField_Turno_PagoIns.setText("");
+                JOptionPane.showMessageDialog(null,"El alumno seleccionado no está inscripto en el ciclo lectivo "+valorPeriodo+".", "Info",JOptionPane.WARNING_MESSAGE);
+            }
+        }   
+    }//GEN-LAST:event_jTablePagoMousePressed
+
+    private void jTableDatosAlumnosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDatosAlumnosMousePressed
+        String dniFila = String.valueOf(modelAlumnos.getValueAt(jTableDatosAlumnos.getSelectedRow(),1));
         Set<Tutor> tutors;
         Map<Integer, Sala> salas;
         Sala sala;
@@ -2675,11 +2800,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 break;
             }
         }
-    }//GEN-LAST:event_jTableDatosAlumnosMouseClicked
+    }//GEN-LAST:event_jTableDatosAlumnosMousePressed
 
-    private void jYearChooser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jYearChooser1MouseClicked
-        
-    }//GEN-LAST:event_jYearChooser1MouseClicked
+    private void jYearChooserCicloLectivoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jYearChooserCicloLectivoPropertyChange
+        //Si esta vacio significa que es la primera vez que entra
+        if(!jTextField_NomyAp_PagoIns.getText().isEmpty()){
+            //Limpio los campos ya cargados
+            jTextField_NomyAp_PagoIns.setEditable(false);
+            jTextField_Sala_PagoIns.setEditable(false);
+            jTextField_Turno_PagoIns.setEditable(false);
+            jTextField_NomyAp_PagoIns.setText("");
+            jTextField_Sala_PagoIns.setText("");
+            jTextField_Turno_PagoIns.setText("");
+            jSpinner_Cuotas_PagoIns.setValue(1);
+            Calendar cal= Calendar.getInstance();
+            jLabelMontoRestante.setText("-");
+            jLabelMontoAPagar.setText("-");
+            jLabelTotalPagado.setText("-");
+            jButtonRegistrarPago.setEnabled(false);
+            modelCuotas.setRowCount(0);
+            jTablePago.clearSelection();
+            
+        }
+    }//GEN-LAST:event_jYearChooserCicloLectivoPropertyChange
 
 
     /**
@@ -2817,7 +2960,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelMontoAPagar;
-    private javax.swing.JLabel jLabelMontoCuota;
+    private javax.swing.JLabel jLabelMontoRestante;
     private javax.swing.JLabel jLabelTotalPagado;
     private javax.swing.JLabel jLabel_ControlMedico;
     private javax.swing.JLabel jLabel_ControlNatacion;
@@ -2872,6 +3015,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -2879,6 +3023,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSpinner jSpinner_Cuotas_PagoIns;
     private javax.swing.JTable jTableAlumnosDialog;
+    private javax.swing.JTable jTableCuotas;
     private javax.swing.JTable jTableDatosAlumnos;
     private javax.swing.JTable jTablePago;
     private javax.swing.JTextArea jTextAreaOtrosDatos;
@@ -2913,7 +3058,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_TipoDoc_Padre;
     private javax.swing.JTextField jTextField_TipoDoc_Tutor;
     private javax.swing.JTextField jTextField_Turno_PagoIns;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
+    private com.toedter.calendar.JYearChooser jYearChooserCicloLectivo;
     // End of variables declaration//GEN-END:variables
     
     private void borrarLabelsDatosAlumno(){
@@ -2967,6 +3112,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jCheckBoxVacunas.setSelected(false);
 
         jRadioButtonAgregarPadre.setSelected(true);
+        jRadioButtonAgregarPadre.setEnabled(true);
         jTextField_ApyNom_Padre.setText("");
         jTextField_TipoDoc_Padre.setText("");
         jTextField_NumDoc_Padre.setText("");
@@ -2975,6 +3121,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jTextField_TelTra_Padre.setText("");
 
         jRadioButtonAgregarMadre.setSelected(true);
+        jRadioButtonAgregarMadre.setEnabled(true);
         jTextField_ApyNom_Madre.setText("");
         jTextField_TipoDoc_Madre.setText("");
         jTextField_NumDoc_Madre.setText("");
@@ -2993,7 +3140,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
     
     public void cargarTabla(String valorComboBox1, String buscado, int salaS, int turnoS){
-        model.setRowCount(0);
+        modelAlumnos.setRowCount(0);
         switch(salaS){
             case 0:
                     switch(turnoS){
@@ -3003,7 +3150,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 while(i.hasNext()){
                                     Alumno a = (Alumno) i.next();
                                     int año = a.obtenerUltimoAñoLectivo();
-                                    model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
+                                    modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3014,14 +3161,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         String nombre = a.getApellidoYNombre().toUpperCase();
                                         if(nombre.contains(buscado)){
                                             int año = a.obtenerUltimoAñoLectivo();
-                                            model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
+                                            modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
                                         }
                                     }
                                     else{
                                         String dni = String.valueOf(a.getDni());
                                         if(dni.contains(buscado)){
                                             int año = a.obtenerUltimoAñoLectivo();
-                                            model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
+                                            modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
                                         } 
                                     }
                                 }
@@ -3035,7 +3182,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int año = a.obtenerUltimoAñoLectivo();
                                     String turno = a.getSalas().get(año).getTurno();
                                     if(turno.equalsIgnoreCase("Mañana"))
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
                                 }
                             }
                             else{
@@ -3048,13 +3195,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
                                             } 
                                         }
                                     }
@@ -3069,7 +3216,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int año = a.obtenerUltimoAñoLectivo();
                                     String turno = a.getSalas().get(año).getTurno();
                                     if(turno.equalsIgnoreCase("Tarde"))
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
                                 }
                             }
                             else{
@@ -3082,13 +3229,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
                                             } 
                                         }
                                     }
@@ -3107,7 +3254,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int año = a.obtenerUltimoAñoLectivo();
                                     int edad = a.getSalas().get(año).getEdad();
                                     if(edad == 5)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3120,13 +3267,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3142,7 +3289,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 5)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3156,13 +3303,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3178,7 +3325,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 6)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3192,13 +3339,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3217,7 +3364,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int año = a.obtenerUltimoAñoLectivo();
                                     int edad = a.getSalas().get(año).getEdad();
                                     if(edad == 4)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3230,13 +3377,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3252,7 +3399,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 3)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3266,13 +3413,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3288,7 +3435,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 4)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3302,13 +3449,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3327,7 +3474,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int año = a.obtenerUltimoAñoLectivo();
                                     int edad = a.getSalas().get(año).getEdad();
                                     if(edad == 3)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3340,13 +3487,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3362,7 +3509,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 1)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3376,13 +3523,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }
@@ -3398,7 +3545,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 2)
-                                        model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                 }
                             }
                             else{
@@ -3412,13 +3559,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),edad,a.getSalas().get(año).getTurno()});
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                model.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelAlumnos.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
                                             } 
                                         }
                                     }

@@ -142,7 +142,7 @@ public class ImplementacionDAO implements DAO {
             }
             Calendar r = new GregorianCalendar();
             String fecha = "", parcial;
-            r.setTime(pago.getFecha());
+            r.setTime(pago.getFecha().get(0));
             parcial = String.valueOf(r.get(Calendar.YEAR));
             fecha = fecha.concat(parcial+"-");
             parcial = String.valueOf(r.get(Calendar.MONTH)+1);
@@ -150,8 +150,9 @@ public class ImplementacionDAO implements DAO {
             parcial = String.valueOf(r.get(Calendar.DATE));
             fecha = fecha.concat(parcial);
             int idPago = (obtenerMaximoIdPago()+1);
-            s.execute("INSERT INTO PAGO VALUES("+idPago+",'"+fecha+"',"+pago.getMontoTotal()
+            s.execute("INSERT INTO PAGO VALUES("+idPago+","+pago.getMontoTotal()
                       +","+pago.getMontoPagado()+",'"+pago.getPeriodo()+"',"+tipoPago+","+pago.getCuotas()+")");
+            s.execute("INSERT INTO FECHA_PAGO VALUES("+idPago+",'"+fecha+"')");
             Iterator i = pago.getAlumnos().iterator();
             while(i.hasNext()){
                 Alumno a = (Alumno) i.next();
@@ -187,7 +188,7 @@ public class ImplementacionDAO implements DAO {
     }
     
     @Override
-    public void altaTutor(Tutor ptutor) {
+    public void altaTutor(Tutor ptutor) throws SQLException {
         try {
             tutor = ptutor;
             Connection c = ConexionBD.getConnection();
@@ -209,6 +210,12 @@ public class ImplementacionDAO implements DAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ImplementacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Exception SQLException = new SQLException("Ya estaba cargado");
+            try {
+                throw SQLException;
+            } catch (Exception ex1) {
+                Logger.getLogger(ImplementacionDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
     }
 
@@ -246,7 +253,21 @@ public class ImplementacionDAO implements DAO {
             Statement s = c.createStatement();
             s.execute("UPDATE PAGO"+
                       " SET MONTOPAGADO="+pago.getMontoPagado()+
-                      " WHERE IDPAGO="+pago.getIdPago());  
+                      " WHERE IDPAGO="+pago.getIdPago());
+            Calendar r = new GregorianCalendar();
+            List<Date> fechas = pago.getFecha();
+            int tamaño = fechas.size();
+            Date d = fechas.get(tamaño-1);
+            String fecha = "", parcial;
+            r.setTime(d);
+            parcial = String.valueOf(r.get(Calendar.YEAR));
+            fecha = fecha.concat(parcial+"-");
+            parcial = String.valueOf(r.get(Calendar.MONTH)+1);
+            fecha = fecha.concat(parcial+"-");
+            parcial = String.valueOf(r.get(Calendar.DATE));
+            fecha = fecha.concat(parcial);
+            s.execute("INSERT INTO FECHA_PAGO VALUES("+pago.getIdPago()+",'"+fecha+"')");
+
         } catch (SQLException ex) {ex.printStackTrace();}
     }
 
@@ -378,7 +399,11 @@ public class ImplementacionDAO implements DAO {
             ResultSet rsTipoPago = sAux.executeQuery("SELECT TIPO FROM TIPO_PAGO WHERE COD_TIPO="+rsPago.getInt("COD_TIPO"));
             rsTipoPago.next();
             String tipoPago = rsTipoPago.getString("TIPO");
-            Pago pago = new Pago(rsPago.getDate("FECHA"),tipoPago,rsPago.getString("PERIODO"),
+            ResultSet rsFechaPago = sAux.executeQuery("SELECT FECHAPAGO FROM FECHA_PAGO WHERE IDPAGO="+idPago);
+            List<Date> fecha = new ArrayList();
+            while(rsFechaPago.next())
+                fecha.add(rsFechaPago.getDate("FECHAPAGO"));
+            Pago pago = new Pago(fecha,tipoPago,rsPago.getString("PERIODO"),
                                    rsPago.getInt("CUOTAS"),rsPago.getFloat("MONTOPAGADO"),rsPago.getFloat("MONTOTOTAL"),
                                    rsPago.getInt("IDPAGO"),null);
             s.close();
@@ -401,7 +426,9 @@ public class ImplementacionDAO implements DAO {
             Set<Pago> pagos;
             Set<Tutor> tutores;
             ResultSet rsAlumno = null;
-            rsAlumno = s.executeQuery("SELECT * FROM ALUMNO");
+            rsAlumno = s.executeQuery("SELECT ALUMNO.DNI,FECHADENACIMIENTO,LUGARDENACIMIENTO,CONTROLMEDICO,"+
+                                      "VACUNAS,CONTROLNATACION,DOMICILIO,TRAEMATERIALES,TELEFONO,OTROSDATOS "+
+                                       "FROM ALUMNO,PERSONA WHERE PERSONA.DNI=ALUMNO.DNI ORDER BY PERSONA.APELLIDOYNOMBRE");
             Statement sAux = c.createStatement();
             ResultSet rsSala = sAux.executeQuery("SELECT IDSALA FROM SALA");
             while(rsSala.next()){
@@ -465,6 +492,24 @@ public class ImplementacionDAO implements DAO {
                                            rsAlumno.getString("OTROSDATOS"),null,tutores,pagos,mapaSalas,null,dni,apellidoYNombre);
                 listaDeAlumnos.add(alumno);
             }
+            ResultSet rsHermanos;
+            Iterator i = listaDeAlumnos.iterator();
+            while(i.hasNext()){
+                Alumno a = (Alumno)i.next();
+                a.setHermanos(new HashSet());
+                rsHermanos = sAux.executeQuery("SELECT DNI1 FROM ES_HERMANO WHERE DNI2="+a.getDni());
+                while(rsHermanos.next()){
+                    int dni1 = rsHermanos.getInt("DNI1");
+                    Iterator j = listaDeAlumnos.iterator();
+                    while(j.hasNext()){
+                        Alumno b = (Alumno) j.next();
+                        if(b.getDni() == dni1){
+                            a.getHermanos().add(b);
+                        }
+                    }
+                }
+            }
+            
             s.close();
             sAux.close();
             return listaDeAlumnos;
@@ -473,13 +518,23 @@ public class ImplementacionDAO implements DAO {
     }
 
     @Override//PARA EL CASO DE LA INSCRIPCION CON ALUMNO YA CARGADO EN EL SISTEMA
-    public void agregarAñoLectivo(int dni, int idSala, int añoLectivo) {
+    public boolean agregarAñoLectivo(int dni, int idSala, int añoLectivo){
         try {
             Connection c = ConexionBD.getConnection();
             Statement s = c.createStatement();
-            s.execute("INSERT INTO ES_ALUMNO VALUES("+dni+","+idSala+","+añoLectivo+")");
+            ResultSet a;
+            int dnia = 0;
+            a = s.executeQuery("SELECT DNIALUMNO FROM ES_ALUMNO WHERE DNIALUMNO="+dni+"AND ANOLECTIVO="+añoLectivo);
+            while(a.next())
+                dnia = a.getInt("DNIALUMNO");
+            if(dnia == 0)
+                s.execute("INSERT INTO ES_ALUMNO VALUES("+dni+","+idSala+","+añoLectivo+")");
+            else{
+                return false;
+            }
             s.close();
-        } catch (SQLException ex) {
+            return true;
+        } catch (Exception ex) {
             Logger.getLogger(ImplementacionDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

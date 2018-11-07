@@ -19,7 +19,7 @@ public class ConexionBD {
             System.err.println("\nNo es posible Instanciar el driver de JDBC");
         } catch (IllegalAccessException iae) {
             System.err.println("\nNo se tiene acceso al driver de JDBC");
-        } catch(SQLException e){e.printStackTrace();}
+        } catch(SQLException e){}
     }
     
     public static Connection getConnection(){
@@ -72,7 +72,6 @@ public class ConexionBD {
         );
 
         s.execute("CREATE TABLE TUTOR(" +
-                  "TIPODNI VARCHAR(10) NOT NULL," +
                   "DNI INT NOT NULL PRIMARY KEY," +
                   "OCUPACION VARCHAR("+largoCampos+") NOT NULL," +
                   "RELACION VARCHAR(20) NOT NULL," +
@@ -146,8 +145,7 @@ public class ConexionBD {
         s.execute("CREATE TABLE FECHA_PAGO(" + 
                   "IDPAGO INT NOT NULL," +
                   "FECHAPAGO DATE NOT NULL," +
-                  "FOREIGN KEY (IDPAGO) REFERENCES PAGO(IDPAGO),"+
-                  "PRIMARY KEY (IDPAGO,FECHAPAGO))");
+                  "FOREIGN KEY (IDPAGO) REFERENCES PAGO(IDPAGO))");
         
         s.execute("CREATE TABLE CORRESPONDE_PAGO(" +
                   "IDPAGO INT NOT NULL," +
@@ -248,7 +246,8 @@ public class ConexionBD {
     
     public static void main(String[] args) throws SQLException{
         Connection c = ConexionBD.getConnection();
-        Statement s = c.createStatement();/*
+        Statement s = c.createStatement();
+//        /*
         s.execute("INSERT INTO PERSONA VALUES(59675123,'Rodriguez Ian',1)");
         s.execute("INSERT INTO PERSONA VALUES(63756456,'Velazquez Martina',1)");
         s.execute("INSERT INTO PERSONA VALUES(60896213,'Silva Jonatan',1)");
@@ -269,15 +268,15 @@ public class ConexionBD {
         s.execute("INSERT INTO PERSONA VALUES(21456213,'Yerumini Estela',2)");
         s.execute("INSERT INTO PERSONA VALUES(34123023,'Lopez Ester',2)");
 
-        s.execute("INSERT INTO TUTOR VALUES('DNI',22768699,'Remisero','Padre',26643578945,26643615945)");
-        s.execute("INSERT INTO TUTOR VALUES('DNI',14542703,'Obrero','Padre',26643575949,26643614545)");
-        s.execute("INSERT INTO TUTOR VALUES('DNI',23724921,'Contador','Padre',2664212468,26644956122)");
-        s.execute("INSERT INTO TUTOR VALUES('DNI',29334669,'Obrero','Padre',26643575949,26643614545)");
+        s.execute("INSERT INTO TUTOR VALUES(22768699,'Remisero','Padre',26643578945,26643615945)");
+        s.execute("INSERT INTO TUTOR VALUES(14542703,'Obrero','Padre',26643575949,26643614545)");
+        s.execute("INSERT INTO TUTOR VALUES(23724921,'Contador','Padre',2664212468,26644956122)");
+        s.execute("INSERT INTO TUTOR VALUES(29334669,'Obrero','Padre',26643575949,26643614545)");
 
-        s.execute("INSERT INTO TUTOR VALUES('DNI',21698853,'Ama de Casa','Madre',2664367982,26648456)");
-        s.execute("INSERT INTO TUTOR VALUES('DNI',23456987,'Cheff','Madre',26643575949,2664451532)");
-        s.execute("INSERT INTO TUTOR VALUES('DNI',21456213,'Arquitecta','Madre',2664456453,2664786455)");
-        s.execute("INSERT INTO TUTOR VALUES('DNI',34123023,'Ingeniera','Madre',2664612341,266445612)");
+        s.execute("INSERT INTO TUTOR VALUES(21698853,'Ama de Casa','Madre',2664367982,26648456)");
+        s.execute("INSERT INTO TUTOR VALUES(23456987,'Cheff','Madre',26643575949,2664451532)");
+        s.execute("INSERT INTO TUTOR VALUES(21456213,'Arquitecta','Madre',2664456453,2664786455)");
+        s.execute("INSERT INTO TUTOR VALUES(34123023,'Ingeniera','Madre',2664612341,266445612)");
 
         s.execute("INSERT INTO ES_TUTOR VALUES(22768699,59675123)");
         s.execute("INSERT INTO ES_TUTOR VALUES(21698853,59675123)");
@@ -296,7 +295,8 @@ public class ConexionBD {
         s.execute("INSERT INTO ES_ALUMNO VALUES(61233664,4,2016)");
         s.execute("INSERT INTO ES_HERMANO VALUES(61233664,59675123)");
         s.execute("INSERT INTO ES_HERMANO VALUES(59675123,61233664)");
-        s.execute("DELETE FROM ES_HERMANO WHERE DNI1 = 61233664");
-        s.execute("DELETE FROM ES_HERMANO WHERE DNI1 = 59675123");*/
+//        */
+        //s.execute("DELETE FROM ES_HERMANO WHERE DNI1 = 61233664");
+        //s.execute("DELETE FROM ES_HERMANO WHERE DNI1 = 59675123");
     }
 }

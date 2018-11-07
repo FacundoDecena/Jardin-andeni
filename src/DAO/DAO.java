@@ -2,6 +2,7 @@
 package DAO;
 
 import ClasesBase.*;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -19,7 +20,7 @@ public interface DAO{
     //public void altaRetiro(Retiro retiro);
     //public void altaSala(Sala sala);
     //public void altaTardanza(Tardanza tardanza);
-    public void altaTutor(Tutor tutor);
+    public void altaTutor(Tutor tutor) throws SQLException;
     
     //Bajas
     //public void bajaAlumno(int dni);

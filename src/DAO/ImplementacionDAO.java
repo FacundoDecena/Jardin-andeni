@@ -537,6 +537,7 @@ public class ImplementacionDAO implements DAO {
         } catch (Exception ex) {
             Logger.getLogger(ImplementacionDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
     }
 
     @Override

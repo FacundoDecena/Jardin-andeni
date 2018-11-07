@@ -79,7 +79,7 @@ public interface DAO{
     //public List obtenerTodosTutor();
     
     //Otros
-    public void agregarAñoLectivo(int dni, int idSala, int añoLectivo);
+    public boolean agregarAñoLectivo(int dni, int idSala, int añoLectivo);
     public float obtenerValorInscripcion();
     public int obtenerMaximoIdPago();
     

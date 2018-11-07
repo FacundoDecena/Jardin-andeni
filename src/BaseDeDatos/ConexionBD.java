@@ -247,7 +247,7 @@ public class ConexionBD {
     public static void main(String[] args) throws SQLException{
         Connection c = ConexionBD.getConnection();
         Statement s = c.createStatement();
-//        /*
+        /*
         s.execute("INSERT INTO PERSONA VALUES(59675123,'Rodriguez Ian',1)");
         s.execute("INSERT INTO PERSONA VALUES(63756456,'Velazquez Martina',1)");
         s.execute("INSERT INTO PERSONA VALUES(60896213,'Silva Jonatan',1)");
@@ -295,7 +295,7 @@ public class ConexionBD {
         s.execute("INSERT INTO ES_ALUMNO VALUES(61233664,4,2016)");
         s.execute("INSERT INTO ES_HERMANO VALUES(61233664,59675123)");
         s.execute("INSERT INTO ES_HERMANO VALUES(59675123,61233664)");
-//        */
+        */
         //s.execute("DELETE FROM ES_HERMANO WHERE DNI1 = 61233664");
         //s.execute("DELETE FROM ES_HERMANO WHERE DNI1 = 59675123");
     }

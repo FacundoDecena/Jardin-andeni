@@ -94,6 +94,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanelOpDatosAlumnos = new javax.swing.JPanel();
         jLabel50 = new javax.swing.JLabel();
+        jPanelOpControlPagos = new javax.swing.JPanel();
+        jLabel78 = new javax.swing.JLabel();
         jPanelTitulo = new javax.swing.JPanel();
         jLabel51 = new javax.swing.JLabel();
         jPanelCard = new javax.swing.JPanel();
@@ -217,9 +219,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanelFondoDatosAlumnos = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel54 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jTextFieldBusqueda_Datos = new javax.swing.JTextField();
+        jComboBoxSalaDatos = new javax.swing.JComboBox<>();
+        jComboBoxTurnoDatos = new javax.swing.JComboBox<>();
+        jComboBoxBusqueda_Datos = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableDatosAlumnos = new javax.swing.JTable();
@@ -267,6 +270,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel_Tutor = new javax.swing.JLabel();
         jLabel_TelefonoPersonalTutor = new javax.swing.JLabel();
         jLabel_TelefonoTrabajoTutor = new javax.swing.JLabel();
+        jPanelControlPagos = new javax.swing.JPanel();
+        jPanelFondoControlPagos = new javax.swing.JPanel();
+        jProgressBarSalaTotal = new javax.swing.JProgressBar();
+        jProgressBarSala5 = new javax.swing.JProgressBar();
+        jProgressBarSala4 = new javax.swing.JProgressBar();
+        jProgressBarSala3 = new javax.swing.JProgressBar();
+        jPanel4 = new javax.swing.JPanel();
         jPanelBarraSup = new javax.swing.JPanel();
         jPanelCerrar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -295,7 +305,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jComboBox_SalaDialog.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sala", "5 años", "4 años", "4 años" }));
+        jComboBox_SalaDialog.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sala", "5 años", "4 años", "3 años" }));
         jComboBox_SalaDialog.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox_SalaDialogItemStateChanged(evt);
@@ -521,6 +531,40 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addComponent(jLabel50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jPanelOpControlPagos.setBackground(new java.awt.Color(132, 183, 224));
+        jPanelOpControlPagos.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanelOpControlPagosMouseMoved(evt);
+            }
+        });
+        jPanelOpControlPagos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanelOpControlPagosMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanelOpControlPagosMouseExited(evt);
+            }
+        });
+
+        jLabel78.setText("Control Pagos");
+
+        javax.swing.GroupLayout jPanelOpControlPagosLayout = new javax.swing.GroupLayout(jPanelOpControlPagos);
+        jPanelOpControlPagos.setLayout(jPanelOpControlPagosLayout);
+        jPanelOpControlPagosLayout.setHorizontalGroup(
+            jPanelOpControlPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelOpControlPagosLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jLabel78)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelOpControlPagosLayout.setVerticalGroup(
+            jPanelOpControlPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelOpControlPagosLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jLabel78)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanelPestanasLayout = new javax.swing.GroupLayout(jPanelPestanas);
         jPanelPestanas.setLayout(jPanelPestanasLayout);
         jPanelPestanasLayout.setHorizontalGroup(
@@ -530,7 +574,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(jPanelOpPago, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                     .addComponent(jPanelOpInscripcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                     .addComponent(jPanelOpDatosAlumnos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanelOpControlPagos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanelPestanasLayout.setVerticalGroup(
             jPanelPestanasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -540,6 +585,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanelOpPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelOpDatosAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelOpControlPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -1381,9 +1428,32 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel54.setText("Buscar Alumno");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sala", "3 años", "4 años", "5 años" }));
+        jTextFieldBusqueda_Datos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldBusqueda_DatosKeyReleased(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turno", "Mañana", "Tarde" }));
+        jComboBoxSalaDatos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sala", "5 años", "4 años", "3 años" }));
+        jComboBoxSalaDatos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxSalaDatosItemStateChanged(evt);
+            }
+        });
+
+        jComboBoxTurnoDatos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turno", "Mañana", "Tarde" }));
+        jComboBoxTurnoDatos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxTurnoDatosItemStateChanged(evt);
+            }
+        });
+
+        jComboBoxBusqueda_Datos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Apellido y Nombre", "DNI" }));
+        jComboBoxBusqueda_Datos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxBusqueda_DatosItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1393,12 +1463,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel54)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldBusqueda_Datos, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addComponent(jComboBoxBusqueda_Datos, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBoxSalaDatos, 0, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBoxTurnoDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1406,9 +1478,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel54)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldBusqueda_Datos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxSalaDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxTurnoDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxBusqueda_Datos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
 
@@ -1706,6 +1779,71 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
 
         jPanelCard.add(jPanelDatosAlumnos, "datosAlumnos");
+
+        jProgressBarSalaTotal.setOrientation(1);
+        jProgressBarSalaTotal.setValue(50);
+
+        jProgressBarSala5.setOrientation(1);
+        jProgressBarSala5.setValue(70);
+
+        jProgressBarSala4.setOrientation(1);
+        jProgressBarSala4.setValue(30);
+
+        jProgressBarSala3.setOrientation(1);
+        jProgressBarSala3.setValue(50);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanelFondoControlPagosLayout = new javax.swing.GroupLayout(jPanelFondoControlPagos);
+        jPanelFondoControlPagos.setLayout(jPanelFondoControlPagosLayout);
+        jPanelFondoControlPagosLayout.setHorizontalGroup(
+            jPanelFondoControlPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFondoControlPagosLayout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addComponent(jProgressBarSala3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jProgressBarSala4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jProgressBarSala5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(jProgressBarSalaTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(114, 114, 114))
+        );
+        jPanelFondoControlPagosLayout.setVerticalGroup(
+            jPanelFondoControlPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelFondoControlPagosLayout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addGroup(jPanelFondoControlPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jProgressBarSala3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jProgressBarSala4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jProgressBarSala5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jProgressBarSalaTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(497, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanelControlPagosLayout = new javax.swing.GroupLayout(jPanelControlPagos);
+        jPanelControlPagos.setLayout(jPanelControlPagosLayout);
+        jPanelControlPagosLayout.setHorizontalGroup(
+            jPanelControlPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelFondoControlPagos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanelControlPagosLayout.setVerticalGroup(
+            jPanelControlPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelFondoControlPagos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanelCard.add(jPanelControlPagos, "controlPagos");
 
         jPanelCerrar.setBackground(new java.awt.Color(200, 0, 0));
         jPanelCerrar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -2844,6 +2982,51 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jYearChooserCicloLectivoPropertyChange
 
+    private void jTextFieldBusqueda_DatosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBusqueda_DatosKeyReleased
+        String a = jComboBoxBusqueda_Datos.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Datos.getText().toUpperCase();
+        int c = jComboBoxSalaDatos.getSelectedIndex();
+        int d = jComboBoxTurnoDatos.getSelectedIndex();
+        cargarTabla(a,b,c,d);
+    }//GEN-LAST:event_jTextFieldBusqueda_DatosKeyReleased
+
+    private void jComboBoxBusqueda_DatosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxBusqueda_DatosItemStateChanged
+        String a = jComboBoxBusqueda_Datos.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Datos.getText().toUpperCase();
+        int c = jComboBoxSalaDatos.getSelectedIndex();
+        int d = jComboBoxTurnoDatos.getSelectedIndex();
+        cargarTabla(a,b,c,d);
+    }//GEN-LAST:event_jComboBoxBusqueda_DatosItemStateChanged
+
+    private void jComboBoxSalaDatosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxSalaDatosItemStateChanged
+        String a = jComboBoxBusqueda_Datos.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Datos.getText().toUpperCase();
+        int c = jComboBoxSalaDatos.getSelectedIndex();
+        int d = jComboBoxTurnoDatos.getSelectedIndex();
+        cargarTabla(a,b,c,d);
+    }//GEN-LAST:event_jComboBoxSalaDatosItemStateChanged
+
+    private void jComboBoxTurnoDatosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTurnoDatosItemStateChanged
+        String a = jComboBoxBusqueda_Datos.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Datos.getText().toUpperCase();
+        int c = jComboBoxSalaDatos.getSelectedIndex();
+        int d = jComboBoxTurnoDatos.getSelectedIndex();
+        cargarTabla(a,b,c,d);
+    }//GEN-LAST:event_jComboBoxTurnoDatosItemStateChanged
+
+    private void jPanelOpControlPagosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpControlPagosMouseClicked
+        CardLayout card = (CardLayout)jPanelCard.getLayout();
+        card.show(jPanelCard, "controlPagos");
+    }//GEN-LAST:event_jPanelOpControlPagosMouseClicked
+
+    private void jPanelOpControlPagosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpControlPagosMouseExited
+        jPanelOpControlPagos.setBackground(new Color(132, 183, 224));
+    }//GEN-LAST:event_jPanelOpControlPagosMouseExited
+
+    private void jPanelOpControlPagosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpControlPagosMouseMoved
+        jPanelOpControlPagos.setBackground(new Color(162, 213, 254));
+    }//GEN-LAST:event_jPanelOpControlPagosMouseMoved
+
 
     /**
      * @param args the command line arguments
@@ -2890,12 +3073,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxNatacion;
     private javax.swing.JCheckBox jCheckBoxTraeMateriales;
     private javax.swing.JCheckBox jCheckBoxVacunas;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBoxBusqueda_Datos;
     private javax.swing.JComboBox<String> jComboBoxBusqueda_Pago;
+    private javax.swing.JComboBox<String> jComboBoxSalaDatos;
     private javax.swing.JComboBox<String> jComboBoxSalaPago;
     private javax.swing.JComboBox<String> jComboBoxSala_Insc;
     private javax.swing.JComboBox<String> jComboBoxTipoDePago;
+    private javax.swing.JComboBox<String> jComboBoxTurnoDatos;
     private javax.swing.JComboBox<String> jComboBoxTurnoPago;
     private javax.swing.JComboBox<String> jComboBoxTurno_Insc;
     private javax.swing.JComboBox<String> jComboBox_SalaDialog;
@@ -2978,6 +3162,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel77;
+    private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelMontoAPagar;
@@ -3008,18 +3193,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelBarraSup;
     private javax.swing.JPanel jPanelCard;
     private javax.swing.JPanel jPanelCerrar;
+    private javax.swing.JPanel jPanelControlPagos;
     private javax.swing.JPanel jPanelCuota;
     private javax.swing.JPanel jPanelDatosAlumnos;
     private javax.swing.JPanel jPanelDetalles;
     private javax.swing.JPanel jPanelFondo;
+    private javax.swing.JPanel jPanelFondoControlPagos;
     private javax.swing.JPanel jPanelFondoDatosAlumnos;
     private javax.swing.JPanel jPanelFondoDialog;
     private javax.swing.JPanel jPanelInscripcion;
     private javax.swing.JPanel jPanelInterseccion;
     private javax.swing.JPanel jPanelMinimizar;
+    private javax.swing.JPanel jPanelOpControlPagos;
     private javax.swing.JPanel jPanelOpDatosAlumnos;
     private javax.swing.JPanel jPanelOpInscripcion;
     private javax.swing.JPanel jPanelOpPago;
@@ -3029,6 +3218,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelTabla;
     private javax.swing.JPanel jPanelTipoPago;
     private javax.swing.JPanel jPanelTitulo;
+    private javax.swing.JProgressBar jProgressBarSala3;
+    private javax.swing.JProgressBar jProgressBarSala4;
+    private javax.swing.JProgressBar jProgressBarSala5;
+    private javax.swing.JProgressBar jProgressBarSalaTotal;
     private javax.swing.JRadioButton jRadioButtonAgregarMadre;
     private javax.swing.JRadioButton jRadioButtonAgregarPadre;
     private javax.swing.JRadioButton jRadioButtonAgregarTutor;
@@ -3048,7 +3241,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable jTableDatosAlumnos;
     private javax.swing.JTable jTablePago;
     private javax.swing.JTextArea jTextAreaOtrosDatos;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldBusqueda_Datos;
     private javax.swing.JTextField jTextFieldBusqueda_Pago;
     private javax.swing.JTextField jTextField_ApyNom;
     private javax.swing.JTextField jTextField_ApyNom_Madre;
@@ -3600,6 +3793,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     }
                     break;
         }
+    }
+    private Object obetenerObjeto(Alumno a, int año){
+        Object objeto = new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()};
+        return objeto;
     }
 }
 

@@ -119,7 +119,7 @@
                         <StringItem index="0" value="Sala"/>
                         <StringItem index="1" value="5 a&#xf1;os"/>
                         <StringItem index="2" value="4 a&#xf1;os"/>
-                        <StringItem index="3" value="4 a&#xf1;os"/>
+                        <StringItem index="3" value="3 a&#xf1;os"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -330,8 +330,9 @@
                           <Component id="jPanelOpInscripcion" alignment="0" pref="152" max="32767" attributes="0"/>
                           <Component id="jPanelOpDatosAlumnos" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="jPanelOpControlPagos" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -342,6 +343,8 @@
                       <Component id="jPanelOpPago" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanelOpDatosAlumnos" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanelOpControlPagos" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -472,6 +475,46 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/GUIs/Imagenes/Datos para facu.png"/>
                     </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelOpControlPagos">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e0" green="b7" red="84" type="rgb"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="jPanelOpControlPagosMouseMoved"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPanelOpControlPagosMouseClicked"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPanelOpControlPagosMouseExited"/>
+              </Events>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                          <Component id="jLabel78" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                          <Component id="jLabel78" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="43" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel78">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Control Pagos"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -2076,12 +2119,14 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel54" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jTextField1" min="-2" pref="220" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldBusqueda_Datos" min="-2" pref="220" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jComboBox1" min="-2" pref="79" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="143" max="32767" attributes="0"/>
+                                  <Component id="jComboBoxBusqueda_Datos" min="-2" pref="141" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jComboBoxSalaDatos" pref="69" max="32767" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jComboBoxTurnoDatos" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2091,9 +2136,10 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel54" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldBusqueda_Datos" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jComboBoxSalaDatos" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jComboBoxTurnoDatos" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jComboBoxBusqueda_Datos" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace pref="75" max="32767" attributes="0"/>
                               </Group>
@@ -2106,24 +2152,30 @@
                             <Property name="text" type="java.lang.String" value="Buscar Alumno"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField1">
+                        <Component class="javax.swing.JTextField" name="jTextFieldBusqueda_Datos">
+                          <Events>
+                            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldBusqueda_DatosKeyReleased"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JComboBox" name="jComboBox1">
+                        <Component class="javax.swing.JComboBox" name="jComboBoxSalaDatos">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="4">
                                 <StringItem index="0" value="Sala"/>
-                                <StringItem index="1" value="3 a&#xf1;os"/>
+                                <StringItem index="1" value="5 a&#xf1;os"/>
                                 <StringItem index="2" value="4 a&#xf1;os"/>
-                                <StringItem index="3" value="5 a&#xf1;os"/>
+                                <StringItem index="3" value="3 a&#xf1;os"/>
                               </StringArray>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxSalaDatosItemStateChanged"/>
+                          </Events>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                           </AuxValues>
                         </Component>
-                        <Component class="javax.swing.JComboBox" name="jComboBox2">
+                        <Component class="javax.swing.JComboBox" name="jComboBoxTurnoDatos">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="3">
@@ -2133,6 +2185,25 @@
                               </StringArray>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxTurnoDatosItemStateChanged"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="jComboBoxBusqueda_Datos">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="2">
+                                <StringItem index="0" value="Apellido y Nombre"/>
+                                <StringItem index="1" value="DNI"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxBusqueda_DatosItemStateChanged"/>
+                          </Events>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                           </AuxValues>
@@ -2403,6 +2474,105 @@
                         <Property name="text" type="java.lang.String" value="jLabel77"/>
                       </Properties>
                     </Component>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelControlPagos">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="controlPagos"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jPanelFondoControlPagos" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jPanelFondoControlPagos" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Container class="javax.swing.JPanel" name="jPanelFondoControlPagos">
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="115" max="32767" attributes="0"/>
+                              <Component id="jProgressBarSala3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="jProgressBarSala4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="jProgressBarSala5" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="jProgressBarSalaTotal" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jProgressBarSala3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jProgressBarSala4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jProgressBarSala5" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jProgressBarSalaTotal" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="497" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JProgressBar" name="jProgressBarSalaTotal">
+                      <Properties>
+                        <Property name="orientation" type="int" value="1"/>
+                        <Property name="value" type="int" value="50"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JProgressBar" name="jProgressBarSala5">
+                      <Properties>
+                        <Property name="orientation" type="int" value="1"/>
+                        <Property name="value" type="int" value="70"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JProgressBar" name="jProgressBarSala4">
+                      <Properties>
+                        <Property name="orientation" type="int" value="1"/>
+                        <Property name="value" type="int" value="30"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JProgressBar" name="jProgressBarSala3">
+                      <Properties>
+                        <Property name="orientation" type="int" value="1"/>
+                        <Property name="value" type="int" value="50"/>
+                      </Properties>
+                    </Component>
+                    <Container class="javax.swing.JPanel" name="jPanel4">
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <EmptySpace min="0" pref="800" max="32767" attributes="0"/>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                    </Container>
                   </SubComponents>
                 </Container>
               </SubComponents>

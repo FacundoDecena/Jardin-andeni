@@ -284,8 +284,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jProgressBarSala4 = new javax.swing.JProgressBar();
         jProgressBarSala3 = new javax.swing.JProgressBar();
         jPanel4 = new javax.swing.JPanel();
+        jLabel79 = new javax.swing.JLabel();
+        jTextFieldBusqueda_Control = new javax.swing.JTextField();
+        jComboBoxBusqueda_Control = new javax.swing.JComboBox<>();
+        jComboBoxSalaControl = new javax.swing.JComboBox<>();
+        jComboBoxTurnoControl = new javax.swing.JComboBox<>();
+        jComboBoxTipoControl = new javax.swing.JComboBox<>();
+        jPanel5 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableControlPagos = new javax.swing.JTable();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanelBarraSup = new javax.swing.JPanel();
         jPanelCerrar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -1115,7 +1124,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addComponent(jYearChooserCicloLectivoInsc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jButton_Inscribir)))
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         jPanelCard.add(jPanelInscripcion, "inscripcion");
@@ -1276,7 +1285,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabelMontoAPagar))
                 .addGap(51, 51, 51)
                 .addComponent(jButtonRegistrarPago)
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
 
         jPanelTipoPago.add(jPanelPagpInsc, "pagoInscripcion");
@@ -1297,7 +1306,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanelCuotaLayout.createSequentialGroup()
                 .addGap(104, 104, 104)
                 .addComponent(jLabel41)
-                .addContainerGap(572, Short.MAX_VALUE))
+                .addContainerGap(563, Short.MAX_VALUE))
         );
 
         jPanelTipoPago.add(jPanelCuota, "pagoCuota");
@@ -1779,7 +1788,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanelFondoDatosAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel76)
                     .addComponent(jLabel_TelefonoTrabajoTutor))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelDatosAlumnosLayout = new javax.swing.GroupLayout(jPanelDatosAlumnos);
@@ -1809,12 +1818,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jProgressBarSala3.setOrientation(1);
         jProgressBarSala3.setValue(50);
 
+        jLabel79.setText("Buscar Alumno");
+
+        jComboBoxBusqueda_Control.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Apellido y Nombre", "DNI" }));
+
+        jComboBoxSalaControl.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sala", "5 años", "4 años", "3 años" }));
+
+        jComboBoxTurnoControl.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turno", "Mañana", "Tarde" }));
+
+        jComboBoxTipoControl.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cuotas", "Otros" }));
+
+        jPanel5.setLayout(new java.awt.CardLayout());
+
         jTableControlPagos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Apellido y Nombre", "Sala", "Turno", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+                "Apellido y Nombre", "Sala", "Turno", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -1830,6 +1851,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jTableControlPagos.getTableHeader().setResizingAllowed(false);
         jTableControlPagos.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(jTableControlPagos);
+        if (jTableControlPagos.getColumnModel().getColumnCount() > 0) {
+            jTableControlPagos.getColumnModel().getColumn(0).setMinWidth(125);
+            jTableControlPagos.getColumnModel().getColumn(0).setPreferredWidth(125);
+            jTableControlPagos.getColumnModel().getColumn(0).setMaxWidth(125);
+        }
+
+        jPanel5.add(jScrollPane6, "card2");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Apellido y Nombre", "Sala", "Turno", "Inscripcion", "Materiales", "Nat Abr", "Nat May", "Nat Jun", "Nat Ago", "Nat Sep", "Nat Oct"
+            }
+        ));
+        jScrollPane7.setViewportView(jTable1);
+
+        jPanel5.add(jScrollPane7, "card3");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -1837,15 +1877,36 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel79)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldBusqueda_Control, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBoxBusqueda_Control, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBoxSalaControl, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBoxTurnoControl, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBoxTipoControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
+                .addGap(19, 19, 19)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel79)
+                    .addComponent(jTextFieldBusqueda_Control, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxBusqueda_Control, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxSalaControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxTurnoControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxTipoControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(198, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelFondoControlPagosLayout = new javax.swing.GroupLayout(jPanelFondoControlPagos);
@@ -1854,27 +1915,33 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jPanelFondoControlPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFondoControlPagosLayout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addComponent(jProgressBarSala3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(54, 54, 54)
                 .addComponent(jProgressBarSala4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(47, 47, 47)
                 .addComponent(jProgressBarSala5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(70, 70, 70)
                 .addComponent(jProgressBarSalaTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(114, 114, 114))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelFondoControlPagosLayout.setVerticalGroup(
             jPanelFondoControlPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFondoControlPagosLayout.createSequentialGroup()
-                .addGap(106, 106, 106)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanelFondoControlPagosLayout.createSequentialGroup()
                 .addGroup(jPanelFondoControlPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jProgressBarSala3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jProgressBarSala4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jProgressBarSala5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jProgressBarSalaTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(497, Short.MAX_VALUE))
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelFondoControlPagosLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanelFondoControlPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jProgressBarSala4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jProgressBarSala3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jProgressBarSala5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelFondoControlPagosLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jProgressBarSalaTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelControlPagosLayout = new javax.swing.GroupLayout(jPanelControlPagos);
@@ -1885,7 +1952,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         jPanelControlPagosLayout.setVerticalGroup(
             jPanelControlPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelFondoControlPagos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelControlPagosLayout.createSequentialGroup()
+                .addComponent(jPanelFondoControlPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanelCard.add(jPanelControlPagos, "controlPagos");
@@ -3118,12 +3187,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxNatacion;
     private javax.swing.JCheckBox jCheckBoxTraeMateriales;
     private javax.swing.JCheckBox jCheckBoxVacunas;
+    private javax.swing.JComboBox<String> jComboBoxBusqueda_Control;
     private javax.swing.JComboBox<String> jComboBoxBusqueda_Datos;
     private javax.swing.JComboBox<String> jComboBoxBusqueda_Pago;
+    private javax.swing.JComboBox<String> jComboBoxSalaControl;
     private javax.swing.JComboBox<String> jComboBoxSalaDatos;
     private javax.swing.JComboBox<String> jComboBoxSalaPago;
     private javax.swing.JComboBox<String> jComboBoxSala_Insc;
+    private javax.swing.JComboBox<String> jComboBoxTipoControl;
     private javax.swing.JComboBox<String> jComboBoxTipoDePago;
+    private javax.swing.JComboBox<String> jComboBoxTurnoControl;
     private javax.swing.JComboBox<String> jComboBoxTurnoDatos;
     private javax.swing.JComboBox<String> jComboBoxTurnoPago;
     private javax.swing.JComboBox<String> jComboBoxTurno_Insc;
@@ -3208,6 +3281,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
+    private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelMontoAPagar;
@@ -3239,6 +3313,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanelBarraSup;
     private javax.swing.JPanel jPanelCard;
     private javax.swing.JPanel jPanelCerrar;
@@ -3276,18 +3351,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSpinner jSpinner_Cuotas_PagoIns;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableAlumnosDialog;
     private javax.swing.JTable jTableControlPagos;
     private javax.swing.JTable jTableCuotas;
     private javax.swing.JTable jTableDatosAlumnos;
     private javax.swing.JTable jTablePago;
     private javax.swing.JTextArea jTextAreaOtrosDatos;
+    private javax.swing.JTextField jTextFieldBusqueda_Control;
     private javax.swing.JTextField jTextFieldBusqueda_Datos;
     private javax.swing.JTextField jTextFieldBusqueda_Pago;
     private javax.swing.JTextField jTextField_ApyNom;

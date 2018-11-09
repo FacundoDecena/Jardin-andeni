@@ -181,6 +181,13 @@
                             <Column editable="false" title="Turno" type="java.lang.Object"/>
                           </Table>
                         </Property>
+                        <Property name="rowSelectionAllowed" type="boolean" value="false"/>
+                        <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                          <JTableSelectionModel selectionMode="0"/>
+                        </Property>
+                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                          <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableAlumnosDialogMouseClicked"/>
@@ -2245,6 +2252,13 @@
                                     <Column editable="false" title="Turno" type="java.lang.Object"/>
                                   </Table>
                                 </Property>
+                                <Property name="rowSelectionAllowed" type="boolean" value="false"/>
+                                <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                                  <JTableSelectionModel selectionMode="0"/>
+                                </Property>
+                                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                                  <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
+                                </Property>
                               </Properties>
                               <Events>
                                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableDatosAlumnosMousePressed"/>
@@ -2563,15 +2577,62 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="800" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jScrollPane6" pref="780" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jScrollPane6" min="-2" pref="599" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPane6">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTable" name="jTableControlPagos">
+                              <Properties>
+                                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                                  <Table columnCount="13" rowCount="0">
+                                    <Column editable="false" title="Apellido y Nombre" type="java.lang.Object"/>
+                                    <Column editable="false" title="Sala" type="java.lang.Object"/>
+                                    <Column editable="false" title="Turno" type="java.lang.Object"/>
+                                    <Column editable="false" title="Marzo" type="java.lang.Object"/>
+                                    <Column editable="false" title="Abril" type="java.lang.Object"/>
+                                    <Column editable="false" title="Mayo" type="java.lang.Object"/>
+                                    <Column editable="false" title="Junio" type="java.lang.Object"/>
+                                    <Column editable="false" title="Julio" type="java.lang.Object"/>
+                                    <Column editable="false" title="Agosto" type="java.lang.Object"/>
+                                    <Column editable="false" title="Septiembre" type="java.lang.Object"/>
+                                    <Column editable="false" title="Octubre" type="java.lang.Object"/>
+                                    <Column editable="false" title="Noviembre" type="java.lang.Object"/>
+                                    <Column editable="false" title="Diciembre" type="java.lang.Object"/>
+                                  </Table>
+                                </Property>
+                                <Property name="rowSelectionAllowed" type="boolean" value="false"/>
+                                <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                                  <JTableSelectionModel selectionMode="0"/>
+                                </Property>
+                                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                                  <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
                     </Container>
                   </SubComponents>
                 </Container>

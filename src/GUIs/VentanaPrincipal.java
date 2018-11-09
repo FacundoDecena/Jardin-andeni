@@ -39,6 +39,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private DefaultTableModel modelAlumnos;
     private DefaultTableModel modelCuotas;
+    private DefaultTableModel modelControl;
     private List<Alumno> listaAlumnos;
     private Alumno alumnoSeleccionado;
     private Pago pagoSeleccionado;
@@ -49,8 +50,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jDialogBuscar.setLocationRelativeTo(null);
         ManagerAlumno ma = ManagerAlumno.getManager();
         listaAlumnos = ma.obtenerTodosAlumno();
+        jTablePago.setDragEnabled(false);
+        jTableCuotas.setDragEnabled(false);
+        jTableControlPagos.setDragEnabled(false);
+        jTableAlumnosDialog.setDragEnabled(false);
+        jTableDatosAlumnos.setDragEnabled(false);
         modelAlumnos = (DefaultTableModel) jTablePago.getModel();
         modelCuotas = (DefaultTableModel) jTableCuotas.getModel();
+        modelControl = (DefaultTableModel) jTableControlPagos.getModel();
         jSpinner_Cuotas_PagoIns.setEditor(new JSpinner.DefaultEditor(jSpinner_Cuotas_PagoIns));
         SpinnerNumberModel modeloSpinner = new SpinnerNumberModel();
         modeloSpinner.setMaximum(4);
@@ -277,6 +284,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jProgressBarSala4 = new javax.swing.JProgressBar();
         jProgressBarSala3 = new javax.swing.JProgressBar();
         jPanel4 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTableControlPagos = new javax.swing.JTable();
         jPanelBarraSup = new javax.swing.JPanel();
         jPanelCerrar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -365,6 +374,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableAlumnosDialog.setRowSelectionAllowed(false);
+        jTableAlumnosDialog.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableAlumnosDialog.getTableHeader().setResizingAllowed(false);
+        jTableAlumnosDialog.getTableHeader().setReorderingAllowed(false);
         jTableAlumnosDialog.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableAlumnosDialogMouseClicked(evt);
@@ -1501,6 +1514,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableDatosAlumnos.setRowSelectionAllowed(false);
+        jTableDatosAlumnos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableDatosAlumnos.getTableHeader().setResizingAllowed(false);
+        jTableDatosAlumnos.getTableHeader().setReorderingAllowed(false);
         jTableDatosAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTableDatosAlumnosMousePressed(evt);
@@ -1792,15 +1809,43 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jProgressBarSala3.setOrientation(1);
         jProgressBarSala3.setValue(50);
 
+        jTableControlPagos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Apellido y Nombre", "Sala", "Turno", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableControlPagos.setRowSelectionAllowed(false);
+        jTableControlPagos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableControlPagos.getTableHeader().setResizingAllowed(false);
+        jTableControlPagos.getTableHeader().setReorderingAllowed(false);
+        jScrollPane6.setViewportView(jTableControlPagos);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
         );
 
         javax.swing.GroupLayout jPanelFondoControlPagosLayout = new javax.swing.GroupLayout(jPanelFondoControlPagos);
@@ -3230,6 +3275,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -3237,6 +3283,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSpinner jSpinner_Cuotas_PagoIns;
     private javax.swing.JTable jTableAlumnosDialog;
+    private javax.swing.JTable jTableControlPagos;
     private javax.swing.JTable jTableCuotas;
     private javax.swing.JTable jTableDatosAlumnos;
     private javax.swing.JTable jTablePago;

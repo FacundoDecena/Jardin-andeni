@@ -196,7 +196,7 @@ public class ImplementacionDAO implements DAO {
             s.execute("INSERT INTO PERSONA VALUES("
                     +tutor.getDni()+",'"
                     +tutor.getApellidoYNombre()+"',2)");
-            s.execute("INSERT INTO TUTOR VALUES('"
+            s.execute("INSERT INTO TUTOR VALUES("
                     +tutor.getDni()+",'"
                     +tutor.getOcupacion()+"','"
                     +tutor.getRelacion()+"',"

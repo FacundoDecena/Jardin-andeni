@@ -2522,15 +2522,15 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="jProgressBarSala3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                              <Component id="jProgressBarSala4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                              <Component id="jProgressBarSala5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                              <Component id="jProgressBarSalaTotal" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="98" max="32767" attributes="0"/>
+                              <Component id="jProgressBarSala3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jProgressBarSala4" min="-2" pref="30" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jProgressBarSala5" min="-2" pref="30" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jProgressBarSalaTotal" min="-2" pref="60" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2540,20 +2540,13 @@
                               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jProgressBarSala4" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jProgressBarSala3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jProgressBarSala5" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                                      <Component id="jProgressBarSalaTotal" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jProgressBarSala3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jProgressBarSala4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jProgressBarSala5" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jProgressBarSalaTotal" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -2603,7 +2596,9 @@
                                   <Component id="jComboBoxTurnoControl" min="-2" pref="90" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jComboBoxTipoControl" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jYearChooserControl" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="62" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jPanel5" min="-2" pref="718" max="-2" attributes="0"/>
@@ -2615,13 +2610,16 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel79" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextFieldBusqueda_Control" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jComboBoxBusqueda_Control" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jComboBoxSalaControl" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jComboBoxTurnoControl" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jComboBoxTipoControl" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel79" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jTextFieldBusqueda_Control" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jComboBoxBusqueda_Control" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jComboBoxSalaControl" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jComboBoxTurnoControl" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jComboBoxTipoControl" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jYearChooserControl" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jPanel5" min="-2" pref="485" max="-2" attributes="0"/>
@@ -2820,22 +2818,84 @@
 
                               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                               <SubComponents>
-                                <Component class="javax.swing.JTable" name="jTable1">
+                                <Component class="javax.swing.JTable" name="jTableControlOtros">
                                   <Properties>
                                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                                       <Table columnCount="11" rowCount="0">
-                                        <Column editable="true" title="Apellido y Nombre" type="java.lang.Object"/>
-                                        <Column editable="true" title="Sala" type="java.lang.Object"/>
-                                        <Column editable="true" title="Turno" type="java.lang.Object"/>
-                                        <Column editable="true" title="Inscripcion" type="java.lang.Object"/>
-                                        <Column editable="true" title="Materiales" type="java.lang.Object"/>
-                                        <Column editable="true" title="Nat Abr" type="java.lang.Object"/>
-                                        <Column editable="true" title="Nat May" type="java.lang.Object"/>
-                                        <Column editable="true" title="Nat Jun" type="java.lang.Object"/>
-                                        <Column editable="true" title="Nat Ago" type="java.lang.Object"/>
-                                        <Column editable="true" title="Nat Sep" type="java.lang.Object"/>
-                                        <Column editable="true" title="Nat Oct" type="java.lang.Object"/>
+                                        <Column editable="false" title="Apellido y Nombre" type="java.lang.Object"/>
+                                        <Column editable="false" title="Sala" type="java.lang.Object"/>
+                                        <Column editable="false" title="Turno" type="java.lang.Object"/>
+                                        <Column editable="false" title="Inscripcion" type="java.lang.Object"/>
+                                        <Column editable="false" title="Materiales" type="java.lang.Object"/>
+                                        <Column editable="false" title="Nat Abr" type="java.lang.Object"/>
+                                        <Column editable="false" title="Nat May" type="java.lang.Object"/>
+                                        <Column editable="false" title="Nat Jun" type="java.lang.Object"/>
+                                        <Column editable="false" title="Nat Ago" type="java.lang.Object"/>
+                                        <Column editable="false" title="Nat Sep" type="java.lang.Object"/>
+                                        <Column editable="false" title="Nat Oct" type="java.lang.Object"/>
                                       </Table>
+                                    </Property>
+                                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                      <TableColumnModel selectionModel="0">
+                                        <Column maxWidth="125" minWidth="125" prefWidth="125" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                      </TableColumnModel>
+                                    </Property>
+                                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
                                 </Component>
@@ -2843,6 +2903,8 @@
                             </Container>
                           </SubComponents>
                         </Container>
+                        <Component class="com.toedter.calendar.JYearChooser" name="jYearChooserControl">
+                        </Component>
                       </SubComponents>
                     </Container>
                   </SubComponents>

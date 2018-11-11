@@ -40,13 +40,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private DefaultTableModel modelAlumnos;
     private DefaultTableModel modelCuotas;
     private DefaultTableModel modelControl;
+    private DefaultTableModel modelOtros;
     private List<Alumno> listaAlumnos;
     private Alumno alumnoSeleccionado;
     private Pago pagoSeleccionado;
     private boolean nuevo;
+    private boolean primera = true; //Si sacas de aca la asignacion, se rompe.
     
     public VentanaPrincipal() {
         initComponents();
+        primera=true;
         jDialogBuscar.setLocationRelativeTo(null);
         ManagerAlumno ma = ManagerAlumno.getManager();
         listaAlumnos = ma.obtenerTodosAlumno();
@@ -58,6 +61,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         modelAlumnos = (DefaultTableModel) jTablePago.getModel();
         modelCuotas = (DefaultTableModel) jTableCuotas.getModel();
         modelControl = (DefaultTableModel) jTableControlPagos.getModel();
+        modelOtros = (DefaultTableModel) jTableControlOtros.getModel();
         jSpinner_Cuotas_PagoIns.setEditor(new JSpinner.DefaultEditor(jSpinner_Cuotas_PagoIns));
         SpinnerNumberModel modeloSpinner = new SpinnerNumberModel();
         modeloSpinner.setMaximum(4);
@@ -293,11 +297,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jComboBoxSalaControl = new javax.swing.JComboBox<>();
         jComboBoxTurnoControl = new javax.swing.JComboBox<>();
         jComboBoxTipoControl = new javax.swing.JComboBox<>();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTableControlPagos = new javax.swing.JTable();
+        jPanelCardControl = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTableControlOtros = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTableControlPagos = new javax.swing.JTable();
         jYearChooserControl = new com.toedter.calendar.JYearChooser();
         jPanelBarraSup = new javax.swing.JPanel();
         jPanelCerrar = new javax.swing.JPanel();
@@ -1824,15 +1828,73 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel79.setText("Buscar Alumno");
 
+        jTextFieldBusqueda_Control.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldBusqueda_ControlKeyReleased(evt);
+            }
+        });
+
         jComboBoxBusqueda_Control.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Apellido y Nombre", "DNI" }));
+        jComboBoxBusqueda_Control.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxBusqueda_ControlItemStateChanged(evt);
+            }
+        });
 
         jComboBoxSalaControl.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sala", "5 años", "4 años", "3 años" }));
+        jComboBoxSalaControl.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxSalaControlItemStateChanged(evt);
+            }
+        });
 
         jComboBoxTurnoControl.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turno", "Mañana", "Tarde" }));
+        jComboBoxTurnoControl.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxTurnoControlItemStateChanged(evt);
+            }
+        });
 
-        jComboBoxTipoControl.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cuotas", "Otros" }));
+        jComboBoxTipoControl.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Otros", "Cuotas" }));
+        jComboBoxTipoControl.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxTipoControlItemStateChanged(evt);
+            }
+        });
 
-        jPanel5.setLayout(new java.awt.CardLayout());
+        jPanelCardControl.setLayout(new java.awt.CardLayout());
+
+        jTableControlOtros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Apellido y Nombre", "Sala", "Turno", "Inscripcion", "Materiales", "SAC1", "SAC2", "Nat Abr", "Nat May", "Nat Jun", "Nat Ago", "Nat Sep", "Nat Oct"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(jTableControlOtros);
+        if (jTableControlOtros.getColumnModel().getColumnCount() > 0) {
+            jTableControlOtros.getColumnModel().getColumn(0).setMinWidth(125);
+            jTableControlOtros.getColumnModel().getColumn(0).setPreferredWidth(125);
+            jTableControlOtros.getColumnModel().getColumn(1).setMinWidth(40);
+            jTableControlOtros.getColumnModel().getColumn(1).setPreferredWidth(40);
+            jTableControlOtros.getColumnModel().getColumn(2).setMinWidth(60);
+            jTableControlOtros.getColumnModel().getColumn(2).setPreferredWidth(60);
+            jTableControlOtros.getColumnModel().getColumn(3).setMinWidth(90);
+            jTableControlOtros.getColumnModel().getColumn(3).setPreferredWidth(90);
+            jTableControlOtros.getColumnModel().getColumn(4).setMinWidth(90);
+            jTableControlOtros.getColumnModel().getColumn(4).setPreferredWidth(90);
+        }
+
+        jPanelCardControl.add(jScrollPane7, "controlOtros");
 
         jTableControlPagos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1861,56 +1923,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jTableControlPagos.getColumnModel().getColumn(0).setMaxWidth(125);
         }
 
-        jPanel5.add(jScrollPane6, "card2");
+        jPanelCardControl.add(jScrollPane6, "controlCuotas");
 
-        jTableControlOtros.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Apellido y Nombre", "Sala", "Turno", "Inscripcion", "Materiales", "Nat Abr", "Nat May", "Nat Jun", "Nat Ago", "Nat Sep", "Nat Oct"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        jYearChooserControl.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jYearChooserControlPropertyChange(evt);
             }
         });
-        jScrollPane7.setViewportView(jTableControlOtros);
-        if (jTableControlOtros.getColumnModel().getColumnCount() > 0) {
-            jTableControlOtros.getColumnModel().getColumn(0).setMinWidth(125);
-            jTableControlOtros.getColumnModel().getColumn(0).setPreferredWidth(125);
-            jTableControlOtros.getColumnModel().getColumn(0).setMaxWidth(125);
-        }
-
-        jPanel5.add(jScrollPane7, "card3");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel79)
-                .addGap(18, 18, 18)
-                .addComponent(jTextFieldBusqueda_Control, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBoxBusqueda_Control, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBoxSalaControl, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBoxTurnoControl, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBoxTipoControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jYearChooserControl, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanelCardControl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel79)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldBusqueda_Control, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxBusqueda_Control, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxSalaControl, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxTurnoControl, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxTipoControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jYearChooserControl, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 62, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1926,7 +1969,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(jComboBoxTipoControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jYearChooserControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelCardControl, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(198, Short.MAX_VALUE))
         );
 
@@ -3150,7 +3193,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String b = jTextFieldBusqueda_Control.getText().toUpperCase();
         int c = jComboBoxSalaControl.getSelectedIndex();
         int d = jComboBoxTurnoControl.getSelectedIndex();
-        cargarTabla(a,b,c,d, modelControl, 1);
+        cargarTabla(a,b,c,d, modelOtros, 1);
         CardLayout card = (CardLayout)jPanelCard.getLayout();
         card.show(jPanelCard, "controlPagos");
     }//GEN-LAST:event_jPanelOpControlPagosMouseClicked
@@ -3162,6 +3205,82 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jPanelOpControlPagosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpControlPagosMouseMoved
         jPanelOpControlPagos.setBackground(new Color(162, 213, 254));
     }//GEN-LAST:event_jPanelOpControlPagosMouseMoved
+
+    private void jTextFieldBusqueda_ControlKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBusqueda_ControlKeyReleased
+        String a = jComboBoxBusqueda_Control.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Control.getText().toUpperCase();
+        int c = jComboBoxSalaControl.getSelectedIndex();
+        int d = jComboBoxTurnoControl.getSelectedIndex();
+        if(jComboBoxTipoControl.getSelectedIndex() == 0)
+            cargarTabla(a,b,c,d, modelOtros, 1);
+        else
+            cargarTabla(a,b,c,d, modelCuotas, 2);
+    }//GEN-LAST:event_jTextFieldBusqueda_ControlKeyReleased
+
+    private void jComboBoxBusqueda_ControlItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxBusqueda_ControlItemStateChanged
+        String a = jComboBoxBusqueda_Control.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Control.getText().toUpperCase();
+        int c = jComboBoxSalaControl.getSelectedIndex();
+        int d = jComboBoxTurnoControl.getSelectedIndex();
+        if(jComboBoxTipoControl.getSelectedIndex() == 0)
+            cargarTabla(a,b,c,d, modelOtros, 1);
+        else
+            cargarTabla(a,b,c,d, modelCuotas, 2);
+    }//GEN-LAST:event_jComboBoxBusqueda_ControlItemStateChanged
+
+    private void jComboBoxSalaControlItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxSalaControlItemStateChanged
+        String a = jComboBoxBusqueda_Control.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Control.getText().toUpperCase();
+        int c = jComboBoxSalaControl.getSelectedIndex();
+        int d = jComboBoxTurnoControl.getSelectedIndex();
+        if(jComboBoxTipoControl.getSelectedIndex() == 0)
+            cargarTabla(a,b,c,d, modelOtros, 1);
+        else
+            cargarTabla(a,b,c,d, modelCuotas, 2);
+    }//GEN-LAST:event_jComboBoxSalaControlItemStateChanged
+
+    private void jComboBoxTurnoControlItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTurnoControlItemStateChanged
+        String a = jComboBoxBusqueda_Control.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Control.getText().toUpperCase();
+        int c = jComboBoxSalaControl.getSelectedIndex();
+        int d = jComboBoxTurnoControl.getSelectedIndex();
+        if(jComboBoxTipoControl.getSelectedIndex() == 0)
+            cargarTabla(a,b,c,d, modelOtros, 1);
+        else
+            cargarTabla(a,b,c,d, modelCuotas, 2);
+    }//GEN-LAST:event_jComboBoxTurnoControlItemStateChanged
+
+    private void jComboBoxTipoControlItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTipoControlItemStateChanged
+        String a = jComboBoxBusqueda_Control.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Control.getText().toUpperCase();
+        int c = jComboBoxSalaControl.getSelectedIndex();
+        int d = jComboBoxTurnoControl.getSelectedIndex();
+        CardLayout card = (CardLayout)jPanelCardControl.getLayout();
+        if(jComboBoxTipoControl.getSelectedIndex() == 0){
+            cargarTabla(a,b,c,d, modelOtros, 1);
+            card.show(jPanelCardControl, "controlOtros");
+        }
+        else{
+            cargarTabla(a,b,c,d, modelCuotas, 2);
+            card.show(jPanelCardControl, "controlCuotas");
+        }
+    }//GEN-LAST:event_jComboBoxTipoControlItemStateChanged
+
+    private void jYearChooserControlPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jYearChooserControlPropertyChange
+        if(primera){
+            primera = false;
+        }
+        else{
+            String a = jComboBoxBusqueda_Control.getSelectedItem().toString();
+            String b = jTextFieldBusqueda_Control.getText().toUpperCase();
+            int c = jComboBoxSalaControl.getSelectedIndex();
+            int d = jComboBoxTurnoControl.getSelectedIndex();
+            if(jComboBoxTipoControl.getSelectedIndex() == 0)
+                cargarTabla(a,b,c,d, modelOtros, 1);
+            else
+                cargarTabla(a,b,c,d, modelCuotas, 2);
+        }
+    }//GEN-LAST:event_jYearChooserControlPropertyChange
 
 
     /**
@@ -3335,9 +3454,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanelBarraSup;
     private javax.swing.JPanel jPanelCard;
+    private javax.swing.JPanel jPanelCardControl;
     private javax.swing.JPanel jPanelCerrar;
     private javax.swing.JPanel jPanelControlPagos;
     private javax.swing.JPanel jPanelCuota;
@@ -3536,14 +3655,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         String nombre = a.getApellidoYNombre().toUpperCase();
                                         if(nombre.contains(buscado)){
                                             int año = a.obtenerUltimoAñoLectivo();
-                                            modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
+                                            modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                         }
                                     }
                                     else{
                                         String dni = String.valueOf(a.getDni());
                                         if(dni.contains(buscado)){
                                             int año = a.obtenerUltimoAñoLectivo();
-                                            modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno()});
+                                            modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                         } 
                                     }
                                 }
@@ -3557,7 +3676,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int año = a.obtenerUltimoAñoLectivo();
                                     String turno = a.getSalas().get(año).getTurno();
                                     if(turno.equalsIgnoreCase("Mañana"))
-                                        modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                        modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                 }
                             }
                             else{
@@ -3570,13 +3689,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             } 
                                         }
                                     }
@@ -3591,7 +3710,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int año = a.obtenerUltimoAñoLectivo();
                                     String turno = a.getSalas().get(año).getTurno();
                                     if(turno.equalsIgnoreCase("Tarde"))
-                                        modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                        modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                 }
                             }
                             else{
@@ -3604,13 +3723,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),a.getSalas().get(año).getEdad(),turno});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             } 
                                         }
                                     }
@@ -3629,7 +3748,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int año = a.obtenerUltimoAñoLectivo();
                                     int edad = a.getSalas().get(año).getEdad();
                                     if(edad == 5)
-                                        modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                 }
                             }
                             else{
@@ -3642,13 +3761,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             } 
                                         }
                                     }
@@ -3664,7 +3783,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 5)
-                                        modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                 }
                             }
                             else{
@@ -3678,13 +3797,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             } 
                                         }
                                     }
@@ -3700,7 +3819,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 6)
-                                        modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                 }
                             }
                             else{
@@ -3714,13 +3833,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             } 
                                         }
                                     }
@@ -3739,7 +3858,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int año = a.obtenerUltimoAñoLectivo();
                                     int edad = a.getSalas().get(año).getEdad();
                                     if(edad == 4)
-                                        modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                 }
                             }
                             else{
@@ -3752,13 +3871,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             } 
                                         }
                                     }
@@ -3774,7 +3893,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 3)
-                                        modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                 }
                             }
                             else{
@@ -3788,13 +3907,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             } 
                                         }
                                     }
@@ -3810,7 +3929,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 4)
-                                        modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                 }
                             }
                             else{
@@ -3824,13 +3943,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             } 
                                         }
                                     }
@@ -3849,7 +3968,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int año = a.obtenerUltimoAñoLectivo();
                                     int edad = a.getSalas().get(año).getEdad();
                                     if(edad == 3)
-                                        modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                 }
                             }
                             else{
@@ -3862,13 +3981,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             } 
                                         }
                                     }
@@ -3884,7 +4003,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 1)
-                                        modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                 }
                             }
                             else{
@@ -3898,13 +4017,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             } 
                                         }
                                     }
@@ -3920,7 +4039,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     int edad = a.getSalas().get(año).getEdad();
                                     int idSala = a.getSalas().get(año).getIdSala();
                                     if(idSala == 2)
-                                        modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                        modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                 }
                             }
                             else{
@@ -3934,13 +4053,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if(valorComboBox1.equals("Apellido y Nombre")){
                                             String nombre = a.getApellidoYNombre().toUpperCase();
                                             if(nombre.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             }
                                         }
                                         else{
                                             String dni = String.valueOf(a.getDni());
                                             if(dni.contains(buscado)){
-                                                modelo.addRow(new Object[]{a.getApellidoYNombre(),a.getDni(),edad,a.getSalas().get(año).getTurno()});
+                                                modelo.addRow(this.obetenerObjeto(a,año,tipo));
                                             } 
                                         }
                                     }
@@ -3961,7 +4080,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 Set<Pago> pagos = a.getPagos();
                 Iterator i = pagos.iterator();//Nunca va a ser null
                 int valorPeriodo = jYearChooserControl.getYear();
-                float pagado=0;
+                float insc=0, mat= 0, sac1 = 0, sac2 = 0, natab = 0, natma = 0, natju = 0, natag = 0, natsep = 0, natoct = 0;
                 boolean encontroInscripcion = false;
                 //Busco los  pagos existentes del alumno seleccionado
                 while(i.hasNext()){
@@ -3973,11 +4092,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         break;
                     }
                 }
-                //Si hay un pago correspondiente al alumno seleccionado en el año indicado en el YearChooser
                 if(encontroInscripcion){
-                    pagado = pagoSeleccionado.getMontoPagado();
+                    insc = pagoSeleccionado.getMontoPagado();
                 }
-                objeto = new Object[]{a.getApellidoYNombre(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno(), pagado, 0,0,0,0,0,0,0};
+                objeto = new Object[]{a.getApellidoYNombre(),a.getSalas().get(año).getEdad(),a.getSalas().get(año).getTurno(), insc, mat, sac1, sac2, natab, natma, natju, natag, natsep, natoct};
                 break;
             default: objeto = null;
         }

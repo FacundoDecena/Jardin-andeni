@@ -49,7 +49,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     public VentanaPrincipal() {
         initComponents();
-        primera=true;
+        primera = true;
         jDialogBuscar.setLocationRelativeTo(null);
         ManagerAlumno ma = ManagerAlumno.getManager();
         listaAlumnos = ma.obtenerTodosAlumno();

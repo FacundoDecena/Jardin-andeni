@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface DAO{
     //Altas
-    public void altaAlumno(Alumno alumno);
+    public boolean altaAlumno(Alumno alumno);
     //public void altaAsistencia(Asistencia asistencia);
     //public void altaDocente(Docente docente);
     //public void altaFalta(Falta falta);
@@ -20,7 +20,7 @@ public interface DAO{
     //public void altaRetiro(Retiro retiro);
     //public void altaSala(Sala sala);
     //public void altaTardanza(Tardanza tardanza);
-    public void altaTutor(Tutor tutor) throws SQLException;
+    public boolean altaTutor(Tutor tutor) throws SQLException;
     
     //Bajas
     //public void bajaAlumno(int dni);

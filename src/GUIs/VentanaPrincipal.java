@@ -14,6 +14,7 @@ import ClasesBase.Sala;
 import ClasesBase.Tutor;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -26,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -45,11 +48,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private Alumno alumnoSeleccionado;
     private Pago pagoSeleccionado;
     private boolean nuevo;
+    private boolean asignarHermano;
     private boolean primera = true; //Si sacas de aca la asignacion, se rompe.
     
     public VentanaPrincipal() {
         initComponents();
         primera = true;
+        asignarHermano = false;
         jDialogBuscar.setLocationRelativeTo(null);
         ManagerAlumno ma = ManagerAlumno.getManager();
         listaAlumnos = ma.obtenerTodosAlumno();
@@ -2319,9 +2324,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Sala sala;
         int salaEdad, salaTurno, idSala;
         ManagerAlumno mngAlumno = ManagerAlumno.getManager();
-        Alumno alumno;
+        Alumno alumno = null;
         ManagerTutor mngTutor = ManagerTutor.getManager();
-        Tutor tutor;
+        Tutor padre = null, madre = null, otro = null;
         ManagerSala mngSala = ManagerSala.getManagerSala();
         
         //Controles de la primer columna
@@ -2352,10 +2357,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         if(!error){
             try{
-                dni = new Integer (jTextField_DNI_Ins.getText());
+                dni = new Integer(jTextField_DNI_Ins.getText());
             }
             catch(java.lang.NumberFormatException e){
-                 error = true;
+                error = true;
                 JOptionPane.showMessageDialog(null,"DNI solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
             }
         }
@@ -2393,58 +2398,44 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         long telefonoPersonal = 0, telefonoTrabajo = 0;
         Set<Alumno> atutorados = new TreeSet();
         Set<Retiro> retiros = new TreeSet();
-        if(jRadioButtonAgregarPadre.isSelected()){
-            if(!error){
-                apellidoYNombreT = jTextField_ApyNom_Padre.getText();
-                if(apellidoYNombreT.isEmpty()){
-                    error = true;
-                    JOptionPane.showMessageDialog(null,"Nombre del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
-                }
+        if(!error){
+            apellidoYNombreT = jTextField_ApyNom_Padre.getText();
+            if(apellidoYNombreT.isEmpty()){
+                error = true;
+                JOptionPane.showMessageDialog(null,"Nombre del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
             }
-            if(!error){
-                tipoDniT = jTextField_TipoDoc_Padre.getText();
-                if(tipoDniT.isEmpty()){
-                    error = true;
-                    JOptionPane.showMessageDialog(null,"Tipo DNI del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
-                }
+        }
+        if(!error){
+            try{
+                dniT = new Integer (jTextField_NumDoc_Padre.getText());
             }
-            if(!error){
-                try{
-                    dniT = new Integer (jTextField_NumDoc_Padre.getText());
-                }
-                catch(java.lang.NumberFormatException e){
-                     error = true;
-                    JOptionPane.showMessageDialog(null,"DNI solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
-                }
+            catch(java.lang.NumberFormatException e){
+                 error = true;
+                JOptionPane.showMessageDialog(null,"DNI solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
             }
-            if(!error){
-                ocupacion = jTextField_Ocupacion_Padre.getText();
-                if(ocupacion.isEmpty()){
-                    error = true;
-                    JOptionPane.showMessageDialog(null,"ocupacion del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
-                }
+        }
+        if(!error){
+            ocupacion = jTextField_Ocupacion_Padre.getText();
+            if(ocupacion.isEmpty()){
+                error = true;
+                JOptionPane.showMessageDialog(null,"ocupacion del padre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
             }
-            if(!error){
-                try{
-                    telefonoPersonal = new Long(jTextField_TelPer_Padre.getText());
-                    telefonoTrabajo = new Long(jTextField_TelTra_Padre.getText());
-                }
-                catch(java.lang.NumberFormatException e){
-                     error = true;
-                    JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
-                }
+        }
+        if(!error){
+            try{
+                telefonoPersonal = new Long(jTextField_TelPer_Padre.getText());
+                telefonoTrabajo = new Long(jTextField_TelTra_Padre.getText());
             }
-            if(!error){
-                try{
-                    tutor = mngTutor.nuevoTutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
-                    if(!(tutor == null)){
-                        tutores.add(tutor);
-                    }
-                }
-                catch (Exception es){
-                    JOptionPane.showMessageDialog(null,es.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
-                    error = true;
-                }
+            catch(java.lang.NumberFormatException e){
+                 error = true;
+                JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        if(!error){//Si no tiene errores creo el padre, luego veré si lo utilizo o no
+            try {
+                padre = mngTutor.nuevoTutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
             }
         }
         //Segundo paso: Madre
@@ -2452,58 +2443,44 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         apellidoYNombreT = "";
         dniT = 0;
         telefonoPersonal = 0; telefonoTrabajo = 0;
-        if(jRadioButtonAgregarMadre.isSelected()){
-            if(!error){
-                apellidoYNombreT = jTextField_ApyNom_Madre.getText();
-                if(apellidoYNombreT.isEmpty()){
-                    error = true;
-                    JOptionPane.showMessageDialog(null,"Nombre de la madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
-                }
+        if(!error){
+            apellidoYNombreT = jTextField_ApyNom_Madre.getText();
+            if(apellidoYNombreT.isEmpty()){
+                error = true;
+                JOptionPane.showMessageDialog(null,"Nombre de la madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
             }
-            if(!error){
-                tipoDniT = jTextField_TipoDoc_Madre.getText();
-                if(tipoDniT.isEmpty()){
-                    error = true;
-                    JOptionPane.showMessageDialog(null,"Tipo DNI del madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
-                }
+        }
+        if(!error){
+            try{
+                dniT = new Integer (jTextField_NumDoc_Madre.getText());
             }
-            if(!error){
-                try{
-                    dniT = new Integer (jTextField_NumDoc_Madre.getText());
-                }
-                catch(java.lang.NumberFormatException e){
-                     error = true;
-                    JOptionPane.showMessageDialog(null,"DNI solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
-                }
+            catch(java.lang.NumberFormatException e){
+                 error = true;
+                JOptionPane.showMessageDialog(null,"DNI solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
             }
-            if(!error){
-                ocupacion = jTextField_Ocupacion_Madre.getText();
-                if(ocupacion.isEmpty()){
-                    error = true;
-                    JOptionPane.showMessageDialog(null,"ocupacion de la madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
-                }
+        }
+        if(!error){
+            ocupacion = jTextField_Ocupacion_Madre.getText();
+            if(ocupacion.isEmpty()){
+                error = true;
+                JOptionPane.showMessageDialog(null,"ocupacion de la madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
             }
-            if(!error){
-                try{
-                    telefonoPersonal = new Long(jTextField_TelPer_Madre.getText());
-                    telefonoTrabajo = new Long(jTextField_TelTra_Madre.getText());
-                }
-                catch(java.lang.NumberFormatException e){
-                     error = true;
-                    JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
-                }
+        }
+        if(!error){
+            try{
+                telefonoPersonal = new Long(jTextField_TelPer_Madre.getText());
+                telefonoTrabajo = new Long(jTextField_TelTra_Madre.getText());
             }
-            if(!error && jRadioButtonAgregarMadre.isSelected()){
-                try{
-                    tutor = mngTutor.nuevoTutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
-                    if(!(tutor == null)){
-                        tutores.add(tutor);
-                    }
-                }
-                catch (Exception es){
-                    JOptionPane.showMessageDialog(null,es.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
-                    error = true;
-                }
+            catch(java.lang.NumberFormatException e){
+                 error = true;
+                JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        if(!error){
+            try {
+                madre = mngTutor.nuevoTutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
             }
         }
         //Paso 3 solo si esta selecionado incluir tutor que no sean los padres
@@ -2518,13 +2495,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 if(apellidoYNombreT.isEmpty()){
                     error = true;
                     JOptionPane.showMessageDialog(null,"Nombre de la madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
-                }
-            }
-            if(!error){
-                tipoDniT = jTextField_TipoDoc_Tutor.getText();
-                if(tipoDniT.isEmpty()){
-                    error = true;
-                    JOptionPane.showMessageDialog(null,"Tipo DNI del madre no puede ser vacío", "Campo incompleto",JOptionPane.WARNING_MESSAGE);
                 }
             }
             if(!error){
@@ -2553,31 +2523,85 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Telefono solo puede contener numeros", "Campo erroneo",JOptionPane.WARNING_MESSAGE);
                 }
             }
-            if(!error && jRadioButtonAgregarTutor.isSelected()){
-                try{
-                    tutor = mngTutor.nuevoTutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dniT, apellidoYNombreT);
-                    if(!(tutor == null)){
-                        tutores.add(tutor);
-                    }
-                }
-                catch (Exception es){
-                    JOptionPane.showMessageDialog(null,es.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
-                    error = true;
+            if(!error){
+                try {
+                    otro = mngTutor.nuevoTutor(ocupacion, telefonoPersonal, telefonoTrabajo, relacion, atutorados, retiros, dni, apellidoYNombre);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
                 }
             }
-              
         }
         if(!error){
-            if(jTextField_ApyNom.isEnabled()){
-                try{
+            if(jTextField_ApyNom.isEnabled()){//Si es un nuevo alumno
+                boolean hermano = false;
+                if(!asignarHermano){//hermano no es necesario aca
+                    try{
+                        mngTutor.altaTutor(padre);
+                        tutores.add(padre);
+                    }
+                    catch(Exception e){//El tutor ya existe en la bd, pueden ocurrir dos cosas
+                        int tieneHermano = JOptionPane.showConfirmDialog(null, "¿El alumno tiene hermanos en el jardin?","Hermano",JOptionPane.YES_NO_OPTION);
+                        if (tieneHermano == JOptionPane.YES_OPTION){
+                            asignarHermano = true;
+                        }
+                        else{
+                            tutores.add(padre);
+                        }
+                    }
+                    hermano = true;
+                }
+                if(!asignarHermano && !hermano){
+                    try{
+                        mngTutor.altaTutor(madre);
+                        tutores.add(madre);
+                    }
+                    catch(Exception e){//El tutor ya existe en la bd, pueden ocurrir dos cosas
+                        int tieneHermano = JOptionPane.showConfirmDialog(null, "¿El alumno tiene hermanos en el jardin?","Hermano",JOptionPane.YES_NO_OPTION);
+                        if (tieneHermano == JOptionPane.YES_OPTION){
+                            asignarHermano = true;
+                        }
+                        else{
+                            tutores.add(madre);
+                        }
+                        hermano = true;
+                    }
+                }
+                if(!asignarHermano && !hermano){
+                    try{
+                        mngTutor.altaTutor(otro);
+                        tutores.add(otro);
+                    }
+                    catch(Exception e){//El tutor ya existe en la bd, pueden ocurrir dos cosas
+                        int tieneHermano = JOptionPane.showConfirmDialog(null, "¿El alumno tiene hermanos en el jardin?","Hermano",JOptionPane.YES_NO_OPTION);
+                        if (tieneHermano == JOptionPane.YES_OPTION){
+                            asignarHermano = true;
+                        }
+                        else{//El hermano ya no asiste al jardin
+                            tutores.add(otro);
+                        }
+                        hermano = true;
+                    }
+                }
+                if(asignarHermano && !hermano){//Si indico que tiene un hno arriba, NO debe entrar aca o habra tutores repetidos
+                    tutores.add(padre);
+                    tutores.add(madre);
+                    tutores.add(otro);
+                }
+                try {
                     alumno = mngAlumno.nuevoAlumno(fechaDeNacimiento, lugarNacimiento, domicilio, telefono, controlMedico, vacunas, controlNatacion, traeMateriales, otrosDatos, hermanos, tutores, pagos, salas, ra, dni, apellidoYNombre);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,ex.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+                }
+                try{
+                    mngAlumno.altaAlumno(alumno);
                     JOptionPane.showMessageDialog(null,"El alumno ha sido Inscripto correctamente", "Inscripto",JOptionPane.INFORMATION_MESSAGE);
                 }
                 catch(Exception e){
+                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, e);
                     JOptionPane.showMessageDialog(null,e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
                 }
             }
-            else{
+            else{//Si no es nuevo alumno
                 if(mngAlumno.actualizarAñoLectivo(dni, idSala, año))
                     JOptionPane.showMessageDialog(null,"El alumno ha sido Inscripto correctamente", "Inscripto",JOptionPane.INFORMATION_MESSAGE);
                 else
@@ -2735,79 +2759,133 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox_TurnoDialogItemStateChanged
 
     private void jTableAlumnosDialogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAlumnosDialogMouseClicked
-        borrarTextFieldInscripcion();
-        jRadioButtonAgregarPadre.setSelected(false);
-        jRadioButtonAgregarMadre.setSelected(false);
-        jRadioButtonAgregarTutor.setSelected(false);
-        //Bloqueo los datos del alumno
-        jTextField_ApyNom.setEnabled(false);
-        jDateChooserFechaNacimiento.setEnabled(false);
-        jTextField_LugarNacimiento.setEnabled(false);
-        jTextField_DNI_Ins.setEnabled(false);
-        jTextField_Domicilio.setEnabled(false);
-        jTextField_Telefono.setEnabled(false);
-        jTextAreaOtrosDatos.setEnabled(false);
-        jCheckBoxMedico.setEnabled(false);
-        jCheckBoxNatacion.setEnabled(false);
-        jCheckBoxTraeMateriales.setEnabled(false);
-        jCheckBoxVacunas.setEnabled(false);
-        
-        String dniFila = String.valueOf(modelAlumnos.getValueAt(jTableAlumnosDialog.getSelectedRow(),1));
-        Set<Tutor> tutors;
-        Iterator j;
-        Iterator i = listaAlumnos.iterator();
-        while(i.hasNext()){
-            Alumno a = (Alumno) i.next();
-            if(dniFila.equals(String.valueOf(a.getDni()))){
-                jTextField_ApyNom.setText(a.getApellidoYNombre());
-                jDateChooserFechaNacimiento.setDate(a.getFechaDeNacimiento());
-                jTextField_LugarNacimiento.setText(a.getLugarNacimiento());
-                jTextField_DNI_Ins.setText(String.valueOf(a.getDni()));
-                jTextField_Domicilio.setText(a.getDomicilio());
-                jTextField_Telefono.setText(String.valueOf(a.getTelefono()));
-                jTextAreaOtrosDatos.setText(a.getOtrosDatos());
-                jCheckBoxMedico.setSelected(a.isControlMedico());
-                jCheckBoxNatacion.setSelected(a.isControlNatacion());
-                jCheckBoxTraeMateriales.setSelected(a.isTraeMateriales());
-                jCheckBoxVacunas.setSelected(a.isVacunas());
-                tutors = a.getTutores();
-                if(tutors == null)
-                    tutors = new HashSet();
-                j = tutors.iterator();
-                while(j.hasNext()){
-                    Tutor t = (Tutor) j.next();
-                    if(t.getRelacion().equals("Padre")){
-                        jTextField_ApyNom_Padre.setText(t.getApellidoYNombre());
-                        jTextField_NumDoc_Padre.setText(String.valueOf(t.getDni()));
-                        jTextField_Ocupacion_Padre.setText(t.getOcupacion());
-                        jTextField_TelPer_Padre.setText(String.valueOf(t.getTelefonoPersonal()));
-                        jTextField_TelTra_Padre.setText(String.valueOf(t.getTelefonoTrabajo()));
-                        continue;
+        if(!asignarHermano){
+            borrarTextFieldInscripcion();
+            jRadioButtonAgregarPadre.setSelected(false);
+            jRadioButtonAgregarMadre.setSelected(false);
+            jRadioButtonAgregarTutor.setSelected(false);
+            //Bloqueo los datos del alumno
+            jTextField_ApyNom.setEnabled(false);
+            jDateChooserFechaNacimiento.setEnabled(false);
+            jTextField_LugarNacimiento.setEnabled(false);
+            jTextField_DNI_Ins.setEnabled(false);
+            jTextField_Domicilio.setEnabled(false);
+            jTextField_Telefono.setEnabled(false);
+            jTextAreaOtrosDatos.setEnabled(false);
+            jCheckBoxMedico.setEnabled(false);
+            jCheckBoxNatacion.setEnabled(false);
+            jCheckBoxTraeMateriales.setEnabled(false);
+            jCheckBoxVacunas.setEnabled(false);
+
+            String dniFila = String.valueOf(modelAlumnos.getValueAt(jTableAlumnosDialog.getSelectedRow(),1));
+            Set<Tutor> tutors;
+            Iterator j;
+            Iterator i = listaAlumnos.iterator();
+            while(i.hasNext()){
+                Alumno a = (Alumno) i.next();
+                if(dniFila.equals(String.valueOf(a.getDni()))){
+                    jTextField_ApyNom.setText(a.getApellidoYNombre());
+                    jDateChooserFechaNacimiento.setDate(a.getFechaDeNacimiento());
+                    jTextField_LugarNacimiento.setText(a.getLugarNacimiento());
+                    jTextField_DNI_Ins.setText(String.valueOf(a.getDni()));
+                    jTextField_Domicilio.setText(a.getDomicilio());
+                    jTextField_Telefono.setText(String.valueOf(a.getTelefono()));
+                    jTextAreaOtrosDatos.setText(a.getOtrosDatos());
+                    jCheckBoxMedico.setSelected(a.isControlMedico());
+                    jCheckBoxNatacion.setSelected(a.isControlNatacion());
+                    jCheckBoxTraeMateriales.setSelected(a.isTraeMateriales());
+                    jCheckBoxVacunas.setSelected(a.isVacunas());
+                    tutors = a.getTutores();
+                    if(tutors == null)
+                        tutors = new HashSet();
+                    j = tutors.iterator();
+                    while(j.hasNext()){
+                        Tutor t = (Tutor) j.next();
+                        if(t.getRelacion().equals("Padre")){
+                            jTextField_ApyNom_Padre.setText(t.getApellidoYNombre());
+                            jTextField_NumDoc_Padre.setText(String.valueOf(t.getDni()));
+                            jTextField_Ocupacion_Padre.setText(t.getOcupacion());
+                            jTextField_TelPer_Padre.setText(String.valueOf(t.getTelefonoPersonal()));
+                            jTextField_TelTra_Padre.setText(String.valueOf(t.getTelefonoTrabajo()));
+                            continue;
+                        }
+                        if(t.getRelacion().equals("Madre")){
+                            jTextField_ApyNom_Madre.setText(t.getApellidoYNombre());
+                            jTextField_NumDoc_Madre.setText(String.valueOf(t.getDni()));
+                            jTextField_Ocupacion_Madre.setText(t.getOcupacion());
+                            jTextField_TelPer_Madre.setText(String.valueOf(t.getTelefonoPersonal()));
+                            jTextField_TelTra_Madre.setText(String.valueOf(t.getTelefonoTrabajo()));
+                            continue;
+                        }
+                        else{
+                            jTextField_ApyNom_Tutor.setText(t.getApellidoYNombre());
+                            jTextField_NumDoc_Tutor.setText(String.valueOf(t.getDni()));
+                            jTextField_Relacion.setText(t.getRelacion());
+                            jTextField_Ocupacion_Tutor.setText(t.getOcupacion());
+                            jTextField_TelPer_Tutor.setText(String.valueOf(t.getTelefonoPersonal()));
+                            jTextField_TelTra_Tutor.setText(String.valueOf(t.getTelefonoTrabajo()));
+                            continue;
+                        }
                     }
-                    if(t.getRelacion().equals("Madre")){
-                        jTextField_ApyNom_Madre.setText(t.getApellidoYNombre());
-                        jTextField_NumDoc_Madre.setText(String.valueOf(t.getDni()));
-                        jTextField_Ocupacion_Madre.setText(t.getOcupacion());
-                        jTextField_TelPer_Madre.setText(String.valueOf(t.getTelefonoPersonal()));
-                        jTextField_TelTra_Madre.setText(String.valueOf(t.getTelefonoTrabajo()));
-                        continue;
-                    }
-                    else{
-                        jTextField_ApyNom_Tutor.setText(t.getApellidoYNombre());
-                        jTextField_NumDoc_Tutor.setText(String.valueOf(t.getDni()));
-                        jTextField_Relacion.setText(t.getRelacion());
-                        jTextField_Ocupacion_Tutor.setText(t.getOcupacion());
-                        jTextField_TelPer_Tutor.setText(String.valueOf(t.getTelefonoPersonal()));
-                        jTextField_TelTra_Tutor.setText(String.valueOf(t.getTelefonoTrabajo()));
-                        continue;
-                    }
+                    break;
                 }
-                break;
             }
+            jDialogBuscar.setVisible(false);
+            jRadioButtonAgregarMadre.setEnabled(false);
+            jRadioButtonAgregarPadre.setEnabled(false);
         }
-        jDialogBuscar.setVisible(false);
-        jRadioButtonAgregarMadre.setEnabled(false);
-        jRadioButtonAgregarPadre.setEnabled(false);
+        else{
+            borrarTextFieldInscripcion();
+            jRadioButtonAgregarPadre.setSelected(false);
+            jRadioButtonAgregarMadre.setSelected(false);
+            jRadioButtonAgregarTutor.setSelected(false);
+            //Bloqueo los datos del alumno
+            String dniFila = String.valueOf(modelAlumnos.getValueAt(jTableAlumnosDialog.getSelectedRow(),1));
+            Set<Tutor> tutors;
+            Iterator j;
+            Iterator i = listaAlumnos.iterator();
+            while(i.hasNext()){
+                Alumno a = (Alumno) i.next();
+                if(dniFila.equals(String.valueOf(a.getDni()))){
+                    tutors = a.getTutores();
+                    if(tutors == null)
+                        tutors = new HashSet();
+                    j = tutors.iterator();
+                    while(j.hasNext()){
+                        Tutor t = (Tutor) j.next();
+                        if(t.getRelacion().equals("Padre")){
+                            jTextField_ApyNom_Padre.setText(t.getApellidoYNombre());
+                            jTextField_NumDoc_Padre.setText(String.valueOf(t.getDni()));
+                            jTextField_Ocupacion_Padre.setText(t.getOcupacion());
+                            jTextField_TelPer_Padre.setText(String.valueOf(t.getTelefonoPersonal()));
+                            jTextField_TelTra_Padre.setText(String.valueOf(t.getTelefonoTrabajo()));
+                            continue;
+                        }
+                        if(t.getRelacion().equals("Madre")){
+                            jTextField_ApyNom_Madre.setText(t.getApellidoYNombre());
+                            jTextField_NumDoc_Madre.setText(String.valueOf(t.getDni()));
+                            jTextField_Ocupacion_Madre.setText(t.getOcupacion());
+                            jTextField_TelPer_Madre.setText(String.valueOf(t.getTelefonoPersonal()));
+                            jTextField_TelTra_Madre.setText(String.valueOf(t.getTelefonoTrabajo()));
+                            continue;
+                        }
+                        else{
+                            jTextField_ApyNom_Tutor.setText(t.getApellidoYNombre());
+                            jTextField_NumDoc_Tutor.setText(String.valueOf(t.getDni()));
+                            jTextField_Relacion.setText(t.getRelacion());
+                            jTextField_Ocupacion_Tutor.setText(t.getOcupacion());
+                            jTextField_TelPer_Tutor.setText(String.valueOf(t.getTelefonoPersonal()));
+                            jTextField_TelTra_Tutor.setText(String.valueOf(t.getTelefonoTrabajo()));
+                            continue;
+                        }
+                    }
+                    break;
+                }
+            }
+            jDialogBuscar.setVisible(false);
+            jRadioButtonAgregarMadre.setEnabled(false);
+            jRadioButtonAgregarPadre.setEnabled(false);
+        }
     }//GEN-LAST:event_jTableAlumnosDialogMouseClicked
 
     private void jRadioButtonAgregarMadreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonAgregarMadreStateChanged

@@ -51,9 +51,20 @@ public class ManagerAlumno{
                 
         ImplementacionDAO dao = ImplementacionDAO.getDAO();
         
-        Alumno alumno = dao.nuevoAlumno(fechaDeNacimiento, lugarNacimiento, domicilio, telefono, controlMedico, vacunas, controlNatacion, traeMateriales, otrosDatos, hermanos, tutores, pagos, salas, ra, dni, apellidoYNombre);
+        Alumno alumno = dao.nuevoAlumno();
         
-        dao.altaAlumno(alumno);
+        
+        alumno = this.cargarAlumno(fechaDeNacimiento, lugarNacimiento, domicilio, telefono, controlMedico, vacunas, controlNatacion, traeMateriales, otrosDatos, hermanos, tutores, pagos, salas, ra, dni, apellidoYNombre);
+        
+        return alumno;
+    }
+    
+    public void altaAlumno(Alumno alumno)throws Exception{
+        ImplementacionDAO dao = ImplementacionDAO.getDAO();
+        if(!dao.altaAlumno(alumno)){
+            throw SQLException(alumno.getApellidoYNombre()+" Ya esta cargada");
+        }
+        Set<Tutor> tutores = alumno.getTutores();
         //Si llegó aca, los tutores ya estan en la base de datos.
         Iterator i = tutores.iterator();
         while(i.hasNext()){
@@ -61,11 +72,33 @@ public class ManagerAlumno{
             int dniT = t.getDni();
             dao.nuevoEs_tutor(dniT,alumno.getDni());
         }
-        return alumno;
     }
 
     public static List<Alumno> obtenerTodosAlumno(){
         return ImplementacionDAO.getDAO().obtenerTodosAlumno();
+    }
+    
+    private Alumno cargarAlumno(Date fechaDeNacimiento, String lugarNacimiento, String domicilio, long telefono, boolean controlMedico, boolean vacunas, boolean controlNatacion, boolean traeMateriales, String otrosDatos, Set<Alumno> hermanos, Set<Tutor> tutores, Set<Pago> pagos, Map<Integer, Sala> salas, Set<RegistroAsistencia> ra, int dni, String apellidoYNombre){
+        ImplementacionDAO dao = ImplementacionDAO.getDAO();
+        
+        Alumno alumno = dao.nuevoAlumno();
+        alumno.setFechaDeNacimiento(fechaDeNacimiento);
+        alumno.setLugarNacimiento(lugarNacimiento);
+        alumno.setDomicilio(domicilio);
+        alumno.setTelefono(telefono);
+        alumno.setControlMedico(controlMedico);
+        alumno.setVacunas(vacunas);
+        alumno.setControlNatacion(controlNatacion);
+        alumno.setTraeMateriales(traeMateriales);
+        alumno.setOtrosDatos(otrosDatos);
+        alumno.setHermanos(hermanos);
+        alumno.setTutores(tutores);
+        alumno.setPagos(pagos);
+        alumno.setSalas(salas);
+        alumno.setRa(ra);
+        alumno.setDni(dni);
+        alumno.setApellidoYNombre(apellidoYNombre);
+        return alumno;
     }
     
     /*public Alumno getAlumno(int dni){
@@ -85,6 +118,11 @@ public class ManagerAlumno{
     
     
     private Exception IllegalArgumentException(String mensaje) {
+        IllegalArgumentException e = new IllegalArgumentException(mensaje, null);
+        return e;
+    }
+    
+    private Exception SQLException(String mensaje) {
         IllegalArgumentException e = new IllegalArgumentException(mensaje, null);
         return e;
     }

@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException;
 
 
 
@@ -50,7 +51,7 @@ public class ImplementacionDAO implements DAO {
     }
     
     @Override//FALTA LA PARTE DE HERMANOS
-    public void altaAlumno(Alumno palumno) {
+    public boolean altaAlumno(Alumno palumno) {
         try {
             this.alumno = palumno;
             Connection c = ConexionBD.getConnection();
@@ -112,8 +113,10 @@ public class ImplementacionDAO implements DAO {
             }
             */
             s.close();
+            return true;
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(ImplementacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 
@@ -188,7 +191,7 @@ public class ImplementacionDAO implements DAO {
     }
     
     @Override
-    public void altaTutor(Tutor ptutor) throws SQLException {
+    public boolean altaTutor(Tutor ptutor) throws SQLException {
         try {
             tutor = ptutor;
             Connection c = ConexionBD.getConnection();
@@ -208,14 +211,10 @@ public class ImplementacionDAO implements DAO {
                 Alumno a = (Alumno)i.next();
                 s.execute("INSERT INTO ES_TUTOR VALUES("+tutor.getDni()+","+a.getDni()+")");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(ImplementacionDAO.class.getName()).log(Level.SEVERE, null, ex);
-            Exception SQLException = new SQLException("Ya estaba cargado");
-            try {
-                throw SQLException;
-            } catch (Exception ex1) {
-                Logger.getLogger(ImplementacionDAO.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+            return true;
+        }
+        catch (DerbySQLIntegrityConstraintViolationException e){
+            return false;
         }
     }
 
@@ -568,6 +567,11 @@ public class ImplementacionDAO implements DAO {
             Logger.getLogger(ImplementacionDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return valor;
+    }
+
+    private Exception SQLException(String mensaje) {
+        IllegalArgumentException e = new IllegalArgumentException(mensaje, null);
+        return e;
     }
 
     

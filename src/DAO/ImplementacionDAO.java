@@ -178,7 +178,8 @@ public class ImplementacionDAO implements DAO {
             s.execute("INSERT INTO REGISTROASISTENCIA VALUES("+idra+","+dni+
                       ","+cl+")");
         } catch (SQLException ex) {
-            Logger.getLogger(ImplementacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("");
+            
         }
     }
 
@@ -223,6 +224,17 @@ public class ImplementacionDAO implements DAO {
             Connection c = ConexionBD.getConnection();
             Statement s = c.createStatement();
             s.execute("INSERT INTO ES_TUTOR VALUES("+dniT+","+dniA+")");
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(ImplementacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void nuevoEs_Hermano(int dniH1, int dniH2){
+        try{
+            Connection c = ConexionBD.getConnection();
+            Statement s = c.createStatement();
+            s.execute("INSERT INTO ES_HERMANO VALUES("+dniH1+","+dniH2+")");
         }
         catch (SQLException ex) {
             Logger.getLogger(ImplementacionDAO.class.getName()).log(Level.SEVERE, null, ex);

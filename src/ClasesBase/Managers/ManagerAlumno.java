@@ -53,7 +53,6 @@ public class ManagerAlumno{
         
         Alumno alumno = dao.nuevoAlumno();
         
-        
         alumno = this.cargarAlumno(fechaDeNacimiento, lugarNacimiento, domicilio, telefono, controlMedico, vacunas, controlNatacion, traeMateriales, otrosDatos, hermanos, tutores, pagos, salas, ra, dni, apellidoYNombre);
         
         return alumno;
@@ -71,6 +70,13 @@ public class ManagerAlumno{
             Tutor t = (Tutor)i.next();
             int dniT = t.getDni();
             dao.nuevoEs_tutor(dniT,alumno.getDni());
+        }
+        Set<Alumno> hermanos = alumno.getHermanos();
+        i = hermanos.iterator();
+        while(i.hasNext()){
+            Alumno h = (Alumno)i.next();
+            int dniH = h.getDni();
+            dao.nuevoEs_Hermano(dniH,alumno.getDni());
         }
     }
 

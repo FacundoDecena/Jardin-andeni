@@ -59,9 +59,9 @@ public class Prueba extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(316, Short.MAX_VALUE))
+                .addGap(83, 83, 83)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 835, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,7 +82,7 @@ public class Prueba extends javax.swing.JFrame {
         p.setVisible(true);
         Connection c = ConexionBD.getConnection();
         Statement s = c.createStatement();
-        ResultSet rs = s.executeQuery("SELECT * FROM ALUMNO");
+        ResultSet rs = s.executeQuery("SELECT * FROM Alumno");
         DefaultTableModel dtm = new DefaultTableModel();
         p.jTableA.setModel(dtm);
         ResultSetMetaData rsMd = rs.getMetaData();

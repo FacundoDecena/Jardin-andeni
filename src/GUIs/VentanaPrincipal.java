@@ -473,11 +473,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jPanelOpInscripcion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelOpInscripcionMouseClicked(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jPanelOpInscripcionMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanelOpInscripcionMousePressed(evt);
             }
         });
 
@@ -506,11 +506,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jPanelOpPago.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelOpPagoMouseClicked(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jPanelOpPagoMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanelOpPagoMousePressed(evt);
             }
         });
 
@@ -538,11 +538,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jPanelOpDatosAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelOpDatosAlumnosMouseClicked(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jPanelOpDatosAlumnosMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanelOpDatosAlumnosMousePressed(evt);
             }
         });
 
@@ -568,11 +568,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jPanelOpControlPagos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelOpControlPagosMouseClicked(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jPanelOpControlPagosMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanelOpControlPagosMousePressed(evt);
             }
         });
 
@@ -1984,11 +1984,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jPanelCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelCerrarMouseClicked(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jPanelCerrarMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanelCerrarMousePressed(evt);
             }
         });
 
@@ -2017,11 +2017,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jPanelMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelMinimizarMouseClicked(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jPanelMinimizarMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanelMinimizarMousePressed(evt);
             }
         });
 
@@ -2118,50 +2118,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanelCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelCerrarMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_jPanelCerrarMouseClicked
-
-    private void jPanelOpInscripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpInscripcionMouseClicked
-        CardLayout card = (CardLayout)jPanelCard.getLayout();
-        card.show(jPanelCard, "inscripcion");
-        borrarTextFieldInscripcion();
-    }//GEN-LAST:event_jPanelOpInscripcionMouseClicked
-
-    private void jPanelOpPagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpPagoMouseClicked
-        //Limpio la busqueda
-        jTextFieldBusqueda_Pago.setText("");
-        jComboBoxBusqueda_Pago.setSelectedIndex(0);
-        jComboBoxSalaPago.setSelectedIndex(0);
-        jComboBoxTurnoPago.setSelectedIndex(0);
-        //Limpio los campos cargados
-        jTextField_NomyAp_PagoIns.setEditable(false);
-        jTextField_Sala_PagoIns.setEditable(false);
-        jTextField_Turno_PagoIns.setEditable(false);
-        jComboBoxTipoDePago.setSelectedIndex(0);
-        jTextField_NomyAp_PagoIns.setText("");
-        jTextField_Sala_PagoIns.setText("");
-        jTextField_Turno_PagoIns.setText("");
-        jSpinner_Cuotas_PagoIns.setValue(1);
-        Calendar cal= Calendar.getInstance();
-        jYearChooserCicloLectivo.setValue(cal.get(Calendar.YEAR));
-        jLabelMontoRestante.setText("-");
-        jLabelMontoAPagar.setText("-");
-        jLabelTotalPagado.setText("-");
-        jButtonRegistrarPago.setEnabled(false);
-        modelCuotas.setRowCount(0);
-        //Cargo la tabla
-        String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
-        String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
-        int c = jComboBoxSalaPago.getSelectedIndex();
-        int d = jComboBoxTurnoPago.getSelectedIndex();
-        cargarTabla(a,b,c,d, modelAlumnos, 0);
-        //Muestro la pantalla
-        CardLayout card = (CardLayout)jPanelCard.getLayout();
-        card.show(jPanelCard, "pago");
-       
-    }//GEN-LAST:event_jPanelOpPagoMouseClicked
-
     private void jPanelCerrarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelCerrarMouseMoved
         jPanelCerrar.setBackground(Color.red);
     }//GEN-LAST:event_jPanelCerrarMouseMoved
@@ -2185,10 +2141,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jPanelOpPagoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpPagoMouseExited
         jPanelOpPago.setBackground(new Color(132, 183, 224));
     }//GEN-LAST:event_jPanelOpPagoMouseExited
-
-    private void jPanelMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelMinimizarMouseClicked
-        this.setExtendedState(ICONIFIED);
-    }//GEN-LAST:event_jPanelMinimizarMouseClicked
 
     private void jPanelMinimizarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelMinimizarMouseMoved
         jPanelMinimizar.setBackground(new Color(132, 183, 224));
@@ -2237,20 +2189,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_jComboBoxTipoDePagoItemStateChanged
-
-    private void jPanelOpDatosAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpDatosAlumnosMouseClicked
-        CardLayout card = (CardLayout)jPanelCard.getLayout();
-        card.show(jPanelCard, "datosAlumnos");
-        borrarLabelsDatosAlumno();
-        modelAlumnos = (DefaultTableModel) jTableDatosAlumnos.getModel();
-        ManagerAlumno ma = ManagerAlumno.getManager();
-        String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
-        String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
-        int c = jComboBoxSalaPago.getSelectedIndex();
-        int d = jComboBoxTurnoPago.getSelectedIndex();
-        cargarTabla(a,b,c,d, modelAlumnos, 0);
-        
-    }//GEN-LAST:event_jPanelOpDatosAlumnosMouseClicked
 
     private void jPanelOpDatosAlumnosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpDatosAlumnosMouseExited
         jPanelOpDatosAlumnos.setBackground(new Color(112, 163, 204));
@@ -3241,16 +3179,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cargarTabla(a,b,c,d, modelAlumnos, 0);
     }//GEN-LAST:event_jComboBoxTurnoDatosItemStateChanged
 
-    private void jPanelOpControlPagosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpControlPagosMouseClicked
-        String a = jComboBoxBusqueda_Control.getSelectedItem().toString();
-        String b = jTextFieldBusqueda_Control.getText().toUpperCase();
-        int c = jComboBoxSalaControl.getSelectedIndex();
-        int d = jComboBoxTurnoControl.getSelectedIndex();
-        cargarTabla(a,b,c,d, modelOtros, 1);
-        CardLayout card = (CardLayout)jPanelCard.getLayout();
-        card.show(jPanelCard, "controlPagos");
-    }//GEN-LAST:event_jPanelOpControlPagosMouseClicked
-
     private void jPanelOpControlPagosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpControlPagosMouseExited
         jPanelOpControlPagos.setBackground(new Color(132, 183, 224));
     }//GEN-LAST:event_jPanelOpControlPagosMouseExited
@@ -3334,6 +3262,78 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 cargarTabla(a,b,c,d, modelCuotas, 2);
         }
     }//GEN-LAST:event_jYearChooserControlPropertyChange
+
+    private void jPanelOpInscripcionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpInscripcionMousePressed
+        CardLayout card = (CardLayout)jPanelCard.getLayout();
+        card.show(jPanelCard, "inscripcion");
+        borrarTextFieldInscripcion();
+    }//GEN-LAST:event_jPanelOpInscripcionMousePressed
+
+    private void jPanelOpPagoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpPagoMousePressed
+        //Limpio la busqueda
+        jTextFieldBusqueda_Pago.setText("");
+        jComboBoxBusqueda_Pago.setSelectedIndex(0);
+        jComboBoxSalaPago.setSelectedIndex(0);
+        jComboBoxTurnoPago.setSelectedIndex(0);
+        //Limpio los campos cargados
+        jTextField_NomyAp_PagoIns.setEditable(false);
+        jTextField_Sala_PagoIns.setEditable(false);
+        jTextField_Turno_PagoIns.setEditable(false);
+        jComboBoxTipoDePago.setSelectedIndex(0);
+        jTextField_NomyAp_PagoIns.setText("");
+        jTextField_Sala_PagoIns.setText("");
+        jTextField_Turno_PagoIns.setText("");
+        jSpinner_Cuotas_PagoIns.setValue(1);
+        Calendar cal= Calendar.getInstance();
+        jYearChooserCicloLectivo.setValue(cal.get(Calendar.YEAR));
+        jLabelMontoRestante.setText("-");
+        jLabelMontoAPagar.setText("-");
+        jLabelTotalPagado.setText("-");
+        jButtonRegistrarPago.setEnabled(false);
+        modelCuotas.setRowCount(0);
+        //Cargo la tabla
+        String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
+        int c = jComboBoxSalaPago.getSelectedIndex();
+        int d = jComboBoxTurnoPago.getSelectedIndex();
+        cargarTabla(a,b,c,d, modelAlumnos, 0);
+        //Muestro la pantalla
+        CardLayout card = (CardLayout)jPanelCard.getLayout();
+        card.show(jPanelCard, "pago");
+       
+    }//GEN-LAST:event_jPanelOpPagoMousePressed
+
+    private void jPanelOpDatosAlumnosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpDatosAlumnosMousePressed
+        CardLayout card = (CardLayout)jPanelCard.getLayout();
+        card.show(jPanelCard, "datosAlumnos");
+        borrarLabelsDatosAlumno();
+        modelAlumnos = (DefaultTableModel) jTableDatosAlumnos.getModel();
+        ManagerAlumno ma = ManagerAlumno.getManager();
+        String a = jComboBoxBusqueda_Pago.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Pago.getText().toUpperCase();
+        int c = jComboBoxSalaPago.getSelectedIndex();
+        int d = jComboBoxTurnoPago.getSelectedIndex();
+        cargarTabla(a,b,c,d, modelAlumnos, 0);
+        
+    }//GEN-LAST:event_jPanelOpDatosAlumnosMousePressed
+
+    private void jPanelOpControlPagosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpControlPagosMousePressed
+        String a = jComboBoxBusqueda_Control.getSelectedItem().toString();
+        String b = jTextFieldBusqueda_Control.getText().toUpperCase();
+        int c = jComboBoxSalaControl.getSelectedIndex();
+        int d = jComboBoxTurnoControl.getSelectedIndex();
+        cargarTabla(a,b,c,d, modelOtros, 1);
+        CardLayout card = (CardLayout)jPanelCard.getLayout();
+        card.show(jPanelCard, "controlPagos");
+    }//GEN-LAST:event_jPanelOpControlPagosMousePressed
+
+    private void jPanelCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelCerrarMousePressed
+        System.exit(0);
+    }//GEN-LAST:event_jPanelCerrarMousePressed
+
+    private void jPanelMinimizarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelMinimizarMousePressed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_jPanelMinimizarMousePressed
 
 
     /**
@@ -4123,18 +4123,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             case 1: 
                 Set<Pago> pagos = a.getPagos();
                 Iterator i = pagos.iterator();//Nunca va a ser null
-                int valorPeriodo = jYearChooserControl.getYear();
+                int valorPeriodoInsc = jYearChooserControl.getYear();
                 float insc=0, mat= 0, sac1 = 0, sac2 = 0, natab = 0, natma = 0, natju = 0, natag = 0, natsep = 0, natoct = 0;
                 boolean encontroInscripcion = false;
                 //Busco los  pagos existentes del alumno seleccionado
                 while(i.hasNext()){
                     Pago pago = (Pago) i.next();
-                    if(Integer.parseInt(pago.getPeriodo()) == valorPeriodo && pago.getTipoPago().equals("INSCRIPCION")){
+                    if(Integer.parseInt(pago.getPeriodo()) == valorPeriodoInsc && pago.getTipoPago().equals("INSCRIPCION")){
                         pagoSeleccionado = pago;
                         encontroInscripcion = true;
                         nuevo = false;
                         break;
                     }
+                    
                 }
                 if(encontroInscripcion){
                     insc = pagoSeleccionado.getMontoPagado();
